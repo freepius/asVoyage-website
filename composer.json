@@ -1,0 +1,25 @@
+{
+    "name": "freepius/asVoyage",
+    "description": "freepius44 website for voyages",
+    "homepage": "http://anarchos-semitas.net",
+    "license": "CC0",
+    "authors": [
+        {
+            "name" : "Mathieu <freepius44> Poisbeau",
+            "email": "freepius44@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "silex/silex": "1.0.*",
+        "twig/twig": "*",
+        "symfony/translation": "*",
+        "symfony/twig-bridge": "*",
+        "symfony/locale": "*",
+        "symfony/validator": "*",
+        "symfony/security": "*"
+    },
+    "autoload": {
+        "psr-0": { "App": "src/" }
+    }
+}
