@@ -1,0 +1,58 @@
+{% from _self import navActive, newLocale %}
+
+
+{% macro navActive(currentNav, item) %}
+    {{ item == currentNav ? 'class="active"' }}
+{% endmacro %}
+
+
+{% macro newLocale(app, locale, alt) %}
+{% spaceless %}
+    <li {{ (app.locale == locale) ? 'class="active"' }}>
+        <a href="{{ path('base.switchLocale', {locale: locale}) }}">
+            <img src="/images/{{- locale -}}.gif" alt="{{ locale|trans }}" />
+        </a>
+    </li>
+{% endspaceless %}
+{% endmacro %}
+
+
+{% set currentNav = currentNav|default %}
+
+
+<header id="header">
+    <img id="logo" src="/images/logo.png" alt="Logo of anarchos semitas" />
+
+    <section id="navigation">
+        <nav id="nav-lang">
+            <ul class="inline">
+                {{ newLocale(app, 'fr') }}
+                {{ newLocale(app, 'en') }}
+            </ul>
+        </nav>
+
+        <nav id="nav-main">
+            <ul class="nav nav-pills">
+                <li {{ navActive(currentNav, 'home') }}><a href="#">{{ 'Home'|trans }}</a></li>
+                <li {{ navActive(currentNav, 'about') }}><a href="#">{{ 'About'|trans }}</a></li>
+                <li {{ navActive(currentNav, 'contact') }}><a href="#">{{ 'Contact'|trans }}</a></li>
+                <li {{ navActive(currentNav, 'our-trips') }}><a href="#">{{ 'Our trips'|trans }}</a></li>
+            </ul>
+        </nav>
+
+        <nav id="nav-roadbook">
+            <b>{{ 'Roadbook'|trans }}</b>
+            <ul class="nav nav-pills">
+                <li {{ navActive(currentNav, 'journal') }}><a href="#">{{ 'Journal'|trans }}</a></li>
+                <li {{ navActive(currentNav, 'gallery') }}><a href="#">{{ 'Gallery'|trans }}</a></li>
+                <li {{ navActive(currentNav, 'map') }}><a href="#">{{ 'Map'|trans }}</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <div class="notification">
+        {% block headerNotification %}
+            Your notification here.
+        {% endblock %}
+    </div>
+</header>

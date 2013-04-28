@@ -1,0 +1,51 @@
+{% extends "layout.html.twig" %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#intro > .carousel').carousel();
+        });
+    </script>
+{% endblock %}
+
+
+{% block main %}
+    <section id="intro" class="row-fluid">
+        <!-- Some pictures of us -->
+        <div class="span4 carousel slide thumbnail">
+            <div class="carousel-inner">
+                <div class="active item"><img src="/images/marie-mathieu/1.jpg"></div>
+                <div class="item"><img src="/images/marie-mathieu/2.jpg"></div>
+                <div class="item"><img src="/images/marie-mathieu/3.jpg"></div>
+            </div>
+        </div>
+
+        <div id="intro-summary" class="span8">
+            <h1 class="main">Bienvenue à tous !</h1>
+
+            <p><big>Nous sommes <strong>Marie</strong> et <strong>Mathieu</strong>, deux jeunes voyageurs.</big></p>
+
+            <p>En octobre 2013, nous voilà partis sur <strong>les chemins d'Afrique</strong>,
+                pour notre deuxième périple au long court.
+            </p>
+
+            <p>Dernière <b>position GPS</b>, le <b>04/12/2013</b> :
+                <em>12 ° 234 " 03 S ; 3 ° 234 " 12 E</em>
+                <a href="#" style="margin-left: 0.5em;">[Voir Carte]</a>
+            </p>
+
+            <p>Dernier <b>mini-message</b> :
+                <blockquote>
+                    blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+                    <small>
+                        Envoyé le 11/12/2013
+                        <a href="#" style="margin-left: 0.5em;">[Voir tous les mini-messages]</a>
+                    </small>
+                </blockquote>
+            </p>
+        </div>
+    </section>
+{% endblock %}

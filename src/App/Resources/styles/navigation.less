@@ -1,0 +1,62 @@
+#navigation
+{
+    float: right;
+    margin-top: 20px;
+}
+
+.nav-main(@radius: 10px, @lineHeight: 40px)
+{
+    padding: 10px;
+    .border-radius(@radius);
+    background: 0 0 repeat url('/images/brown-texture.png') @primaryColor;
+    font-size: 16px;
+    font-weight: bold;
+
+    & > li > a {
+        padding: 0 10px;
+        line-height: @lineHeight;
+        color: white;
+    }
+
+    & > li > a:hover { color: @primaryColor; }
+
+    & > li.active > a,
+    & > li > a:hover { background-color: @secondaryColor; }
+}
+
+#nav-lang > ul
+{
+    margin: 0;
+
+    & > li {
+        line-height: 0;
+        margin: 0 3px;
+        padding: 3px 0 0;
+
+        &.active { border-top: 3px solid @secondaryColor; }
+    }
+}
+
+#nav-main
+{
+    float: left;
+
+    & > ul {
+        .nav-main(10px 10px 0 10px);
+    }
+}
+
+#nav-roadbook
+{
+    float: left;
+
+    & > b {
+        display: block;
+        text-align: center;
+    }
+
+    & > ul {
+        .nav-main(0 10px 10px 0, 20px);
+        border-left: 2px solid white;
+    }
+}

@@ -1,0 +1,129 @@
+@import 'bootstrap/bootstrap.less';
+@import 'variables.less';
+@import 'navigation.less';
+
+
+/*************************************************
+ * Special / Highlighting
+ ************************************************/
+
+#page-title
+{
+    color: @secondaryColor;
+    font-family: 'GorriSansRegular';
+}
+
+strong {
+    font-family: 'GorriSansRegular';
+}
+
+
+/*************************************************
+ * Generic
+ ************************************************/
+
+body { margin: 0 2em 1em; }
+
+.row { margin-left: 0; }
+
+@font-face {
+    font-family: 'GorriSansRegular';
+    src: url('/fonts/gorrisans-webfont.eot');
+    src: url('/fonts/gorrisans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/gorrisans-webfont.woff') format('woff'),
+         url('/fonts/gorrisans-webfont.ttf') format('truetype'),
+         url('/fonts/gorrisans-webfont.svg#gorrisansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/*************************************************
+ * Titles
+ ************************************************/
+
+h1, h2, h3, h4, h5, h6 { margin: 0; }
+h1, h2 { margin-bottom: 0.5em; }
+
+h1 { font-size: @baseFontSize * 1.75; }
+h2 { font-size: @baseFontSize * 1.5; }
+h3 { font-size: @baseFontSize * 1.25; }
+h4 { font-size: @baseFontSize; }
+h5,
+h6 { font-size: @baseFontSize * 0.85; }
+
+h1 small { font-size: @baseFontSize * 1.5; }
+h2 small { font-size: @baseFontSize * 1.25; }
+
+
+/*************************************************
+ * Form
+ ************************************************/
+
+input[type="submit"]
+{
+    .btn;
+}
+
+
+/*************************************************
+ * Header
+ ************************************************/
+
+#header
+{
+    height: 150px;
+    border-bottom: 5px solid @secondaryColor;
+
+    #logo { float: left; }
+
+    .notification
+    {
+        clear: right;
+        float: right;
+        margin-right: 1em;
+    }
+}
+
+
+/*************************************************
+ * Introduction
+ ************************************************/
+
+#intro
+{
+    border-bottom: 5px solid @secondaryColor;
+}
+
+#intro-summary
+{
+    h1 { margin-top: 0; }
+}
+
+
+/*************************************************
+ * Main section
+ ************************************************/
+
+#main
+{
+    padding: 2em 0 1em;
+
+    & > aside {
+        float: right;
+        width: 33%;
+
+        .box
+        {
+            margin-bottom: 1em;
+            padding: 10px 25px 25px;
+            background-color: @grayLighter;
+            .border-radius(10px);
+        }
+    }
+}
+
+
+/*************************************************
+ * Other styles
+ ************************************************/

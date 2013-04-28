@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ app.locale }}">
+<head>
+    <meta charset="utf-8">
+
+
+    {% block stylesheets %}
+        <!-- Styles
+        ================================================== -->
+        <link href="/css/main.css" type="text/css" rel="stylesheet" />
+    {% endblock %}
+
+
+    {% block javascripts %}
+        <!-- Javascripts
+        ================================================== -->
+        <script src="/vendor/jquery-2.0.0.min.js" type="text/javascript"></script>
+        <script src="/vendor/bootstrap.min.js" type="text/javascript"></script>
+    {% endblock %}
+</head>
+<body>
+
+    {% embed "header.html.twig" %}{% endembed %}
+
+    <section id="main">
+        {% block main %}{% endblock %}
+    </section>
+
+</body>
+</html>
