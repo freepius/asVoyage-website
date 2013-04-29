@@ -1,31 +1,26 @@
 <?php
 
-/*************************************************
- * VARIOUS MESSAGES
- ************************************************/
-
-$messages = array
+return array
 (
+    // Languages
+    'lang' => array
+    (
+        'fr' => 'Français',
+        'en' => 'Anglais',
+    ),
+
+    // Navigation
+    'nav' => array
+    (
+        'home'      => 'Accueil',
+        'about'     => 'À propos',
+        'contact'   => 'Contact',
+        'our-trips' => 'Nos voyages',
+        'roadbook'  => 'Carnet de route',
+        'journal'   => 'Journal',
+        'gallery'   => 'Galerie',
+        'map'       => 'Carte',
+    ),
 );
-
-
-/*************************************************
- * NAVIGATION
- ************************************************/
-
-$navigation = array
-(
-    'Home'      => 'Accueil',
-    'About'     => 'À propos',
-    'Contact'   => 'Contact',
-    'Our trips' => 'Nos voyages',
-    'Roadbook'  => 'Carnet de route',
-    'Journal'   => 'Journal',
-    'Gallery'   => 'Galerie',
-    'Map'       => 'Carte',
-);
-
-
-return array_merge($messages, $navigation);
 
 ?>

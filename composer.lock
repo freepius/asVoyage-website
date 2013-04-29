@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4bffbe57b913aac508ea389fa284b6ae",
+    "hash": "e47dbd482afd3937f616f949abff101d",
     "packages": [
         {
             "name": "pimple/pimple",
@@ -578,35 +578,52 @@
         },
         {
             "name": "symfony/security",
-            "version": "2.0.6",
+            "version": "dev-master",
             "target-dir": "Symfony/Component/Security",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Security",
-                "reference": "v2.0.6"
+                "url": "https://github.com/symfony/Security.git",
+                "reference": "19f7bad34640fa722438b80a9733af6c17d9f203"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/Security/zipball/v2.0.6",
-                "reference": "v2.0.6",
+                "url": "https://api.github.com/repos/symfony/Security/zipball/19f7bad34640fa722438b80a9733af6c17d9f203",
+                "reference": "19f7bad34640fa722438b80a9733af6c17d9f203",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
-                "symfony/event-dispatcher": ">=2.0",
-                "symfony/http-foundation": ">=2.0",
-                "symfony/http-kernel": ">=2.0"
+                "php": ">=5.3.3",
+                "symfony/event-dispatcher": ">=2.1,<3.0",
+                "symfony/http-foundation": ">=2.1,<2.4-dev",
+                "symfony/http-kernel": ">=2.1,<2.4-dev"
+            },
+            "require-dev": {
+                "doctrine/common": ">=2.2,<3.0",
+                "doctrine/dbal": ">=2.2,<3.0",
+                "ircmaxell/password-compat": "1.0.*",
+                "psr/log": ">=1.0,<2.0",
+                "symfony/form": ">=2.0,<3.0",
+                "symfony/routing": ">=2.2,<2.4-dev",
+                "symfony/validator": ">=2.2,<2.4-dev"
             },
             "suggest": {
-                "symfony/class-loader": ">=2.0",
-                "symfony/finder": ">=2.0",
-                "symfony/form": ">=2.0",
-                "symfony/routing": ">=2.0"
+                "doctrine/dbal": "to use the built-in ACL implementation",
+                "ircmaxell/password-compat": "1.0.*",
+                "symfony/class-loader": "2.2.*",
+                "symfony/finder": "2.2.*",
+                "symfony/form": "2.2.*",
+                "symfony/routing": "2.2.*",
+                "symfony/validator": "2.2.*"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
-                    "Symfony\\Component\\Security": ""
+                    "Symfony\\Component\\Security\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -625,7 +642,7 @@
             ],
             "description": "Symfony Security Component",
             "homepage": "http://symfony.com",
-            "time": "2011-11-14 04:10:32"
+            "time": "2013-04-27 20:06:15"
         },
         {
             "name": "symfony/translation",
@@ -755,12 +772,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Validator.git",
-                "reference": "0e40c5b67c0de06bcbf3cd7a6a1161b0900456ac"
+                "reference": "690564e7cb5a4c73ddf17d4dcc2e8a9461d0c823"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Validator/zipball/0e40c5b67c0de06bcbf3cd7a6a1161b0900456ac",
-                "reference": "0e40c5b67c0de06bcbf3cd7a6a1161b0900456ac",
+                "url": "https://api.github.com/repos/symfony/Validator/zipball/690564e7cb5a4c73ddf17d4dcc2e8a9461d0c823",
+                "reference": "690564e7cb5a4c73ddf17d4dcc2e8a9461d0c823",
                 "shasum": ""
             },
             "require": {
@@ -807,7 +824,7 @@
             ],
             "description": "Symfony Validator Component",
             "homepage": "http://symfony.com",
-            "time": "2013-04-25 11:16:11"
+            "time": "2013-04-28 16:50:39"
         },
         {
             "name": "twig/twig",
@@ -860,7 +877,62 @@
         }
     ],
     "packages-dev": [
-
+        {
+            "name": "symfony/debug",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/Debug",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Debug.git",
+                "reference": "cc615424a19193d1c96886cc0d4ff6125eac7cde"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Debug/zipball/cc615424a19193d1c96886cc0d4ff6125eac7cde",
+                "reference": "cc615424a19193d1c96886cc0d4ff6125eac7cde",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/http-foundation": ">=2.1,<3.0",
+                "symfony/http-kernel": ">=2.1,<3.0"
+            },
+            "suggest": {
+                "symfony/class-loader": "~2.1",
+                "symfony/http-foundation": "~2.1",
+                "symfony/http-kernel": "~2.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Debug\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Debug Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-04-07 20:25:23"
+        }
     ],
     "aliases": [
 

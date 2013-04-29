@@ -11,28 +11,30 @@ class BaseController implements ControllerProviderInterface
 {
     public function home(Application $app)
     {
-        return $app['twig']->render('home.html.twig', array(
-            'currentNav' => 'home'
-        ));
+        return $app['twig']->render('home.html.twig');
+    }
+
+    public function about(Application $app)
+    {
+        return $app['twig']->render("about.{$app['locale']}.html.twig");
     }
 
     public function switchLocale(Application $app, Request $request, $locale)
     {
         $app['session']->set('locale', $locale);
 
-        $referer = $request->headers->get('referer');
-
-        return $app->redirect($referer ?: $app['url_generator']->generate('base.home'));
+        return $app->redirect('/home');
     }
 
     public function connect(Application $app)
     {
         $base = $app['controllers_factory'];
 
-        $base->get('/', array($this, 'home'))->bind('base.home');
+        $base->get('/home', array($this, 'home'));
+
+        $base->get('/about', array($this, 'about'));
 
         $base->get('/switch-locale/{locale}', array($this, 'switchLocale'))
-            ->bind('base.switchLocale')
             ->assert('locale', 'en|fr');
 
         return $base;

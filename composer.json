@@ -19,6 +19,9 @@
         "symfony/validator": "*",
         "symfony/security": "*"
     },
+    "require-dev": {
+        "symfony/debug": "*"
+    },
     "autoload": {
         "psr-0": { "App": "src/" }
     }

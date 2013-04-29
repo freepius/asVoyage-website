@@ -3,6 +3,13 @@
 <head>
     <meta charset="utf-8">
 
+    <title>
+        {% block title %}
+            anarchos semitas
+            {{ currentNav ? ' - ' ~ ('nav.'~currentNav)|trans : '' }}
+        {% endblock %}
+    </title>
+
 
     {% block stylesheets %}
         <!-- Styles
