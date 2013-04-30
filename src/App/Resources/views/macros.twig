@@ -1,0 +1,15 @@
+{##
+ # Add an image (in a bootstrap style)
+ # which can be open in a lightbox2 box under the `group` (if specified).
+ #}
+{% macro add_img_lightbox(img, group, hasThumb, title) %}
+{% spaceless %}
+    <a class="thumbnail" href="{{ img }}"
+       rel="lightbox{{- group|default ? '['~group~']' -}}"
+       {{ title|default ? 'title="'~title~'"' }}>
+
+        <img src="{{ (hasThumb|default(false) ? 'thumb_') ~ img  }}" />
+
+    </a>
+{% endspaceless %}
+{% endmacro %}

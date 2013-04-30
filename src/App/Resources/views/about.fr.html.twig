@@ -2,6 +2,8 @@
 
 {% extends "layout.html.twig" %}
 
+{% from "macros.twig" import add_img_lightbox as add_img %}
+
 
 {% block stylesheets %}
     <style type="text/css">
@@ -44,9 +46,8 @@
     </article>
 
     <aside>
-        <img class="thumbnail" src="/images/ourselves/marie-manalee.jpg" />
-        <img class="thumbnail" src="/images/ourselves/mathieu-freepius.jpg" />
-        <img class="thumbnail" src="/images/ourselves/marie-manalee-2.jpg" />
-        <img class="thumbnail" src="/images/ourselves/mathieu-freepius-2.jpg" />
+        {% for img in ['manalee', 'freepius', 'manalee-2', 'freepius-2'] %}
+            {{ add_img('/images/ourselves/'~img~'.jpg', 'ourselves') }}
+        {% endfor %}
     </aside>
 {% endblock %}
