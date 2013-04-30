@@ -5204,10 +5204,6 @@ a.badge:focus {
   float: left;
 }
 #nav-main > ul {
-  margin-left: 0;
-  margin-bottom: 20px;
-  list-style: none;
-  *zoom: 1;
   padding: 10px;
   -webkit-border-radius: 10px 10px 0 10px;
   -moz-border-radius: 10px 10px 0 10px;
@@ -5215,15 +5211,6 @@ a.badge:focus {
   background: 0 0 repeat url('/images/brown-texture.png') #3B372E;
   font-size: 16px;
   font-weight: bold;
-}
-#nav-main > ul:before,
-#nav-main > ul:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-#nav-main > ul:after {
-  clear: both;
 }
 #nav-main > ul > li > a {
   padding: 0 10px;
@@ -5245,10 +5232,6 @@ a.badge:focus {
   text-align: center;
 }
 #nav-roadbook > ul {
-  margin-left: 0;
-  margin-bottom: 20px;
-  list-style: none;
-  *zoom: 1;
   padding: 10px;
   -webkit-border-radius: 0 10px 10px 0;
   -moz-border-radius: 0 10px 10px 0;
@@ -5257,15 +5240,6 @@ a.badge:focus {
   font-size: 16px;
   font-weight: bold;
   border-left: 2px solid white;
-}
-#nav-roadbook > ul:before,
-#nav-roadbook > ul:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-#nav-roadbook > ul:after {
-  clear: both;
 }
 #nav-roadbook > ul > li > a {
   padding: 0 10px;
@@ -5445,9 +5419,16 @@ input[type="submit"] .badge {
 #main {
   padding: 2em 0 1em;
 }
+#main > article {
+  text-align: justify;
+}
+#main > article.two-thirds {
+  width: 68%;
+  float: left;
+}
 #main > aside {
   float: right;
-  width: 33%;
+  width: 28%;
 }
 #main > aside .box {
   margin-bottom: 1em;

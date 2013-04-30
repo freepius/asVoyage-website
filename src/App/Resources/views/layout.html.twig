@@ -11,25 +11,23 @@
     </title>
 
 
-    {% block stylesheets %}
-        <!-- Styles
-        ================================================== -->
-        <link href="/css/main.css" type="text/css" rel="stylesheet" />
-    {% endblock %}
+    <!-- Styles
+    ================================================== -->
+    <link href="/css/main.css" type="text/css" rel="stylesheet" />
+    {% block stylesheets %}{% endblock %}
 
 
-    {% block javascripts %}
-        <!-- Javascripts
-        ================================================== -->
-        <script src="/vendor/jquery-2.0.0.min.js" type="text/javascript"></script>
-        <script src="/vendor/bootstrap.min.js" type="text/javascript"></script>
-    {% endblock %}
+    <!-- Javascripts
+    ================================================== -->
+    <script src="/vendor/jquery-2.0.0.min.js" type="text/javascript"></script>
+    <script src="/vendor/bootstrap.min.js" type="text/javascript"></script>
+    {% block javascripts %}{% endblock %}
 </head>
 <body>
 
     {% embed "header.html.twig" %}{% endembed %}
 
-    <section id="main">
+    <section id="main" class="row-fluid">
         {% block main %}{% endblock %}
     </section>
 

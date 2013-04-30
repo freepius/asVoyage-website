@@ -109,12 +109,20 @@ input[type="submit"]
 {
     padding: 2em 0 1em;
 
+    & > article {
+        text-align: justify;
+
+        &.two-thirds {
+            width: 68%;
+            float: left;
+        }
+    }
+
     & > aside {
         float: right;
-        width: 33%;
+        width: 28%;
 
-        .box
-        {
+        .box {
             margin-bottom: 1em;
             padding: 10px 25px 25px;
             background-color: @grayLighter;
