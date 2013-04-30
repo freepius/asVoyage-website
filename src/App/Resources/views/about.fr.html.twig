@@ -1,0 +1,52 @@
+{% set currentNav = 'about' %}
+
+{% extends "layout.html.twig" %}
+
+
+{% block stylesheets %}
+    <style type="text/css">
+        aside > img { margin-top: 1em; }
+    </style>
+{% endblock %}
+
+
+{% block main %}
+    <article class="two-thirds">
+        <h1 id="page-title">À propos...</h1>
+
+        <h2>Qui sommes-nous ?</h2>
+        <p>
+            Nous sommes un vieux couple de jeunes. Mathieu et Marie ; alias, respectivement, <em>freepius</em> et <em>manalee</em>. Allez savoir pourquoi...
+            Cela fait {{ ('literal.'~yearsMMM)|trans }} ans que nous nous accompagnons. {{ ('literal.'~yearsMMM)|trans|title }} années durant lesquelles nos projets de vie et d'avenir se sont affirmés. Parmi eux – et ce sera l'unique thème de cet espace web – le voyage.
+        </p>
+        <p>
+            Chacun a des raisons, profondes et personnelles, d'envier l'idée du voyage ; ou plutôt, l'idée d'un voyage.
+            Car, nous semble-t-il, personne ne doit y voir les mêmes actes, émotions ou philosophies.
+            Les nôtres – d'idées du voyage – se sont rencontrées et apprivoisées, puis se sont construites, le long d'un même chemin.
+            Ces idées évoquent : la beauté et la grandeur de la nature ; la lenteur d'une marche ou d'une réflexion ; la perpétuité et l'infinie de la découverte. Elles proposent également la construction d'une certaine humilité, et l'amour pour une ouverture sans faille.
+        </p>
+        <p>Le nom du présent site web se veut leur écho.</p>
+
+        <h2>anarchos semitas</h2>
+        <p>
+            <em>« anarchos semitas »</em>, c'est l'idée que nos pas – physiquement et philosophiquement – se laisseront aller aux rencontres.
+            C'est l'idée, aussi, qu'ils essaieront de ne jamais suivre des routes et des pensées toutes tracées.
+            Nous avons un profond besoin – chacun de nous deux pour des raisons propres – de continuer, pas après pas, à découvrir et construire nos vies, sans préjugés ni buts stricts, le long de <em>« chemins anarchiques »</em>.
+        </p>
+
+        <h2>Les débuts d'un long voyage</h2>
+        <p>
+            Des voyages, petits ou grands (en distance, en durée, en dureté...), nous aimerions en faire de nombreux.
+            S'est immiscée en nous l'envie que ces voyages ne fassent pas que ponctuer nos vies, mais en soient l'épine dorsale.
+            S'est immiscée en nous, également, l'envie d'y être comme des enfants et de considérer que – toujours – nous ne serions qu'à leurs débuts.
+            Des vies qui seront alors, peut-être, <em>« les débuts d'un long voyage »</em>.
+        </p>
+    </article>
+
+    <aside>
+        <img class="thumbnail" src="/images/ourselves/marie-manalee.jpg" />
+        <img class="thumbnail" src="/images/ourselves/mathieu-freepius.jpg" />
+        <img class="thumbnail" src="/images/ourselves/marie-manalee-2.jpg" />
+        <img class="thumbnail" src="/images/ourselves/mathieu-freepius-2.jpg" />
+    </aside>
+{% endblock %}
