@@ -42,6 +42,34 @@
     {% embed "header.html.twig" %}{% endembed %}
 
 
+    <!-- Notifications
+    ================================================== -->
+    <section id="notifications">
+    {% block notifications %}
+        {% for level in ['success', 'error', 'info', 'warning']
+            if app.session.flashbag.has(level)
+        %}
+
+            <div class="alert alert-{{ level }}">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+
+                {% set messages = app.session.flashbag.get(level) %}
+
+                {% if messages|length > 1 %}
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    {{ messages[0] }}
+                {% endif %}
+            </div>
+
+        {% endfor %}
+    {% endblock %}
+    </section>
+
 
     <!-- Main content
     ================================================== -->
