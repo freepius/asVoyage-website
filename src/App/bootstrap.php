@@ -30,7 +30,7 @@ $app['mongo.database'] = $app['mongo.connection']->asVoyage;
 $app->register(new \Silex\Provider\SessionServiceProvider());
 
 /* url generator */
-$app->register(new \Silex\Provider\UrlGeneratorServiceProvider());
+//$app->register(new \Silex\Provider\UrlGeneratorServiceProvider());
 
 /* cache */
 $app->register(new \Silex\Provider\HttpCacheServiceProvider(), array(

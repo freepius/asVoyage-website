@@ -11,12 +11,12 @@ class BaseController implements ControllerProviderInterface
 {
     public function home(Application $app)
     {
-        return $app['twig']->render('home.html.twig');
+        return $app['twig']->render('base/home.html.twig');
     }
 
     public function about(Application $app)
     {
-        return $app['twig']->render("about.{$app['locale']}.html.twig", array
+        return $app['twig']->render("base/about.{$app['locale']}.html.twig", array
         (
             // Years together of Marie and Mathieu
             // ("Today" - "2004/10/15 16:00:00") / (60 * 60 * 24 * 365.25)

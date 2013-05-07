@@ -11,16 +11,14 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "silex/silex": "1.0.*",
+        "silex/silex": "*",
         "twig/twig": "*",
+        "symfony/config": "*",
         "symfony/translation": "*",
         "symfony/twig-bridge": "*",
         "symfony/locale": "*",
         "symfony/validator": "*",
         "symfony/security": "*"
-    },
-    "require-dev": {
-        "symfony/debug": "*"
     },
     "autoload": {
         "psr-0": { "App": "src/" }
