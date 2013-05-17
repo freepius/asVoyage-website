@@ -35,7 +35,9 @@
 
     {% block javascripts %}{% endblock %}
 </head>
-<body>
+<body itemscope itemtype="http://schema.org/
+    {{- currentNav == 'about'   ? 'AboutPage'   :
+       (currentNav == 'contact' ? 'ContactPage' : 'WebPage') -}}">
 
     <!-- Header
     ================================================== -->
@@ -58,11 +60,11 @@
                 {% if messages|length > 1 %}
                     <ul>
                         {% for message in messages %}
-                            <li>{{ message }}</li>
+                            <li>{{ message|raw }}</li>
                         {% endfor %}
                     </ul>
                 {% else %}
-                    {{ messages[0] }}
+                    {{ messages[0]|raw }}
                 {% endif %}
             </div>
 
