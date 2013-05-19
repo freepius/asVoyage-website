@@ -42,13 +42,14 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => array(APP.'/Resources/views'),
 ));
 
+/* validator */
+$app->register(new Silex\Provider\ValidatorServiceProvider());
+
 /* translator */
 $app->register(new \Silex\Provider\TranslationServiceProvider(), array(
     'locale' => $app['session']->get('locale') ?: 'fr',
     'locale_fallback' => 'en',
 ));
-$transDir = APP.'/Resources/translations';
-$app['translator']->addResource('array', require "$transDir/messages.fr.php", 'fr');
 
 /* monolog */
 //$app->register(new \Silex\Provider\MonologServiceProvider(), array(
@@ -60,10 +61,58 @@ $app['translator']->addResource('array', require "$transDir/messages.fr.php", 'f
 
 
 /*************************************************
+ * Twig extensions, global variables and other
+ ************************************************/
+
+$loader->add('Twig', ROOT.'/vendor/twig/extensions/lib');
+
+$app['twig'] = $app->share($app->extend('twig', function($twig, $app)
+{
+    $twig->addExtension(new Twig_Extensions_Extension_Intl());
+
+    $twig->addFilter('sum', new \Twig_Filter_Function('array_sum'));
+
+    return $twig;
+}));
+
+
+/*************************************************
+ * Add translation resources
+ ************************************************/
+
+$translator = $app['translator'];
+$transDir = APP.'/Resources/translations';
+
+$translator->addResource('array', require "$transDir/messages.fr.php", 'fr');
+$translator->addResource('array', require "$transDir/blog.fr.php"    , 'fr');
+
+
+/*************************************************
+ * Register repositories
+ ************************************************/
+
+$app['model.repository.blog.article'] = $app->share(function ($app)
+{
+    return new \App\Model\Repository\BlogArticle($app['mongo.database']->blogArticle);
+});
+
+
+/*************************************************
+ * Register entity factories
+ ************************************************/
+
+$app['model.factory.blog.article'] = $app->share(function ($app)
+{
+    return new \App\Model\Factory\BlogArticle($app['validator'], $app['model.repository.blog.article']);
+});
+
+
+/*************************************************
  * Define the routes
  ************************************************/
 
-$app->mount('/', new \App\Controller\BaseController);
+$app->mount('/'    , new \App\Controller\BaseController);
+$app->mount('/blog', new \App\Controller\BlogController($app));
 
 
 return $app;

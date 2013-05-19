@@ -1,0 +1,55 @@
+{% set currentNav = 'blog' %}
+
+{% extends "layout.html.twig" %}
+
+
+{% block main %}
+
+<article itemscope itemtype="http://schema.org/BlogPosting" class="with-aside">
+
+    <!-- Breadcrumb + title -->
+    <header>
+        <nav><a href="/blog">{{ 'blog.home'|trans }}</a> »</nav>
+
+        <h1 itemprop="name" id="page-title">{{ article.title }}</h1>
+    </header>
+
+    <div itemprop="articleBody">
+        {{ article.text | raw }}
+    </div>
+
+</article>
+
+
+<aside>
+    <!-- Publication datetime + Tags + Actions on article -->
+    <div class="box">
+        <p>
+            <time itemprop="datePublished" datetime="{{ article.pubdatetime }}">
+                {{ article.pubdatetime | localizeddate('full') | capitalize }}
+            </time>
+        </p>
+
+        <p>
+            <b>{{ 'blog.field.tags'|trans }} :</b>
+
+            {% if article.tags is empty %}
+                {{ 'none'|trans }}
+            {% else %}
+                <span itemprop="keywords">{{ article.tags | join(', ') }}</span>
+            {% endif %}
+        </p>
+
+        <div>
+            <!-- Update -->
+            <a href="/blog/{{- article.slug -}}/update" title="{{ 'Update'|trans }}">
+                <i class="icon-pencil"></i></a>
+
+            <!-- Delete -->
+            <a href="/blog/{{- article.slug -}}/delete" title="{{ 'Delete'|trans }}">
+                <i class="icon-trash"></i></a>
+        </div>
+    </div>
+</aside>
+
+{% endblock %}

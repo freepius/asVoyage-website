@@ -1,0 +1,69 @@
+{% set currentNav = 'blog' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import cancel, submit %}
+
+
+{% block main %}
+
+<header class="row">
+    <!-- Title -->
+    <h1 class="pull-left">
+        <span id="page-title">{{ 'blog.home'|trans }}</span>
+
+        {% if hasTagFilter or hasYearFilter or hasMonthFilter %}
+            <!-- Filter used -->
+            <small style="margin-left: 0.5em;"> »
+                {% if hasTagFilter %}
+                    {{ 'blog.having-tag' | trans([tag]) | raw }}
+                {% elseif hasYearFilter %}
+                    {{ 'blog.having-year' | trans([year]) | raw }}
+                {% elseif hasMonthFilter %}
+                    {{ 'blog.having-year-month' | trans([year, ('month.'~month)|trans]) | raw }}
+                {% endif %}
+
+                <!-- Remove filter -->
+                <a href="/blog" title="{{ 'blog.remove-filter'|trans }}">
+                    <i class="icon-remove" style="margin-top: 4px;"></i>
+                </a>
+            </small>
+        {% endif %}
+    </h1>
+
+    <!-- Go to dashboard -->
+    <div class="pull-right">
+        <a href="/blog/dashboard" class="btn">
+            <i class="icon-list-alt"></i> {{ 'blog.dashboard'|trans }}
+        </a>
+    </div>
+</header>
+
+
+{% if articles is empty %}
+
+    <big>{{ 'blog.noArticle'|trans }}</big>
+
+{% else %}
+
+    <div class="with-aside">
+        {% for article in articles %}
+            {% include 'blog/article-summary.html.twig' with article only %}
+        {% endfor %}
+    </div>
+
+    <aside>
+        {% include 'blog/counter-and-navigation.html.twig' %}
+
+        <nav class="box">
+            <h1>{{ 'Search' | trans }}</h1>
+
+            {{ tagsFilter | raw }}
+
+            {{ datesFilter | raw }}
+        </nav>
+    </aside>
+
+{% endif %}
+
+{% endblock %}

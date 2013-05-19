@@ -8,6 +8,7 @@ Requirements
 ------------
 
 - Any flavor of PHP 5.3 or above should do
+- Intl module for PHP 5
 - [optional] PHPUnit 3.5+ to execute the test suite (phpunit --version)
 
 External libraries used

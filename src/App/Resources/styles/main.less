@@ -1,6 +1,7 @@
 @import 'bootstrap.less';
 @import 'variables.less';
 @import 'navigation.less';
+@import 'article.less';
 
 
 /*************************************************
@@ -52,18 +53,8 @@ h4 { font-size: @baseFontSize; }
 h5,
 h6 { font-size: @baseFontSize * 0.85; }
 
-h1 small { font-size: @baseFontSize * 1.5; }
-h2 small { font-size: @baseFontSize * 1.25; }
-
-
-/*************************************************
- * Form
- ************************************************/
-
-input[type="submit"]
-{
-    .btn;
-}
+h1 small { font-size: @baseFontSize * 1.25; }
+h2 small { font-size: @baseFontSize; }
 
 
 /*************************************************
@@ -73,7 +64,7 @@ input[type="submit"]
 #header
 {
     height: 150px;
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
     border-bottom: 5px solid @secondaryColor;
 
     #logo { float: left; }
@@ -108,18 +99,14 @@ input[type="submit"]
 
 #main
 {
-    & > article {
-        text-align: justify;
-
-        &.with-aside {
-            width: 68%;
-            float: left;
-        }
+    & > .with-aside {
+        width: 68%;
+        float: left;
     }
 
     & > aside {
-        float: right;
         width: 28%;
+        float: right;
 
         .box {
             margin-bottom: 1em;

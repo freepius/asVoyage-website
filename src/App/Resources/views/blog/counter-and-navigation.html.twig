@@ -1,0 +1,35 @@
+<nav class="row box lead">
+    <!-- Articles counter -->
+    <h1>
+        {{ 'Articles'|trans  }}
+        <small>
+            {{ countPrevious + 1 }} {{ 'to'|trans }}
+            {{ countPrevious + count }} / {{ total }}
+        </small>
+    </h1>
+
+    <!-- Navigation in articles -->
+
+    {# URL depends on filters #}
+    {% if hasTagFilter %}
+        {% set url = '/blog/tag-' ~tag~ '/' %}
+    {% elseif hasYearFilter %}
+        {% set url = '/blog/year-' ~year~ '/' %}
+    {% elseif hasMonthFilter %}
+        {% set url = '/blog/year-' ~year~ '/month-' ~month~ '/' %}
+    {% else %}
+        {% set url = '/blog/' %}
+    {% endif %}
+
+    {% if page > 1 %}
+        <a class="pull-left" href="{{ url ~ (page-1) }}">
+            « {{ 'blog.younger'|trans }}
+        </a>
+    {% endif %}
+
+    {% if page < totalPage %}
+        <a class="pull-right" href="{{ url ~ (page+1) }}">
+            {{ 'blog.older'|trans }} »
+        </a>
+    {% endif %}
+</nav>

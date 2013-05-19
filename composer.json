@@ -13,6 +13,7 @@
     "require": {
         "silex/silex": "*",
         "twig/twig": "*",
+        "twig/extensions": "*",
         "symfony/config": "*",
         "symfony/translation": "*",
         "symfony/twig-bridge": "*",

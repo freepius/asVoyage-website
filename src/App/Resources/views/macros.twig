@@ -1,4 +1,13 @@
 {##
+ # Summary :
+ #  -> add_img_lightbox
+ #  -> bool2icon
+ #  -> submit
+ #  -> cancel
+ #}
+
+
+{##
  # Add an image (in a bootstrap style)
  # which can be open in a lightbox2 box under the `group` (if specified).
  #}
@@ -11,5 +20,64 @@
         <img src="{{ (hasThumb|default(false) ? 'thumb_') ~ img  }}" />
 
     </a>
+{% endspaceless %}
+{% endmacro %}
+
+
+{##
+ # Display a boolean value as an icon + a hidden text ('Yes' or 'No').
+ #}
+{% macro bool2icon(value) %}
+{% spaceless %}
+
+    {% if value %}
+        <i class="icon-ok" title="{{ 'Yes'|trans }}">
+            <span class="hide">{{ 'Yes'|trans }}</span>
+        </i>
+    {% else %}
+        <i class="icon-remove" title="{{ 'No'|trans }}">
+            <span class="hide">{{ 'No'|trans }}</span>
+        </i>
+    {% endif %}
+
+{% endspaceless %}
+{% endmacro %}
+
+
+{##
+ # A form submit button
+ #}
+{% macro submit(text, classes) %}
+{% spaceless %}
+
+    {% set text    = text    | default('Submit'|trans) %}
+    {% set classes = classes | default('btn btn-success') %}
+
+    <!-- Submit button -->
+    <button type="submit" class="{{ classes }}">
+        <i class="icon-ok icon-white"></i> {{ text }}
+    </button>
+
+{% endspaceless %}
+{% endmacro %}
+
+
+{##
+ # A form to cancel anything : more secure than a link
+ # (eg: prevents open the target in a new browser tab).
+ #}
+{% macro cancel(action, text, classes) %}
+{% spaceless %}
+
+    {% set text    = text    | default('Cancel'|trans) %}
+    {% set classes = classes | default('btn btn-warning') %}
+
+    <!-- Cancel button -->
+    <form name="cancel" action="{{ action }}" method="get">
+        <button type="submit" class="{{ classes }}">
+            <i class="icon-remove icon-white"></i> {{ text }}
+        </button>
+    </form>
+
 {% endspaceless %}
 {% endmacro %}

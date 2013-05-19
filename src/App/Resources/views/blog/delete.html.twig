@@ -1,0 +1,33 @@
+{% set currentNav = 'blog' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import cancel, submit %}
+
+
+{% block main %}
+
+    <!-- Breadcrumb + title -->
+    <header>
+        <nav>
+            <a href="/blog">{{ 'blog.home'|trans }}</a> »
+            <a href="/blog/dashboard">{{ 'blog.dashboard'|trans }}</a> »
+        </nav>
+
+        <h1 id="page-title">{{ 'blog.deleting'|trans }}</h1>
+    </header>
+
+
+    <big>{{ 'blog.deleting.confirm' | trans([article.slug]) | raw }}</big>
+
+    <div class="row">
+        <div class="pull-left" style="margin-right: 1em;">
+            {{ cancel('/blog/dashboard', 'No'|trans) }}
+        </div>
+
+        <form action="/blog/{{- article.slug -}}/delete" method="post" class="pull-left">
+            {{ submit('Yes'|trans, 'btn btn-danger') }}
+        </form>
+    </div>
+
+{% endblock %}

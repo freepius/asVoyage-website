@@ -1,0 +1,127 @@
+{% set currentNav = 'blog' %}
+
+{% set form_action = isCreation ? '/blog/create' : ('/blog/'~article.slug~'/update') %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import cancel, submit %}
+
+
+{% block main %}
+
+    <header class="row">
+        <!-- Breadcrumb + title -->
+        <div class="pull-left">
+            <nav>
+                <a href="/blog">{{ 'blog.home'|trans }}</a> »
+                <a href="/blog/dashboard">{{ 'blog.dashboard'|trans }}</a> »
+            </nav>
+
+            <h1 id="page-title">
+                {{ (isCreation ? 'blog.creation' : 'blog.updating') | trans }}
+            </h1>
+        </div>
+
+        <!-- Cancel creation -->
+        <div class="pull-right">
+            {{ cancel('/blog/dashboard') }}
+        </div>
+    </header>
+
+
+    <form action="{{ form_action }}" method="post" class="form-horizontal">
+
+        <!-- Title -->
+        <div class="control-group {{ errors.title is defined ? 'error' }}">
+            <label class="control-label" for="title">{{ 'blog.field.title'|trans }}</label>
+            <div class="controls">
+                <input type="text" id="title" name="title" value="{{ article.title }}" placeholder="{{ 'blog.placeholder.title'|trans }}" />
+
+                {% if errors.title is defined %}
+                    <span class="help-block text-error">{{ errors.title }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Slug -->
+        <div class="control-group {{ errors.slug is defined ? 'error' }}">
+            <label class="control-label" for="slug">{{ 'blog.field.slug'|trans }}</label>
+            <div class="controls">
+                <input type="text" id="slug" name="slug" value="{{ article.slug }}" placeholder="{{ 'blog.placeholder.slug'|trans }}" />
+
+                {% if errors.slug is defined %}
+                    <span class="help-block text-error">{{ errors.slug }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Publication DateTime -->
+        <div class="control-group {{ errors.pubdatetime is defined ? 'error' }}">
+            <label class="control-label" for="pubdatetime">{{ 'blog.field.pubdatetime'|trans }}</label>
+            <div class="controls">
+                <input type="text" id="pubdatetime" name="pubdatetime" value="{{ article.pubdatetime }}" placeholder="{{ 'blog.placeholder.pubdatetime'|trans }}" />
+
+                {% if errors.pubdatetime is defined %}
+                    <span class="help-block text-error">{{ errors.pubdatetime }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Is it published ? -->
+        <div class="control-group">
+            <label class="control-label" for="ispublished">{{ 'blog.field.ispublished'|trans }}</label>
+            <div class="controls">
+                <input type="checkbox" id="ispublished" name="ispublished" {{ article.ispublished ? 'checked="checked"' }} />
+            </div>
+        </div>
+
+        <!-- Can be commented ? -->
+        <div class="control-group">
+            <label class="control-label" for="becommented">{{ 'blog.field.becommented'|trans }}</label>
+            <div class="controls">
+                <input type="checkbox" id="becommented" name="becommented" {{ article.becommented ? 'checked="checked"' }} />
+            </div>
+        </div>
+
+        <!-- Text -->
+        <div class="control-group {{ errors.text is defined ? 'error' }}">
+            <label class="control-label" for="text">{{ 'blog.field.text'|trans }}</label>
+            <div class="controls">
+                <textarea type="text" id="text" name="text" placeholder="{{ 'blog.placeholder.text'|trans }}">{{ article.text }}</textarea>
+
+                {% if errors.text is defined %}
+                    <span class="help-block text-error">{{ errors.text }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="control-group {{ errors.summary is defined ? 'error' }}">
+            <label class="control-label" for="summary">{{ 'blog.field.summary'|trans }}</label>
+            <div class="controls">
+                <textarea type="summary" id="summary" name="summary" placeholder="{{ 'blog.placeholder.summary'|trans }}">{{ article.summary }}</textarea>
+
+                {% if errors.summary is defined %}
+                    <span class="help-block text-error">{{ errors.summary }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="control-group {{ errors.tags is defined ? 'error' }}">
+            <label class="control-label" for="tags">{{ 'blog.field.tags'|trans }}</label>
+            <div class="controls">
+                <textarea type="tags" id="tags" name="tags" placeholder="{{ 'blog.placeholder.tags'|trans }}">
+                    {{- article.tags |  join(' ; ') -}}
+                </textarea>
+
+                {% if errors.tags is defined %}
+                    <span class="help-block text-error">{{ errors.tags }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        {{ submit() }}
+    </form>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+/*************************************************
+ * Article(s) styles
+ ************************************************/
+
+article
+{
+    header
+    {
+        time {
+            font-weight: bold;
+            .muted;
+        }
+    }
+
+    [itemprop="articleBody"]
+    {
+        text-align: justify;
+    }
+}
+
+article.summary
+{
+    margin-bottom: 1em;
+    padding: 0.5em 1em;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid gray;
+
+    [itemprop="articleBody"] {
+        margin: 0.5em 0;
+        padding: 1em 0;
+        border-bottom: 1px solid gray;
+    }
+}

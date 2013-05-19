@@ -1,0 +1,21 @@
+<!-- Filter articles by dates -->
+<h2>{{ 'blog.by-date'|trans }}</h2>
+
+<ul>
+    {% for year, countByMonth in countByYearMonth %}
+        <li>
+            <a href="/blog/year-{{ year }}">{{ year }}</a> ({{ countByMonth | sum }})
+
+            <ul>
+                {% for month, count in countByMonth %}
+                    <li>
+                        <a href="/blog/year-{{ year }}/month-{{ month }}">
+                            {{ ('month.'~month) | trans }}
+                        </a>
+                        ({{ count }})
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
