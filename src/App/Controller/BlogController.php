@@ -72,6 +72,62 @@ class BlogController implements ControllerProviderInterface
     }
 
     /**
+     * If HTTP_REFERER is Blog home page, determine the filter and/or the page number
+     * by reverse-engineering on HTTP_REFERER.
+     *
+     * Url of Blog home page is one of the following ({page} is optional) :
+     *  -> http://host/blog/{page}
+     *  -> http://host/blog/tag-{tag}/{page}
+     *  -> http://host/blog/year-{year}/{page}
+     *  -> http://host/blog/year-{year}/mont-{month}/{page}
+     */
+    protected static function reverseBlogHomeReferer(Request $request)
+    {
+        $tag = $year = $month = $page = null;
+
+        $referer = $request->headers->get('referer');
+
+        strtok($referer, '/'); // skip the protocol (eg: http://)
+        strtok('/');           // skip the host     (eg: anarchos-semitas.net/)
+
+        // Do we come from Blog home page ?
+        if ('blog' === strtok('/'))
+        {
+            $params = strtok('');
+            $filter = strtok($params, '-');
+
+            if ('tag' === $filter)
+            {
+                $tag  = strtok('/');
+                $page = strtok('');
+            }
+            elseif ('year' === $filter)
+            {
+                $year = strtok('/');
+
+                if ('month' === $page = strtok('-'))
+                {
+                    $month = strtok('/');
+                    $page  = strtok('');
+                }
+            }
+            else { $page = $params; }
+        }
+
+        return array
+        (
+            'hasTagFilter'   => null !== $tag,
+            'hasYearFilter'  => null !== $year && null === $month,
+            'hasMonthFilter' => null !== $month,
+            'hasPage'        => is_numeric((string) $page),
+            'tag'            => urldecode($tag),
+            'year'           => $year,
+            'month'          => $month,
+            'page'           => (string) $page,
+        );
+    }
+
+    /**
      * From its slug ($article param.), retrieve an article as array.
      * If $article doesn't match any article, add a flash error and return null.
      */
@@ -181,17 +237,17 @@ class BlogController implements ControllerProviderInterface
         ));
     }
 
-    public function read($article)
+    public function read($article, Request $request)
     {
         if (null === $article)
         {
             return $this->app->redirect('/blog/dashboard');
         }
 
-        return $this->twig->render('blog/read.html.twig', array
-        (
-            'article' => $article,
-        ));
+        return $this->twig->render('blog/read.html.twig',
+            self::reverseBlogHomeReferer($request) +
+            array('article' => $article)
+        );
     }
 
     /**

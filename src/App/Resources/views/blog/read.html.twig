@@ -7,10 +7,40 @@
 
 <article itemscope itemtype="http://schema.org/BlogPosting" class="with-aside">
 
-    <!-- Breadcrumb + title -->
     <header>
-        <nav><a href="/blog">{{ 'blog.home'|trans }}</a> »</nav>
+        <!-- Breadcrumb -->
+        <nav itemprop="breadcrumb">
+            {# Link to Blog home page #}
+            {% set url = '/blog' %}
+            <a href="{{ url }}">{{ 'blog.home'|trans }}</a> »
 
+            {# Eventual link to filtered Blog home page #}
+            {% if hasTagFilter %}
+                {% set url = '/blog/tag-' ~tag %}
+
+                <a href="{{ url }}">
+                    {{ 'blog.having-tag' | trans([tag]) | raw }}</a> »
+
+            {% elseif hasYearFilter %}
+                {% set url = '/blog/year-' ~year %}
+
+                <a href="{{ url }}">
+                    {{ 'blog.having-year' | trans([year]) | raw }}</a> »
+
+            {% elseif hasMonthFilter %}
+                {% set url = '/blog/year-' ~tag~ '/month-' ~month %}
+
+                <a href="{{ url }}">
+                    {{ 'blog.having-year-month' | trans([year, ('month.'~month)|trans]) | raw }}</a> »
+            {% endif %}
+
+            {# Eventual link to Blog home page by page number #}
+            {% if hasPage %}
+                <a href="{{ url ~'/'~ page }}">{{ 'blog.page-number' | trans([page]) }}</a> »
+            {% endif %}
+        </nav>
+
+        <!-- Title -->
         <h1 itemprop="name" id="page-title">{{ article.title }}</h1>
     </header>
 
