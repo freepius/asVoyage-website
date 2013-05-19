@@ -48,7 +48,6 @@ $app->register(new Silex\Provider\ValidatorServiceProvider());
 /* translator */
 $app->register(new \Silex\Provider\TranslationServiceProvider(), array(
     'locale' => $app['session']->get('locale') ?: 'fr',
-    'locale_fallback' => 'en',
 ));
 
 /* monolog */
@@ -68,7 +67,7 @@ $loader->add('Twig', ROOT.'/vendor/twig/extensions/lib');
 
 $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
 {
-    $twig->addExtension(new Twig_Extensions_Extension_Intl());
+    $twig->addExtension(new Twig_Extensions_Extension_Intl());  // for 'localizeddate' filter
 
     $twig->addFilter('sum', new \Twig_Filter_Function('array_sum'));
 
@@ -81,10 +80,15 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
  ************************************************/
 
 $translator = $app['translator'];
-$transDir = APP.'/Resources/translations';
+$transDir   = APP.'/Resources/translations';
+$locales    = ['fr', 'en'];
+$resources  = ['messages', 'blog'];
 
-$translator->addResource('array', require "$transDir/messages.fr.php", 'fr');
-$translator->addResource('array', require "$transDir/blog.fr.php"    , 'fr');
+foreach ($locales as $locale) {
+    foreach ($resources as $resource) {
+        $translator->addResource('array', require "$transDir/$resource.$locale.php", $locale);
+    }
+}
 
 
 /*************************************************
