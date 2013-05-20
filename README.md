@@ -8,15 +8,17 @@ Requirements
 ------------
 
 - Any flavor of PHP 5.3 or above should do
-- Intl module for PHP 5
+- PHP extension : Intl, Fileinfo, ZIP, GD
 - [optional] PHPUnit 3.5+ to execute the test suite (phpunit --version)
 
 External libraries used
 -----------------------
 
+* [CKEditor](http://ckeditor.com/) as WYSIWYG Web text editor
+* [KCFINDER](http://kcfinder.sunhater.com/) as Web file manager
 * [jQuery 2](http://jquery.com/)
 * [Bootstrap](http://twitter.github.io/bootstrap/)
-* [Lightbox 2](http://lokeshdhakar.com/projects/lightbox2/)
+* [Lightbox 2](https://github.com/javierjulio/lightbox2) : a very advanced fork of [this](http://lokeshdhakar.com/projects/lightbox2/)
 
 Author
 ------

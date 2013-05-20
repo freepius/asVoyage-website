@@ -1,0 +1,3 @@
+[submodule "web/vendor/ckeditor"]
+	path = web/vendor/ckeditor
+	url = git://github.com/ckeditor/ckeditor-releases.git

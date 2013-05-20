@@ -1,181 +1,149 @@
-/* line 6, ../sass/lightbox.sass */
-#lightboxOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  background-color: black;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85);
-  opacity: 0.85;
-  display: none;
-}
-
-/* line 15, ../sass/lightbox.sass */
 #lightbox {
-  position: absolute;
+  background-color: #111;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  z-index: 10000;
-  text-align: center;
-  line-height: 0;
-  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
-  font-weight: normal;
-}
-/* line 24, ../sass/lightbox.sass */
-#lightbox img {
-  width: auto;
-  height: auto;
-}
-/* line 27, ../sass/lightbox.sass */
-#lightbox a img {
-  border: none;
-}
-
-/* line 30, ../sass/lightbox.sass */
-.lb-outerContainer {
-  position: relative;
-  background-color: white;
-  *zoom: 1;
-  width: 250px;
-  height: 250px;
-  margin: 0 auto;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
-}
-/* line 38, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
-.lb-outerContainer:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* line 39, ../sass/lightbox.sass */
-.lb-container {
-  padding: 10px;
-}
-
-/* line 42, ../sass/lightbox.sass */
-.lb-loader {
-  position: absolute;
-  top: 40%;
-  left: 0%;
-  height: 25%;
-  width: 100%;
-  text-align: center;
-  line-height: 0;
-}
-
-/* line 51, ../sass/lightbox.sass */
-.lb-nav {
-  position: absolute;
+  position: fixed;
+  right: 0;
   top: 0;
+  -webkit-transition: opacity 0.2s ease-in, z-index 0s ease-in 0s;
+  -moz-transition: opacity 0.2s ease-in, z-index 0s ease-in 0s;
+  -o-transition: opacity 0.2s ease-in, z-index 0s ease-in 0s;
+  transition: opacity 0.2s ease-in, z-index 0s ease-in 0s;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /* our click handler is on the #lightbox event */
+  z-index: 1000;
+}
+#lightbox.transition-hidden {
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease-in, z-index 0s ease-in 0.2s;
+  -moz-transition: opacity 0.2s ease-in, z-index 0s ease-in 0.2s;
+  -o-transition: opacity 0.2s ease-in, z-index 0s ease-in 0.2s;
+  transition: opacity 0.2s ease-in, z-index 0s ease-in 0.2s;
+  /* delay z-index change so overlay fades out and then z-index is applied to hide it */
+  z-index: -5;
+}
+
+.lb-image-container {
+  bottom: 70px;
   left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 10;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  /* so we can center <img> without specifying a container width */
+  top: 50px;
 }
 
-/* line 59, ../sass/lightbox.sass */
-.lb-container > .nav {
+.lb-image {
+  max-height: 100%;
+  max-width: 100%;
+  -webkit-transition: opacity 0.2s ease-in;
+  -moz-transition: opacity 0.2s ease-in;
+  -o-transition: opacity 0.2s ease-in;
+  transition: opacity 0.2s ease-in;
+  vertical-align: middle;
+  /* by setting line-height on image container using JS, image will always vertically center */
+}
+.lb-image.transition-hidden {
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease-out;
+  -moz-transition: opacity 0.2s ease-out;
+  -o-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
+}
+
+.lb-progress-container, .lb-nav {
+  bottom: 0;
   left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
-/* line 62, ../sass/lightbox.sass */
-.lb-nav a {
-  outline: none;
+.lb-progress {
+  background-color: #1a1a1a;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 1px 1px #333333, 0 0 10px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: inset 0 0 1px 1px #333333, 0 0 10px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 1px 1px #333333, 0 0 10px rgba(0, 0, 0, 0.7);
+  color: #eee;
+  height: 50px;
+  left: 50%;
+  line-height: 50px;
+  margin: -25px 0 0 -45px;
+  position: absolute;
+  top: 50%;
+  width: 90px;
 }
 
-/* line 65, ../sass/lightbox.sass */
 .lb-prev, .lb-next {
-  width: 49%;
-  height: 100%;
   background-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
   /* Trick IE into showing hover */
-  display: block;
+  bottom: 0;
+  height: 100%;
+  outline: none;
+  position: absolute;
+  top: 0;
+  width: 49%;
 }
 
-/* line 72, ../sass/lightbox.sass */
 .lb-prev {
   left: 0;
-  float: left;
+}
+.lb-prev:hover {
+  background: url("../images/prev.png") left 48% no-repeat;
 }
 
-/* line 76, ../sass/lightbox.sass */
 .lb-next {
   right: 0;
-  float: right;
 }
-
-/* line 81, ../sass/lightbox.sass */
-.lb-prev:hover {
-  background: url(../images/prev.png) left 48% no-repeat;
-}
-
-/* line 85, ../sass/lightbox.sass */
 .lb-next:hover {
-  background: url(../images/next.png) right 48% no-repeat;
+  background: url("../images/next.png") right 48% no-repeat;
 }
 
-/* line 88, ../sass/lightbox.sass */
-.lb-dataContainer {
-  margin: 0 auto;
-  padding-top: 5px;
-  *zoom: 1;
-  width: 100%;
-  -moz-border-radius-bottomleft: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  -ms-border-bottom-left-radius: 4px;
-  -o-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  -moz-border-radius-bottomright: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  -ms-border-bottom-right-radius: 4px;
-  -o-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+.lb-footer {
+  background-color: #1a1a1a;
+  border-top: 1px solid #222;
+  bottom: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  left: 0;
+  min-height: 50px;
+  padding: 10px 15px;
+  position: absolute;
+  right: 0;
 }
-/* line 38, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
-.lb-dataContainer:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* line 95, ../sass/lightbox.sass */
-.lb-data {
-  padding: 0 10px;
-  color: #bbbbbb;
-}
-/* line 98, ../sass/lightbox.sass */
-.lb-data .lb-details {
-  width: 85%;
+.lb-footer .lb-title-container {
   float: left;
-  text-align: left;
-  line-height: 1.1em;
 }
-/* line 103, ../sass/lightbox.sass */
-.lb-data .lb-caption {
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 1em;
+.lb-footer .lb-number {
+  color: #999;
+  font-size: 12px;
 }
-/* line 107, ../sass/lightbox.sass */
-.lb-data .lb-number {
-  display: block;
-  clear: left;
-  padding-bottom: 1em;
-  font-size: 11px;
+.lb-footer .lb-title {
+  font-size: 14px;
 }
-/* line 112, ../sass/lightbox.sass */
-.lb-data .lb-close {
-  width: 35px;
-  float: right;
-  padding-bottom: 0.7em;
-  outline: none;
+.lb-footer .lb-title, .lb-footer .lb-title a {
+  color: #fff;
 }
-/* line 117, ../sass/lightbox.sass */
-.lb-data .lb-close:hover {
+
+.lb-close {
+  color: #888;
   cursor: pointer;
+  font-size: 26px;
+  height: 50px;
+  line-height: 50px;
+  outline: none;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  text-decoration: none;
+  top: 0;
+  width: 50px;
+}
+.lb-close:hover {
+  color: #eee;
+  text-decoration: none;
 }
