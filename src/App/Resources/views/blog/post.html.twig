@@ -7,6 +7,25 @@
 {% from "macros.twig" import cancel, submit %}
 
 
+{% block stylesheets %}
+
+    <style type="text/css">
+        #summary { height: 100px; }
+        #text    { height: 200px; }
+        #summary, #text, .preview { max-height: 600px; }
+    </style>
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    <script type="text/javascript" src="/js/jquery.elastic.source.js"></script>
+    <script type="text/javascript" src="/js/blog-post.js"></script>
+
+{% endblock %}
+
+
 {% block main %}
 
     <header class="row">
@@ -35,7 +54,7 @@
         <div class="control-group {{ errors.title is defined ? 'error' }}">
             <label class="control-label" for="title">{{ 'blog.field.title'|trans }}</label>
             <div class="controls">
-                <input type="text" id="title" name="title" value="{{ article.title }}" placeholder="{{ 'blog.placeholder.title'|trans }}" />
+                <input type="text" id="title" name="title" class="span6" value="{{ article.title }}" placeholder="{{ 'blog.placeholder.title'|trans }}" />
 
                 {% if errors.title is defined %}
                     <span class="help-block text-error">{{ errors.title }}</span>
@@ -47,7 +66,7 @@
         <div class="control-group {{ errors.slug is defined ? 'error' }}">
             <label class="control-label" for="slug">{{ 'blog.field.slug'|trans }}</label>
             <div class="controls">
-                <input type="text" id="slug" name="slug" value="{{ article.slug }}" placeholder="{{ 'blog.placeholder.slug'|trans }}" />
+                <input type="text" id="slug" name="slug" class="span6" value="{{ article.slug }}" placeholder="{{ 'blog.placeholder.slug'|trans }}" />
 
                 {% if errors.slug is defined %}
                     <span class="help-block text-error">{{ errors.slug }}</span>
@@ -83,43 +102,21 @@
             </div>
         </div>
 
-        <!-- Text -->
-        <div class="control-group {{ errors.text is defined ? 'error' }}">
-            <label class="control-label" for="text">{{ 'blog.field.text'|trans }}</label>
-            <div class="controls">
-                <textarea type="text" id="text" name="text" placeholder="{{ 'blog.placeholder.text'|trans }}">{{ article.text }}</textarea>
-
-                {% if errors.text is defined %}
-                    <span class="help-block text-error">{{ errors.text }}</span>
-                {% endif %}
-            </div>
-        </div>
-
-        <!-- Summary -->
-        <div class="control-group {{ errors.summary is defined ? 'error' }}">
-            <label class="control-label" for="summary">{{ 'blog.field.summary'|trans }}</label>
-            <div class="controls">
-                <textarea type="summary" id="summary" name="summary" placeholder="{{ 'blog.placeholder.summary'|trans }}">{{ article.summary }}</textarea>
-
-                {% if errors.summary is defined %}
-                    <span class="help-block text-error">{{ errors.summary }}</span>
-                {% endif %}
-            </div>
-        </div>
-
         <!-- Tags -->
         <div class="control-group {{ errors.tags is defined ? 'error' }}">
             <label class="control-label" for="tags">{{ 'blog.field.tags'|trans }}</label>
             <div class="controls">
-                <textarea type="tags" id="tags" name="tags" placeholder="{{ 'blog.placeholder.tags'|trans }}">
-                    {{- article.tags |  join(' ; ') -}}
-                </textarea>
+                <input type="text" id="tags" name="tags" class="span8" value="{{- article.tags |  join(' ; ') -}}" placeholder="{{ 'blog.placeholder.tags'|trans }}">
 
                 {% if errors.tags is defined %}
                     <span class="help-block text-error">{{ errors.tags }}</span>
                 {% endif %}
             </div>
         </div>
+
+        {# Text and Summary #}
+        {% embed "blog/edit-text-field.html.twig" with {field: 'text'   } %}{% endembed %}
+        {% embed "blog/edit-text-field.html.twig" with {field: 'summary'} %}{% endembed %}
 
         {{ submit() }}
     </form>

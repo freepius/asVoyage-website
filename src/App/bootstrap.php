@@ -6,6 +6,10 @@ define('ROOT', dirname(SRC));
 
 $loader = require ROOT.'/vendor/autoload.php';
 
+// Hack to load SmartyPantsTypographer class :-/
+$loader->add('michelf', ROOT.'/vendor/michelf/php-smartypants');
+\michelf\SmartyPants::SMARTYPANTS_VERSION;
+
 $app = new \Silex\Application();
 
 /* environment */
@@ -20,7 +24,7 @@ $app['mongo.database'] = $app['mongo.connection']->asVoyage;
 
 
 /*************************************************
- * Register of providers
+ * Register services
  ************************************************/
 
 /* controller as service */
@@ -28,9 +32,6 @@ $app['mongo.database'] = $app['mongo.connection']->asVoyage;
 
 /* session */
 $app->register(new \Silex\Provider\SessionServiceProvider());
-
-/* url generator */
-//$app->register(new \Silex\Provider\UrlGeneratorServiceProvider());
 
 /* cache */
 $app->register(new \Silex\Provider\HttpCacheServiceProvider(), array(
@@ -57,6 +58,11 @@ $app->register(new \Silex\Provider\TranslationServiceProvider(), array(
         //return new \Monolog\Handler\MongoDBHandler($app['mongo.connection'], $app['mongo.database'], 'log');
     //}),
 //));
+
+/* markdown and typo */
+$app['markdownTypo'] = $app->share(function () {
+    return new \App\Util\MarkdownTypo();
+});
 
 
 /*************************************************

@@ -121,3 +121,14 @@ h2 small { font-size: @baseFontSize; }
 /*************************************************
  * Other styles
  ************************************************/
+
+.preview // textarea style
+{
+    overflow: auto;
+    padding: 4px 6px;
+    margin-bottom: @baseLineHeight / 2;
+    .border-radius(@inputBorderRadius);
+    border: 1px solid @inputBorder;
+    background-color: white;
+    text-align: justify;
+}

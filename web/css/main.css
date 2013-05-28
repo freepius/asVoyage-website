@@ -4317,3 +4317,14 @@ h2 small {
   -moz-border-radius: 10px;
   border-radius: 10px;
 }
+.preview {
+  overflow: auto;
+  padding: 4px 6px;
+  margin-bottom: 10px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: white;
+  text-align: justify;
+}

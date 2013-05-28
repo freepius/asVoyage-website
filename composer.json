@@ -9,6 +9,12 @@
             "email": "freepius44@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/michelf/php-smartypants.git"
+        }
+    ],
     "minimum-stability": "dev",
     "require": {
         "silex/silex": "*",
@@ -19,7 +25,9 @@
         "symfony/twig-bridge": "*",
         "symfony/locale": "*",
         "symfony/validator": "*",
-        "symfony/security": "*"
+        "symfony/security": "*",
+        "michelf/php-markdown": "1.3.*@dev",
+        "michelf/php-smartypants": "1.6-beta1"
     },
     "autoload": {
         "psr-0": { "App": "src/" }

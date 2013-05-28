@@ -1,0 +1,42 @@
+{% block edit_text_field %}
+
+<!-- {{ field }} : Edit and Preview tabs -->
+<div class="control-group {{ errors[field] is defined ? 'error' }}">
+    <label class="control-label" for="{{ field }}">{{ ('blog.field.'~field) | trans }}</label>
+
+    <div class="controls tabbable">
+
+        <!-- Links to tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#{{ field }}-edit" data-toggle="tab">{{ 'Edit'|trans }}</a>
+            </li>
+
+            <li>
+                <a id="{{ field }}-preview-link" href="#{{ field }}-preview" data-toggle="tab">
+                    {{ 'Preview'|trans }}
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <!-- Edit tab -->
+            <div class="tab-pane active" id="{{ field }}-edit">
+                {% if errors[field] is defined %}
+                    <span class="help-block text-error">{{ errors[field] }}</span>
+                {% endif %}
+
+                <textarea id="{{ field }}" name="{{ field }}" class="span12"
+                          placeholder="{{ ('blog.placeholder.'~field) | trans }}">
+                    {{- article[field] -}}
+                </textarea>
+            </div>
+
+            <!-- Preview tab -->
+            <div id="{{ field }}-preview" class="tab-pane preview"></div>
+        </div>
+    </div>
+</div>
+<!-- END_{{ field }} -->
+
+{% endblock %}

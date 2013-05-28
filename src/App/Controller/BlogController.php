@@ -11,17 +11,18 @@ use Silex\Application,
 class BlogController implements ControllerProviderInterface
 {
     // On "home" page, max number of articles
-    const LIMIT_ARTICLES = 2;
+    const LIMIT_ARTICLES = 2; // TODO: change this
 
 
     public function __construct(Application $app)
     {
-        $this->app        = $app;
-        $this->flashBag   = $app['session']->getFlashBag();
-        $this->translator = $app['translator'];
-        $this->twig       = $app['twig'];
-        $this->repository = $app['model.repository.blog.article'];
-        $this->factory    = $app['model.factory.blog.article'];
+        $this->app          = $app;
+        $this->flashBag     = $app['session']->getFlashBag();
+        $this->translator   = $app['translator'];
+        $this->twig         = $app['twig'];
+        $this->repository   = $app['model.repository.blog.article'];
+        $this->factory      = $app['model.factory.blog.article'];
+        $this->markdownTypo = $app['markdownTypo'];
     }
 
     public function connect(Application $app)
@@ -206,6 +207,16 @@ class BlogController implements ControllerProviderInterface
             self::LIMIT_ARTICLES, $skip, $fromDate, $toDate, $tag
         ));
 
+        // For text and summary : MarkdownTypo to Html
+        foreach ($articles as & $article)
+        {
+            // avoid conflicts for footnote ids
+            $this->markdownTypo->markdown->fn_id_prefix = $article['slug'];
+
+            $article['text']    = $this->markdownTypo->transform($article['text']);
+            $article['summary'] = trim($this->markdownTypo->transform($article['summary']));
+        }
+
         return $this->twig->render('blog/home.html.twig', array
         (
             'articles' => $articles,
@@ -243,6 +254,8 @@ class BlogController implements ControllerProviderInterface
         {
             return $this->app->redirect('/blog/dashboard');
         }
+
+        $article['text'] = $this->markdownTypo->transform($article['text']);
 
         return $this->twig->render('blog/read.html.twig',
             self::reverseBlogHomeReferer($request) +
