@@ -6,6 +6,9 @@ define('ROOT', dirname(SRC));
 
 $loader = require ROOT.'/vendor/autoload.php';
 
+// Locale of the application
+setlocale(LC_ALL, 'fr_FR.UTF-8');
+
 // Hack to load SmartyPantsTypographer class :-/
 $loader->add('michelf', ROOT.'/vendor/michelf/php-smartypants');
 \michelf\SmartyPants::SMARTYPANTS_VERSION;

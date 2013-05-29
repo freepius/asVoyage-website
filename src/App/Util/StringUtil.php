@@ -5,8 +5,6 @@ namespace App\Util;
 
 class StringUtil
 {
-    const LOCAL = 'fr_FR.UTF-8';
-
     /**
      * Modifies a string to remove all non ASCII characters and spaces,
      * and to put ASCII characters in lowercase.
@@ -22,7 +20,6 @@ class StringUtil
         // transliterate
         if (function_exists('iconv'))
         {
-            setlocale(LC_ALL, self::LOCAL); // Alter //TRANSLIT result
             $text = iconv('utf-8', 'ascii//TRANSLIT', $text);
         }
 

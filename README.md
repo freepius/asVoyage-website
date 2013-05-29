@@ -41,15 +41,12 @@ TODO
   * Add a datepicker for "pubdatetime" field
   * Add helps / placeholders
   * Add help for Markdown
-* Configure SmartyPants (depending on locale or only french ?).
 * Configure and make secure KCFinder
 * Separator for tags : ';' or ',' ?
-* Use DataTable jquery plugin to Blog dashboard ?
 * Improve the inclusion of JS and CSS files (if not using => do not include)
-* Add comments for Blog articleq
+* Add comments for Blog articles
 * Reorganize HTML5 => make semantic !
 * On Blog "reading" page : add box containing related articles/contents
-* Locale depending on geo-localization
 
 For production
 --------------
@@ -58,3 +55,10 @@ For production
   * Blog repository => caching for listTags() and countArticlesByYearMonth()
   * Blog controller => caching the generated HTML from Markdown
 * Minified JS and CSS files
+
+Low priority
+------------
+
+* Use DataTable jquery plugin to Blog dashboard ?
+* Transform App\Util\MarkdownTypo to Silex provider
+* Locale depending on geo-localization

@@ -10,9 +10,12 @@
             idLink    = '#' + field + '-preview-link';
 
         $(idLink).click(function (event) {
-            var preview = $(idPreview);
+            var preview = $(idPreview),
+                text = $.trim($(idField).val());
 
-            if (preview.hasClass('active')) { return false; }
+            if (preview.hasClass('active') || text === '') {
+                return false;
+            }
 
             preview.html(
                 '<div style="text-align: center;">' +
@@ -23,7 +26,7 @@
             $.ajax({
                 method  : 'POST',
                 url     : '/render-markdown',
-                data    : { text: $(idField).val() },
+                data    : { text: text },
                 success : function (data) {
                     $(preview).html(data);
                 }
