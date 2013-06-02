@@ -28,7 +28,7 @@
                     {{ 'blog.having-year' | trans([year]) | raw }}</a> »
 
             {% elseif hasMonthFilter %}
-                {% set url = '/blog/year-' ~tag~ '/month-' ~month %}
+                {% set url = '/blog/year-' ~year~ '/month-' ~month %}
 
                 <a href="{{ url }}">
                     {{ 'blog.having-year-month' | trans([year, ('month.'~month)|trans]) | raw }}</a> »
@@ -70,6 +70,7 @@
             {% endif %}
         </p>
 
+        {% if is_granted('ROLE_ADMIN') %}
         <div>
             <!-- Update -->
             <a href="/blog/{{- article.slug -}}/update" title="{{ 'Update'|trans }}">
@@ -79,6 +80,7 @@
             <a href="/blog/{{- article.slug -}}/delete" title="{{ 'Delete'|trans }}">
                 <i class="icon-trash"></i></a>
         </div>
+        {% endif %}
     </div>
 </aside>
 

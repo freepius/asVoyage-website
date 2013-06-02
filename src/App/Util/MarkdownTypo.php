@@ -7,7 +7,7 @@ use Michelf\MarkdownExtra,
 
 
 /**
- * Transform a text using MarkdownExtra and SmartyPantsTypo
+ * Transform a text using MarkdownExtra and SmartyPantsTypographer
  */
 class MarkdownTypo
 {

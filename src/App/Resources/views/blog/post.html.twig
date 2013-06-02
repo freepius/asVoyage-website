@@ -106,7 +106,7 @@
         <div class="control-group {{ errors.tags is defined ? 'error' }}">
             <label class="control-label" for="tags">{{ 'blog.field.tags'|trans }}</label>
             <div class="controls">
-                <input type="text" id="tags" name="tags" class="span8" value="{{- article.tags |  join(' ; ') -}}" placeholder="{{ 'blog.placeholder.tags'|trans }}">
+                <input type="text" id="tags" name="tags" class="span8" value="{{- article.tags |  join(', ') -}}" placeholder="{{ 'blog.placeholder.tags'|trans }}">
 
                 {% if errors.tags is defined %}
                     <span class="help-block text-error">{{ errors.tags }}</span>

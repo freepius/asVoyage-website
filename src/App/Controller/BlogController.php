@@ -19,7 +19,6 @@ class BlogController implements ControllerProviderInterface
         $this->app          = $app;
         $this->flashBag     = $app['session']->getFlashBag();
         $this->translator   = $app['translator'];
-        $this->twig         = $app['twig'];
         $this->repository   = $app['model.repository.blog.article'];
         $this->factory      = $app['model.factory.blog.article'];
         $this->markdownTypo = $app['markdownTypo'];
@@ -70,6 +69,15 @@ class BlogController implements ControllerProviderInterface
             ->convert('article', $slugToArticle);
 
         return $blog;
+    }
+
+    /**
+     * Useful shorcut because premature calling of twig will crash application
+     * (because of its SecurityExtension).
+     */
+    protected function render($name, array $context = array())
+    {
+        return $this->app['twig']->render($name, $context);
     }
 
     /**
@@ -149,7 +157,7 @@ class BlogController implements ControllerProviderInterface
     // TODO : cache HTML until one article is edit/create.
     protected function renderTagsFilter()
     {
-        return $this->twig->render('blog/filter-by-tags.html.twig', array(
+        return $this->render('blog/filter-by-tags.html.twig', array(
             'tags' => $this->repository->listTags(),
         ));
     }
@@ -157,7 +165,7 @@ class BlogController implements ControllerProviderInterface
     // TODO : cache HTML until one article is edit/create.
     protected function renderDatesFilter()
     {
-        return $this->twig->render('blog/filter-by-dates.html.twig', array(
+        return $this->render('blog/filter-by-dates.html.twig', array(
             'countByYearMonth' => $this->repository->countArticlesByYearMonth(),
         ));
     }
@@ -217,7 +225,7 @@ class BlogController implements ControllerProviderInterface
             $article['summary'] = trim($this->markdownTypo->transform($article['summary']));
         }
 
-        return $this->twig->render('blog/home.html.twig', array
+        return $this->render('blog/home.html.twig', array
         (
             'articles' => $articles,
 
@@ -242,7 +250,7 @@ class BlogController implements ControllerProviderInterface
 
     public function dashboard()
     {
-        return $this->twig->render('blog/dashboard.html.twig', array
+        return $this->render('blog/dashboard.html.twig', array
         (
             'articles' => $this->repository->listAllArticles(),
         ));
@@ -257,7 +265,7 @@ class BlogController implements ControllerProviderInterface
 
         $article['text'] = $this->markdownTypo->transform($article['text']);
 
-        return $this->twig->render('blog/read.html.twig',
+        return $this->render('blog/read.html.twig',
             self::reverseBlogHomeReferer($request) +
             array('article' => $article)
         );
@@ -311,7 +319,7 @@ class BlogController implements ControllerProviderInterface
             }
         }
 
-        return $this->twig->render('blog/post.html.twig', array
+        return $this->render('blog/post.html.twig', array
         (
             'article'    => $article,
             'errors'     => $errors,
@@ -337,7 +345,7 @@ class BlogController implements ControllerProviderInterface
             return $this->app->redirect('/blog/dashboard');
         }
 
-        return $this->twig->render('blog/delete.html.twig', array
+        return $this->render('blog/delete.html.twig', array
         (
             'article' => $article,
         ));

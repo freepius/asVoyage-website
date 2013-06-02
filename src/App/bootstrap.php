@@ -30,9 +30,6 @@ $app['mongo.database'] = $app['mongo.connection']->asVoyage;
  * Register services
  ************************************************/
 
-/* controller as service */
-//$app->register(new Silex\Provider\ServiceControllerServiceProvider());
-
 /* session */
 $app->register(new \Silex\Provider\SessionServiceProvider());
 
@@ -53,6 +50,9 @@ $app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new \Silex\Provider\TranslationServiceProvider(), array(
     'locale' => $app['session']->get('locale') ?: 'fr',
 ));
+
+/* security */
+$app->register(new \Silex\Provider\SecurityServiceProvider());
 
 /* monolog */
 //$app->register(new \Silex\Provider\MonologServiceProvider(), array(
@@ -82,6 +82,32 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
 
     return $twig;
 }));
+
+
+/*************************************************
+ * Security configuration
+ ************************************************/
+
+$app['security.firewalls'] = array(
+    'all' => array(
+        'anonymous' => true,
+        'pattern'   => '^/',
+        'form'      => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
+        'logout'    => array('logout_path' => '/admin/logout'),
+        'users'     => array(
+            'vagabond' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+        ),
+    ),
+);
+
+$app['security.access_rules'] = array(array
+(
+    '^/admin'                   .'|'.
+    '^/render-markdown'         .'|'.
+    '^/blog/(dashboard|create)' .'|'.
+    '^/blog/.*/(update|delete)'
+,
+'ROLE_ADMIN'));
 
 
 /*************************************************

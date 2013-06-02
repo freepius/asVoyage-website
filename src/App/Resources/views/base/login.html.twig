@@ -1,0 +1,20 @@
+{% extends "layout.html.twig" %}
+
+{% from 'macros.twig' import submit %}
+
+
+{% block main %}
+    <h1 id="page-title">{{ 'Login'|trans }}</h1>
+
+    <p>
+        <form action="/admin/login_check" method="post" class="form-inline">
+            <input type="hidden" name="_username" value="vagabond" />
+            <input type="password" name="_password" value="" placeholder="{{ 'Password'|trans }}" />
+            {{ submit() }}
+
+            {% if error %}
+                <span class="text-error">{{ error|trans }}</span>
+            {% endif %}
+        </form>
+    </p>
+{% endblock %}

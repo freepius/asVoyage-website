@@ -45,7 +45,7 @@
                     <td>{{ article.pubdatetime | localizeddate }}</td>
                     <td>{{ bool2icon(article.ispublished) }}</td>
                     <td>{{ bool2icon(article.becommented) }}</td>
-                    <td>{{ article.tags|join(';') }}</td>
+                    <td>{{ article.tags|join(', ') }}</td>
 
                     <!-- Actions on article -->
                     <td>

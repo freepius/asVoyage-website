@@ -16,7 +16,11 @@ class BaseController implements ControllerProviderInterface
         $base->get('/',     array($this, 'home'));
         $base->get('/home', array($this, 'home'));
 
+        // Various pages
         $base->get('/about', array($this, 'about'));
+
+        // Technical routes
+        $base->get('/login', array($this, 'login'));
 
         $base->get('/switch-locale/{locale}', array($this, 'switchLocale'))
             ->assert('locale', 'en|fr');
@@ -43,6 +47,14 @@ class BaseController implements ControllerProviderInterface
             // Years together of Marie and Mathieu
             // ("Today" - "2004/10/15 16:00:00") / (60 * 60 * 24 * 365.25)
             'yearsMMM' => (int) round((time() - 1097769600) / 31557600),
+        ));
+    }
+
+    public function login(Application $app)
+    {
+        return $app['twig']->render('base/login.html.twig', array
+        (
+            'error' => $app['security.last_error']($app['request']),
         ));
     }
 

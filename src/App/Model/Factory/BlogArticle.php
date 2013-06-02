@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert,
 class BlogArticle extends EntityFactory
 {
     /**
-     * @param  string  $tags  Tags separated by ';'
+     * @param  string  $tags  Tags separated by ','
      *
      * Return an array (without duplicates) of tags as strings (non-empty, natural sorted).
      */
@@ -21,7 +21,7 @@ class BlogArticle extends EntityFactory
             return ucfirst(strtolower(trim($tag)));
         };
 
-        $tags = explode(';', $tags);
+        $tags = explode(',', $tags);
 
         // No blank value
         $tags = array_filter(array_map($processTag, $tags));

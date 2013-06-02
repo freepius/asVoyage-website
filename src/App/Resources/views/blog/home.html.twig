@@ -31,12 +31,14 @@
         {% endif %}
     </h1>
 
-    <!-- Go to dashboard -->
-    <div class="pull-right">
-        <a href="/blog/dashboard" class="btn">
-            <i class="icon-list-alt"></i> {{ 'blog.dashboard'|trans }}
-        </a>
-    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+        <!-- Go to dashboard -->
+        <div class="pull-right">
+            <a href="/blog/dashboard" class="btn">
+                <i class="icon-list-alt"></i> {{ 'blog.dashboard'|trans }}
+            </a>
+        </div>
+    {% endif %}
 </header>
 
 

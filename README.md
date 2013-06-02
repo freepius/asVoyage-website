@@ -35,7 +35,6 @@ License
 TODO
 ====
 
-* Add security
 * Blog creating/updating page :
   * Auto fill the "slug" field from slugified "title" field (with javascript)
   * Add a datepicker for "pubdatetime" field
@@ -51,6 +50,8 @@ TODO
 For production
 --------------
 
+* Change password for admin
+* Management of errors and exceptions
 * Cache (with Memcached ?) :
   * Blog repository => caching for listTags() and countArticlesByYearMonth()
   * Blog controller => caching the generated HTML from Markdown

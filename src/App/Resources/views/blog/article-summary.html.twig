@@ -19,6 +19,7 @@
 
 
     <footer class="row">
+        <!-- Tags -->
         <div class="span8">
             <b>{{ 'blog.field.tags'|trans }} :</b>
 
@@ -29,16 +30,18 @@
             {% endif %}
         </div>
 
-        <!-- Actions on article -->
-        <div class="pull-right">
-            <!-- Update -->
-            <a href="/blog/{{- slug -}}/update" title="{{ 'Update'|trans }}">
-                <i class="icon-pencil"></i></a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <!-- Actions on article -->
+            <div class="pull-right">
+                <!-- Update -->
+                <a href="/blog/{{- slug -}}/update" title="{{ 'Update'|trans }}">
+                    <i class="icon-pencil"></i></a>
 
-            <!-- Delete -->
-            <a href="/blog/{{- slug -}}/delete" title="{{ 'Delete'|trans }}">
-                <i class="icon-trash"></i></a>
-        </div>
+                <!-- Delete -->
+                <a href="/blog/{{- slug -}}/delete" title="{{ 'Delete'|trans }}">
+                    <i class="icon-trash"></i></a>
+            </div>
+        {% endif %}
     </footer>
 
 </article>
