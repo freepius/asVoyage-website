@@ -38,10 +38,8 @@ TODO
 * Blog creating/updating page :
   * Auto fill the "slug" field from slugified "title" field (with javascript)
   * Add a datepicker for "pubdatetime" field
-  * Add helps / placeholders
   * Add help for Markdown
 * Configure and make secure KCFinder
-* Separator for tags : ';' or ',' ?
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 * Add comments for Blog articles
 * Reorganize HTML5 => make semantic !
@@ -50,6 +48,7 @@ TODO
 For production
 --------------
 
+* Update vendor and libraries
 * Change password for admin
 * Management of errors and exceptions
 * Cache (with Memcached ?) :

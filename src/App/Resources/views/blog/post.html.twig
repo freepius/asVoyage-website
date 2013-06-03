@@ -48,13 +48,27 @@
     </header>
 
 
+    {% if errors %}
+        <!-- Errors in the article posting -->
+        <p class="alert alert-error">
+            {% set fields_trans = [] %}
+
+            {% for field in errors | keys %}
+                {% set fields_trans = fields_trans | merge([('blog.field.'~field) | trans]) %}
+            {% endfor %}
+
+            {{ 'blog.error(s)' | trans([errors|length, fields_trans|join(', ')]) | raw }}
+        </p>
+    {% endif %}
+
+
     <form action="{{ form_action }}" method="post" class="form-horizontal">
 
         <!-- Title -->
         <div class="control-group {{ errors.title is defined ? 'error' }}">
             <label class="control-label" for="title">{{ 'blog.field.title'|trans }}</label>
             <div class="controls">
-                <input type="text" id="title" name="title" class="span6" value="{{ article.title }}" placeholder="{{ 'blog.placeholder.title'|trans }}" />
+                <input type="text" id="title" name="title" class="span6" value="{{ article.title }}" required="required" />
 
                 {% if errors.title is defined %}
                     <span class="help-block text-error">{{ errors.title }}</span>
@@ -66,11 +80,13 @@
         <div class="control-group {{ errors.slug is defined ? 'error' }}">
             <label class="control-label" for="slug">{{ 'blog.field.slug'|trans }}</label>
             <div class="controls">
-                <input type="text" id="slug" name="slug" class="span6" value="{{ article.slug }}" placeholder="{{ 'blog.placeholder.slug'|trans }}" />
+                <input type="text" id="slug" name="slug" class="span6" value="{{ article.slug }}" required="required" />
 
                 {% if errors.slug is defined %}
-                    <span class="help-block text-error">{{ errors.slug }}</span>
+                    <span class="help-inline text-error">{{ errors.slug }}</span>
                 {% endif %}
+
+                <span class="help-block muted">{{ 'blog.help.slug' | trans | raw }}</span>
             </div>
         </div>
 
@@ -78,11 +94,13 @@
         <div class="control-group {{ errors.pubdatetime is defined ? 'error' }}">
             <label class="control-label" for="pubdatetime">{{ 'blog.field.pubdatetime'|trans }}</label>
             <div class="controls">
-                <input type="text" id="pubdatetime" name="pubdatetime" value="{{ article.pubdatetime }}" placeholder="{{ 'blog.placeholder.pubdatetime'|trans }}" />
+                <input type="text" id="pubdatetime" name="pubdatetime" value="{{ article.pubdatetime }}" required="required" />
 
                 {% if errors.pubdatetime is defined %}
-                    <span class="help-block text-error">{{ errors.pubdatetime }}</span>
+                    <span class="help-inline text-error">{{ errors.pubdatetime }}</span>
                 {% endif %}
+
+                <span class="help-block muted">{{ 'blog.help.pubdatetime' | trans | raw }}</span>
             </div>
         </div>
 
@@ -91,14 +109,16 @@
             <label class="control-label" for="ispublished">{{ 'blog.field.ispublished'|trans }}</label>
             <div class="controls">
                 <input type="checkbox" id="ispublished" name="ispublished" {{ article.ispublished ? 'checked="checked"' }} />
+                <span class="help-inline muted">{{ 'blog.help.ispublished' | trans | raw }}</span>
             </div>
         </div>
 
         <!-- Can be commented ? -->
         <div class="control-group">
-            <label class="control-label" for="becommented">{{ 'blog.field.becommented'|trans }}</label>
+            <label class="control-label" for="becommented">{{ 'blog.field.becommented' | trans | raw }}</label>
             <div class="controls">
                 <input type="checkbox" id="becommented" name="becommented" {{ article.becommented ? 'checked="checked"' }} />
+                <span class="help-inline muted">{{ 'blog.help.becommented' | trans | raw }}</span>
             </div>
         </div>
 
@@ -106,11 +126,8 @@
         <div class="control-group {{ errors.tags is defined ? 'error' }}">
             <label class="control-label" for="tags">{{ 'blog.field.tags'|trans }}</label>
             <div class="controls">
-                <input type="text" id="tags" name="tags" class="span8" value="{{- article.tags |  join(', ') -}}" placeholder="{{ 'blog.placeholder.tags'|trans }}">
-
-                {% if errors.tags is defined %}
-                    <span class="help-block text-error">{{ errors.tags }}</span>
-                {% endif %}
+                <input type="text" id="tags" name="tags" class="span8" value="{{- article.tags |  join(', ') -}}">
+                <span class="help-block muted">{{ 'blog.help.tags' | trans | raw }}</span>
             </div>
         </div>
 

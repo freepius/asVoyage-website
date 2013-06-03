@@ -26,8 +26,7 @@
                     <span class="help-block text-error">{{ errors[field] }}</span>
                 {% endif %}
 
-                <textarea id="{{ field }}" name="{{ field }}" class="span12"
-                          placeholder="{{ ('blog.placeholder.'~field) | trans }}">
+                <textarea id="{{ field }}" name="{{ field }}" class="span12">
                     {{- article[field] -}}
                 </textarea>
             </div>
