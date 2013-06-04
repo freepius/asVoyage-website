@@ -36,8 +36,6 @@ TODO
 ====
 
 * Blog creating/updating page :
-  * Auto fill the "slug" field from slugified "title" field (with javascript)
-  * Add a datepicker for "pubdatetime" field
   * Add help for Markdown
 * Configure and make secure KCFinder
 * Improve the inclusion of JS and CSS files (if not using => do not include)
