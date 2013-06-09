@@ -4322,7 +4322,7 @@ strong {
   font-family: 'GorriSansRegular';
 }
 body {
-  margin: 0 2em 1em;
+  padding: 0 2em 1em;
 }
 .row {
   margin-left: 0;

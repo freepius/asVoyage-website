@@ -21,6 +21,16 @@
     <link href="/css/main.css" type="text/css" rel="stylesheet" />
     <link href="/css/lightbox.css" type="text/css" rel="stylesheet" />
 
+    {# Red borders for ADMIN ! #}
+    {% if is_granted('ROLE_ADMIN') %}
+        <style type="text/css">
+            body {
+                border-left : 5px solid red;
+                border-right: 5px solid red;
+            }
+        </style>
+    {% endif %}
+
     {% block stylesheets %}{% endblock %}
 </head>
 <body itemscope itemtype="http://schema.org/
