@@ -1,0 +1,45 @@
+{% set currentNav = 'blog' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import cancel %}
+
+
+{% block main %}
+
+    <header class="row">
+        <!-- Breadcrumb + title -->
+        <div class="pull-left">
+            <nav>
+                <a href="/blog">{{ 'blog.home'|trans }}</a> »
+                <a href="/blog/dashboard">{{ 'blog.dashboard'|trans }}</a> »
+            </nav>
+
+            <h1 id="page-title">
+                {{ 'blog.updating' | trans }}
+            </h1>
+        </div>
+
+        <!-- Cancel creation -->
+        <div class="pull-right">
+            {{ cancel('/blog/dashboard') }}
+        </div>
+    </header>
+
+
+    <!-- Various actions for the article editing -->
+    <ul class="nav nav-tabs">
+        <li><a href="/blog/{{ article.slug }}/update">{{ 'General'|trans }}</a></li>
+        <li class="active"><a href="">{{ 'Comments'|trans }}</a></li>
+    </ul>
+
+
+    <h2>{{ 'Comments'|trans }}</h2>
+
+    {% include 'comment/list.html.twig' with {
+            url_prefix: '/blog/'~article.slug~'/comments', comments: article.comments,
+            idComment: idComment, comment: comment, errors: errors
+       } only
+    %}
+
+{% endblock %}

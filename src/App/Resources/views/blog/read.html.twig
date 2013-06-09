@@ -48,6 +48,17 @@
         {{ article.text | raw }}
     </div>
 
+    <!-- Comments -->
+    <div itemprop="comment">
+        <h2>{{ 'Comments'|trans }}</h2>
+
+        {% include 'comment/list.html.twig' with {
+                url_prefix: '/blog/'~article.slug~'/read', comments: article.comments,
+                idComment: idComment, comment: comment, errors: errors
+           } only
+        %}
+    </div>
+
 </article>
 
 

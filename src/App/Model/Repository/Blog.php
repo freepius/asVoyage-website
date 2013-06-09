@@ -14,8 +14,10 @@ use App\Exception\BlogArticleNotFound;
  *  -> listArticles
  *  -> listTags
  *  -> countArticlesByYearMonth
+ *  -> storeComment
+ *  -> deleteComment
  */
-class BlogArticle extends MongoRepository
+class Blog extends MongoRepository
 {
     /**
      * Return some filters for querying articles :
@@ -191,5 +193,44 @@ class BlogArticle extends MongoRepository
         foreach ($result as $year) { krsort($year); }
 
         return $result;
+    }
+
+    /**
+     * Create or update a comment in an article.
+     * Return true if the operation succeed ; false, else.
+     */
+    public function storeComment($idArticle, $idComment, array $comment)
+    {
+        if (null === $idComment) {
+            $update = array('$push' => array('comments' => $comment));
+        }
+        else {
+            $update = array('$set' => array("comments.$idComment" => $comment));
+        }
+
+        $result = $this->collection->update(array('_id' => $idArticle), $update);
+
+        return $result['n'] > 0;
+    }
+
+    /**
+     * Delete a comment in an article.
+     * Return true if the operation succeed ; false, else.
+     */
+    public function deleteComment($idArticle, $idComment)
+    {
+        // Change comments[$idComment] to null
+        $result = $this->collection->update(
+            array('_id' => $idArticle),
+            array('$unset' => array("comments.$idComment" => 1))
+        );
+
+        // Remove the null
+        $this->collection->update(
+            array('_id' => $idArticle),
+            array('$pull' => array('comments' => null))
+        );
+
+        return $result['n'] > 0;
     }
 }

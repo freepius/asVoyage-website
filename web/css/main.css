@@ -4295,7 +4295,7 @@ a.badge:focus {
 #nav-roadbook > ul > li > a:hover {
   background-color: #CF5B37;
 }
-article header time {
+article > header time {
   font-weight: bold;
   color: #999;
 }
@@ -4313,6 +4313,29 @@ article.summary [itemprop="articleBody"] {
   margin: 0.5em 0;
   padding: 1em 0;
   border-bottom: 1px solid gray;
+}
+.comment {
+  *zoom: 1;
+}
+.comment:before,
+.comment:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.comment:after {
+  clear: both;
+}
+.comment > header {
+  float: left;
+  text-align: right;
+}
+.comment > header time {
+  font-weight: bold;
+}
+.comment [itemprop="text"] {
+  float: left;
+  margin-left: 1em;
 }
 #page-title {
   color: #CF5B37;
@@ -4413,4 +4436,24 @@ h2 small {
   border: 1px solid #ccc;
   background-color: white;
   text-align: justify;
+}
+.actions-right {
+  *zoom: 1;
+}
+.actions-right:before,
+.actions-right:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.actions-right:after {
+  clear: both;
+}
+.actions-right > * {
+  float: right;
+}
+.actions-right button {
+  margin: 0;
+  padding: 0;
+  border: 0;
 }

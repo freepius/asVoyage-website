@@ -37,15 +37,17 @@ TODO
 
 * Blog creating/updating page :
   * Add help for Markdown
+* Add comments for Blog articles
 * Configure and make secure KCFinder
 * Improve the inclusion of JS and CSS files (if not using => do not include)
-* Add comments for Blog articles
 * Reorganize HTML5 => make semantic !
 * On Blog "reading" page : add box containing related articles/contents
 
 For production
 --------------
 
+* Set properly the BlogController::LIMIT\_ARTICLES constant (eg: to 10)
+* Solve the TODOs
 * Update vendor and libraries
 * Change password for admin
 * Management of errors and exceptions

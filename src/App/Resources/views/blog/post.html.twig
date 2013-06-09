@@ -47,6 +47,13 @@
         </div>
     </header>
 
+    {% if not isCreation %}
+        <!-- Various actions for the article editing -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="">{{ 'General'|trans }}</a></li>
+            <li><a href="/blog/{{ article.slug }}/comments">{{ 'Comments'|trans }}</a></li>
+        </ul>
+    {% endif %}
 
     {% if errors %}
         <!-- Errors in the article posting -->
@@ -68,7 +75,7 @@
         <div class="control-group {{ errors.title is defined ? 'error' }}">
             <label class="control-label" for="title">{{ 'blog.field.title'|trans }}</label>
             <div class="controls">
-                <input type="text" id="title" name="title" class="span6" value="{{ article.title }}" required="required" />
+                <input type="text" id="title" name="title" class="input-xlarge" value="{{ article.title }}" required />
 
                 {% if errors.title is defined %}
                     <span class="help-block text-error">{{ errors.title }}</span>
@@ -80,7 +87,7 @@
         <div class="control-group {{ errors.slug is defined ? 'error' }}">
             <label class="control-label" for="slug">{{ 'blog.field.slug'|trans }}</label>
             <div class="controls">
-                <input type="text" id="slug" name="slug" class="span6" value="{{ article.slug }}" required="required" />
+                <input type="text" id="slug" name="slug" class="input-xlarge" value="{{ article.slug }}" required />
 
                 {% if errors.slug is defined %}
                     <span class="help-inline text-error">{{ errors.slug }}</span>
@@ -94,7 +101,7 @@
         <div class="control-group {{ errors.pubdatetime is defined ? 'error' }}">
             <label class="control-label" for="pubdatetime">{{ 'blog.field.pubdatetime'|trans }}</label>
             <div class="controls">
-                <input type="text" id="pubdatetime" name="pubdatetime" value="{{ article.pubdatetime }}" required="required" />
+                <input type="text" id="pubdatetime" name="pubdatetime" value="{{ article.pubdatetime }}" required />
 
                 {% if errors.pubdatetime is defined %}
                     <span class="help-inline text-error">{{ errors.pubdatetime }}</span>
@@ -126,7 +133,7 @@
         <div class="control-group {{ errors.tags is defined ? 'error' }}">
             <label class="control-label" for="tags">{{ 'blog.field.tags'|trans }}</label>
             <div class="controls">
-                <input type="text" id="tags" name="tags" class="span8" value="{{- article.tags |  join(', ') -}}">
+                <input type="text" id="tags" name="tags" class="input-xxlarge" value="{{- article.tags |  join(', ') -}}">
                 <span class="help-block muted">{{ 'blog.help.tags' | trans | raw }}</span>
             </div>
         </div>

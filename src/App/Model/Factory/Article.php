@@ -3,12 +3,22 @@
 namespace App\Model\Factory;
 
 use Symfony\Component\Validator\Constraints as Assert,
+    Symfony\Component\Validator\ValidatorInterface,
+    App\Model\Repository\MongoRepository,
     App\Validator\Constraints\Unused,
     App\Util\StringUtil;
 
 
-class BlogArticle extends EntityFactory
+class Article extends EntityFactory
 {
+    protected $repository;
+
+    public function __construct(ValidatorInterface $validator, MongoRepository $repository)
+    {
+        parent::__construct($validator);
+        $this->repository = $repository;
+    }
+
     /**
      * @param  string  $tags  Tags separated by ','
      *
@@ -47,6 +57,7 @@ class BlogArticle extends EntityFactory
             'text'        => '',
             'summary'     => '',
             'tags'        => array(),
+            'comments'    => array(),
         );
     }
 

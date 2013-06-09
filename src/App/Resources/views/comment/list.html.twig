@@ -1,0 +1,50 @@
+{% from 'macros.twig' import submit %}
+
+
+<meta itemprop="interactionCount" content="UserComments:{{- comments | length -}}" />
+
+
+{% for id, comment in comments %}
+    {% include 'comment/read.html.twig'
+       with {url_comment: url_prefix ~'/'~ id, comment: comment} only
+    %}
+{% else %}
+    <p>{{ 'comment.none'|trans }}</p>
+{% endfor %}
+
+
+<!-- Create / update a comment -->
+<h2>{{ (idComment is null ? 'comment.create' : 'comment.update') | trans }}</h2>
+
+<form action="{{ url_prefix ~ (idComment is not null ? '/'~idComment) }}" method="post" class="form-horizontal">
+
+    <!-- Name or Nickname -->
+    <div class="control-group {{ errors.name is defined ? 'error' }}">
+        <label class="control-label" for="name">{{ 'comment.field.name'|trans }}</label>
+
+        <div class="controls">
+            <input type="text" id="name" name="name" class="input-xlarge" value="{{ comment.name }}" required />
+
+            {% if errors.name is defined %}
+                <span class="help-block text-error">{{ errors.name }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Text -->
+    <div class="control-group {{ errors.text is defined ? 'error' }}">
+        <label class="control-label" for="text">{{ 'comment.field.text'|trans }}</label>
+
+        <div class="controls">
+            <textarea id="text" name="text" class="input-xxlarge" rows="8" required>
+                {{- comment.text -}}
+            </textarea>
+
+            {% if errors.text is defined %}
+                <span class="help-block text-error">{{ errors.text }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    {{ submit() }}
+</form>

@@ -7,11 +7,16 @@ define('ROOT', dirname(SRC));
 $loader = require ROOT.'/vendor/autoload.php';
 
 // Locale of the application
+// TODO : think to this ; is it useful ? ; is it ugly ?
 setlocale(LC_ALL, 'fr_FR.UTF-8');
 
 // Hack to load SmartyPantsTypographer class :-/
+// TODO : change this when corrected by author
 $loader->add('michelf', ROOT.'/vendor/michelf/php-smartypants');
 \michelf\SmartyPants::SMARTYPANTS_VERSION;
+
+// Enable _method request parameter support
+\Symfony\Component\HttpFoundation\Request::enableHttpMethodParameterOverride();
 
 $app = new \Silex\Application();
 
@@ -105,7 +110,9 @@ $app['security.access_rules'] = array(array
     '^/admin'                   .'|'.
     '^/render-markdown'         .'|'.
     '^/blog/(dashboard|create)' .'|'.
-    '^/blog/.*/(update|delete)'
+    '^/blog/.+/(update|delete)' .'|'.
+    '^/blog/.+/read/.+'         .'|'.   // <=> CRUD for comment
+    '^/blog/.+/comments/.+'             // <=> idem
 ,
 'ROLE_ADMIN'));
 
@@ -117,7 +124,7 @@ $app['security.access_rules'] = array(array
 $translator = $app['translator'];
 $transDir   = APP.'/Resources/translations';
 $locales    = ['fr', 'en'];
-$resources  = ['messages', 'blog'];
+$resources  = ['messages', 'blog', 'comment'];
 
 foreach ($locales as $locale) {
     foreach ($resources as $resource) {
@@ -130,9 +137,9 @@ foreach ($locales as $locale) {
  * Register repositories
  ************************************************/
 
-$app['model.repository.blog.article'] = $app->share(function ($app)
+$app['model.repository.blog'] = $app->share(function ($app)
 {
-    return new \App\Model\Repository\BlogArticle($app['mongo.database']->blogArticle);
+    return new \App\Model\Repository\Blog($app['mongo.database']->article);
 });
 
 
@@ -140,9 +147,14 @@ $app['model.repository.blog.article'] = $app->share(function ($app)
  * Register entity factories
  ************************************************/
 
-$app['model.factory.blog.article'] = $app->share(function ($app)
+$app['model.factory.article'] = $app->share(function ($app)
 {
-    return new \App\Model\Factory\BlogArticle($app['validator'], $app['model.repository.blog.article']);
+    return new \App\Model\Factory\Article($app['validator'], $app['model.repository.blog']);
+});
+
+$app['model.factory.comment'] = $app->share(function ($app)
+{
+    return new \App\Model\Factory\Comment($app['validator']);
 });
 
 

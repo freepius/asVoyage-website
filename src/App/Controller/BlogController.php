@@ -8,6 +8,29 @@ use Silex\Application,
     App\Exception\BlogArticleNotFound;
 
 
+/**
+ * Summary :
+ *  -> __construct
+ *  -> connect
+ *  -> reverseBlogHomeReferer [protected, static]
+ *  -> slugToArticle
+ *  -> renderTagsFilter  [protected]
+ *  -> renderDatesFilter [protected]
+ *
+ *  -> GLOBAL ACTIONS :
+ *      => home
+ *      => dashboard
+ *
+ *  -> ACTIONS ON ARTICLE :
+ *      => read
+ *      => post
+ *      => delete
+ *
+ *  -> ACTIONS ON COMMENT :
+ *      => crudComment
+ *      => actionsOnComment [protected]
+ *      => postComment      [protected]
+ */
 class BlogController implements ControllerProviderInterface
 {
     // On "home" page, max number of articles
@@ -16,12 +39,18 @@ class BlogController implements ControllerProviderInterface
 
     public function __construct(Application $app)
     {
-        $this->app          = $app;
-        $this->flashBag     = $app['session']->getFlashBag();
-        $this->translator   = $app['translator'];
-        $this->repository   = $app['model.repository.blog.article'];
-        $this->factory      = $app['model.factory.blog.article'];
-        $this->markdownTypo = $app['markdownTypo'];
+        $app['security.firewall']; // TODO: ugly !
+
+        // TODO : revoir enregistrement des services
+        $this->app            = $app;
+        $this->flashBag       = $app['session']->getFlashBag();
+        $this->translator     = $app['translator'];
+        $this->security       = $app['security'];
+        $this->twig           = $app['twig'];
+        $this->repository     = $app['model.repository.blog'];
+        $this->factoryArticle = $app['model.factory.article'];
+        $this->factoryComment = $app['model.factory.comment'];
+        $this->markdownTypo   = $app['markdownTypo'];
     }
 
     public function connect(Application $app)
@@ -35,18 +64,18 @@ class BlogController implements ControllerProviderInterface
             ->value('page', 1)
             ->assert('page', '\d+');
 
-        // ...filter by tag
+        // ...filtered by tag
         $blog->get('/tag-{tag}/{page}', array($this, 'home'))
             ->value('page', 1)
             ->assert('page', '\d+');
 
-        // ...filter by year
+        // ...filtered by year
         $blog->get('/year-{year}/{page}', array($this, 'home'))
             ->value('page', 1)
             ->assert('page', '\d+')
             ->assert('year', '\d\d\d\d');
 
-        // ...filter by year and month
+        // ...filtered by year and month
         $blog->get('/year-{year}/month-{month}/{page}', array($this, 'home'))
             ->value('page', 1)
             ->assert('page' , '\d+')
@@ -56,7 +85,8 @@ class BlogController implements ControllerProviderInterface
         // Admin dashboard
         $blog->get('/dashboard', array($this, 'dashboard'));
 
-        // CRUD !
+        // CRUD for article :
+
         $blog->match('/create', array($this, 'post'));
 
         $blog->get('/{article}/read', array($this, 'read'))
@@ -68,16 +98,21 @@ class BlogController implements ControllerProviderInterface
         $blog->match('/{article}/delete', array($this, 'delete'))
             ->convert('article', $slugToArticle);
 
-        return $blog;
-    }
+        // CRUD for comment :
 
-    /**
-     * Useful shorcut because premature calling of twig will crash application
-     * (because of its SecurityExtension).
-     */
-    protected function render($name, array $context = array())
-    {
-        return $this->app['twig']->render($name, $context);
+        // ...on the article reading page
+        $blog->match('/{article}/read/{idComment}', array($this, 'read'))
+            ->convert('article', $slugToArticle)
+            ->value('idComment', null)
+            ->assert('idComment', '\d+');
+
+        // ...on an admin page
+        $blog->match('/{article}/comments/{idComment}', array($this, 'crudComment'))
+            ->convert('article', $slugToArticle)
+            ->value('idComment', null)
+            ->assert('idComment', '\d+');
+
+        return $blog;
     }
 
     /**
@@ -157,7 +192,7 @@ class BlogController implements ControllerProviderInterface
     // TODO : cache HTML until one article is edit/create.
     protected function renderTagsFilter()
     {
-        return $this->render('blog/filter-by-tags.html.twig', array(
+        return $this->twig->render('blog/filter-by-tags.html.twig', array(
             'tags' => $this->repository->listTags(),
         ));
     }
@@ -165,14 +200,14 @@ class BlogController implements ControllerProviderInterface
     // TODO : cache HTML until one article is edit/create.
     protected function renderDatesFilter()
     {
-        return $this->render('blog/filter-by-dates.html.twig', array(
+        return $this->twig->render('blog/filter-by-dates.html.twig', array(
             'countByYearMonth' => $this->repository->countArticlesByYearMonth(),
         ));
     }
 
 
     /***************************************************************************
-     * ACTIONS
+     * GLOBAL ACTIONS
      **************************************************************************/
 
     public function home(Request $request, $page = 1, $tag = null, $year = null, $month = null)
@@ -225,7 +260,7 @@ class BlogController implements ControllerProviderInterface
             $article['summary'] = trim($this->markdownTypo->transform($article['summary']));
         }
 
-        return $this->render('blog/home.html.twig', array
+        return $this->twig->render('blog/home.html.twig', array
         (
             'articles' => $articles,
 
@@ -250,24 +285,37 @@ class BlogController implements ControllerProviderInterface
 
     public function dashboard()
     {
-        return $this->render('blog/dashboard.html.twig', array
+        return $this->twig->render('blog/dashboard.html.twig', array
         (
             'articles' => $this->repository->listAllArticles(),
         ));
     }
 
-    public function read($article, Request $request)
+
+    /***************************************************************************
+     * ACTIONS ON ARTICLE
+     **************************************************************************/
+
+    /**
+     * Read an article + CRUD for comment.
+     */
+    public function read(Request $request, $article, $idComment = null)
     {
         if (null === $article)
         {
-            return $this->app->redirect('/blog/dashboard');
+            return $this->app->redirect('/blog');
+        }
+
+        $opComment = $this->actionsOnComment($request, $article, $idComment);
+
+        if (false === $opComment || true === $opComment) {
+            return $this->app->redirect("/blog/{$article['slug']}/read");
         }
 
         $article['text'] = $this->markdownTypo->transform($article['text']);
 
-        return $this->render('blog/read.html.twig',
-            self::reverseBlogHomeReferer($request) +
-            array('article' => $article)
+        return $this->twig->render('blog/read.html.twig',
+            self::reverseBlogHomeReferer($request) + $opComment + array('article' => $article)
         );
     }
 
@@ -284,7 +332,7 @@ class BlogController implements ControllerProviderInterface
 
         if ($isCreation = array() === $article)
         {
-            $article = $this->factory->instantiate();
+            $article = $this->factoryArticle->instantiate();
         }
 
         $errors = array();
@@ -294,10 +342,10 @@ class BlogController implements ControllerProviderInterface
         {
             $httpData = $request->request->all(); // http POST data
 
-            $violations = $this->factory->bind($article, $httpData);
+            $errors = $this->factoryArticle->bind($article, $httpData);
 
             // No error => store the article + redirect to dashboard
-            if (0 === count($violations))
+            if (array() === $errors)
             {
                 $this->repository->store($article);
 
@@ -308,18 +356,9 @@ class BlogController implements ControllerProviderInterface
 
                 return $this->app->redirect('/blog/dashboard');
             }
-
-            // Some errors => retrieve them
-            foreach ($violations as $violation)
-            {
-                $field = $violation->getPropertyPath();         // eg: "[My field]"
-                $field = substr($field, 1, strlen($field)-2);   //  => "My field"
-
-                $errors[$field] = $violation->getMessage();
-            }
         }
 
-        return $this->render('blog/post.html.twig', array
+        return $this->twig->render('blog/post.html.twig', array
         (
             'article'    => $article,
             'errors'     => $errors,
@@ -345,9 +384,116 @@ class BlogController implements ControllerProviderInterface
             return $this->app->redirect('/blog/dashboard');
         }
 
-        return $this->render('blog/delete.html.twig', array
+        return $this->twig->render('blog/delete.html.twig', array
         (
             'article' => $article,
         ));
+    }
+
+
+    /***************************************************************************
+     * ACTIONS ON COMMENT
+     **************************************************************************/
+
+    /**
+     * CRUD for comment.
+     */
+    public function crudComment(Request $request, $article, $idComment = null)
+    {
+        if (null === $article)
+        {
+            return $this->app->redirect('/blog/dashboard');
+        }
+
+        $opComment = $this->actionsOnComment($request, $article, $idComment);
+
+        if (false === $opComment || true === $opComment) {
+            return $this->app->redirect("/blog/{$article['slug']}/comments");
+        }
+
+        return $this->twig->render('comment/crud.html.twig',
+            $opComment + array('article' => $article)
+        );
+    }
+
+    /**
+     * CRUD for comment :
+     *  -> GET    + idComment !== null <=> request to update a comment
+     *  -> POST   + idComment !== null <=> update a comment
+     *  -> POST   + idComment === null <=> create a comment
+     *  -> DELETE + idComment !== null <=> delete a comment
+     *
+     * Return :
+     *  -> false : if $idComment doesn't match any existing comment.
+     *  -> true  : if a creating / updating / deleting operation succeeded.
+     *  -> Else, an associative array with keys 'idComment', 'comment' and 'errors'.
+     */
+    protected function actionsOnComment(Request $request, array $article, $idComment)
+    {
+        // Comment not found !
+        if (null !== $idComment && ! array_key_exists($idComment, $article['comments']))
+        {
+            $this->flashBag->add('error', $this->translator->trans(
+                'comment.notFound', array($idComment)
+            ));
+
+            return false;
+        }
+
+        // Request to update a comment
+        if ($request->isMethod('GET') && null !== $idComment)
+        {
+            $comment = $article['comments'][$idComment];
+        }
+        // Create or update a comment
+        elseif ($request->isMethod('POST'))
+        {
+            return $this->postComment($article, $idComment, $request->request->all());
+        }
+        // Delete a comment
+        elseif ($request->isMethod('DELETE') && null !== $idComment)
+        {
+            $this->flashBag->add('success', $this->translator->trans('comment.deleted'));
+
+            return $this->repository->deleteComment($article['_id'], $idComment);
+        }
+
+        return array
+        (
+            'idComment' => $idComment,
+            'comment'   => @ $comment ?: $this->factoryComment->instantiate(),
+            'errors'    => array()
+        );
+    }
+
+    /**
+     * Create or update a comment.
+     */
+    protected function postComment(array $article, $idComment, array $inputData)
+    {
+        $comment = null === $idComment ?
+            $this->factoryComment->instantiate() :
+            $article['comments'][$idComment];
+
+        $errors = $this->factoryComment->bind($comment, $inputData);
+
+        // No error => store the created/updated comment
+        if (array() === $errors)
+        {
+            $this->repository->storeComment($article['_id'], $idComment, $comment);
+
+            $this->flashBag->add('success', $this->translator->trans(
+                (null === $idComment) ? 'comment.created' : 'comment.updated'
+            ));
+
+            return true;
+        }
+
+        return array
+        (
+            'idComment' => $idComment,
+            'comment'   => $comment,
+            'errors'    => $errors
+        );
     }
 }

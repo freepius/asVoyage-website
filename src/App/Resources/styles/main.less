@@ -2,6 +2,7 @@
 @import 'variables.less';
 @import 'navigation.less';
 @import 'article.less';
+@import 'comment.less';
 
 
 /*************************************************
@@ -131,4 +132,17 @@ h2 small { font-size: @baseFontSize; }
     border: 1px solid @inputBorder;
     background-color: white;
     text-align: justify;
+}
+
+.actions-right
+{
+    .clearfix();
+
+    & > * { float: right; }
+
+    button {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
 }

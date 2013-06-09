@@ -2,19 +2,16 @@
 
 namespace App\Model\Factory;
 
-use Symfony\Component\Validator\ValidatorInterface,
-    App\Model\Repository\MongoRepository;
+use Symfony\Component\Validator\ValidatorInterface;
 
 
 abstract class EntityFactory
 {
     protected $validator;
-    protected $repository;
 
-    public function __construct(ValidatorInterface $validator, MongoRepository $repository)
+    public function __construct(ValidatorInterface $validator)
     {
         $this->validator = $validator;
-        $this->repository = $repository;
     }
 
     /**
@@ -23,18 +20,29 @@ abstract class EntityFactory
     abstract public function instantiate();
 
     /**
-     * Bind $inputData to $entity and return a
-     * \Symfony\Component\Validator\ConstraintViolationListInterface list.
+     * Bind $inputData to $entity and return an array whose :
+     * keys = fields and values = error messages.
      */
     public function bind(array & $entity, array $inputData)
     {
         $inputData = $this->processInputData($inputData);
 
-        $violations = $this->validator->validateValue($inputData, $this->getConstraints($entity));
-
         $entity = array_merge($entity, $inputData);
 
-        return $violations;
+        $violations = $this->validator->validateValue($inputData, $this->getConstraints($entity));
+
+        $errors = array();
+
+        // Turn violations in [field => error]+
+        foreach ($violations as $violation)
+        {
+            $field = $violation->getPropertyPath();         // eg: "[My field]"
+            $field = substr($field, 1, strlen($field)-2);   //  => "My field"
+
+            $errors[$field] = $violation->getMessage();
+        }
+
+        return $errors;
     }
 
     /**

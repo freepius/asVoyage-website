@@ -43,7 +43,7 @@ return array('blog' => array
         'ispublished' => "Check the box if the article must be published.",
         'pubdatetime' => 'The date format must be <b>YYYY-MM-DD hh:mm:ss</b> <i>(eg: 2013-01-31 12:00:00)</i>.',
         'slug'        => "The slug is a short text, only composed of <b>digits, letters and dashes</b>.<br/>".
-                         "It is used to build the Web address of the article!",
+                         "It is used to build the web address of the article!",
         'tags'        => "Tags are used to categorize / summary / describe the article.<br/>".
                          "They must be <b>separated by a comma</b> <i>(eg: Family, Ney-York, Nature, Picnic)</i>.",
     ),
