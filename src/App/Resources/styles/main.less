@@ -146,3 +146,24 @@ h2 small { font-size: @baseFontSize; }
         border: 0;
     }
 }
+
+a#back2top
+{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+
+    padding: 1em;
+    background-color: @tertiaryColor;
+    border-top: 4px solid @primaryColor;
+    border-left: 4px solid @primaryColor;
+    .border-radius(10px 0 0);
+
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    opacity: 0.8;
+
+    &:hover { opacity: 1; }
+}

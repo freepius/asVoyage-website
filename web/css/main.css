@@ -4457,3 +4457,23 @@ h2 small {
   padding: 0;
   border: 0;
 }
+a#back2top {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  padding: 1em;
+  background-color: #625D50;
+  border-top: 4px solid #3B372E;
+  border-left: 4px solid #3B372E;
+  -webkit-border-radius: 10px 0 0;
+  -moz-border-radius: 10px 0 0;
+  border-radius: 10px 0 0;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  opacity: 0.8;
+}
+a#back2top:hover {
+  opacity: 1;
+}

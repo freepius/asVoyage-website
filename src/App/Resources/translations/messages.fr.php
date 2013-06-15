@@ -23,6 +23,7 @@ return array
     'Submit'          => 'Envoyer',
     'Tags'            => 'Mots-clés',
     'to'              => 'à',
+    'Top'             => 'Haut',
     'Update'          => 'Mettre à jour',
     'website'         => 'site web',
     'Yes'             => 'Oui',
