@@ -1,10 +1,8 @@
-{% set currentNav = 'blog' %}
+{% set tab = 'general' %}
 
-{% set form_action = isCreation ? '/blog/create' : ('/blog/'~article.slug~'/update') %}
+{% extends "article/post.html.twig" %}
 
-{% extends "layout.html.twig" %}
-
-{% from "macros.twig" import cancel, submit %}
+{% from "macros.twig" import submit %}
 
 
 {% block stylesheets %}
@@ -26,34 +24,7 @@
 {% endblock %}
 
 
-{% block main %}
-
-    <header class="row">
-        <!-- Breadcrumb + title -->
-        <div class="pull-left">
-            <nav>
-                <a href="/blog">{{ 'blog.home'|trans }}</a> »
-                <a href="/blog/dashboard">{{ 'blog.dashboard'|trans }}</a> »
-            </nav>
-
-            <h1 id="page-title">
-                {{ (isCreation ? 'blog.creation' : 'blog.updating') | trans }}
-            </h1>
-        </div>
-
-        <!-- Cancel creation -->
-        <div class="pull-right">
-            {{ cancel('/blog/dashboard') }}
-        </div>
-    </header>
-
-    {% if not isCreation %}
-        <!-- Various actions for the article editing -->
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="">{{ 'General'|trans }}</a></li>
-            <li><a href="/blog/{{ article.slug }}/comments">{{ 'Comments'|trans }}</a></li>
-        </ul>
-    {% endif %}
+{% block post %}
 
     {% if errors %}
         <!-- Errors in the article posting -->
@@ -64,7 +35,7 @@
                 {% set fields_trans = fields_trans | merge([('blog.field.'~field) | trans]) %}
             {% endfor %}
 
-            {{ 'blog.error(s)' | trans([errors|length, fields_trans|join(', ')]) | raw }}
+            {{ 'Error(s)' | trans([errors|length, fields_trans|join(', ')]) | raw }}
         </p>
     {% endif %}
 
@@ -93,39 +64,39 @@
                     <span class="help-inline text-error">{{ errors.slug }}</span>
                 {% endif %}
 
-                <span class="help-block muted">{{ 'blog.help.slug' | trans | raw }}</span>
+                <span class="help-bloc">{{ 'blog.help.slug' | trans | raw }}</span>
             </div>
         </div>
 
         <!-- Publication DateTime -->
-        <div class="control-group {{ errors.pubdatetime is defined ? 'error' }}">
-            <label class="control-label" for="pubdatetime">{{ 'blog.field.pubdatetime'|trans }}</label>
+        <div class="control-group {{ errors.pubDatetime is defined ? 'error' }}">
+            <label class="control-label" for="pubDatetime">{{ 'blog.field.pubDatetime'|trans }}</label>
             <div class="controls">
-                <input type="text" id="pubdatetime" name="pubdatetime" value="{{ article.pubdatetime }}" required />
+                <input type="text" id="pubDatetime" name="pubDatetime" value="{{ article.pubDatetime }}" required />
 
-                {% if errors.pubdatetime is defined %}
-                    <span class="help-inline text-error">{{ errors.pubdatetime }}</span>
+                {% if errors.pubDatetime is defined %}
+                    <span class="help-inline text-error">{{ errors.pubDatetime }}</span>
                 {% endif %}
 
-                <span class="help-block muted">{{ 'blog.help.pubdatetime' | trans | raw }}</span>
+                <span class="help-block">{{ 'blog.help.pubDatetime' | trans | raw }}</span>
             </div>
         </div>
 
         <!-- Is it published ? -->
         <div class="control-group">
-            <label class="control-label" for="ispublished">{{ 'blog.field.ispublished'|trans }}</label>
+            <label class="control-label" for="isPublished">{{ 'blog.field.isPublished'|trans }}</label>
             <div class="controls">
-                <input type="checkbox" id="ispublished" name="ispublished" {{ article.ispublished ? 'checked="checked"' }} />
-                <span class="help-inline muted">{{ 'blog.help.ispublished' | trans | raw }}</span>
+                <input type="checkbox" id="isPublished" name="isPublished" {{ article.isPublished ? 'checked="checked"' }} />
+                <span class="help-inline">{{ 'blog.help.isPublished' | trans | raw }}</span>
             </div>
         </div>
 
         <!-- Can be commented ? -->
         <div class="control-group">
-            <label class="control-label" for="becommented">{{ 'blog.field.becommented' | trans | raw }}</label>
+            <label class="control-label" for="beCommented">{{ 'blog.field.beCommented' | trans | raw }}</label>
             <div class="controls">
-                <input type="checkbox" id="becommented" name="becommented" {{ article.becommented ? 'checked="checked"' }} />
-                <span class="help-inline muted">{{ 'blog.help.becommented' | trans | raw }}</span>
+                <input type="checkbox" id="beCommented" name="beCommented" {{ article.beCommented ? 'checked="checked"' }} />
+                <span class="help-inline">{{ 'blog.help.beCommented' | trans | raw }}</span>
             </div>
         </div>
 
@@ -134,13 +105,13 @@
             <label class="control-label" for="tags">{{ 'blog.field.tags'|trans }}</label>
             <div class="controls">
                 <input type="text" id="tags" name="tags" class="input-xxlarge" value="{{- article.tags |  join(', ') -}}">
-                <span class="help-block muted">{{ 'blog.help.tags' | trans | raw }}</span>
+                <span class="help-block">{{ 'blog.help.tags' | trans | raw }}</span>
             </div>
         </div>
 
         {# Text and Summary #}
-        {% embed "blog/edit-text-field.html.twig" with {field: 'text'   } %}{% endembed %}
-        {% embed "blog/edit-text-field.html.twig" with {field: 'summary'} %}{% endembed %}
+        {% embed "article/edit-text-field.html.twig" with {field: 'text'   } %}{% endembed %}
+        {% embed "article/edit-text-field.html.twig" with {field: 'summary'} %}{% endembed %}
 
         {{ submit() }}
     </form>

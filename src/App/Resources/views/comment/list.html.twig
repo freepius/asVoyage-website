@@ -1,50 +1,64 @@
-{% from 'macros.twig' import submit %}
+{% from 'macros.twig' import cancel_link, submit %}
 
 
-<meta itemprop="interactionCount" content="UserComments:{{- comments | length -}}" />
+<meta itemprop="interactionCount" content="UserComments:{{- article.countComments -}}" />
+
+{% if article.countComments > 0 %}
+    <!-- Comments -->
+    <h2>{{ 'Comments'|trans }}</h2>
+
+    {% for id, comment in article.comments %}
+        {% include 'comment/read.html.twig' with {url_comment: url_prefix ~'/'~ id} %}
+    {% endfor %}
+{% endif %}
 
 
-{% for id, comment in comments %}
-    {% include 'comment/read.html.twig'
-       with {url_comment: url_prefix ~'/'~ id, comment: comment} only
-    %}
-{% else %}
-    <p>{{ 'comment.none'|trans }}</p>
-{% endfor %}
-
+{% if article.beCommented or comment.isUpdating %}
 
 <!-- Create / update a comment -->
-<h2>{{ (idComment is null ? 'comment.create' : 'comment.update') | trans }}</h2>
+<h2 id="comment-post">
+    {{ (comment.isCreation ? 'comment.create' : 'comment.updateX') | trans([comment.id]) | raw }}
+</h2>
 
-<form action="{{ url_prefix ~ (idComment is not null ? '/'~idComment) }}" method="post" class="form-horizontal">
+<form action="{{ url_prefix ~ (comment.isUpdating ? '/'~comment.id) }}" method="post" class="form-horizontal">
 
     <!-- Name or Nickname -->
-    <div class="control-group {{ errors.name is defined ? 'error' }}">
+    <div class="control-group {{ comment.errors.name is defined ? 'error' }}">
         <label class="control-label" for="name">{{ 'comment.field.name'|trans }}</label>
 
         <div class="controls">
-            <input type="text" id="name" name="name" class="input-xlarge" value="{{ comment.name }}" required />
+            <input type="text" id="name" name="name" class="input-xlarge" value="{{ comment.entity.name }}" required />
 
-            {% if errors.name is defined %}
-                <span class="help-block text-error">{{ errors.name }}</span>
+            {% if comment.errors.name is defined %}
+                <span class="help-block text-error">{{ comment.errors.name }}</span>
             {% endif %}
         </div>
     </div>
 
     <!-- Text -->
-    <div class="control-group {{ errors.text is defined ? 'error' }}">
+    <div class="control-group {{ comment.errors.text is defined ? 'error' }}">
         <label class="control-label" for="text">{{ 'comment.field.text'|trans }}</label>
 
         <div class="controls">
             <textarea id="text" name="text" class="input-xxlarge" rows="8" required>
-                {{- comment.text -}}
+                {{- comment.entity.text -}}
             </textarea>
 
-            {% if errors.text is defined %}
-                <span class="help-block text-error">{{ errors.text }}</span>
+            {% if comment.errors.text is defined %}
+                <span class="help-block text-error">{{ comment.errors.text }}</span>
             {% endif %}
+
+            <span class="help-block">{{ 'comment.help.text' | trans | raw }}</span>
         </div>
     </div>
 
-    {{ submit() }}
+    <div class="controls">
+        {% if not comment.isFirstCreation %}
+            {{ cancel_link(url_prefix) }}
+        {% endif %}
+
+        {{ submit('Post'|trans) }}
+    </div>
 </form>
+
+{% endif %}

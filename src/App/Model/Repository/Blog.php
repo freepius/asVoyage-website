@@ -16,6 +16,7 @@ use App\Exception\BlogArticleNotFound;
  *  -> countArticlesByYearMonth
  *  -> storeComment
  *  -> deleteComment
+ *  -> getCommentsById
  */
 class Blog extends MongoRepository
 {
@@ -38,16 +39,16 @@ class Blog extends MongoRepository
     {
         $query = array();
 
-        if ($from) { $query['pubdatetime']['$gte'] = (string) $from; }
-        if ($to)   { $query['pubdatetime']['$lte'] = (string) $to; }
+        if ($from) { $query['pubDatetime']['$gte'] = (string) $from; }
+        if ($to)   { $query['pubDatetime']['$lte'] = (string) $to; }
         if ($tags) { $query['tags']['$in'] = (array) $tags; }
 
         // if not admin => unpublished articles, as those postdated, stay hidden !
         if (! $isAdmin)
         {
-            $query['ispublished'] = true;
+            $query['isPublished'] = true;
 
-            $query['pubdatetime']['$lte'] = min
+            $query['pubDatetime']['$lte'] = min
             (
                 (string) $to ?: '9999',
                 date('Y-m-d H:i:s') // < or == to 'now'
@@ -64,12 +65,13 @@ class Blog extends MongoRepository
     public function listAllArticles()
     {
         return $this->collection->find(array(), array(
-            'title', 'slug', 'pubdatetime', 'ispublished', 'becommented', 'tags'
+            'title', 'slug', 'pubDatetime',
+            'isPublished', 'beCommented', 'tags', 'countComments',
         ));
     }
 
     /**
-     * From its slug, retrieve an article as array.
+     * From its slug, retrieve an article as array (without its comments).
      * If $slug doesn't match any article, throw a BlogArticleNotFound exception.
      */
     public function getBySlug($slug, $isAdmin = false)
@@ -78,7 +80,7 @@ class Blog extends MongoRepository
 
         $query['slug'] = $slug;
 
-        $article = $this->collection->findOne($query);
+        $article = $this->collection->findOne($query, array('comments' => 0));
 
         if (! is_array($article)) {
             throw new BlogArticleNotFound("slug = $slug");
@@ -115,8 +117,9 @@ class Blog extends MongoRepository
     {
         $query = $this->filterArticles(false, $from, $to, $tags);
 
-        $articles = $this->collection->find($query)
-            ->sort(array('pubdatetime' => -1)); // desc = younger first
+        // Articles without comments
+        $articles = $this->collection->find($query, array('comments' => 0))
+            ->sort(array('pubDatetime' => -1)); // desc = younger first
 
         if ($skip > 0)  { $articles->skip($skip); }
         if ($limit > 0) { $articles->limit($limit); }
@@ -174,13 +177,13 @@ class Blog extends MongoRepository
         $result = array();
 
         $articles = $this->collection->find(
-            $this->filterArticles(false, $from, $to), array('pubdatetime' => 1)
+            $this->filterArticles(false, $from, $to), array('pubDatetime' => 1)
         );
 
         foreach ($articles as $article)
         {
-            $year  = (int) substr($article['pubdatetime'], 0, 4);
-            $month = (int) substr($article['pubdatetime'], 5, 2);
+            $year  = (int) substr($article['pubDatetime'], 0, 4);
+            $month = (int) substr($article['pubDatetime'], 5, 2);
 
             $occ = & $result[$year][$month];
             $occ++;
@@ -199,10 +202,14 @@ class Blog extends MongoRepository
      * Create or update a comment in an article.
      * Return true if the operation succeed ; false, else.
      */
-    public function storeComment($idArticle, $idComment, array $comment)
+    public function storeComment(\MongoId $idArticle, $idComment, array $comment)
     {
-        if (null === $idComment) {
-            $update = array('$push' => array('comments' => $comment));
+        if (null === $idComment)
+        {
+            $update = array(
+                '$push' => array('comments' => $comment),
+                '$inc'  => array('countComments' => 1),
+            );
         }
         else {
             $update = array('$set' => array("comments.$idComment" => $comment));
@@ -217,12 +224,15 @@ class Blog extends MongoRepository
      * Delete a comment in an article.
      * Return true if the operation succeed ; false, else.
      */
-    public function deleteComment($idArticle, $idComment)
+    public function deleteComment(\MongoId $idArticle, $idComment)
     {
         // Change comments[$idComment] to null
         $result = $this->collection->update(
             array('_id' => $idArticle),
-            array('$unset' => array("comments.$idComment" => 1))
+            array(
+                '$unset' => array("comments.$idComment" => 1),
+                '$inc'   => array('countComments' => -1),
+            )
         );
 
         // Remove the null
@@ -232,5 +242,15 @@ class Blog extends MongoRepository
         );
 
         return $result['n'] > 0;
+    }
+
+    /**
+     * Retrieve the comments of a given article.
+     */
+    public function getCommentsById(\MongoId $idArticle)
+    {
+        $article = $this->collection->findOne(array('_id' => $idArticle), array('comments' => 1));
+
+        return $article['comments'];
     }
 }

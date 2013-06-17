@@ -7,11 +7,10 @@ define('ROOT', dirname(SRC));
 $loader = require ROOT.'/vendor/autoload.php';
 
 // Locale of the application
-// TODO : think to this ; is it useful ? ; is it ugly ?
 setlocale(LC_ALL, 'fr_FR.UTF-8');
 
 // Hack to load SmartyPantsTypographer class :-/
-// TODO : change this when corrected by author
+// TODO : delete this when corrected by author
 $loader->add('michelf', ROOT.'/vendor/michelf/php-smartypants');
 \michelf\SmartyPants::SMARTYPANTS_VERSION;
 
@@ -59,18 +58,23 @@ $app->register(new \Silex\Provider\TranslationServiceProvider(), array(
 /* security */
 $app->register(new \Silex\Provider\SecurityServiceProvider());
 
-/* monolog */
-//$app->register(new \Silex\Provider\MonologServiceProvider(), array(
-    //'monolog.name' => 'asVoyage',
-    //'monolog.handler' => $app->share(function ($app) {
-        //return new \Monolog\Handler\MongoDBHandler($app['mongo.connection'], $app['mongo.database'], 'log');
-    //}),
-//));
+/* autolink Twig extension */
+$app->register(new \Nicl\Silex\AutolinkServiceProvider());
 
 /* markdown and typo */
 $app['markdownTypo'] = $app->share(function () {
     return new \App\Util\MarkdownTypo();
 });
+
+/* monolog */
+/*
+$app->register(new \Silex\Provider\MonologServiceProvider(), array(
+    'monolog.name' => 'asVoyage',
+    'monolog.handler' => $app->share(function ($app) {
+        return new \Monolog\Handler\MongoDBHandler($app['mongo.connection'], $app['mongo.database'], 'log');
+    }),
+));
+*/
 
 
 /*************************************************
@@ -112,7 +116,7 @@ $app['security.access_rules'] = array(array
     '^/blog/(dashboard|create)' .'|'.
     '^/blog/.+/(update|delete)' .'|'.
     '^/blog/.+/read/.+'         .'|'.   // <=> CRUD for comment
-    '^/blog/.+/comments/.+'             // <=> idem
+    '^/blog/.+/comments.*'              // <=> idem
 ,
 'ROLE_ADMIN'));
 

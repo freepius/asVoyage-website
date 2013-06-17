@@ -111,7 +111,7 @@ h2 small { font-size: @baseFontSize; }
 
         .box {
             margin-bottom: 1em;
-            padding: 10px 25px 25px;
+            padding: 25px;
             background-color: @grayLighter;
             .border-radius(10px);
         }
@@ -138,12 +138,14 @@ h2 small { font-size: @baseFontSize; }
 {
     .clearfix();
 
-    & > * { float: right; }
+    & > * {
+        float: right;
+        margin: 0 2px;
+    }
 
-    button {
+    .btn-link {
         margin: 0;
         padding: 0;
-        border: 0;
     }
 }
 

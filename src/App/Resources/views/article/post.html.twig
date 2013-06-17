@@ -1,0 +1,55 @@
+{% set currentNav = 'blog' %}
+
+{% set form_action = isCreation ? '/blog/create' : ('/blog/'~article.slug~'/update') %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import cancel %}
+
+
+{% block main %}
+
+    <header class="row">
+        <!-- Breadcrumb + title -->
+        <div class="pull-left">
+            <nav>
+                <a href="/blog">{{ 'blog.home'|trans }}</a> »
+                <a href="/blog/dashboard">{{ 'blog.dashboard'|trans }}</a> »
+            </nav>
+
+            <h1 id="page-title">
+                {{ (isCreation ? 'blog.creation' : 'blog.updating') | trans }}
+            </h1>
+        </div>
+
+        <div class="actions-right">
+            <!-- Go to the article reading page -->
+            <a href="/blog/{{- article.slug -}}/read" class="btn">
+                <i class="icon-eye-open"></i>
+                {{ 'Read'|trans }}
+            </a>
+
+            <!-- Cancel creation -->
+            {{ cancel('/blog/dashboard') }}
+        </div>
+    </header>
+
+
+    {% if not isCreation %}
+        <!-- Various actions for the article editing -->
+        <ul class="nav nav-tabs">
+            <li {{ tab == 'general' ? 'class="active"' }}>
+                <a href="/blog/{{ article.slug }}/update">{{ 'General'|trans }}</a>
+            </li>
+
+            <li {{ tab == 'comments' ? 'class="active"' }}>
+                <a href="/blog/{{ article.slug }}/comments">
+                    {{ 'Comments'|trans }} ({{ article.countComments }})
+                </a>
+            </li>
+        </ul>
+    {% endif %}
+
+    {% block post %}{% endblock %}
+
+{% endblock %}

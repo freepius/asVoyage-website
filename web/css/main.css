@@ -4301,6 +4301,7 @@ article > header time {
 }
 article [itemprop="articleBody"] {
   text-align: justify;
+  margin-bottom: 3em;
 }
 article.summary {
   margin-bottom: 1em;
@@ -4315,6 +4316,7 @@ article.summary [itemprop="articleBody"] {
   border-bottom: 1px solid gray;
 }
 .comment {
+  margin-bottom: 1em;
   *zoom: 1;
 }
 .comment:before,
@@ -4335,7 +4337,8 @@ article.summary [itemprop="articleBody"] {
 }
 .comment [itemprop="text"] {
   float: left;
-  margin-left: 1em;
+  margin: 0 1em;
+  padding: 0 1em;
 }
 #page-title {
   color: #CF5B37;
@@ -4420,7 +4423,7 @@ h2 small {
 }
 #main > aside .box {
   margin-bottom: 1em;
-  padding: 10px 25px 25px;
+  padding: 25px;
   background-color: #E5E5D5;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -4451,11 +4454,11 @@ h2 small {
 }
 .actions-right > * {
   float: right;
+  margin: 0 2px;
 }
-.actions-right button {
+.actions-right .btn-link {
   margin: 0;
   padding: 0;
-  border: 0;
 }
 a#back2top {
   position: fixed;

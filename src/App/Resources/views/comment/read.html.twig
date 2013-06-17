@@ -1,4 +1,4 @@
-<div class="comment" itemscope itemtype="http://schema.org/Comment">
+<div id="comment-{{ id }}" class="comment" itemscope itemtype="http://schema.org/Comment">
 
     <header>
         <time itemprop="datePublished" datetime="{{ comment.datetime }}">
@@ -14,13 +14,13 @@
             <form action="{{ url_comment }}" method="post">
                 <input type="hidden" name="_method" value="DELETE" />
 
-                <button type="submit" class="btn-link" title="{{ 'Delete'|trans }}">
+                <button class="comment-delete btn-link" type="submit" title="{{ 'Delete'|trans }}">
                     <i class="icon-trash"></i>
                 </button>
             </form>
 
             <!-- Update -->
-            <a href="{{ url_comment }}" title="{{ 'Update'|trans }}">
+            <a href="{{ url_comment }}#comment-post" title="{{ 'Update'|trans }}">
                 <i class="icon-pencil"></i></a>
 
         </div>
@@ -31,11 +31,12 @@
     <blockquote itemprop="text">
 
         <small>
+            <span style="margin-right: 3px;">#{{ id }}</span>
             {{ 'Posted by'|trans }}
             <b itemprop="author">{{ comment.name }}</b>
         </small>
 
-        {{ comment.text | nl2br }} {# TODO : transform link #}
+        {{ comment.text | nl2br | autolink }}
 
     </blockquote>
 

@@ -49,15 +49,16 @@ class Article extends EntityFactory
     {
         return array
         (
-            'title'       => '',
-            'slug'        => '',
-            'pubdatetime' => date('Y-m-d H:i:s'), // now
-            'ispublished' => true,
-            'becommented' => true,
-            'text'        => '',
-            'summary'     => '',
-            'tags'        => array(),
-            'comments'    => array(),
+            'title'         => '',
+            'slug'          => '',
+            'pubDatetime'   => date('Y-m-d H:i:s'), // now
+            'isPublished'   => true,
+            'beCommented'   => true,
+            'text'          => '',
+            'summary'       => '',
+            'tags'          => array(),
+            'comments'      => array(),
+            'countComments' => 0,
         );
     }
 
@@ -68,11 +69,11 @@ class Article extends EntityFactory
     {
         return array
         (
-            'title'       => $data['title'],
+            'title'       => trim($data['title']),
             'slug'        => StringUtil::slugify($data['slug']),
-            'pubdatetime' => $data['pubdatetime'] ?: date('Y-m-d H:i:s'), // empty 'pubdatetime' === now
-            'ispublished' => array_key_exists('ispublished', $data),
-            'becommented' => array_key_exists('becommented', $data),
+            'pubDatetime' => $data['pubDatetime'] ?: date('Y-m-d H:i:s'), // empty === now
+            'isPublished' => array_key_exists('isPublished', $data),
+            'beCommented' => array_key_exists('beCommented', $data),
             'text'        => $data['text'],
             'summary'     => $data['summary'],
             'tags'        => self::normalizeTags($data['tags']),
@@ -99,9 +100,9 @@ class Article extends EntityFactory
         (
             'title'       => new Assert\NotBlank(),
             'slug'        => array(new Assert\NotBlank(), $slugUnused),
-            'pubdatetime' => new Assert\DateTime(),
-            'ispublished' => null,
-            'becommented' => null,
+            'pubDatetime' => new Assert\DateTime(),
+            'isPublished' => null,
+            'beCommented' => null,
             'text'        => new Assert\NotBlank(),
             'summary'     => null,
             'tags'        => null,

@@ -1,0 +1,147 @@
+{% set currentNav = 'blog' %}
+
+{% set now = date() | date('Y-m-d H:i:s') %}
+
+{% set isUnpublished = (article.isPublished == false) or (article.pubDatetime > now) %}
+
+{% extends "layout.html.twig" %}
+
+
+{# Ask confirmation before delete a comment ! #}
+{% block javascripts %}
+    {% if is_granted('ROLE_ADMIN') %}
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.comment-delete').click(function () {
+                    return confirm("{{ 'comment.deleting.confirm'|trans }}");
+                });
+            });
+        </script>
+
+    {% endif %}
+{% endblock %}
+
+
+{% block main %}
+
+<article itemscope itemtype="http://schema.org/BlogPosting" class="with-aside">
+
+    <header>
+        <!-- Breadcrumb -->
+        <nav itemprop="breadcrumb">
+            {# Link to Blog home page #}
+            {% set url = '/blog' %}
+            <a href="{{ url }}">{{ 'blog.home'|trans }}</a> »
+
+            {# Link to Blog dashboard if unpublished #}
+            {% if isUnpublished %}
+                <a href="/blog/dashboard">{{ 'blog.dashboard'|trans }}</a> »
+            {% else %}
+
+                {# Eventual link to filtered Blog home page #}
+                {% if hasTagFilter %}
+                    {% set url = '/blog/tag-' ~tag %}
+
+                    <a href="{{ url }}">
+                        {{ 'blog.having-tag' | trans([tag]) | raw }}</a> »
+
+                {% elseif hasYearFilter %}
+                    {% set url = '/blog/year-' ~year %}
+
+                    <a href="{{ url }}">
+                        {{ 'blog.having-year' | trans([year]) | raw }}</a> »
+
+                {% elseif hasMonthFilter %}
+                    {% set url = '/blog/year-' ~year~ '/month-' ~month %}
+
+                    <a href="{{ url }}">
+                        {{ 'blog.having-year-month' | trans([year, ('month.'~month)|trans]) | raw }}</a> »
+                {% endif %}
+
+                {# Eventual link to Blog home page by page number #}
+                {% if hasPage %}
+                    <a href="{{ url ~'/'~ page }}">{{ 'blog.page-number' | trans([page]) }}</a> »
+                {% endif %}
+
+            {% endif %}
+        </nav>
+
+        <!-- Title -->
+        <h1 itemprop="name" id="page-title">{{ article.title }}</h1>
+    </header>
+
+    <div itemprop="articleBody">
+        {{ article.text | raw }}
+    </div>
+
+    <div id="comments" itemprop="comment">
+        {% include 'comment/list.html.twig'
+            with {url_prefix: '/blog/'~article.slug~'/read'}
+        %}
+    </div>
+
+</article>
+
+
+<aside>
+    <div class="box">
+        <!-- Publication datetime -->
+        <p>
+            <i class="icon-calendar"></i>
+
+            <time itemprop="datePublished" datetime="{{ article.pubDatetime }}">
+                {{ article.pubDatetime | localizeddate('full', 'short') | capitalize }}
+            </time>
+        </p>
+
+        <!-- Tags -->
+        <p>
+            <i class="icon-tags" title="{{ 'blog.field.tags'|trans }}"></i>
+
+            {% if article.tags is empty %}
+                {{ 'none'|trans }}
+            {% else %}
+                <span itemprop="keywords">{{ article.tags | join(', ') }}</span>
+            {% endif %}
+        </p>
+
+        <!-- Comments : count + link to read + link to create/update -->
+        <p>
+            <a href="#comments">
+                <i class="icon-comment"></i>
+                {{ 'comment.count'|trans([article.countComments]) }}
+            </a>
+
+            <br/>
+
+            {% if article.beCommented or comment.isUpdating %}
+                <small style="margin-left: 15px;">
+                    <i class="icon-arrow-right"></i>
+                    <a href="#comment-post">
+                        {{ (comment.isCreation ? 'comment.create' : 'comment.update') | trans }}
+                    </a>
+                </small>
+            {% endif %}
+        </p>
+
+        {% if isUnpublished %}
+            <!-- Article unpublished -->
+            <p><i class="icon-lock"></i> {{ 'blog.isUnpublished'|trans }}</p>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="actions-right">
+                <!-- Delete -->
+                <a href="/blog/{{- article.slug -}}/delete" title="{{ 'Delete'|trans }}">
+                    <i class="icon-trash"></i></a>
+
+                <!-- Update -->
+                <a href="/blog/{{- article.slug -}}/update" title="{{ 'Update'|trans }}">
+                    <i class="icon-pencil"></i></a>
+            </div>
+        {% endif %}
+    </div>
+</aside>
+
+{% endblock %}

@@ -34,14 +34,17 @@ use Silex\Application,
 class BlogController implements ControllerProviderInterface
 {
     // On "home" page, max number of articles
-    const LIMIT_ARTICLES = 2; // TODO: change this
+    const LIMIT_ARTICLES = 2; // TODO: change this before PROD
 
 
     public function __construct(Application $app)
     {
-        $app['security.firewall']; // TODO: ugly !
+        /**
+         * Hack: call 'security.firewall' allows to call
+         * 'security' and 'twig' services, at this point !
+         */
+        $app['security.firewall'];
 
-        // TODO : revoir enregistrement des services
         $this->app            = $app;
         $this->flashBag       = $app['session']->getFlashBag();
         $this->translator     = $app['translator'];
@@ -73,14 +76,14 @@ class BlogController implements ControllerProviderInterface
         $blog->get('/year-{year}/{page}', array($this, 'home'))
             ->value('page', 1)
             ->assert('page', '\d+')
-            ->assert('year', '\d\d\d\d');
+            ->assert('year', '\d{4}');
 
         // ...filtered by year and month
         $blog->get('/year-{year}/month-{month}/{page}', array($this, 'home'))
             ->value('page', 1)
             ->assert('page' , '\d+')
-            ->assert('year' , '\d\d\d\d')
-            ->assert('month', '\d||\d\d');
+            ->assert('year' , '\d{4}')
+            ->assert('month', '\d{1,2}');
 
         // Admin dashboard
         $blog->get('/dashboard', array($this, 'dashboard'));
@@ -177,8 +180,10 @@ class BlogController implements ControllerProviderInterface
      */
     public function slugToArticle($article)
     {
-        try { return $this->repository->getBySlug($article, true); }
-
+        try {
+            return $this->repository->getBySlug(
+                $article, $this->security->isGranted('ROLE_ADMIN'));
+        }
         catch (BlogArticleNotFound $e)
         {
             $this->flashBag->add('error', $this->translator->trans(
@@ -306,6 +311,7 @@ class BlogController implements ControllerProviderInterface
             return $this->app->redirect('/blog');
         }
 
+        $article['comments'] = $this->repository->getCommentsById($article['_id']);
         $opComment = $this->actionsOnComment($request, $article, $idComment);
 
         if (false === $opComment || true === $opComment) {
@@ -314,7 +320,7 @@ class BlogController implements ControllerProviderInterface
 
         $article['text'] = $this->markdownTypo->transform($article['text']);
 
-        return $this->twig->render('blog/read.html.twig',
+        return $this->twig->render('article/read.html.twig',
             self::reverseBlogHomeReferer($request) + $opComment + array('article' => $article)
         );
     }
@@ -358,7 +364,7 @@ class BlogController implements ControllerProviderInterface
             }
         }
 
-        return $this->twig->render('blog/post.html.twig', array
+        return $this->twig->render('article/post-general.html.twig', array
         (
             'article'    => $article,
             'errors'     => $errors,
@@ -384,7 +390,7 @@ class BlogController implements ControllerProviderInterface
             return $this->app->redirect('/blog/dashboard');
         }
 
-        return $this->twig->render('blog/delete.html.twig', array
+        return $this->twig->render('article/delete.html.twig', array
         (
             'article' => $article,
         ));
@@ -405,6 +411,7 @@ class BlogController implements ControllerProviderInterface
             return $this->app->redirect('/blog/dashboard');
         }
 
+        $article['comments'] = $this->repository->getCommentsById($article['_id']);
         $opComment = $this->actionsOnComment($request, $article, $idComment);
 
         if (false === $opComment || true === $opComment) {
@@ -417,16 +424,28 @@ class BlogController implements ControllerProviderInterface
     }
 
     /**
-     * CRUD for comment :
+     * Manage the possible actions for a comment :
+     *  -> GET    + idComment === null <=> ready to create a comment
+     *  -> POST   + idComment === null <=> create a comment
      *  -> GET    + idComment !== null <=> request to update a comment
      *  -> POST   + idComment !== null <=> update a comment
-     *  -> POST   + idComment === null <=> create a comment
      *  -> DELETE + idComment !== null <=> delete a comment
      *
      * Return :
      *  -> false : if $idComment doesn't match any existing comment.
      *  -> true  : if a creating / updating / deleting operation succeeded.
-     *  -> Else, an associative array with keys 'idComment', 'comment' and 'errors'.
+     *  -> Else, the following associative array :
+     *     {
+     *         comment:
+     *         {
+     *             id              : id of the comment or null for a new
+     *             entity          : comment as array
+     *             errors          : possible errors as array
+     *             isCreation      : boolean
+     *             isFirstCreation : boolean
+     *             isUpdating      : boolean
+     *         }
+     *     }
      */
     protected function actionsOnComment(Request $request, array $article, $idComment)
     {
@@ -445,8 +464,9 @@ class BlogController implements ControllerProviderInterface
         {
             $comment = $article['comments'][$idComment];
         }
-        // Create or update a comment
-        elseif ($request->isMethod('POST'))
+        // Create (only if article can be commented) or update a comment
+        elseif ($request->isMethod('POST') &&
+                ($article['beCommented'] || null !== $idComment))
         {
             return $this->postComment($article, $idComment, $request->request->all());
         }
@@ -455,15 +475,20 @@ class BlogController implements ControllerProviderInterface
         {
             $this->flashBag->add('success', $this->translator->trans('comment.deleted'));
 
-            return $this->repository->deleteComment($article['_id'], $idComment);
+            $this->repository->deleteComment($article['_id'], $idComment);
+
+            return true;
         }
 
-        return array
+        return array('comment' => array
         (
-            'idComment' => $idComment,
-            'comment'   => @ $comment ?: $this->factoryComment->instantiate(),
-            'errors'    => array()
-        );
+            'id'              => $idComment,
+            'entity'          => @ $comment ?: $this->factoryComment->instantiate(),
+            'errors'          => array(),
+            'isCreation'      => ! (bool) @ $comment,
+            'isFirstCreation' => ! (bool) @ $comment,
+            'isUpdating'      =>   (bool) @ $comment,
+        ));
     }
 
     /**
@@ -483,17 +508,26 @@ class BlogController implements ControllerProviderInterface
             $this->repository->storeComment($article['_id'], $idComment, $comment);
 
             $this->flashBag->add('success', $this->translator->trans(
-                (null === $idComment) ? 'comment.created' : 'comment.updated'
+                (null === $idComment) ? 'comment.created' : 'comment.updated',
+                array($idComment)
             ));
 
             return true;
         }
 
-        return array
+        // Some errors => add a flash message
+        $this->flashBag->add('error', $this->translator->trans(
+            (null === $idComment) ? 'comment.creation.error(s)' : 'comment.updating.error(s)'
+        ));
+
+        return array('comment' => array
         (
-            'idComment' => $idComment,
-            'comment'   => $comment,
-            'errors'    => $errors
-        );
+            'id'              => $idComment,
+            'entity'          => $comment,
+            'errors'          => $errors,
+            'isCreation'      => null === $idComment,
+            'isFirstCreation' => false,
+            'isUpdating'      => null !== $idComment,
+        ));
     }
 }

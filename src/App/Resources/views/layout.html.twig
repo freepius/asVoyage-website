@@ -24,7 +24,7 @@
     {# Red borders for ADMIN ! #}
     {% if is_granted('ROLE_ADMIN') %}
         <style type="text/css">
-            body { border : 5px solid red; }
+            body { border : 5px solid #CF5B37; }
         </style>
     {% endif %}
 
@@ -106,6 +106,7 @@
     <script src="/js/modernizr.js" type="text/javascript"></script>
     <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/js/lightbox.js" type="text/javascript"></script>
+    <script src="/js/app.js" type="text/javascript"></script>
 
     {% block javascripts %}{% endblock %}
 </body>

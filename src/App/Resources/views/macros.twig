@@ -4,6 +4,7 @@
  #  -> bool2icon
  #  -> submit
  #  -> cancel
+ #  -> cancel_link
  #}
 
 
@@ -78,6 +79,24 @@
             <i class="icon-remove icon-white"></i> {{ text }}
         </button>
     </form>
+
+{% endspaceless %}
+{% endmacro %}
+
+
+{##
+ # A link stylized as a cancel button.
+ #}
+{% macro cancel_link(action, text, classes) %}
+{% spaceless %}
+
+    {% set text    = text    | default('Cancel'|trans) %}
+    {% set classes = classes | default('btn btn-warning') %}
+
+    <!-- Cancel link -->
+    <a href="{{ action }}" class="{{ classes }}">
+        <i class="icon-remove icon-white"></i> {{ text }}
+    </a>
 
 {% endspaceless %}
 {% endmacro %}

@@ -35,13 +35,16 @@ License
 TODO
 ====
 
+* When deleting a comment, ensure continuity of the IDs ? Eg: #0 #1 #2  or  #0 #3 #8 ?
+* Blog reading page : when creating/updating a comment => keep the filters / HTTP\_REFERER
+* Add a CAPTCHA system for comments (only for basic user)
 * Blog creating/updating page :
   * Add help for Markdown
-* Add comments for Blog articles
 * Configure and make secure KCFinder
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 * Reorganize HTML5 => make semantic !
 * On Blog "reading" page : add box containing related articles/contents
+* SECURITY : correct potential injections in Mongo query !!
 
 For production
 --------------
@@ -49,8 +52,9 @@ For production
 * Set properly the BlogController::LIMIT\_ARTICLES constant (eg: to 10)
 * Solve the TODOs
 * Update vendor and libraries
-* Change password for admin
+* Change name and password for admin
 * Management of errors and exceptions
+* Index some Mongo fields ?
 * Cache (with Memcached ?) :
   * Blog repository => caching for listTags() and countArticlesByYearMonth()
   * Blog controller => caching the generated HTML from Markdown
@@ -62,3 +66,4 @@ Low priority
 * Use DataTable jquery plugin to Blog dashboard ?
 * Transform App\Util\MarkdownTypo to Silex provider
 * Locale depending on geo-localization
+* Migrate to PHP 5.4 (or better to PHP 5.5) : particulary, use Trait for \Silex\Application

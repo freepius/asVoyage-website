@@ -37,7 +37,17 @@ abstract class MongoRepository
      */
     public function store(array & $entity)
     {
-        $result = $this->collection->save($entity);
+        // update
+        if ($id = @ $entity['_id'])
+        {
+            unset($entity['_id']);
+
+            $result = $this->collection->update(array('_id' => $id), array('$set' => $entity));
+        }
+        // create
+        else {
+            $result = $this->collection->insert($entity);
+        }
 
         return $result['n'] > 0;
     }

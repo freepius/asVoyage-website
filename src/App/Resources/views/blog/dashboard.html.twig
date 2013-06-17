@@ -29,9 +29,10 @@
             <tr>
                 <th>{{ 'blog.field.title'|trans }}</th>
                 <th>{{ 'blog.field.slug'|trans }}</th>
-                <th>{{ 'blog.field.pubdatetime'|trans }}</th>
-                <th>{{ 'blog.field.ispublished'|trans }}</th>
-                <th>{{ 'blog.field.becommented'|trans }}</th>
+                <th>{{ 'blog.field.pubDatetime'|trans }}</th>
+                <th>{{ 'blog.field.isPublished'|trans }}</th>
+                <th>{{ 'blog.field.beCommented'|trans }}</th>
+                <th>{{ 'blog.field.countComments'|trans }}</th>
                 <th>{{ 'blog.field.tags'|trans }}</th>
                 <th>{{ 'Actions'|trans }}</th>
             </tr>
@@ -42,9 +43,10 @@
                 <tr>
                     <td>{{ article.title }}</td>
                     <td>{{ article.slug }}</td>
-                    <td>{{ article.pubdatetime | localizeddate }}</td>
-                    <td>{{ bool2icon(article.ispublished) }}</td>
-                    <td>{{ bool2icon(article.becommented) }}</td>
+                    <td>{{ article.pubDatetime | localizeddate }}</td>
+                    <td>{{ bool2icon(article.isPublished) }}</td>
+                    <td>{{ bool2icon(article.beCommented) }}</td>
+                    <td>{{ article.countComments }}</td>
                     <td>{{ article.tags|join(', ') }}</td>
 
                     <!-- Actions on article -->

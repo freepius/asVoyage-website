@@ -1,45 +1,26 @@
-{% set currentNav = 'blog' %}
+{% set tab, isCreation = 'comments', false %}
 
-{% extends "layout.html.twig" %}
-
-{% from "macros.twig" import cancel %}
+{% extends "article/post.html.twig" %}
 
 
-{% block main %}
+{# Ask confirmation before delete a comment ! #}
+{% block javascripts %}
+    {% if is_granted('ROLE_ADMIN') %}
 
-    <header class="row">
-        <!-- Breadcrumb + title -->
-        <div class="pull-left">
-            <nav>
-                <a href="/blog">{{ 'blog.home'|trans }}</a> »
-                <a href="/blog/dashboard">{{ 'blog.dashboard'|trans }}</a> »
-            </nav>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.comment-delete').click(function () {
+                    return confirm("{{ 'comment.deleting.confirm'|trans }}");
+                });
+            });
+        </script>
 
-            <h1 id="page-title">
-                {{ 'blog.updating' | trans }}
-            </h1>
-        </div>
-
-        <!-- Cancel creation -->
-        <div class="pull-right">
-            {{ cancel('/blog/dashboard') }}
-        </div>
-    </header>
+    {% endif %}
+{% endblock %}
 
 
-    <!-- Various actions for the article editing -->
-    <ul class="nav nav-tabs">
-        <li><a href="/blog/{{ article.slug }}/update">{{ 'General'|trans }}</a></li>
-        <li class="active"><a href="">{{ 'Comments'|trans }}</a></li>
-    </ul>
-
-
-    <h2>{{ 'Comments'|trans }}</h2>
-
-    {% include 'comment/list.html.twig' with {
-            url_prefix: '/blog/'~article.slug~'/comments', comments: article.comments,
-            idComment: idComment, comment: comment, errors: errors
-       } only
+{% block post %}
+    {% include 'comment/list.html.twig'
+        with {url_prefix: '/blog/'~article.slug~'/comments'}
     %}
-
 {% endblock %}

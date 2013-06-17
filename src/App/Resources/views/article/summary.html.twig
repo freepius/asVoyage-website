@@ -3,8 +3,8 @@
     <header class="row">
         <h1 itemprop="name" class="pull-left">{{ title }}</h1>
 
-        <time itemprop="datePublished" datetime="{{ pubdatetime }}" class="pull-right">
-            {{ pubdatetime | localizeddate('full') | capitalize }}
+        <time itemprop="datePublished" datetime="{{ pubDatetime }}" class="pull-right">
+            {{ pubDatetime | localizeddate('full') | capitalize }}
         </time>
     </header>
 
@@ -30,9 +30,20 @@
             {% endif %}
         </div>
 
+        <!-- Comments -->
+        <div class="pull-right" style="margin-left: 1em;">
+            <meta itemprop="interactionCount" content="UserComments:{{- countComments -}}" />
+
+            <a itemprop="discussionUrl" href="/blog/{{- slug -}}/read#comments"
+                title="{{ 'comment.count'|trans([countComments]) }}"
+            >
+                <i class="icon-comment"></i> {{ countComments }}
+            </a>
+        </div>
+
         {% if is_granted('ROLE_ADMIN') %}
             <!-- Actions on article -->
-            <div class="pull-right">
+            <div class="pull-right" style="margin-right: 1em;">
                 <!-- Update -->
                 <a href="/blog/{{- slug -}}/update" title="{{ 'Update'|trans }}">
                     <i class="icon-pencil"></i></a>
