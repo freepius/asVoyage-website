@@ -23,5 +23,3 @@ return array('comment' => array
     'help.text' => '<i class="icon-info-sign"></i> '.
                    'Le code HTML est affiché comme du texte et les adresses web sont automatiquement transformées.',
 ));
-
-?>

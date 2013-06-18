@@ -11,6 +11,8 @@ use Michelf\MarkdownExtra,
  */
 class MarkdownTypo
 {
+    const SCRIPT_TAG_PATTERN = '{<(\s*)script(.*)>.*<(\s*)/(\s*)script(.*)>}si';
+
     public $markdown;
     public $smartypants;
 
@@ -26,8 +28,13 @@ class MarkdownTypo
 
     public function transform($text)
     {
-        return $this->smartypants->transform(
-            $this->markdown->transform($text)
-        );
+        $text = $this->markdown->transform($text);
+
+        $text = $this->smartypants->transform($text);
+
+        // remove <script> tags
+        $text = preg_replace(self::SCRIPT_TAG_PATTERN, '', $text);
+
+        return $text;
     }
 }

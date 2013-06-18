@@ -44,7 +44,6 @@ TODO
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 * Reorganize HTML5 => make semantic !
 * On Blog "reading" page : add box containing related articles/contents
-* SECURITY : correct potential injections in Mongo query !!
 
 For production
 --------------
@@ -55,7 +54,7 @@ For production
 * Change name and password for admin
 * Management of errors and exceptions
 * Index some Mongo fields ?
-* Cache (with Memcached ?) :
+* Cache (with APC/Memcached ?) :
   * Blog repository => caching for listTags() and countArticlesByYearMonth()
   * Blog controller => caching the generated HTML from Markdown
 * Minified JS and CSS files

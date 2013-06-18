@@ -49,5 +49,3 @@ return array('blog' => array
                          "Ils doivent être <b>séparés par une virgule</b> <i>(ex : Famille, Loire-Atlantique, Nature, Pique-nique)</i>.",
     ),
 ));
-
-?>

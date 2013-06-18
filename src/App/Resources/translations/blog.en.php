@@ -49,5 +49,3 @@ return array('blog' => array
                          "They must be <b>separated by a comma</b> <i>(eg: Family, Ney-York, Nature, Picnic)</i>.",
     ),
 ));
-
-?>

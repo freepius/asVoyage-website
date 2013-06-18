@@ -80,5 +80,3 @@ return array
         'map'       => 'Carte',
     ),
 );
-
-?>

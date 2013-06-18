@@ -23,5 +23,3 @@ return array('comment' => array
     'help.text' => '<i class="icon-info-sign"></i> '.
                    'HTML code is displayed as text and URL are automatically converted.',
 ));
-
-?>

@@ -171,5 +171,3 @@ $app->mount('/blog', new \App\Controller\BlogController($app));
 
 
 return $app;
-
-?>

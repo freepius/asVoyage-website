@@ -220,12 +220,10 @@ class BlogController implements ControllerProviderInterface
         /**
          * Process the filters.
          * User can used them only one by one !
-         *
-         * TODO : escape / striptags
          */
         $tag   = $tag;
         $year  = (int) $year;
-        $month = (int) $month;
+        $month = min((int) $month, 12);
 
         $hasTagFilter   = null !== $tag;                      // priority = 1
         $hasYearFilter  = !$hasTagFilter && $year && !$month; //          = 2
