@@ -26,9 +26,11 @@
         "symfony/locale": "*",
         "symfony/validator": "*",
         "symfony/security": "*",
+        "symfony/finder": "*",
         "michelf/php-markdown": "1.3.*@dev",
         "michelf/php-smartypants": "1.6-beta1",
-        "nicl/silex-autolink": "1.0.*"
+        "nicl/silex-autolink": "1.0.*",
+        "gregwar/captcha": "*"
     },
     "autoload": {
         "psr-0": { "App": "src/" }

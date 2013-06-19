@@ -30,7 +30,7 @@
             <input type="text" id="name" name="name" class="input-xlarge" value="{{ comment.entity.name }}" required />
 
             {% if comment.errors.name is defined %}
-                <span class="help-block text-error">{{ comment.errors.name }}</span>
+                <span class="help-block">{{ comment.errors.name }}</span>
             {% endif %}
         </div>
     </div>
@@ -45,13 +45,35 @@
             </textarea>
 
             {% if comment.errors.text is defined %}
-                <span class="help-block text-error">{{ comment.errors.text }}</span>
+                <span class="help-block">{{ comment.errors.text }}</span>
             {% endif %}
 
             <span class="help-block">{{ 'comment.help.text' | trans | raw }}</span>
         </div>
     </div>
 
+    {% if comment.entity.captcha is defined %}
+        <!-- Captcha -->
+        <div class="control-group {{ comment.errors.captcha is defined ? 'error' }}">
+            <label class="control-label" for="captcha">{{ 'comment.field.captcha'|trans }}</label>
+
+            <div class="controls">
+                <p>
+                    <input type="text" id="captcha" name="captcha" class="input-medium" required />
+
+                    {% if comment.errors.captcha is defined %}
+                        <span class="help-inline">{{ comment.errors.captcha }}</span>
+                    {% endif %}
+                </p>
+
+                <p><img src="{{ comment.entity.captcha }}" class="captcha-img" /></p>
+
+                <span class="help-block">{{ 'comment.help.captcha' | trans | raw }}</span>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Form actions -->
     <div class="controls">
         {% if not comment.isFirstCreation %}
             {{ cancel_link(url_prefix) }}

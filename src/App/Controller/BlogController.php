@@ -310,6 +310,7 @@ class BlogController implements ControllerProviderInterface
         }
 
         $article['comments'] = $this->repository->getCommentsById($article['_id']);
+
         $opComment = $this->actionsOnComment($request, $article, $idComment);
 
         if (false === $opComment || true === $opComment) {
@@ -410,6 +411,7 @@ class BlogController implements ControllerProviderInterface
         }
 
         $article['comments'] = $this->repository->getCommentsById($article['_id']);
+
         $opComment = $this->actionsOnComment($request, $article, $idComment);
 
         if (false === $opComment || true === $opComment) {
@@ -478,14 +480,20 @@ class BlogController implements ControllerProviderInterface
             return true;
         }
 
+        $isUpdating = @ $comment ? true : false;
+
+        $comment = @ $comment ?: $this->factoryComment->instantiate();
+
+        $this->factoryComment->addCaptchaIfNeeded($comment);
+
         return array('comment' => array
         (
             'id'              => $idComment,
-            'entity'          => @ $comment ?: $this->factoryComment->instantiate(),
+            'entity'          => $comment,
             'errors'          => array(),
-            'isCreation'      => ! (bool) @ $comment,
-            'isFirstCreation' => ! (bool) @ $comment,
-            'isUpdating'      =>   (bool) @ $comment,
+            'isCreation'      => ! $isUpdating,
+            'isFirstCreation' => ! $isUpdating,
+            'isUpdating'      =>   $isUpdating,
         ));
     }
 
@@ -513,10 +521,13 @@ class BlogController implements ControllerProviderInterface
             return true;
         }
 
-        // Some errors => add a flash message
+        // Some errors => add a flash message + a captcha if needed
+
         $this->flashBag->add('error', $this->translator->trans(
             (null === $idComment) ? 'comment.creation.error(s)' : 'comment.updating.error(s)'
         ));
+
+        $this->factoryComment->addCaptchaIfNeeded($comment);
 
         return array('comment' => array
         (

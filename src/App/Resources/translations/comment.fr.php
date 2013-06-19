@@ -16,10 +16,17 @@ return array('comment' => array
 
     'field' => array
     (
+        'captcha' => 'Système anti-spam',
         'name'    => 'Nom ou pseudo',
         'text'    => 'Commentaire',
     ),
 
-    'help.text' => '<i class="icon-info-sign"></i> '.
-                   'Le code HTML est affiché comme du texte et les adresses web sont automatiquement transformées.',
+    'help' => array
+    (
+        'captcha' => '<i class="icon-warning-sign"></i> '.
+            "Veuillez recopier les caractères affichés dans l'image, afin d'empêcher les systèmes automatiques de <i>spammer</i>.",
+
+        'text' => '<i class="icon-info-sign"></i> '.
+            'Le code HTML est affiché comme du texte et les adresses web sont automatiquement transformées.',
+    ),
 ));

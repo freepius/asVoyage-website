@@ -27,9 +27,9 @@ abstract class EntityFactory
     {
         $inputData = $this->processInputData($inputData);
 
-        $entity = array_merge($entity, $inputData);
-
         $violations = $this->validator->validateValue($inputData, $this->getConstraints($entity));
+
+        $entity = $this->merge($entity, $inputData);
 
         $errors = array();
 
@@ -43,6 +43,11 @@ abstract class EntityFactory
         }
 
         return $errors;
+    }
+
+    protected function merge(array $entity, array $inputData)
+    {
+        return array_merge($entity, $inputData);
     }
 
     /**

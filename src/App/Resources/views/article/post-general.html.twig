@@ -49,7 +49,7 @@
                 <input type="text" id="title" name="title" class="input-xlarge" value="{{ article.title }}" required />
 
                 {% if errors.title is defined %}
-                    <span class="help-block text-error">{{ errors.title }}</span>
+                    <span class="help-block">{{ errors.title }}</span>
                 {% endif %}
             </div>
         </div>
@@ -61,10 +61,10 @@
                 <input type="text" id="slug" name="slug" class="input-xlarge" value="{{ article.slug }}" required />
 
                 {% if errors.slug is defined %}
-                    <span class="help-inline text-error">{{ errors.slug }}</span>
+                    <span class="help-inline">{{ errors.slug }}</span>
                 {% endif %}
 
-                <span class="help-bloc">{{ 'blog.help.slug' | trans | raw }}</span>
+                <span class="help-block">{{ 'blog.help.slug' | trans | raw }}</span>
             </div>
         </div>
 
@@ -75,7 +75,7 @@
                 <input type="text" id="pubDatetime" name="pubDatetime" value="{{ article.pubDatetime }}" required />
 
                 {% if errors.pubDatetime is defined %}
-                    <span class="help-inline text-error">{{ errors.pubDatetime }}</span>
+                    <span class="help-inline">{{ errors.pubDatetime }}</span>
                 {% endif %}
 
                 <span class="help-block">{{ 'blog.help.pubDatetime' | trans | raw }}</span>

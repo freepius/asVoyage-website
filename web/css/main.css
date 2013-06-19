@@ -4227,6 +4227,26 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+a#back2top {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  padding: 1em;
+  background-color: #625D50;
+  border-top: 4px solid #3B372E;
+  border-left: 4px solid #3B372E;
+  -webkit-border-radius: 10px 0 0;
+  -moz-border-radius: 10px 0 0;
+  border-radius: 10px 0 0;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  opacity: 0.8;
+}
+a#back2top:hover {
+  opacity: 1;
+}
 #navigation {
   float: right;
   margin-top: 20px;
@@ -4336,6 +4356,7 @@ article.summary [itemprop="articleBody"] {
   font-weight: bold;
 }
 .comment [itemprop="text"] {
+  width: 75%;
   float: left;
   margin: 0 1em;
   padding: 0 1em;
@@ -4460,23 +4481,9 @@ h2 small {
   margin: 0;
   padding: 0;
 }
-a#back2top {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  z-index: 999;
-  padding: 1em;
-  background-color: #625D50;
-  border-top: 4px solid #3B372E;
-  border-left: 4px solid #3B372E;
-  -webkit-border-radius: 10px 0 0;
-  -moz-border-radius: 10px 0 0;
-  border-radius: 10px 0 0;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  opacity: 0.8;
-}
-a#back2top:hover {
-  opacity: 1;
+.captcha-img {
+  border: 3px solid black;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }

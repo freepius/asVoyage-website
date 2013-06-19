@@ -37,7 +37,6 @@ TODO
 
 * When deleting a comment, ensure continuity of the IDs ? Eg: #0 #1 #2  or  #0 #3 #8 ?
 * Blog reading page : when creating/updating a comment => keep the filters / HTTP\_REFERER
-* Add a CAPTCHA system for comments (only for basic user)
 * Blog creating/updating page :
   * Add help for Markdown
 * Configure and make secure KCFinder

@@ -16,10 +16,17 @@ return array('comment' => array
 
     'field' => array
     (
+        'captcha' => 'Anti-spam system',
         'name'    => 'Name or nickname',
         'text'    => 'Comment',
     ),
 
-    'help.text' => '<i class="icon-info-sign"></i> '.
-                   'HTML code is displayed as text and URL are automatically converted.',
+    'help' => array
+    (
+        'captcha' => '<i class="icon-warning-sign"></i> '.
+            'Please enter the characters displayed in the picture to prevent automated spam systems.',
+
+        'text' => '<i class="icon-info-sign"></i> '.
+            'HTML code is displayed as text and URL are automatically converted.',
+    ),
 ));

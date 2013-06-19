@@ -3,8 +3,57 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5afd9f2f5b14e8f9aca31cb42e7f738c",
+    "hash": "e8e7fcffcc85f1df7a609cfd63dd2ae3",
     "packages": [
+        {
+            "name": "gregwar/captcha",
+            "version": "dev-master",
+            "target-dir": "Gregwar/Captcha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Gregwar/Captcha.git",
+                "reference": "dce5a674569621eaa84addd3fa0aaabca261ea96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/dce5a674569621eaa84addd3fa0aaabca261ea96",
+                "reference": "dce5a674569621eaa84addd3fa0aaabca261ea96",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "captcha",
+            "autoload": {
+                "psr-0": {
+                    "Gregwar\\Captcha": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégoire Passault",
+                    "email": "g.passault@gmail.com",
+                    "homepage": "http://www.gregwar.com/"
+                },
+                {
+                    "name": "Jeremy Livingston",
+                    "email": "jeremy.j.livingston@gmail.com"
+                }
+            ],
+            "description": "Captcha generator",
+            "homepage": "https://github.com/Gregwar/Captcha",
+            "keywords": [
+                "bot",
+                "captcha",
+                "spam"
+            ],
+            "time": "2013-06-19 13:56:05"
+        },
         {
             "name": "michelf/php-markdown",
             "version": "dev-lib",
@@ -325,12 +374,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Config.git",
-                "reference": "a1f7da9011af8f9bdf1995fe9be6aa359a394019"
+                "reference": "51fadec8a95b6b58a8512d5418c96de28dd78d1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Config/zipball/a1f7da9011af8f9bdf1995fe9be6aa359a394019",
-                "reference": "a1f7da9011af8f9bdf1995fe9be6aa359a394019",
+                "url": "https://api.github.com/repos/symfony/Config/zipball/51fadec8a95b6b58a8512d5418c96de28dd78d1a",
+                "reference": "51fadec8a95b6b58a8512d5418c96de28dd78d1a",
                 "shasum": ""
             },
             "require": {
@@ -364,7 +413,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "http://symfony.com",
-            "time": "2013-06-11 07:15:38"
+            "time": "2013-06-19 09:29:07"
         },
         {
             "name": "symfony/debug",
@@ -429,12 +478,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "v2.3.0-RC1"
+                "reference": "v2.3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.3.0-RC1",
-                "reference": "v2.3.0-RC1",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.3.1",
+                "reference": "v2.3.1",
                 "shasum": ""
             },
             "require": {
@@ -524,6 +573,53 @@
             "time": "2013-06-11 07:15:38"
         },
         {
+            "name": "symfony/finder",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/Finder",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Finder.git",
+                "reference": "b709a80b766b47761ae1d1e27a6fa6b4e62dcf08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/b709a80b766b47761ae1d1e27a6fa6b4e62dcf08",
+                "reference": "b709a80b766b47761ae1d1e27a6fa6b4e62dcf08",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Finder\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Finder Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-06-02 12:05:59"
+        },
+        {
             "name": "symfony/http-foundation",
             "version": "2.3.x-dev",
             "target-dir": "Symfony/Component/HttpFoundation",
@@ -580,12 +676,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "99b9acb3fc7590e0e4717b6ca03c14a292c70f1f"
+                "reference": "98c849cd968571794d7cfc6edef21aa1363ce05c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/99b9acb3fc7590e0e4717b6ca03c14a292c70f1f",
-                "reference": "99b9acb3fc7590e0e4717b6ca03c14a292c70f1f",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/98c849cd968571794d7cfc6edef21aa1363ce05c",
+                "reference": "98c849cd968571794d7cfc6edef21aa1363ce05c",
                 "shasum": ""
             },
             "require": {
@@ -641,7 +737,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2013-06-11 11:46:38"
+            "time": "2013-06-11 13:34:17"
         },
         {
             "name": "symfony/icu",
@@ -823,12 +919,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Routing.git",
-                "reference": "v2.3.0"
+                "reference": "v2.3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Routing/zipball/v2.3.0",
-                "reference": "v2.3.0",
+                "url": "https://api.github.com/repos/symfony/Routing/zipball/v2.3.1",
+                "reference": "v2.3.1",
                 "shasum": ""
             },
             "require": {
@@ -1004,12 +1100,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/TwigBridge.git",
-                "reference": "126d31387ab33074ffa9d023cc83a700ad1db238"
+                "reference": "16c87a5d222a29dd1072321c3ce7a3c8cb2985c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/TwigBridge/zipball/126d31387ab33074ffa9d023cc83a700ad1db238",
-                "reference": "126d31387ab33074ffa9d023cc83a700ad1db238",
+                "url": "https://api.github.com/repos/symfony/TwigBridge/zipball/16c87a5d222a29dd1072321c3ce7a3c8cb2985c3",
+                "reference": "16c87a5d222a29dd1072321c3ce7a3c8cb2985c3",
                 "shasum": ""
             },
             "require": {
@@ -1061,7 +1157,7 @@
             ],
             "description": "Symfony Twig Bridge",
             "homepage": "http://symfony.com",
-            "time": "2013-05-16 20:40:38"
+            "time": "2013-06-19 09:26:21"
         },
         {
             "name": "symfony/validator",

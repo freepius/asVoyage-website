@@ -3,6 +3,7 @@
 define('APP',  __DIR__);
 define('SRC',  dirname(APP));
 define('ROOT', dirname(SRC));
+define('WEB',  ROOT.'/web');
 
 $loader = require ROOT.'/vendor/autoload.php';
 
@@ -64,6 +65,11 @@ $app->register(new \Nicl\Silex\AutolinkServiceProvider());
 /* markdown and typo */
 $app['markdownTypo'] = $app->share(function () {
     return new \App\Util\MarkdownTypo();
+});
+
+/* captcha manager */
+$app['captcha.manager'] = $app->share(function ($app) {
+    return new \App\Util\CaptchaManager($app['session']);
 });
 
 /* monolog */
@@ -158,7 +164,7 @@ $app['model.factory.article'] = $app->share(function ($app)
 
 $app['model.factory.comment'] = $app->share(function ($app)
 {
-    return new \App\Model\Factory\Comment($app['validator']);
+    return new \App\Model\Factory\Comment($app['validator'], $app['security'], $app['captcha.manager']);
 });
 
 

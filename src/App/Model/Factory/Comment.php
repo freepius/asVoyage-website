@@ -2,11 +2,24 @@
 
 namespace App\Model\Factory;
 
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints as Assert,
+    Symfony\Component\Validator\ValidatorInterface,
+    Symfony\Component\Security\Core\SecurityContextInterface,
+    App\Util\CaptchaManager;
 
 
 class Comment extends EntityFactory
 {
+    protected $security;
+    protected $captcha;
+
+    public function __construct(ValidatorInterface $validator, SecurityContextInterface $security, CaptchaManager $captcha)
+    {
+        parent::__construct($validator);
+        $this->security = $security;
+        $this->captcha = $captcha;
+    }
+
     protected static function cleanText($text)
     {
         $text = trim($text);
@@ -14,6 +27,30 @@ class Comment extends EntityFactory
         $text = preg_replace('/\n{4,}/', "\n\n\n", $text);  // max. 3 nl
 
         return $text;
+    }
+
+    /**
+     * The current "comment context" needs a captcha ?
+     */
+    protected function needCaptcha()
+    {
+        return ! $this->security->isGranted('IS_AUTHENTICATED_FULLY');
+    }
+
+    /**
+     * If needed, add a captcha to the comment.
+     */
+    public function addCaptchaIfNeeded(array & $entity)
+    {
+        if ($this->needCaptcha()) {
+            $entity['captcha'] = $this->captcha->getFilename();
+        }
+    }
+
+    protected function merge(array $entity, array $inputData)
+    {
+        unset($inputData['captcha']);
+        return parent::merge($entity, $inputData);
     }
 
     /**
@@ -39,6 +76,8 @@ class Comment extends EntityFactory
             'name'     => trim($data['name']),
             'text'     => self::cleanText($data['text']),
             'datetime' => date('Y-m-d H:i:s'), // now
+            'captcha'  => $this->needCaptcha() ?
+                          $this->captcha->isValid((string) @ $data['captcha']) : true,
         );
     }
 
@@ -51,7 +90,8 @@ class Comment extends EntityFactory
         (
             'name'     => new Assert\NotBlank(),
             'text'     => new Assert\NotBlank(),
-            'datetime' => array(new Assert\NotBlank(), new Assert\DateTime()),
+            'datetime' => new Assert\DateTime(),
+            'captcha'  => new Assert\True(array('message' => 'This value is not valid.')),
         ));
     }
 }
