@@ -456,7 +456,7 @@ class BlogController implements ControllerProviderInterface
     protected function actionsOnComment(Request $request, array $article, $idComment)
     {
         // Comment not found !
-        if (null !== $idComment && ! array_key_exists($idComment, $article['comments']))
+        if (null !== $idComment && ! isset($article['comments'][$idComment]))
         {
             $this->flashBag->add('error', $this->translator->trans(
                 'comment.notFound', array($idComment)

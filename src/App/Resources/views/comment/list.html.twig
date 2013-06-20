@@ -7,7 +7,7 @@
     <!-- Comments -->
     <h2>{{ 'Comments'|trans }}</h2>
 
-    {% for id, comment in article.comments %}
+    {% for id, comment in article.comments if comment is not null %}
         {% include 'comment/read.html.twig' with {url_comment: url_prefix ~'/'~ id} %}
     {% endfor %}
 {% endif %}

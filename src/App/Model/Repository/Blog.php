@@ -221,24 +221,18 @@ class Blog extends MongoRepository
     }
 
     /**
-     * Delete a comment in an article.
+     * Delete a comment in an article (ie: replace its content by null).
      * Return true if the operation succeed ; false, else.
      */
     public function deleteComment(\MongoId $idArticle, $idComment)
     {
-        // Change comments[$idComment] to null
+        // Change comments[$idComment] by null
         $result = $this->collection->update(
             array('_id' => $idArticle),
             array(
                 '$unset' => array("comments.$idComment" => 1),
                 '$inc'   => array('countComments' => -1),
             )
-        );
-
-        // Remove the null
-        $this->collection->update(
-            array('_id' => $idArticle),
-            array('$pull' => array('comments' => null))
         );
 
         return $result['n'] > 0;
