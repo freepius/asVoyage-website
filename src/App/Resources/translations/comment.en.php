@@ -26,6 +26,8 @@ return array('comment' => array
         'captcha' => '<i class="icon-warning-sign"></i> '.
             'Please enter the characters displayed in the picture to prevent automated spam systems.',
 
+        'captcha-change' => 'Please click here to change the picture',
+
         'text' => '<i class="icon-info-sign"></i> '.
             'HTML code is displayed as text and URL are automatically converted.',
     ),

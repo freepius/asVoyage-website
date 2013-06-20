@@ -7,19 +7,10 @@
 {% extends "layout.html.twig" %}
 
 
-{# Ask confirmation before delete a comment ! #}
 {% block javascripts %}
-    {% if is_granted('ROLE_ADMIN') %}
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('.comment-delete').click(function () {
-                    return confirm("{{ 'comment.deleting.confirm'|trans }}");
-                });
-            });
-        </script>
-
-    {% endif %}
+    <script type="text/javascript">
+        {% include 'comment/javascript.js.twig' %}
+    </script>
 {% endblock %}
 
 

@@ -30,6 +30,9 @@ use Silex\Application,
  *      => crudComment
  *      => actionsOnComment [protected]
  *      => postComment      [protected]
+ *
+ *  -> OTHER / TECHNICAL ACTIONS :
+ *      => changeCaptcha
  */
 class BlogController implements ControllerProviderInterface
 {
@@ -41,7 +44,7 @@ class BlogController implements ControllerProviderInterface
     {
         /**
          * Hack: call 'security.firewall' allows to call
-         * 'security' and 'twig' services, at this point !
+         * 'security' and 'twig' services at this point !
          */
         $app['security.firewall'];
 
@@ -54,6 +57,7 @@ class BlogController implements ControllerProviderInterface
         $this->factoryArticle = $app['model.factory.article'];
         $this->factoryComment = $app['model.factory.comment'];
         $this->markdownTypo   = $app['markdownTypo'];
+        $this->captchaManager = $app['captcha.manager'];
     }
 
     public function connect(Application $app)
@@ -89,7 +93,6 @@ class BlogController implements ControllerProviderInterface
         $blog->get('/dashboard', array($this, 'dashboard'));
 
         // CRUD for article :
-
         $blog->match('/create', array($this, 'post'));
 
         $blog->get('/{article}/read', array($this, 'read'))
@@ -109,11 +112,14 @@ class BlogController implements ControllerProviderInterface
             ->value('idComment', null)
             ->assert('idComment', '\d+');
 
-        // ...on an admin page
+        // ...on a specific admin page
         $blog->match('/{article}/comments/{idComment}', array($this, 'crudComment'))
             ->convert('article', $slugToArticle)
             ->value('idComment', null)
             ->assert('idComment', '\d+');
+
+        // Other / technical routes :
+        $blog->get('/captcha-change', array($this, 'changeCaptcha'));
 
         return $blog;
     }
@@ -538,5 +544,20 @@ class BlogController implements ControllerProviderInterface
             'isFirstCreation' => false,
             'isUpdating'      => null !== $idComment,
         ));
+    }
+
+
+    /***************************************************************************
+     * OTHER / TECHNICAL ACTIONS
+     **************************************************************************/
+
+    /**
+     * Generate a new captcha for current user, and return the associated filename.
+     */
+    public function changeCaptcha()
+    {
+        $this->captchaManager->revoke();
+
+        return $this->captchaManager->getFilename();
     }
 }

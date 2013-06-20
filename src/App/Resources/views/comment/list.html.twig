@@ -58,6 +58,7 @@
             <label class="control-label" for="captcha">{{ 'comment.field.captcha'|trans }}</label>
 
             <div class="controls">
+                <!-- Input + error -->
                 <p>
                     <input type="text" id="captcha" name="captcha" class="input-medium" required />
 
@@ -66,7 +67,13 @@
                     {% endif %}
                 </p>
 
-                <p><img src="{{ comment.entity.captcha }}" class="captcha-img" /></p>
+                <!-- Captcha image + "change" action -->
+                <p>
+                    <i id="captcha-change" class="icon-refresh" style="cursor: pointer;"
+                       title="{{ 'comment.help.captcha-change'|trans }}"></i>
+
+                    <img id="captcha-img" src="{{ comment.entity.captcha }}" />
+                </p>
 
                 <span class="help-block">{{ 'comment.help.captcha' | trans | raw }}</span>
             </div>

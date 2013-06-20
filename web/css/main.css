@@ -4356,7 +4356,7 @@ article.summary [itemprop="articleBody"] {
   font-weight: bold;
 }
 .comment [itemprop="text"] {
-  width: 75%;
+  width: 72%;
   float: left;
   margin: 0 1em;
   padding: 0 1em;
@@ -4481,7 +4481,7 @@ h2 small {
   margin: 0;
   padding: 0;
 }
-.captcha-img {
+#captcha-img {
   border: 3px solid black;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;

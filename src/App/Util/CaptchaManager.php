@@ -9,34 +9,43 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface,
 
 class CaptchaManager
 {
-    const SESSION_KEY = 'captcha';
-
-    const IMAGE_FOLDER = 'images/captcha';
-
     protected $session;
 
-    public function __construct(SessionInterface $session)
+    // Config parameters
+    protected $sessionKey;
+    protected $webPath;
+    protected $imageFolder;
+
+    public function __construct(SessionInterface $session, array $config = array())
     {
         $this->session = $session;
+
+        // Set config parameters
+        $this->sessionKey = @ $config['sessionKey'] ?: 'captcha';
+
+        $this->webPath = @ $config['webPath'] ?: __DIR__.'/../../../web';
+
+        $this->imageFolder = @ $config['imageFolder'] ?: 'images/captcha';
     }
 
     /**
-     * Generate the captcha as a jpg image, and return its filename
-     * (relative to the web dir).
+     * Generate a captcha as jpg image, and return its filename
+     * (relative to the WEB directory).
+     * If a captcha already exists in session, return its filename directly.
      */
     public function getFilename()
     {
-        $imageFileHandler = new ImageFileHandler(self::IMAGE_FOLDER, WEB, 20, 60);
+        $imageFileHandler = new ImageFileHandler($this->imageFolder, $this->webPath, 20, 60);
 
         // Randomly execute garbage collection
         $imageFileHandler->collectGarbage();
 
         // If a captcha already exists => return it directly
-        if (($captcha = $this->session->get(self::SESSION_KEY))
+        if (($captcha = $this->session->get($this->sessionKey))
             && ($filename = @ $captcha['filename'])
-            && file_exists(WEB .'/'. $filename))
+            && file_exists($this->webPath .'/'. $filename))
         {
-            touch(WEB .'/'. $filename); // update modification date
+            touch($this->webPath .'/'. $filename); // update modification date
 
             return $filename;
         }
@@ -46,7 +55,7 @@ class CaptchaManager
         $content = $builder->build(225, 60)->getGd();
 
         // Save it in session
-        $this->session->set(self::SESSION_KEY, array
+        $this->session->set($this->sessionKey, array
         (
             'phrase'   => $builder->getPhrase(),
             'filename' => $filename = $imageFileHandler->saveAsFile($content),
@@ -60,10 +69,18 @@ class CaptchaManager
      */
     public function isValid($phrase)
     {
-        $captcha = $this->session->get(self::SESSION_KEY);
+        $captcha = $this->session->get($this->sessionKey);
 
         $builder = new CaptchaBuilder(@ $captcha['phrase']);
 
         return is_string($phrase) && $builder->testPhrase($phrase);
+    }
+
+    /**
+     * Revoke the eventual captcha from current session.
+     */
+    public function revoke()
+    {
+        $this->session->remove($this->sessionKey);
     }
 }

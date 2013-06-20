@@ -26,6 +26,8 @@ return array('comment' => array
         'captcha' => '<i class="icon-warning-sign"></i> '.
             "Veuillez recopier les caractères affichés dans l'image, afin d'empêcher les systèmes automatiques de <i>spammer</i>.",
 
+        'captcha-change' => "Cliquez ici pour changer l'image",
+
         'text' => '<i class="icon-info-sign"></i> '.
             'Le code HTML est affiché comme du texte et les adresses web sont automatiquement transformées.',
     ),
