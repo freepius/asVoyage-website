@@ -6,7 +6,7 @@ return array('comment' => array
     'created'           => 'Votre commentaire a bien été ajouté.',
     'creation.error(s)' => '<a href="#comment-post">Ajout d\'un commentaire</a> : il y a une/des erreur/s !',
     'count'             => '0 commentaire(s)',
-    'deleted'           => 'Le commentaire a bien été supprimé.',
+    'deleted'           => 'Le commentaire <b>0</b> a bien été supprimé.',
     'deleting.confirm'  => 'Confirmez-vous la suppression du commentaire ?',
     'notFound'          => "Le commentaire <b>0</b> n'existe pas.",
     'update'            => 'Mise à jour du commentaire',

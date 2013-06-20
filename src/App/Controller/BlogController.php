@@ -12,7 +12,7 @@ use Silex\Application,
  * Summary :
  *  -> __construct
  *  -> connect
- *  -> reverseBlogHomeReferer [protected, static]
+ *  -> retrieveFiltersAndPage [protected]
  *  -> slugToArticle
  *  -> renderTagsFilter  [protected]
  *  -> renderDatesFilter [protected]
@@ -49,6 +49,7 @@ class BlogController implements ControllerProviderInterface
         $app['security.firewall'];
 
         $this->app            = $app;
+        $this->session        = $app['session'];
         $this->flashBag       = $app['session']->getFlashBag();
         $this->translator     = $app['translator'];
         $this->security       = $app['security'];
@@ -125,26 +126,44 @@ class BlogController implements ControllerProviderInterface
     }
 
     /**
-     * If HTTP_REFERER is Blog home page, determine the filter and/or the page number
-     * by reverse-engineering on HTTP_REFERER.
+     * If HTTP_REFERER is Blog home page :
+     *  -> determine the filters and/or the page number by reverse-engineering on HTTP_REFERER
+     *  -> store them in session
+     *
+     * If HTTP_REFERER is the reading page of a Blog article :
+     *  -> try to retrieve the filters and/or the page number from session
      *
      * Url of Blog home page is one of the following ({page} is optional) :
-     *  -> http://host/blog/{page}
-     *  -> http://host/blog/tag-{tag}/{page}
-     *  -> http://host/blog/year-{year}/{page}
-     *  -> http://host/blog/year-{year}/mont-{month}/{page}
+     *  -> blog/{page}
+     *  -> blog/tag-{tag}/{page}
+     *  -> blog/year-{year}/{page}
+     *  -> blog/year-{year}/mont-{month}/{page}
      */
-    protected static function reverseBlogHomeReferer(Request $request)
+    protected function retrieveFiltersAndPage(Request $request)
     {
-        $tag = $year = $month = $page = null;
-
         $referer = $request->headers->get('referer');
 
         strtok($referer, '/'); // skip the protocol (eg: http://)
         strtok('/');           // skip the host     (eg: anarchos-semitas.net/)
 
+        $url = strtok('');
+
+        // Do we come from the reading page of a Blog article ?
+        if (preg_match('{^blog/.*/read}', $url))
+        {
+            return $this->session->get('blog_filters_and_page', array
+            (
+                'hasTagFilter'   => false,
+                'hasYearFilter'  => false,
+                'hasMonthFilter' => false,
+                'hasPage'        => false,
+            ));
+        }
+
+        $tag = $year = $month = $page = null;
+
         // Do we come from Blog home page ?
-        if ('blog' === strtok('/'))
+        if ('blog' === strtok($url, '/'))
         {
             $params = strtok('');
             $filter = strtok($params, '-');
@@ -165,9 +184,17 @@ class BlogController implements ControllerProviderInterface
                 }
             }
             else { $page = $params; }
+
+            // Despite appearances, we don't come from Blog home page !
+            if (! (null === $year  || is_numeric($year))  ||
+                ! (null === $month || is_numeric($month)) ||
+                ! (''   === $page  || is_numeric($page)))
+            {
+                $tag = $year = $month = $page = null;
+            }
         }
 
-        return array
+        $this->session->set('blog_filters_and_page', $result = array
         (
             'hasTagFilter'   => null !== $tag,
             'hasYearFilter'  => null !== $year && null === $month,
@@ -177,7 +204,9 @@ class BlogController implements ControllerProviderInterface
             'year'           => $year,
             'month'          => $month,
             'page'           => (string) $page,
-        );
+        ));
+
+        return $result;
     }
 
     /**
@@ -326,7 +355,7 @@ class BlogController implements ControllerProviderInterface
         $article['text'] = $this->markdownTypo->transform($article['text']);
 
         return $this->twig->render('article/read.html.twig',
-            self::reverseBlogHomeReferer($request) + $opComment + array('article' => $article)
+            $this->retrieveFiltersAndPage($request) + $opComment + array('article' => $article)
         );
     }
 
@@ -479,7 +508,9 @@ class BlogController implements ControllerProviderInterface
         // Delete a comment
         elseif ($request->isMethod('DELETE') && null !== $idComment)
         {
-            $this->flashBag->add('success', $this->translator->trans('comment.deleted'));
+            $this->flashBag->add('success', $this->translator->trans(
+                'comment.deleted', array($idComment)
+            ));
 
             $this->repository->deleteComment($article['_id'], $idComment);
 

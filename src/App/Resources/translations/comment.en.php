@@ -6,7 +6,7 @@ return array('comment' => array
     'created'           => 'Your comment has been added.',
     'creation.error(s)' => '<a href="#comment-post">Adding a comment</a> : one or more errors !',
     'count'             => '0 comment(s)',
-    'deleted'           => 'The comment has been deleted.',
+    'deleted'           => 'The comment <b>0</b> has been deleted.',
     'deleting.confirm'  => 'Do you confirm the comment deleting ?',
     'notFound'          => "Comment <b>0</b> doesn't exist.",
     'update'            => 'Updating of the comment',
