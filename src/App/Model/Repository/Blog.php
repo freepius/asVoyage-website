@@ -37,7 +37,7 @@ class Blog extends MongoRepository
      */
     protected function filterArticles($isAdmin = false, $from = null, $to = null, $tags = null)
     {
-        $query = array();
+        $query = [];
 
         if ($from) { $query['pubDatetime']['$gte'] = (string) $from; }
         if ($to)   { $query['pubDatetime']['$lte'] = (string) $to; }
@@ -64,10 +64,10 @@ class Blog extends MongoRepository
      */
     public function listAllArticles()
     {
-        return $this->collection->find(array(), array(
+        return $this->collection->find([], [
             'title', 'slug', 'pubDatetime',
             'isPublished', 'beCommented', 'tags', 'countComments',
-        ));
+        ]);
     }
 
     /**
@@ -80,7 +80,7 @@ class Blog extends MongoRepository
 
         $query['slug'] = $slug;
 
-        $article = $this->collection->findOne($query, array('comments' => 0));
+        $article = $this->collection->findOne($query, ['comments' => 0]);
 
         if (! is_array($article)) {
             throw new BlogArticleNotFound("slug = $slug");
@@ -118,8 +118,8 @@ class Blog extends MongoRepository
         $query = $this->filterArticles(false, $from, $to, $tags);
 
         // Articles without comments
-        $articles = $this->collection->find($query, array('comments' => 0))
-            ->sort(array('pubDatetime' => -1)); // desc = younger first
+        $articles = $this->collection->find($query, ['comments' => 0])
+            ->sort(['pubDatetime' => -1]); // desc = younger first
 
         if ($skip > 0)  { $articles->skip($skip); }
         if ($limit > 0) { $articles->limit($limit); }
@@ -135,10 +135,10 @@ class Blog extends MongoRepository
     public function listTags()
     {
         $total  = 0;
-        $result = array();
+        $result = [];
 
         $articles = $this->collection->find(
-            $this->filterArticles(false), array('tags' => 1)
+            $this->filterArticles(false), ['tags' => 1]
         );
 
         // Retrieve all tags + their occurrences
@@ -157,7 +157,7 @@ class Blog extends MongoRepository
         // Compute the percentage of each
         $result = array_map(function ($nOcc) use ($total)
         {
-            return array($nOcc, (int) round($nOcc / $total * 100));
+            return [$nOcc, (int) round($nOcc / $total * 100)];
         },
         $result);
 
@@ -174,10 +174,10 @@ class Blog extends MongoRepository
      */
     public function countArticlesByYearMonth($from = null, $to = null)
     {
-        $result = array();
+        $result = [];
 
         $articles = $this->collection->find(
-            $this->filterArticles(false, $from, $to), array('pubDatetime' => 1)
+            $this->filterArticles(false, $from, $to), ['pubDatetime' => 1]
         );
 
         foreach ($articles as $article)
@@ -206,16 +206,16 @@ class Blog extends MongoRepository
     {
         if (null === $idComment)
         {
-            $update = array(
-                '$push' => array('comments' => $comment),
-                '$inc'  => array('countComments' => 1),
-            );
+            $update = [
+                '$push' => ['comments' => $comment],
+                '$inc'  => ['countComments' => 1],
+            ];
         }
         else {
-            $update = array('$set' => array("comments.$idComment" => $comment));
+            $update = ['$set' => ["comments.$idComment" => $comment]];
         }
 
-        $result = $this->collection->update(array('_id' => $idArticle), $update);
+        $result = $this->collection->update(['_id' => $idArticle], $update);
 
         return $result['n'] > 0;
     }
@@ -228,11 +228,11 @@ class Blog extends MongoRepository
     {
         // Change comments[$idComment] by null
         $result = $this->collection->update(
-            array('_id' => $idArticle),
-            array(
-                '$unset' => array("comments.$idComment" => 1),
-                '$inc'   => array('countComments' => -1),
-            )
+            ['_id' => $idArticle],
+            [
+                '$unset' => ["comments.$idComment" => 1],
+                '$inc'   => ['countComments' => -1],
+            ]
         );
 
         return $result['n'] > 0;
@@ -243,7 +243,7 @@ class Blog extends MongoRepository
      */
     public function getCommentsById(\MongoId $idArticle)
     {
-        $article = $this->collection->findOne(array('_id' => $idArticle), array('comments' => 1));
+        $article = $this->collection->findOne(['_id' => $idArticle], ['comments' => 1]);
 
         return $article['comments'];
     }

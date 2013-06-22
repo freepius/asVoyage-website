@@ -39,22 +39,22 @@ $app['mongo.database'] = $app['mongo.connection']->asVoyage;
 $app->register(new \Silex\Provider\SessionServiceProvider());
 
 /* cache */
-$app->register(new \Silex\Provider\HttpCacheServiceProvider(), array(
+$app->register(new \Silex\Provider\HttpCacheServiceProvider(), [
     'http_cache.cache_dir' => ROOT.'/cache'
-));
+]);
 
 /* twig */
-$app->register(new \Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => array(APP.'/Resources/views'),
-));
+$app->register(new \Silex\Provider\TwigServiceProvider(), [
+    'twig.path' => [APP.'/Resources/views'],
+]);
 
 /* validator */
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 
 /* translator */
-$app->register(new \Silex\Provider\TranslationServiceProvider(), array(
+$app->register(new \Silex\Provider\TranslationServiceProvider(), [
     'locale' => $app['session']->get('locale') ?: 'fr',
-));
+]);
 
 /* security */
 $app->register(new \Silex\Provider\SecurityServiceProvider());
@@ -74,12 +74,12 @@ $app['captcha.manager'] = $app->share(function ($app) {
 
 /* monolog */
 /*
-$app->register(new \Silex\Provider\MonologServiceProvider(), array(
+$app->register(new \Silex\Provider\MonologServiceProvider(), [
     'monolog.name' => 'asVoyage',
     'monolog.handler' => $app->share(function ($app) {
         return new \Monolog\Handler\MongoDBHandler($app['mongo.connection'], $app['mongo.database'], 'log');
     }),
-));
+]);
 */
 
 
@@ -103,20 +103,20 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
  * Security configuration
  ************************************************/
 
-$app['security.firewalls'] = array(
-    'all' => array(
+$app['security.firewalls'] = [
+    'all' => [
         'anonymous' => true,
         'pattern'   => '^/',
-        'form'      => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
-        'logout'    => array('logout_path' => '/admin/logout'),
-        'users'     => array(
-            'vagabond' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
-        ),
-    ),
-);
+        'form'      => ['login_path' => '/login', 'check_path' => '/admin/login_check'],
+        'logout'    => ['logout_path' => '/admin/logout'],
+        'users'     => [
+            'vagabond' => ['ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='],
+        ],
+    ],
+];
 
-$app['security.access_rules'] = array(array
-(
+$app['security.access_rules'] =
+[[
     '^/admin'                   .'|'.
     '^/render-markdown'         .'|'.
     '^/blog/(dashboard|create)' .'|'.
@@ -124,7 +124,7 @@ $app['security.access_rules'] = array(array
     '^/blog/.+/read/.+'         .'|'.   // <=> CRUD for comment
     '^/blog/.+/comments.*'              // <=> idem
 ,
-'ROLE_ADMIN'));
+'ROLE_ADMIN']];
 
 
 /*************************************************

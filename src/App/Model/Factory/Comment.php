@@ -58,12 +58,11 @@ class Comment extends EntityFactory
      */
     public function instantiate()
     {
-        return array
-        (
+        return [
             'name'     => '',
             'text'     => '',
             'datetime' => '',
-        );
+        ];
     }
 
     /**
@@ -71,14 +70,13 @@ class Comment extends EntityFactory
      */
     protected function processInputData(array $data)
     {
-        return array
-        (
+        return [
             'name'     => trim($data['name']),
             'text'     => self::cleanText($data['text']),
             'datetime' => date('Y-m-d H:i:s'), // now
             'captcha'  => $this->needCaptcha() ?
                           $this->captcha->isValid((string) @ $data['captcha']) : true,
-        );
+        ];
     }
 
     /**
@@ -86,12 +84,11 @@ class Comment extends EntityFactory
      */
     protected function getConstraints(array $entity)
     {
-        return new Assert\Collection(array
-        (
+        return new Assert\Collection([
             'name'     => new Assert\NotBlank(),
             'text'     => new Assert\NotBlank(),
             'datetime' => new Assert\DateTime(),
-            'captcha'  => new Assert\True(array('message' => 'This value is not valid.')),
-        ));
+            'captcha'  => new Assert\True(['message' => 'This value is not valid.']),
+        ]);
     }
 }

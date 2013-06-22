@@ -31,7 +31,7 @@ abstract class EntityFactory
 
         $entity = $this->merge($entity, $inputData);
 
-        $errors = array();
+        $errors = [];
 
         // Turn violations in [field => error]+
         foreach ($violations as $violation)

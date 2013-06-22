@@ -26,12 +26,12 @@ class UnusedValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint->id, 'string');
         }
 
-        $query = array($constraint->field => $value);
+        $query = [$constraint->field => $value];
 
         // Useful to not count a specific entity
         if ($constraint->id)
         {
-            $query['_id'] = array('$ne' => new \MongoId($constraint->id));
+            $query['_id'] = ['$ne' => new \MongoId($constraint->id)];
         }
 
         if (0 !== $constraint->mongoCollection->count($query, 1))

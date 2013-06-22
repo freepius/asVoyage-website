@@ -1,7 +1,6 @@
 <?php
 
-return array('blog' => array
-(
+return ['blog' => [
     'by-date'           => 'by date',
     'by-tag'            => 'by tag',
     'create'            => 'Create an article',
@@ -25,8 +24,7 @@ return array('blog' => array
     'updating'          => "Updating of an article",
     'younger'           => 'Younger',
 
-    'field' => array
-    (
+    'field' => [
         'beCommented'   => 'Accept comments ?',
         'countComments' => 'Comments number',
         'isPublished'   => 'Is published ?',
@@ -36,10 +34,9 @@ return array('blog' => array
         'tags'          => 'Tags',
         'text'          => 'Text',
         'title'         => 'Title',
-    ),
+    ],
 
-    'help' => array
-    (
+    'help' => [
         'beCommented' => "Check the box if the article could be commented.",
         'isPublished' => "Check the box if the article must be published.",
         'pubDatetime' => 'The date format must be <b>YYYY-MM-DD hh:mm:ss</b> <i>(eg: 2013-01-31 12:00:00)</i>.',
@@ -47,5 +44,5 @@ return array('blog' => array
                          "It is used to build the web address of the article!",
         'tags'        => "Tags are used to categorize / summary / describe the article.<br/>".
                          "They must be <b>separated by a comma</b> <i>(eg: Family, Ney-York, Nature, Picnic)</i>.",
-    ),
-));
+    ],
+]];

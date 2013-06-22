@@ -47,8 +47,7 @@ class Article extends EntityFactory
      */
     public function instantiate()
     {
-        return array
-        (
+        return [
             'title'         => '',
             'slug'          => '',
             'pubDatetime'   => date('Y-m-d H:i:s'), // now
@@ -56,10 +55,10 @@ class Article extends EntityFactory
             'beCommented'   => true,
             'text'          => '',
             'summary'       => '',
-            'tags'          => array(),
-            'comments'      => array(),
+            'tags'          => [],
+            'comments'      => [],
             'countComments' => 0,
-        );
+        ];
     }
 
     /**
@@ -67,8 +66,7 @@ class Article extends EntityFactory
      */
     protected function processInputData(array $data)
     {
-        return array
-        (
+        return [
             'title'       => trim($data['title']),
             'slug'        => StringUtil::slugify($data['slug']),
             'pubDatetime' => $data['pubDatetime'] ?: date('Y-m-d H:i:s'), // empty === now
@@ -77,7 +75,7 @@ class Article extends EntityFactory
             'text'        => $data['text'],
             'summary'     => $data['summary'],
             'tags'        => self::normalizeTags($data['tags']),
-        );
+        ];
     }
 
     /**
@@ -89,23 +87,21 @@ class Article extends EntityFactory
          * The slug must not already be used,
          * beacause it is the human-readable ID of an article.
          */
-        $slugUnused = new Unused(array
-        (
+        $slugUnused = new Unused([
             'mongoCollection' => $this->repository->getCollection(),
             'field'           => 'slug',
             'id'              => (string) @ $entity['_id'],
-        ));
+        ]);
 
-        return new Assert\Collection(array
-        (
+        return new Assert\Collection([
             'title'       => new Assert\NotBlank(),
-            'slug'        => array(new Assert\NotBlank(), $slugUnused),
+            'slug'        => [new Assert\NotBlank(), $slugUnused],
             'pubDatetime' => new Assert\DateTime(),
             'isPublished' => null,
             'beCommented' => null,
             'text'        => new Assert\NotBlank(),
             'summary'     => null,
             'tags'        => null,
-        ));
+        ]);
     }
 }

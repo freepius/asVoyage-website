@@ -1,7 +1,6 @@
 <?php
 
-return array
-(
+return [
     'Actions'         => 'Actions',
     'Articles'        => 'Articles',
     'Bad credentials' => 'Mot de passe erroné',
@@ -9,7 +8,7 @@ return array
     'Comments'        => 'Commentaires',
     'Delete'          => 'Supprimer',
     'Edit'            => 'Éditer',
-    'Error(s)'        => "Il y a <b>0</b> erreur(s) : à 1.",
+    'Errors]'        => "Il y a <b>0</b> erreurs] : à 1.",
     'General'         => 'Général',
     'Login'           => 'Connexion',
     'Logout'          => 'Déconnexion',
@@ -31,15 +30,13 @@ return array
     'Yes'             => 'Oui',
 
     // Languages
-    'lang' => array
-    (
+    'lang' => [
         'fr' => 'Français',
         'en' => 'Anglais',
-    ),
+    ],
 
     // Literal numbers
-    'literal' => array
-    (
+    'literal' => [
         '8'  => 'huit',
         '9'  => 'neuf',
         '10' => 'dix',
@@ -48,11 +45,10 @@ return array
         '13' => 'treize',
         '14' => 'quatorze',
         '15' => 'quinze',
-    ),
+    ],
 
     // Months
-    'month' => array
-    (
+    'month' => [
         '1'  => 'Janvier',
         '2'  => 'Février',
         '3'  => 'Mars',
@@ -65,11 +61,10 @@ return array
         '10' => 'Octobre',
         '11' => 'Novembre',
         '12' => 'Décembre',
-    ),
+    ],
 
     // Navigation
-    'nav' => array
-    (
+    'nav' => [
         'home'      => 'Accueil',
         'about'     => 'À propos',
         'contact'   => 'Contact',
@@ -78,5 +73,5 @@ return array
         'blog'      => 'Blog',
         'gallery'   => 'Galerie',
         'map'       => 'Carte',
-    ),
-);
+    ],
+];

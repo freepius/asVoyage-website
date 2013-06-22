@@ -19,6 +19,6 @@ class Unused extends Constraint
 
     public function getRequiredOptions()
     {
-        return array('mongoCollection', 'field');
+        return ['mongoCollection', 'field'];
     }
 }

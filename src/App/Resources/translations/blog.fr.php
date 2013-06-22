@@ -1,7 +1,6 @@
 <?php
 
-return array('blog' => array
-(
+return ['blog' => [
     'by-date'           => 'par date',
     'by-tag'            => 'par mot-clé',
     'create'            => 'Créer un article',
@@ -25,8 +24,7 @@ return array('blog' => array
     'updating'          => "Mise à jour d'un article",
     'younger'           => 'Plus récents',
 
-    'field' => array
-    (
+    'field' => [
         'beCommented'   => 'Accepte commentaires ?',
         'countComments' => 'Nombre de commentaires',
         'isPublished'   => 'Est publié ?',
@@ -36,10 +34,9 @@ return array('blog' => array
         'tags'          => 'Mots-clés',
         'text'          => 'Texte',
         'title'         => 'Titre',
-    ),
+    ],
 
-    'help' => array
-    (
+    'help' => [
         'beCommented' => "Cochez la case si l'article peut être commenté.",
         'isPublished' => "Cochez la case si l'article doit être publié.",
         'pubDatetime' => 'La date doit être au format <b>AAAA-MM-JJ hh:mm:ss</b> <i>(ex : 2013-01-31 12:00:00).</i>',
@@ -47,5 +44,5 @@ return array('blog' => array
                          "Il sert à constituer l'adresse web de l'article !",
         'tags'        => "Les mots-clés servent à catégoriser / résumer / décrire l'article.<br/>".
                          "Ils doivent être <b>séparés par une virgule</b> <i>(ex : Famille, Loire-Atlantique, Nature, Pique-nique)</i>.",
-    ),
-));
+    ],
+]];

@@ -35,7 +35,6 @@ License
 TODO
 ====
 
-* Blog reading page : when creating/updating a comment => keep the filters / HTTP\_REFERER
 * Blog creating/updating page :
   * Add help for Markdown
 * Configure and make secure KCFinder
@@ -63,4 +62,5 @@ Low priority
 * Use DataTable jquery plugin to Blog dashboard ?
 * Transform App\Util\MarkdownTypo to Silex provider
 * Locale depending on geo-localization
-* Migrate to PHP 5.4 (or better to PHP 5.5) : particulary, use Trait for \Silex\Application
+* Migrate to PHP 5.4 (or better to PHP 5.5) :
+  * use Trait for \Silex\Application

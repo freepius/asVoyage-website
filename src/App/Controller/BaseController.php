@@ -13,16 +13,16 @@ class BaseController implements ControllerProviderInterface
         $base = $app['controllers_factory'];
 
         // Home
-        $base->get('/',     array($this, 'home'));
-        $base->get('/home', array($this, 'home'));
+        $base->get('/',     [$this, 'home']);
+        $base->get('/home', [$this, 'home']);
 
         // Various pages
-        $base->get('/about', array($this, 'about'));
+        $base->get('/about', [$this, 'about']);
 
         // Technical routes
-        $base->get('/login', array($this, 'login'));
+        $base->get('/login', [$this, 'login']);
 
-        $base->get('/switch-locale/{locale}', array($this, 'switchLocale'))
+        $base->get('/switch-locale/{locale}', [$this, 'switchLocale'])
             ->assert('locale', 'en|fr');
 
         $base->post('/render-markdown', function (Application $app)
@@ -42,20 +42,20 @@ class BaseController implements ControllerProviderInterface
 
     public function about(Application $app)
     {
-        return $app['twig']->render("base/about.{$app['locale']}.html.twig", array
-        (
+        return $app['twig']->render("base/about.{$app['locale']}.html.twig",
+        [
             // Years together of Marie and Mathieu
             // ("Today" - "2004/10/15 16:00:00") / (60 * 60 * 24 * 365.25)
             'yearsMMM' => (int) round((time() - 1097769600) / 31557600),
-        ));
+        ]);
     }
 
     public function login(Application $app)
     {
-        return $app['twig']->render('base/login.html.twig', array
-        (
+        return $app['twig']->render('base/login.html.twig',
+        [
             'error' => $app['security.last_error']($app['request']),
-        ));
+        ]);
     }
 
     public function switchLocale(Application $app, $locale)

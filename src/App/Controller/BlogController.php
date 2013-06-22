@@ -65,62 +65,62 @@ class BlogController implements ControllerProviderInterface
     {
         $blog = $app['controllers_factory'];
 
-        $slugToArticle = array($this, 'slugToArticle');
+        $slugToArticle = [$this, 'slugToArticle'];
 
         // Home : a list of articles, for basic users
-        $blog->get('/{page}', array($this, 'home'))
+        $blog->get('/{page}', [$this, 'home'])
             ->value('page', 1)
             ->assert('page', '\d+');
 
         // ...filtered by tag
-        $blog->get('/tag-{tag}/{page}', array($this, 'home'))
+        $blog->get('/tag-{tag}/{page}', [$this, 'home'])
             ->value('page', 1)
             ->assert('page', '\d+');
 
         // ...filtered by year
-        $blog->get('/year-{year}/{page}', array($this, 'home'))
+        $blog->get('/year-{year}/{page}', [$this, 'home'])
             ->value('page', 1)
             ->assert('page', '\d+')
             ->assert('year', '\d{4}');
 
         // ...filtered by year and month
-        $blog->get('/year-{year}/month-{month}/{page}', array($this, 'home'))
+        $blog->get('/year-{year}/month-{month}/{page}', [$this, 'home'])
             ->value('page', 1)
             ->assert('page' , '\d+')
             ->assert('year' , '\d{4}')
             ->assert('month', '\d{1,2}');
 
         // Admin dashboard
-        $blog->get('/dashboard', array($this, 'dashboard'));
+        $blog->get('/dashboard', [$this, 'dashboard']);
 
         // CRUD for article :
-        $blog->match('/create', array($this, 'post'));
+        $blog->match('/create', [$this, 'post']);
 
-        $blog->get('/{article}/read', array($this, 'read'))
+        $blog->get('/{article}/read', [$this, 'read'])
             ->convert('article', $slugToArticle);
 
-        $blog->match('/{article}/update', array($this, 'post'))
+        $blog->match('/{article}/update', [$this, 'post'])
             ->convert('article', $slugToArticle);
 
-        $blog->match('/{article}/delete', array($this, 'delete'))
+        $blog->match('/{article}/delete', [$this, 'delete'])
             ->convert('article', $slugToArticle);
 
         // CRUD for comment :
 
         // ...on the article reading page
-        $blog->match('/{article}/read/{idComment}', array($this, 'read'))
+        $blog->match('/{article}/read/{idComment}', [$this, 'read'])
             ->convert('article', $slugToArticle)
             ->value('idComment', null)
             ->assert('idComment', '\d+');
 
         // ...on a specific admin page
-        $blog->match('/{article}/comments/{idComment}', array($this, 'crudComment'))
+        $blog->match('/{article}/comments/{idComment}', [$this, 'crudComment'])
             ->convert('article', $slugToArticle)
             ->value('idComment', null)
             ->assert('idComment', '\d+');
 
         // Other / technical routes :
-        $blog->get('/captcha-change', array($this, 'changeCaptcha'));
+        $blog->get('/captcha-change', [$this, 'changeCaptcha']);
 
         return $blog;
     }
@@ -151,13 +151,13 @@ class BlogController implements ControllerProviderInterface
         // Do we come from the reading page of a Blog article ?
         if (preg_match('{^blog/.*/read}', $url))
         {
-            return $this->session->get('blog_filters_and_page', array
-            (
+            return $this->session->get('blog_filters_and_page',
+            [
                 'hasTagFilter'   => false,
                 'hasYearFilter'  => false,
                 'hasMonthFilter' => false,
                 'hasPage'        => false,
-            ));
+            ]);
         }
 
         $tag = $year = $month = $page = null;
@@ -194,8 +194,8 @@ class BlogController implements ControllerProviderInterface
             }
         }
 
-        $this->session->set('blog_filters_and_page', $result = array
-        (
+        $this->session->set('blog_filters_and_page', $result =
+        [
             'hasTagFilter'   => null !== $tag,
             'hasYearFilter'  => null !== $year && null === $month,
             'hasMonthFilter' => null !== $month,
@@ -204,7 +204,7 @@ class BlogController implements ControllerProviderInterface
             'year'           => $year,
             'month'          => $month,
             'page'           => (string) $page,
-        ));
+        ]);
 
         return $result;
     }
@@ -222,7 +222,7 @@ class BlogController implements ControllerProviderInterface
         catch (BlogArticleNotFound $e)
         {
             $this->flashBag->add('error', $this->translator->trans(
-                'blog.notFound', array($article)
+                'blog.notFound', [$article]
             ));
 
             return null;
@@ -232,17 +232,17 @@ class BlogController implements ControllerProviderInterface
     // TODO : cache HTML until one article is edit/create.
     protected function renderTagsFilter()
     {
-        return $this->twig->render('blog/filter-by-tags.html.twig', array(
-            'tags' => $this->repository->listTags(),
-        ));
+        return $this->twig->render('blog/filter-by-tags.html.twig', [
+            'tags' => $this->repository->listTags()
+        ]);
     }
 
     // TODO : cache HTML until one article is edit/create.
     protected function renderDatesFilter()
     {
-        return $this->twig->render('blog/filter-by-dates.html.twig', array(
+        return $this->twig->render('blog/filter-by-dates.html.twig', [
             'countByYearMonth' => $this->repository->countArticlesByYearMonth(),
-        ));
+        ]);
     }
 
 
@@ -298,8 +298,8 @@ class BlogController implements ControllerProviderInterface
             $article['summary'] = trim($this->markdownTypo->transform($article['summary']));
         }
 
-        return $this->twig->render('blog/home.html.twig', array
-        (
+        return $this->twig->render('blog/home.html.twig',
+        [
             'articles' => $articles,
 
             // For counter and navigation
@@ -318,15 +318,15 @@ class BlogController implements ControllerProviderInterface
             'tag'            => $tag,
             'year'           => $year,
             'month'          => $month,
-        ));
+        ]);
     }
 
     public function dashboard()
     {
-        return $this->twig->render('blog/dashboard.html.twig', array
-        (
+        return $this->twig->render('blog/dashboard.html.twig',
+        [
             'articles' => $this->repository->listAllArticles(),
-        ));
+        ]);
     }
 
 
@@ -355,27 +355,27 @@ class BlogController implements ControllerProviderInterface
         $article['text'] = $this->markdownTypo->transform($article['text']);
 
         return $this->twig->render('article/read.html.twig',
-            $this->retrieveFiltersAndPage($request) + $opComment + array('article' => $article)
+            $this->retrieveFiltersAndPage($request) + $opComment + ['article' => $article]
         );
     }
 
     /**
      * Create or update a blog article
-     * (if $article === array() then create else update).
+     * (if $article === [] then create else update).
      */
-    public function post(Request $request, $article = array())
+    public function post(Request $request, $article = [])
     {
         if (null === $article)
         {
             return $this->app->redirect('/blog/dashboard');
         }
 
-        if ($isCreation = array() === $article)
+        if ($isCreation = [] === $article)
         {
             $article = $this->factoryArticle->instantiate();
         }
 
-        $errors = array();
+        $errors = [];
 
         // Process of the creation / updating
         if ($request->isMethod('POST'))
@@ -385,25 +385,25 @@ class BlogController implements ControllerProviderInterface
             $errors = $this->factoryArticle->bind($article, $httpData);
 
             // No error => store the article + redirect to dashboard
-            if (array() === $errors)
+            if ([] === $errors)
             {
                 $this->repository->store($article);
 
                 $this->flashBag->add('success', $this->translator->trans(
                     'blog.' . ($isCreation ? 'created' : 'updated'),
-                    array($article['slug'])
+                    [$article['slug']]
                 ));
 
                 return $this->app->redirect('/blog/dashboard');
             }
         }
 
-        return $this->twig->render('article/post-general.html.twig', array
-        (
+        return $this->twig->render('article/post-general.html.twig',
+        [
             'article'    => $article,
             'errors'     => $errors,
             'isCreation' => $isCreation,
-        ));
+        ]);
     }
 
     public function delete(Request $request, $article)
@@ -418,16 +418,16 @@ class BlogController implements ControllerProviderInterface
             $this->repository->deleteById($article['_id']);
 
             $this->flashBag->add('success', $this->translator->trans(
-                'blog.deleted', array($article['slug'])
+                'blog.deleted', [$article['slug']]
             ));
 
             return $this->app->redirect('/blog/dashboard');
         }
 
-        return $this->twig->render('article/delete.html.twig', array
-        (
+        return $this->twig->render('article/delete.html.twig',
+        [
             'article' => $article,
-        ));
+        ]);
     }
 
 
@@ -454,7 +454,7 @@ class BlogController implements ControllerProviderInterface
         }
 
         return $this->twig->render('comment/crud.html.twig',
-            $opComment + array('article' => $article)
+            $opComment + ['article' => $article]
         );
     }
 
@@ -488,7 +488,7 @@ class BlogController implements ControllerProviderInterface
         if (null !== $idComment && ! isset($article['comments'][$idComment]))
         {
             $this->flashBag->add('error', $this->translator->trans(
-                'comment.notFound', array($idComment)
+                'comment.notFound', [$idComment]
             ));
 
             return false;
@@ -509,7 +509,7 @@ class BlogController implements ControllerProviderInterface
         elseif ($request->isMethod('DELETE') && null !== $idComment)
         {
             $this->flashBag->add('success', $this->translator->trans(
-                'comment.deleted', array($idComment)
+                'comment.deleted', [$idComment]
             ));
 
             $this->repository->deleteComment($article['_id'], $idComment);
@@ -523,15 +523,15 @@ class BlogController implements ControllerProviderInterface
 
         $this->factoryComment->addCaptchaIfNeeded($comment);
 
-        return array('comment' => array
-        (
+        return ['comment' =>
+        [
             'id'              => $idComment,
             'entity'          => $comment,
-            'errors'          => array(),
+            'errors'          => [],
             'isCreation'      => ! $isUpdating,
             'isFirstCreation' => ! $isUpdating,
             'isUpdating'      =>   $isUpdating,
-        ));
+        ]];
     }
 
     /**
@@ -546,13 +546,13 @@ class BlogController implements ControllerProviderInterface
         $errors = $this->factoryComment->bind($comment, $inputData);
 
         // No error => store the created/updated comment
-        if (array() === $errors)
+        if ([] === $errors)
         {
             $this->repository->storeComment($article['_id'], $idComment, $comment);
 
             $this->flashBag->add('success', $this->translator->trans(
                 (null === $idComment) ? 'comment.created' : 'comment.updated',
-                array($idComment)
+                [$idComment]
             ));
 
             return true;
@@ -566,15 +566,15 @@ class BlogController implements ControllerProviderInterface
 
         $this->factoryComment->addCaptchaIfNeeded($comment);
 
-        return array('comment' => array
-        (
+        return ['comment' =>
+        [
             'id'              => $idComment,
             'entity'          => $comment,
             'errors'          => $errors,
             'isCreation'      => null === $idComment,
             'isFirstCreation' => false,
             'isUpdating'      => null !== $idComment,
-        ));
+        ]];
     }
 
 

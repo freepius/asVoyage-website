@@ -1,7 +1,6 @@
 <?php
 
-return array
-(
+return [
     //'Actions'         => '',
     //'Articles'        => '',
     //'Bad credentials' => '',
@@ -9,7 +8,7 @@ return array
     //'Comments'        => '',
     //'Delete'          => '',
     //'Edit'            => '',
-    'Error(s)'        => "There is/are <b>0</b> error/s : at 1.",
+    'Errors]'        => "There is/are <b>0</b> error/s : at 1.",
     //'General'         => '',
     //'Login'           => '',
     //'Logout'          => '',
@@ -31,15 +30,13 @@ return array
     //'Yes'             => '',
 
     // Languages
-    'lang' => array
-    (
+    'lang' => [
         'fr' => 'French',
         'en' => 'English',
-    ),
+    ],
 
     // Literal numbers
-    'literal' => array
-    (
+    'literal' => [
         '8'  => 'eight',
         '9'  => 'nine',
         '10' => 'ten',
@@ -48,11 +45,10 @@ return array
         '13' => 'thirteen',
         '14' => 'forteen',
         '15' => 'fifteen',
-    ),
+    ],
 
     // Months
-    'month' => array
-    (
+    'month' => [
         '1'  => 'January',
         '2'  => 'February',
         '3'  => 'March',
@@ -65,11 +61,10 @@ return array
         '10' => 'October',
         '11' => 'November',
         '12' => 'December',
-    ),
+    ],
 
     // Navigation
-    'nav' => array
-    (
+    'nav' => [
         'home'      => 'Home',
         'about'     => 'About',
         'contact'   => 'Contact',
@@ -78,5 +73,5 @@ return array
         'blog'      => 'Blog',
         'gallery'   => 'Gallery',
         'map'       => 'Map',
-    ),
-);
+    ],
+];

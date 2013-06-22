@@ -25,7 +25,7 @@ abstract class MongoRepository
     {
         if (! $id instanceof \MongoId) { $id = new \MongoId($id); }
 
-        $result = $this->collection->remove(array('_id' => $id));
+        $result = $this->collection->remove(['_id' => $id]);
 
         return $result['n'] > 0;
     }
@@ -42,7 +42,7 @@ abstract class MongoRepository
         {
             unset($entity['_id']);
 
-            $result = $this->collection->update(array('_id' => $id), array('$set' => $entity));
+            $result = $this->collection->update(['_id' => $id], ['$set' => $entity]);
         }
         // create
         else {

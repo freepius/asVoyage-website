@@ -16,7 +16,7 @@ class CaptchaManager
     protected $webPath;
     protected $imageFolder;
 
-    public function __construct(SessionInterface $session, array $config = array())
+    public function __construct(SessionInterface $session, array $config = [])
     {
         $this->session = $session;
 
@@ -55,11 +55,11 @@ class CaptchaManager
         $content = $builder->build(225, 60)->getGd();
 
         // Save it in session
-        $this->session->set($this->sessionKey, array
-        (
+        $this->session->set($this->sessionKey,
+        [
             'phrase'   => $builder->getPhrase(),
             'filename' => $filename = $imageFileHandler->saveAsFile($content),
-        ));
+        ]);
 
         return $filename;
     }
