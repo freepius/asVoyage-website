@@ -1,14 +1,23 @@
 /**
  * Some global/bulk javascript
  */
-(function ($, document) {
+
+/*global document, $ */
+
+(function () {
     "use strict";
+
+    /**
+     * Auto-tooltip <a/>, <i/> and <button/>
+     */
+    $.autoTooltip = function () {
+        $('a[title], i[title], button[title]').tooltip();
+    };
 
     $(document).ready(function () {
 
-        // auto-tooltip <a/>, <i/> and <button/>
-        $('a[title]').add('i[title]').add('button[title]').tooltip();
+        $.autoTooltip();
 
     });
 
-})(jQuery, document);
+}());

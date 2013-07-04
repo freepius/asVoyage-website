@@ -7,7 +7,7 @@ About
 Requirements
 ------------
 
-- Any flavor of PHP 5.3 or above should do
+- Any flavor of PHP 5.4 or above should do
 - PHP extension : Intl, Fileinfo, ZIP, GD
 - [optional] PHPUnit 3.5+ to execute the test suite (phpunit --version)
 
@@ -37,15 +37,17 @@ TODO
 
 * Blog creating/updating page :
   * Add help for Markdown
+  * A summary (in top-right)
 * Configure and make secure KCFinder
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 * Reorganize HTML5 => make semantic !
 * On Blog "reading" page : add box containing related articles/contents
+* BUG : in bootstrap, bug with tooltip and "max-width: 200px;"
+* STYLE : change some "em sizes" to "px sizes" (for style consistency) !
 
 For production
 --------------
 
-* Set properly the BlogController::LIMIT\_ARTICLES constant (eg: to 10)
 * Solve the TODOs
 * Update vendor and libraries
 * Change name and password for admin

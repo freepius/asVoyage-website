@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use Silex\Application,
-    Silex\ControllerProviderInterface,
+use Silex\ControllerProviderInterface,
     Symfony\Component\HttpFoundation\Request,
     App\Exception\BlogArticleNotFound;
 
@@ -37,23 +36,14 @@ use Silex\Application,
 class BlogController implements ControllerProviderInterface
 {
     // On "home" page, max number of articles
-    const LIMIT_ARTICLES = 2; // TODO: change this before PROD
+    protected $limitArticles;
 
 
-    public function __construct(Application $app)
+    public function __construct(\App\Application $app)
     {
-        /**
-         * Hack: call 'security.firewall' allows to call
-         * 'security' and 'twig' services at this point !
-         */
-        $app['security.firewall'];
+        $this->limitArticles = 'prod' === $app['env'] ? 10 : 2;
 
         $this->app            = $app;
-        $this->session        = $app['session'];
-        $this->flashBag       = $app['session']->getFlashBag();
-        $this->translator     = $app['translator'];
-        $this->security       = $app['security'];
-        $this->twig           = $app['twig'];
         $this->repository     = $app['model.repository.blog'];
         $this->factoryArticle = $app['model.factory.article'];
         $this->factoryComment = $app['model.factory.comment'];
@@ -61,7 +51,7 @@ class BlogController implements ControllerProviderInterface
         $this->captchaManager = $app['captcha.manager'];
     }
 
-    public function connect(Application $app)
+    public function connect(\Silex\Application $app)
     {
         $blog = $app['controllers_factory'];
 
@@ -151,7 +141,7 @@ class BlogController implements ControllerProviderInterface
         // Do we come from the reading page of a Blog article ?
         if (preg_match('{^blog/.*/read}', $url))
         {
-            return $this->session->get('blog_filters_and_page',
+            return $this->app->getSession('blog_filters_and_page',
             [
                 'hasTagFilter'   => false,
                 'hasYearFilter'  => false,
@@ -194,7 +184,7 @@ class BlogController implements ControllerProviderInterface
             }
         }
 
-        $this->session->set('blog_filters_and_page', $result =
+        $this->app->setSession('blog_filters_and_page', $result =
         [
             'hasTagFilter'   => null !== $tag,
             'hasYearFilter'  => null !== $year && null === $month,
@@ -217,11 +207,11 @@ class BlogController implements ControllerProviderInterface
     {
         try {
             return $this->repository->getBySlug(
-                $article, $this->security->isGranted('ROLE_ADMIN'));
+                $article, $this->app->isGranted('ROLE_ADMIN'));
         }
         catch (BlogArticleNotFound $e)
         {
-            $this->flashBag->add('error', $this->translator->trans(
+            $this->app->addFlash('error', $this->app->trans(
                 'blog.notFound', [$article]
             ));
 
@@ -232,7 +222,7 @@ class BlogController implements ControllerProviderInterface
     // TODO : cache HTML until one article is edit/create.
     protected function renderTagsFilter()
     {
-        return $this->twig->render('blog/filter-by-tags.html.twig', [
+        return $this->app->renderView('blog/filter-by-tags.html.twig', [
             'tags' => $this->repository->listTags()
         ]);
     }
@@ -240,7 +230,7 @@ class BlogController implements ControllerProviderInterface
     // TODO : cache HTML until one article is edit/create.
     protected function renderDatesFilter()
     {
-        return $this->twig->render('blog/filter-by-dates.html.twig', [
+        return $this->app->renderView('blog/filter-by-dates.html.twig', [
             'countByYearMonth' => $this->repository->countArticlesByYearMonth(),
         ]);
     }
@@ -276,16 +266,16 @@ class BlogController implements ControllerProviderInterface
         // Total number of articles depending on filters
         $total = $this->repository->countArticles($fromDate, $toDate, $tag);
 
-        $totalPages = (int) ceil($total / self::LIMIT_ARTICLES);
+        $totalPages = (int) ceil($total / $this->limitArticles);
 
         $page = (int) min($totalPages, $page);
 
         // Number of previous articles
-        $skip = ($page - 1) * self::LIMIT_ARTICLES;
+        $skip = ($page - 1) * $this->limitArticles;
 
         // Retrieve articles depending on filters
         $articles = iterator_to_array($this->repository->listArticles(
-            self::LIMIT_ARTICLES, $skip, $fromDate, $toDate, $tag
+            $this->limitArticles, $skip, $fromDate, $toDate, $tag
         ));
 
         // For text and summary : MarkdownTypo to Html
@@ -298,7 +288,7 @@ class BlogController implements ControllerProviderInterface
             $article['summary'] = trim($this->markdownTypo->transform($article['summary']));
         }
 
-        return $this->twig->render('blog/home.html.twig',
+        return $this->app->render('blog/home.html.twig',
         [
             'articles' => $articles,
 
@@ -323,7 +313,7 @@ class BlogController implements ControllerProviderInterface
 
     public function dashboard()
     {
-        return $this->twig->render('blog/dashboard.html.twig',
+        return $this->app->render('blog/dashboard.html.twig',
         [
             'articles' => $this->repository->listAllArticles(),
         ]);
@@ -354,7 +344,7 @@ class BlogController implements ControllerProviderInterface
 
         $article['text'] = $this->markdownTypo->transform($article['text']);
 
-        return $this->twig->render('article/read.html.twig',
+        return $this->app->render('article/read.html.twig',
             $this->retrieveFiltersAndPage($request) + $opComment + ['article' => $article]
         );
     }
@@ -389,7 +379,7 @@ class BlogController implements ControllerProviderInterface
             {
                 $this->repository->store($article);
 
-                $this->flashBag->add('success', $this->translator->trans(
+                $this->app->addFlash('success', $this->app->trans(
                     'blog.' . ($isCreation ? 'created' : 'updated'),
                     [$article['slug']]
                 ));
@@ -398,7 +388,7 @@ class BlogController implements ControllerProviderInterface
             }
         }
 
-        return $this->twig->render('article/post-general.html.twig',
+        return $this->app->render('article/post-general.html.twig',
         [
             'article'    => $article,
             'errors'     => $errors,
@@ -417,14 +407,14 @@ class BlogController implements ControllerProviderInterface
         {
             $this->repository->deleteById($article['_id']);
 
-            $this->flashBag->add('success', $this->translator->trans(
+            $this->app->addFlash('success', $this->app->trans(
                 'blog.deleted', [$article['slug']]
             ));
 
             return $this->app->redirect('/blog/dashboard');
         }
 
-        return $this->twig->render('article/delete.html.twig',
+        return $this->app->render('article/delete.html.twig',
         [
             'article' => $article,
         ]);
@@ -453,7 +443,7 @@ class BlogController implements ControllerProviderInterface
             return $this->app->redirect("/blog/{$article['slug']}/comments");
         }
 
-        return $this->twig->render('comment/crud.html.twig',
+        return $this->app->render('comment/crud.html.twig',
             $opComment + ['article' => $article]
         );
     }
@@ -487,7 +477,7 @@ class BlogController implements ControllerProviderInterface
         // Comment not found !
         if (null !== $idComment && ! isset($article['comments'][$idComment]))
         {
-            $this->flashBag->add('error', $this->translator->trans(
+            $this->app->addFlash('error', $this->app->trans(
                 'comment.notFound', [$idComment]
             ));
 
@@ -508,7 +498,7 @@ class BlogController implements ControllerProviderInterface
         // Delete a comment
         elseif ($request->isMethod('DELETE') && null !== $idComment)
         {
-            $this->flashBag->add('success', $this->translator->trans(
+            $this->app->addFlash('success', $this->app->trans(
                 'comment.deleted', [$idComment]
             ));
 
@@ -550,7 +540,7 @@ class BlogController implements ControllerProviderInterface
         {
             $this->repository->storeComment($article['_id'], $idComment, $comment);
 
-            $this->flashBag->add('success', $this->translator->trans(
+            $this->app->addFlash('success', $this->app->trans(
                 (null === $idComment) ? 'comment.created' : 'comment.updated',
                 [$idComment]
             ));
@@ -560,7 +550,7 @@ class BlogController implements ControllerProviderInterface
 
         // Some errors => add a flash message + a captcha if needed
 
-        $this->flashBag->add('error', $this->translator->trans(
+        $this->app->addFlash('error', $this->app->trans(
             (null === $idComment) ? 'comment.creation.error(s)' : 'comment.updating.error(s)'
         ));
 

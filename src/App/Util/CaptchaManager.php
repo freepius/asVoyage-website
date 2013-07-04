@@ -23,9 +23,9 @@ class CaptchaManager
         // Set config parameters
         $this->sessionKey = @ $config['sessionKey'] ?: 'captcha';
 
-        $this->webPath = @ $config['webPath'] ?: __DIR__.'/../../../web';
+        $this->webPath = $config['webPath'];
 
-        $this->imageFolder = @ $config['imageFolder'] ?: 'images/captcha';
+        $this->imageFolder = $config['imageFolder'];
     }
 
     /**

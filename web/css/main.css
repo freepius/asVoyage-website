@@ -4324,15 +4324,17 @@ article [itemprop="articleBody"] {
   margin-bottom: 3em;
 }
 article.summary {
-  margin-bottom: 1em;
-  padding: 0.5em 1em;
+  margin-bottom: 20px;
+  padding: 15px 25px;
   background-color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
   border-radius: 10px;
   border: 1px solid gray;
 }
 article.summary [itemprop="articleBody"] {
-  margin: 0.5em 0;
-  padding: 1em 0;
+  margin: 10px 0;
+  padding: 15px 0;
   border-bottom: 1px solid gray;
 }
 .comment {
@@ -4434,23 +4436,41 @@ h2 small {
 #intro-summary h1 {
   margin-top: 0;
 }
-#main > .with-aside {
+#main .with-aside {
   width: 68%;
   float: left;
 }
-#main > aside {
+#main .with-aside + aside {
   width: 28%;
   float: right;
 }
-#main > aside .box {
-  margin-bottom: 1em;
-  padding: 25px;
-  background-color: #E5E5D5;
+#main .with-aside + aside .box {
+  margin-bottom: 20px;
+  padding: 15px 25px;
+  background-color: white;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+  border: 1px solid gray;
+  background-color: #E5E5D5;
+  border: 0;
 }
-.preview {
+#main .with-aside.little {
+  width: 60%;
+}
+#main .with-aside.little + aside {
+  width: 36%;
+}
+.decorated {
+  margin-bottom: 20px;
+  padding: 15px 25px;
+  background-color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+div.preview {
   overflow: auto;
   padding: 4px 6px;
   margin-bottom: 10px;

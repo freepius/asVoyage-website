@@ -8,7 +8,7 @@ return [
     'Comments'        => 'Commentaires',
     'Delete'          => 'Supprimer',
     'Edit'            => 'Éditer',
-    'Errors]'        => "Il y a <b>0</b> erreurs] : à 1.",
+    'Error(s)'        => "Il y a <b>0</b> erreur(s) : à 1.",
     'General'         => 'Général',
     'Login'           => 'Connexion',
     'Logout'          => 'Déconnexion',

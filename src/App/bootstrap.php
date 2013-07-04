@@ -1,9 +1,8 @@
 <?php
 
-define('APP',  __DIR__);
-define('SRC',  dirname(APP));
+define('APP' , __DIR__);
+define('SRC' , dirname(APP));
 define('ROOT', dirname(SRC));
-define('WEB',  ROOT.'/web');
 
 $loader = require ROOT.'/vendor/autoload.php';
 
@@ -18,7 +17,7 @@ $loader->add('michelf', ROOT.'/vendor/michelf/php-smartypants');
 // Enable _method request parameter support
 \Symfony\Component\HttpFoundation\Request::enableHttpMethodParameterOverride();
 
-$app = new \Silex\Application();
+$app = new \App\Application();
 
 /* environment */
 $app['env'] = 'dev';
@@ -28,7 +27,10 @@ $app['debug'] = ($app['env'] === 'dev') ? true : false;
 
 /* MongoDB config */
 $app['mongo.connection'] = new \MongoClient(); // default connection
-$app['mongo.database'] = $app['mongo.connection']->asVoyage;
+$app['mongo.database'] = $app['mongo.connection']->selectDB('asVoyage');
+
+/* Directories and paths */
+$app['path.web'] = ROOT.'/web';
 
 
 /*************************************************
@@ -69,7 +71,13 @@ $app['markdownTypo'] = $app->share(function () {
 
 /* captcha manager */
 $app['captcha.manager'] = $app->share(function ($app) {
-    return new \App\Util\CaptchaManager($app['session']);
+    return new \App\Util\CaptchaManager(
+        $app['session'],
+        [
+            'webPath'     => $app['path.web'],
+            'imageFolder' => 'tmp/captcha',
+        ]
+    );
 });
 
 /* monolog */
@@ -125,6 +133,12 @@ $app['security.access_rules'] =
     '^/blog/.+/comments.*'              // <=> idem
 ,
 'ROLE_ADMIN']];
+
+/**
+ * Hack: call 'security.firewall' allows to call
+ * 'security' and 'twig' services at this point !
+ */
+$app['security.firewall'];
 
 
 /*************************************************

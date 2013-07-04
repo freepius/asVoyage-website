@@ -8,7 +8,7 @@ return [
     //'Comments'        => '',
     //'Delete'          => '',
     //'Edit'            => '',
-    'Errors]'        => "There is/are <b>0</b> error/s : at 1.",
+    'Error(s)'        => "There is/are <b>0</b> error/s : at 1.",
     //'General'         => '',
     //'Login'           => '',
     //'Logout'          => '',

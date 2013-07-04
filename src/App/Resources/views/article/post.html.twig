@@ -23,11 +23,13 @@
         </div>
 
         <div class="actions-right">
-            <!-- Go to the article reading page -->
-            <a href="/blog/{{- article.slug -}}/read" class="btn">
-                <i class="icon-eye-open"></i>
-                {{ 'Read'|trans }}
-            </a>
+            {% if not isCreation %}
+                <!-- Go to the article reading page -->
+                <a href="/blog/{{- article.slug -}}/read" class="btn">
+                    <i class="icon-eye-open"></i>
+                    {{ 'Read'|trans }}
+                </a>
+            {% endif %}
 
             <!-- Cancel creation -->
             {{ cancel('/blog/dashboard') }}

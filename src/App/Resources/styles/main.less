@@ -100,20 +100,24 @@ h2 small { font-size: @baseFontSize; }
 
 #main
 {
-    & > .with-aside {
+    .with-aside {
         width: 68%;
         float: left;
-    }
 
-    & > aside {
-        width: 28%;
-        float: right;
+        & + aside {
+            width: 28%;
+            float: right;
 
-        .box {
-            margin-bottom: 1em;
-            padding: 25px;
-            background-color: @grayLighter;
-            .border-radius(10px);
+            .box {
+                .decorated;
+                background-color: @grayLighter;
+                border: 0;
+            }
+        }
+
+        &.little {
+            width: 60%;
+            & + aside { width: 36%; }
         }
     }
 }
@@ -123,7 +127,16 @@ h2 small { font-size: @baseFontSize; }
  * Other styles
  ************************************************/
 
-.preview // textarea style
+.decorated
+{
+    margin-bottom: 20px;
+    padding: 15px 25px;
+    background-color: white;
+    .border-radius(10px);
+    border: 1px solid gray;
+}
+
+div.preview // textarea style
 {
     overflow: auto;
     padding: 4px 6px;
