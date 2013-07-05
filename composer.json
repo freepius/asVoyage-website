@@ -23,13 +23,12 @@
         "symfony/config": "*",
         "symfony/translation": "*",
         "symfony/twig-bridge": "*",
-        "symfony/locale": "*",
         "symfony/validator": "*",
         "symfony/security": "*",
         "symfony/finder": "*",
         "michelf/php-markdown": "1.3.*@dev",
         "michelf/php-smartypants": "1.6-beta1",
-        "nicl/silex-autolink": "1.0.*",
+        "nicl/silex-autolink": "1.0.*@dev",
         "gregwar/captcha": "*"
     },
     "autoload": {

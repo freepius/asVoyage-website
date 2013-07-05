@@ -29,8 +29,9 @@ $app['debug'] = ($app['env'] === 'dev') ? true : false;
 $app['mongo.connection'] = new \MongoClient(); // default connection
 $app['mongo.database'] = $app['mongo.connection']->selectDB('asVoyage');
 
-/* Directories and paths */
+/* Paths and directories */
 $app['path.web'] = ROOT.'/web';
+$app['dir.captcha'] = 'tmp/captcha';
 
 
 /*************************************************
@@ -75,7 +76,7 @@ $app['captcha.manager'] = $app->share(function ($app) {
         $app['session'],
         [
             'webPath'     => $app['path.web'],
-            'imageFolder' => 'tmp/captcha',
+            'imageFolder' => $app['dir.captcha'],
         ]
     );
 });
