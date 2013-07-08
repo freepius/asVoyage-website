@@ -40,9 +40,9 @@ return ['blog' => [
         'beCommented' => "Cochez la case si l'article peut être commenté.",
         'isPublished' => "Cochez la case si l'article doit être publié.",
         'pubDatetime' => 'La date doit être au format <b>AAAA-MM-JJ hh:mm:ss</b> <i>(ex : 2013-01-31 12:00:00).</i>',
-        'slug'        => "Le slug est un texte court, constitué uniquement <b>de chiffres, de lettres et de tirets</b>.<br/>".
+        'slug'        => "Le slug est un texte court, constitué uniquement <b>de chiffres, de lettres et de tirets</b>.<br>".
                          "Il sert à constituer l'adresse web de l'article !",
-        'tags'        => "Les mots-clés servent à catégoriser / résumer / décrire l'article.<br/>".
+        'tags'        => "Les mots-clés servent à catégoriser / résumer / décrire l'article.<br>".
                          "Ils doivent être <b>séparés par une virgule</b> <i>(ex : Famille, Loire-Atlantique, Nature, Pique-nique)</i>.",
     ],
 ]];

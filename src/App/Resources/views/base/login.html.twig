@@ -8,8 +8,8 @@
 
     <p>
         <form action="/admin/login_check" method="post" class="form-inline">
-            <input type="hidden" name="_username" value="vagabond" />
-            <input type="password" name="_password" value="" placeholder="{{ 'Password'|trans }}" />
+            <input type="hidden" name="_username" value="vagabond">
+            <input type="password" name="_password" value="" placeholder="{{ 'Password'|trans }}">
             {{ submit() }}
 
             {% if error %}

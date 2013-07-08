@@ -41,7 +41,7 @@ class BlogController implements ControllerProviderInterface
 
     public function __construct(\App\Application $app)
     {
-        $this->limitArticles = 'prod' === $app['env'] ? 10 : 2;
+        $this->limitArticles = $app['debug'] ? 2 : 10;
 
         $this->app            = $app;
         $this->repository     = $app['model.repository.blog'];

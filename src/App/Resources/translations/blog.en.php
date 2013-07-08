@@ -40,9 +40,9 @@ return ['blog' => [
         'beCommented' => "Check the box if the article could be commented.",
         'isPublished' => "Check the box if the article must be published.",
         'pubDatetime' => 'The date format must be <b>YYYY-MM-DD hh:mm:ss</b> <i>(eg: 2013-01-31 12:00:00)</i>.',
-        'slug'        => "The slug is a short text, only composed of <b>digits, letters and dashes</b>.<br/>".
+        'slug'        => "The slug is a short text, only composed of <b>digits, letters and dashes</b>.<br>".
                          "It is used to build the web address of the article!",
-        'tags'        => "Tags are used to categorize / summary / describe the article.<br/>".
+        'tags'        => "Tags are used to categorize / summary / describe the article.<br>".
                          "They must be <b>separated by a comma</b> <i>(eg: Family, Ney-York, Nature, Picnic)</i>.",
     ],
 ]];

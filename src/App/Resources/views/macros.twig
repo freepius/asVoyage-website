@@ -18,7 +18,7 @@
        rel="lightbox{{- group|default ? '['~group~']' -}}"
        {{ title|default ? 'title="'~title~'"' }}>
 
-        <img src="{{ (hasThumb|default(false) ? 'thumb_') ~ img  }}" />
+        <img src="{{ (hasThumb|default(false) ? 'thumb_') ~ img  }}">
 
     </a>
 {% endspaceless %}

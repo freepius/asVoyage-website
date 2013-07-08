@@ -7,7 +7,7 @@
 
 {% block stylesheets %}
 
-    <style type="text/css">
+    <style>
         #summary { height: 100px; }
         #text    { height: 200px; }
         #summary, #text, .preview { max-height: 600px; }
@@ -18,8 +18,8 @@
 
 {% block javascripts %}
 
-    <script type="text/javascript" src="/js/jquery.elastic.source.js"></script>
-    <script type="text/javascript" src="/js/app-blog-post.js"></script>
+    <script src="/js/jquery.elastic.source.js"></script>
+    <script src="/js/app-blog-post.js"></script>
 
 {% endblock %}
 
@@ -46,7 +46,7 @@
         <div class="control-group {{ errors.title is defined ? 'error' }}">
             <label class="control-label" for="title">{{ 'blog.field.title'|trans }}</label>
             <div class="controls">
-                <input type="text" id="title" name="title" class="input-xlarge" value="{{ article.title }}" required />
+                <input type="text" id="title" name="title" class="input-xlarge" value="{{ article.title }}" required>
 
                 {% if errors.title is defined %}
                     <span class="help-block">{{ errors.title }}</span>
@@ -58,7 +58,7 @@
         <div class="control-group {{ errors.slug is defined ? 'error' }}">
             <label class="control-label" for="slug">{{ 'blog.field.slug'|trans }}</label>
             <div class="controls">
-                <input type="text" id="slug" name="slug" class="input-xlarge" value="{{ article.slug }}" required />
+                <input type="text" id="slug" name="slug" class="input-xlarge" value="{{ article.slug }}" required>
 
                 {% if errors.slug is defined %}
                     <span class="help-inline">{{ errors.slug }}</span>
@@ -72,7 +72,7 @@
         <div class="control-group {{ errors.pubDatetime is defined ? 'error' }}">
             <label class="control-label" for="pubDatetime">{{ 'blog.field.pubDatetime'|trans }}</label>
             <div class="controls">
-                <input type="text" id="pubDatetime" name="pubDatetime" value="{{ article.pubDatetime }}" required />
+                <input type="text" id="pubDatetime" name="pubDatetime" value="{{ article.pubDatetime }}" required>
 
                 {% if errors.pubDatetime is defined %}
                     <span class="help-inline">{{ errors.pubDatetime }}</span>
@@ -86,7 +86,7 @@
         <div class="control-group">
             <label class="control-label" for="isPublished">{{ 'blog.field.isPublished'|trans }}</label>
             <div class="controls">
-                <input type="checkbox" id="isPublished" name="isPublished" {{ article.isPublished ? 'checked="checked"' }} />
+                <input type="checkbox" id="isPublished" name="isPublished" {{ article.isPublished ? 'checked="checked"' }}>
                 <span class="help-inline">{{ 'blog.help.isPublished' | trans | raw }}</span>
             </div>
         </div>
@@ -95,7 +95,7 @@
         <div class="control-group">
             <label class="control-label" for="beCommented">{{ 'blog.field.beCommented' | trans | raw }}</label>
             <div class="controls">
-                <input type="checkbox" id="beCommented" name="beCommented" {{ article.beCommented ? 'checked="checked"' }} />
+                <input type="checkbox" id="beCommented" name="beCommented" {{ article.beCommented ? 'checked="checked"' }}>
                 <span class="help-inline">{{ 'blog.help.beCommented' | trans | raw }}</span>
             </div>
         </div>

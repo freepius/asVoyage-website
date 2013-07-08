@@ -19,11 +19,8 @@ $loader->add('michelf', ROOT.'/vendor/michelf/php-smartypants');
 
 $app = new \App\Application();
 
-/* environment */
-$app['env'] = 'dev';
-
 /* debug */
-$app['debug'] = ($app['env'] === 'dev') ? true : false;
+$app['debug'] = true;
 
 /* MongoDB config */
 $app['mongo.connection'] = new \MongoClient(); // default connection

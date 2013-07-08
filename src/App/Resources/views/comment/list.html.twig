@@ -1,7 +1,7 @@
 {% from 'macros.twig' import cancel_link, submit %}
 
 
-<meta itemprop="interactionCount" content="UserComments:{{- article.countComments -}}" />
+<meta itemprop="interactionCount" content="UserComments:{{- article.countComments -}}">
 
 {% if article.countComments > 0 %}
     <!-- Comments -->
@@ -27,7 +27,7 @@
         <label class="control-label" for="name">{{ 'comment.field.name'|trans }}</label>
 
         <div class="controls">
-            <input type="text" id="name" name="name" class="input-xlarge" value="{{ comment.entity.name }}" required />
+            <input type="text" id="name" name="name" class="input-xlarge" value="{{ comment.entity.name }}" required>
 
             {% if comment.errors.name is defined %}
                 <span class="help-block">{{ comment.errors.name }}</span>
@@ -60,7 +60,7 @@
             <div class="controls">
                 <!-- Input + error -->
                 <p>
-                    <input type="text" id="captcha" name="captcha" class="input-medium" required />
+                    <input type="text" id="captcha" name="captcha" class="input-medium" required>
 
                     {% if comment.errors.captcha is defined %}
                         <span class="help-inline">{{ comment.errors.captcha }}</span>
@@ -72,7 +72,7 @@
                     <i id="captcha-change" class="icon-refresh" style="cursor: pointer;"
                        title="{{ 'comment.help.captcha-change'|trans }}"></i>
 
-                    <img id="captcha-img" src="{{ comment.entity.captcha }}" />
+                    <img id="captcha-img" src="{{ comment.entity.captcha }}">
                 </p>
 
                 <span class="help-block">{{ 'comment.help.captcha' | trans | raw }}</span>
