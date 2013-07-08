@@ -8,13 +8,12 @@ Requirements
 ------------
 
 - Any flavor of PHP 5.4 or above should do
-- PHP extension : Intl, Fileinfo, ZIP, GD
+- PHP extension : Fileinfo, GD
 - [optional] PHPUnit 3.5+ to execute the test suite (phpunit --version)
 
 External libraries used
 -----------------------
 
-* [KCFINDER](http://kcfinder.sunhater.com/) as Web file manager
 * [Bootstrap](http://twitter.github.io/bootstrap/)
 * [Modernizr](http://modernizr.com/)
 * [jQuery 2](http://jquery.com/) and plugins :
@@ -57,6 +56,7 @@ For production
   * Blog repository => caching for listTags() and countArticlesByYearMonth()
   * Blog controller => caching the generated HTML from Markdown
 * Minified JS and CSS files
+* Use Google CDN for jquery/bootstrap/... js/css/.. files ?
 
 Low priority
 ------------
