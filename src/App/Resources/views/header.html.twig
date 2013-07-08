@@ -40,20 +40,9 @@
                 {{ add_nav('our-trips', currentNav) }}
             </ul>
         </nav>
-
-        <nav id="nav-roadbook">
-            <b>{{ 'nav.roadbook'|trans }}</b>
-            <ul class="nav nav-pills">
-                {{ add_nav('blog'   , currentNav) }}
-                {{ add_nav('gallery', currentNav) }}
-                {{ add_nav('map'    , currentNav) }}
-            </ul>
-        </nav>
     </section>
 
     <div class="notification">
-        {% block headerNotification %}
-            Your notification here.
-        {% endblock %}
+        {% block headerNotification %}{% endblock %}
     </div>
 </header>

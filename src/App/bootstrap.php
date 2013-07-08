@@ -185,7 +185,7 @@ $app['model.factory.comment'] = $app->share(function ($app)
  ************************************************/
 
 $app->mount('/'    , new \App\Controller\BaseController);
-$app->mount('/blog', new \App\Controller\BlogController($app));
+//$app->mount('/blog', new \App\Controller\BlogController($app));
 
 
 return $app;
