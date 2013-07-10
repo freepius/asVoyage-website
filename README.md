@@ -14,7 +14,8 @@ Requirements
 External libraries used
 -----------------------
 
-* [Bootstrap](http://twitter.github.io/bootstrap/)
+* [Bootstrap](http://twitter.github.io/bootstrap/) : front-end web framework
+* [Font-Awesome](http://fortawesome.github.io/Font-Awesome/) : iconic font designed for Bootstrap
 * [Modernizr](http://modernizr.com/)
 * [jQuery](http://jquery.com/) and plugins :
   * [Lightbox 2](https://github.com/javierjulio/lightbox2) : an advanced fork of [this](http://lokeshdhakar.com/projects/lightbox2/)
@@ -36,7 +37,6 @@ TODO
 
 * Blog creating/updating page :
   * Add help for Markdown
-  * A summary (in top-right)
 * Configure and make secure KCFinder
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 * Reorganize HTML5 => make semantic !

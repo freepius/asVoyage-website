@@ -79,7 +79,7 @@
     <div class="box">
         <!-- Publication datetime -->
         <p>
-            <i class="icon-calendar"></i>
+            <i class="icon-calendar" title="{{ 'blog.field.pubDatetime'|trans }}"></i>
 
             <time itemprop="datePublished" datetime="{{ article.pubDatetime }}">
                 {{ article.pubDatetime | localizeddate('full', 'short') | capitalize }}
@@ -99,8 +99,8 @@
 
         <!-- Comments : count + link to read + link to create/update -->
         <p>
+            <i class="icon-comments"></i>
             <a href="#comments">
-                <i class="icon-comment"></i>
                 {{ 'comment.count'|trans([article.countComments]) }}
             </a>
 

@@ -21,6 +21,14 @@
     <link href="/css/main.css" rel="stylesheet">
     <link href="/css/lightbox.css" rel="stylesheet">
 
+    {# DEBUG mode => local files #}
+    {% if app.debug %}
+        <link href="/vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
+    {% else %}
+    {# Else => files from CDNs #}
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    {% endif %}
+
     {# Red borders for ADMIN ! #}
     {% if is_granted('ROLE_ADMIN') %}
         <style>
