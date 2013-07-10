@@ -20,6 +20,8 @@ External libraries used
 * [jQuery](http://jquery.com/) and plugins :
   * [Lightbox 2](https://github.com/javierjulio/lightbox2) : an advanced fork of [this](http://lokeshdhakar.com/projects/lightbox2/)
   * [Elastic](http://unwrongest.com/projects/elastic/) : auto grows textareas
+* [Leaflet](http://leafletjs.com/) and plugins :
+  * [awesome-markers plugin](https://github.com/lvoogdt/Leaflet.awesome-markers)
 
 Author
 ------
@@ -42,6 +44,7 @@ TODO
 * Reorganize HTML5 => make semantic !
 * On Blog "reading" page : add box containing related articles/contents
 * STYLE : change some "em sizes" to "px sizes" (for style consistency) !
+* Make a Twig filter for MarkdownTypo service
 
 For production
 --------------
