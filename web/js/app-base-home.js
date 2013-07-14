@@ -14,14 +14,6 @@
 
         var markers, i;
 
-        map = L.map('map-pictures', {
-            center: [46.32433, 2.41434], // center of France
-            zoom: 5,
-            minZoom: 4,
-            maxZoom: 8,
-            layers: [new L.StamenTileLayer("watercolor")]
-        });
-
         function resetMarker(marker) {
             // TODO : régler le chainage quand mon pullrequest sera accepté et leaflet MAJ
             marker.setZIndexOffset(0)
@@ -36,8 +28,6 @@
             marker.setOpacity(1.0);
             return marker;
         }
-
-        map.attributionControl.setPrefix('');
 
         markers = [
             [47.2694, 2.5559],
@@ -98,7 +88,19 @@
     $(document).ready(function () {
 
         $('.carousel').carousel();
+
+        map = L.map('map-pictures', {
+            center: [46.32433, 2.0], // center of France
+            zoom: 5,
+            minZoom: 4,
+            maxZoom: 8,
+            layers: [new L.StamenTileLayer("watercolor")]
+        });
+
+        map.attributionControl.setPrefix('');
+
         mapPictures();
+
         mapCurrentPlace();
 
     });

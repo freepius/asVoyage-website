@@ -1,4 +1,6 @@
-{% from 'macros.twig' import cancel_link, submit %}
+{% from 'macros.twig' import cancel_link %}
+
+{% from 'form.html.twig' import captcha, input, submit %}
 
 
 <meta itemprop="interactionCount" content="UserComments:{{- article.countComments -}}">
@@ -23,61 +25,16 @@
 <form action="{{ url_prefix ~ (comment.isUpdating ? '/'~comment.id) }}" method="post" class="form-horizontal">
 
     <!-- Name or Nickname -->
-    <div class="control-group {{ comment.errors.name is defined ? 'error' }}">
-        <label class="control-label" for="name">{{ 'comment.field.name'|trans }}</label>
-
-        <div class="controls">
-            <input type="text" id="name" name="name" class="input-xlarge" value="{{ comment.entity.name }}" required>
-
-            {% if comment.errors.name is defined %}
-                <span class="help-block">{{ comment.errors.name }}</span>
-            {% endif %}
-        </div>
-    </div>
+    {{ input('text', comment.entity, comment.errors, 'comment', 'name', {required: true}) }}
 
     <!-- Text -->
-    <div class="control-group {{ comment.errors.text is defined ? 'error' }}">
-        <label class="control-label" for="text">{{ 'comment.field.text'|trans }}</label>
-
-        <div class="controls">
-            <textarea id="text" name="text" class="input-xxlarge" rows="8" required>
-                {{- comment.entity.text -}}
-            </textarea>
-
-            {% if comment.errors.text is defined %}
-                <span class="help-block">{{ comment.errors.text }}</span>
-            {% endif %}
-
-            <span class="help-block">{{ 'comment.help.text' | trans | raw }}</span>
-        </div>
-    </div>
+    {{ input('textarea', comment.entity, comment.errors, 'comment', 'text', {
+            help: true,
+            required: true
+    }) }}
 
     {% if comment.entity.captcha is defined %}
-        <!-- Captcha -->
-        <div class="control-group {{ comment.errors.captcha is defined ? 'error' }}">
-            <label class="control-label" for="captcha">{{ 'comment.field.captcha'|trans }}</label>
-
-            <div class="controls">
-                <!-- Input + error -->
-                <p>
-                    <input type="text" id="captcha" name="captcha" class="input-medium" required>
-
-                    {% if comment.errors.captcha is defined %}
-                        <span class="help-inline">{{ comment.errors.captcha }}</span>
-                    {% endif %}
-                </p>
-
-                <!-- Captcha image + "change" action -->
-                <p>
-                    <i id="captcha-change" class="icon-refresh" style="cursor: pointer;"
-                       title="{{ 'comment.help.captcha-change'|trans }}"></i>
-
-                    <img id="captcha-img" src="{{ comment.entity.captcha }}">
-                </p>
-
-                <span class="help-block">{{ 'comment.help.captcha' | trans | raw }}</span>
-            </div>
-        </div>
+        {{ captcha(comment.entity.captcha, comment.errors.captcha | default) }}
     {% endif %}
 
     <!-- Form actions -->

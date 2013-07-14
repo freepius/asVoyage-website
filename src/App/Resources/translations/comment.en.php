@@ -14,17 +14,11 @@ return ['comment' => [
     'updating.error(s)' => '<a href="#comment-post">Updating of the comment</a> : one or more errors !',
 
     'field' => [
-        'captcha' => 'Anti-spam system',
-        'name'    => 'Name or nickname',
-        'text'    => 'Comment',
+        'name' => 'Name or nickname',
+        'text' => 'Comment',
     ],
 
     'help' => [
-        'captcha' => '<i class="icon-warning-sign"></i> '.
-            'Please enter the characters displayed in the picture to prevent automated spam systems.',
-
-        'captcha-change' => 'Please click here to change the picture',
-
         'text' => '<i class="icon-info-sign"></i> '.
             'HTML code is displayed as text and URL are automatically converted.',
     ],

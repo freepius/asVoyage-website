@@ -2,7 +2,7 @@
 
 {% extends "article/post.html.twig" %}
 
-{% from "macros.twig" import submit %}
+{% from "form.html.twig" import input, list_errors, submit, textarea_with_preview %}
 
 
 {% block stylesheets %}
@@ -26,92 +26,36 @@
 
 {% block post %}
 
-    {% if errors %}
-        <!-- Errors in the article posting -->
-        <p class="alert alert-error">
-            {% set fields_trans = [] %}
-
-            {% for field in errors | keys %}
-                {% set fields_trans = fields_trans | merge([('blog.field.'~field) | trans]) %}
-            {% endfor %}
-
-            {{ 'Error(s)' | trans([errors|length, fields_trans|join(', ')]) | raw }}
-        </p>
-    {% endif %}
-
+    {{ list_errors(errors, 'blog') }}
 
     <form action="{{ form_action }}" method="post" class="form-horizontal">
 
         <!-- Title -->
-        <div class="control-group {{ errors.title is defined ? 'error' }}">
-            <label class="control-label" for="title">{{ 'blog.field.title'|trans }}</label>
-            <div class="controls">
-                <input type="text" id="title" name="title" class="input-xlarge" value="{{ article.title }}" required>
-
-                {% if errors.title is defined %}
-                    <span class="help-block">{{ errors.title }}</span>
-                {% endif %}
-            </div>
-        </div>
+        {{ input('text', article, errors, 'blog', 'title', {required: true}) }}
 
         <!-- Slug -->
-        <div class="control-group {{ errors.slug is defined ? 'error' }}">
-            <label class="control-label" for="slug">{{ 'blog.field.slug'|trans }}</label>
-            <div class="controls">
-                <input type="text" id="slug" name="slug" class="input-xlarge" value="{{ article.slug }}" required>
-
-                {% if errors.slug is defined %}
-                    <span class="help-inline">{{ errors.slug }}</span>
-                {% endif %}
-
-                <span class="help-block">{{ 'blog.help.slug' | trans | raw }}</span>
-            </div>
-        </div>
+        {{ input('text', article, errors, 'blog', 'slug',
+            {error_inline: true, help: true, required: true}
+        ) }}
 
         <!-- Publication DateTime -->
-        <div class="control-group {{ errors.pubDatetime is defined ? 'error' }}">
-            <label class="control-label" for="pubDatetime">{{ 'blog.field.pubDatetime'|trans }}</label>
-            <div class="controls">
-                <input type="text" id="pubDatetime" name="pubDatetime" value="{{ article.pubDatetime }}" required>
-
-                {% if errors.pubDatetime is defined %}
-                    <span class="help-inline">{{ errors.pubDatetime }}</span>
-                {% endif %}
-
-                <span class="help-block">{{ 'blog.help.pubDatetime' | trans | raw }}</span>
-            </div>
-        </div>
+        {{ input('text', article, errors, 'blog', 'pubDatetime',
+            {error_inline: true, help: true, required: true, size: ''}
+        ) }}
 
         <!-- Is it published ? -->
-        <div class="control-group">
-            <label class="control-label" for="isPublished">{{ 'blog.field.isPublished'|trans }}</label>
-            <div class="controls">
-                <input type="checkbox" id="isPublished" name="isPublished" {{ article.isPublished ? 'checked="checked"' }}>
-                <span class="help-inline">{{ 'blog.help.isPublished' | trans | raw }}</span>
-            </div>
-        </div>
+        {{ input('checkbox', article, [], 'blog', 'isPublished', {help: true, help_inline: true}) }}
 
         <!-- Can be commented ? -->
-        <div class="control-group">
-            <label class="control-label" for="beCommented">{{ 'blog.field.beCommented' | trans | raw }}</label>
-            <div class="controls">
-                <input type="checkbox" id="beCommented" name="beCommented" {{ article.beCommented ? 'checked="checked"' }}>
-                <span class="help-inline">{{ 'blog.help.beCommented' | trans | raw }}</span>
-            </div>
-        </div>
+        {{ input('checkbox', article, [], 'blog', 'beCommented', {help: true, help_inline: true}) }}
 
         <!-- Tags -->
-        <div class="control-group {{ errors.tags is defined ? 'error' }}">
-            <label class="control-label" for="tags">{{ 'blog.field.tags'|trans }}</label>
-            <div class="controls">
-                <input type="text" id="tags" name="tags" class="input-xxlarge" value="{{- article.tags |  join(', ') -}}">
-                <span class="help-block">{{ 'blog.help.tags' | trans | raw }}</span>
-            </div>
-        </div>
+        {% set tags = {tags: article.tags |  join(', ')} %}
+        {{ input('text', tags, errors, 'blog', 'tags', {help: true, size: 'input-xxlarge'}) }}
 
         {# Text and Summary #}
-        {% embed "article/edit-text-field.html.twig" with {field: 'text'   } %}{% endembed %}
-        {% embed "article/edit-text-field.html.twig" with {field: 'summary'} %}{% endembed %}
+        {{ textarea_with_preview(article, errors, 'blog', 'text') }}
+        {{ textarea_with_preview(article, errors, 'blog', 'summary') }}
 
         {{ submit() }}
     </form>

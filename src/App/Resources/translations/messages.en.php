@@ -29,6 +29,16 @@ return [
     //'website'         => '',
     //'Yes'             => '',
 
+    // Captcha
+    'captcha' => [
+        'field' => 'Anti-spam system',
+
+        'help' => '<i class="icon-warning-sign"></i> '.
+            'Please enter the characters displayed in the picture to prevent automated spam systems.',
+
+        'help.change' => 'Please click here to change the picture',
+    ],
+
     // Languages
     'lang' => [
         'fr' => 'French',

@@ -37,12 +37,12 @@ class BaseController implements ControllerProviderInterface
 
     public function home(Application $app)
     {
-        return $app['twig']->render('base/home.html.twig');
+        return $app->render('base/home.html.twig');
     }
 
     public function about(Application $app)
     {
-        return $app['twig']->render("base/about.{$app['locale']}.html.twig",
+        return $app->render("base/about.{$app['locale']}.html.twig",
         [
             // Years together of Marie and Mathieu
             // ("Today" - "2004/10/15 16:00:00") / (60 * 60 * 24 * 365.25)
@@ -52,7 +52,7 @@ class BaseController implements ControllerProviderInterface
 
     public function login(Application $app)
     {
-        return $app['twig']->render('base/login.html.twig',
+        return $app->render('base/login.html.twig',
         [
             'error' => $app['security.last_error']($app['request']),
         ]);
@@ -60,7 +60,7 @@ class BaseController implements ControllerProviderInterface
 
     public function switchLocale(Application $app, $locale)
     {
-        $app['session']->set('locale', $locale);
+        $app->setSession('locale', $locale);
 
         return $app->redirect('/home');
     }

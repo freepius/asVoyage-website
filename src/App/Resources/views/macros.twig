@@ -2,7 +2,6 @@
  # Summary :
  #  -> add_img_lightbox
  #  -> bool2icon
- #  -> submit
  #  -> cancel
  #  -> cancel_link
  #}
@@ -40,24 +39,6 @@
             <span class="hide">{{ 'No'|trans }}</span>
         </i>
     {% endif %}
-
-{% endspaceless %}
-{% endmacro %}
-
-
-{##
- # A form submit button
- #}
-{% macro submit(text, classes) %}
-{% spaceless %}
-
-    {% set text    = text    | default('Submit'|trans) %}
-    {% set classes = classes | default('btn btn-success') %}
-
-    <!-- Submit button -->
-    <button type="submit" class="{{ classes }}">
-        <i class="icon-ok icon-white"></i> {{ text }}
-    </button>
 
 {% endspaceless %}
 {% endmacro %}
