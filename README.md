@@ -38,14 +38,14 @@ TODO
 ====
 
 * Blog creating/updating page :
-  * Add help for Markdown
+  * Add help for RichText
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 * Reorganize HTML5 => make semantic !
 * On Blog "reading" page : add box containing related articles/contents
 * STYLE : change some "em sizes" to "px sizes" (for style consistency) !
-* Make a Twig filter for MarkdownTypo service
 * Contact : log when a message is sent
 * Contact : make secure the message sending (with TLS)
+* Change "richText" Twig filters to Twig token + node
 
 For production
 --------------
@@ -57,12 +57,12 @@ For production
 * Index some Mongo fields ?
 * Cache (with APC/Memcached ?) :
   * Blog repository => caching for listTags() and countArticlesByYearMonth()
-  * Blog controller => caching the generated HTML from Markdown
+  * Blog controller => caching the generated HTML from RichText
 * Minified JS and CSS files
 
 Low priority
 ------------
 
 * Use DataTable jquery plugin to Blog dashboard ?
-* Transform App\Util\MarkdownTypo to Silex provider
+* Transform App\Util\RichText to Silex provider ?
 * Locale depending on geo-localization

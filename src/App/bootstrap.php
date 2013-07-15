@@ -65,9 +65,9 @@ $app->register(new \Silex\Provider\SecurityServiceProvider());
 /* autolink Twig extension */
 $app->register(new \Nicl\Silex\AutolinkServiceProvider());
 
-/* markdown and typo */
-$app['markdownTypo'] = $app->share(function () {
-    return new \App\Util\MarkdownTypo();
+/* richText (markdown and typo) */
+$app['richText'] = $app->share(function () {
+    return new \App\Util\RichText();
 });
 
 /* captcha manager */
@@ -93,7 +93,7 @@ $app->register(new \Silex\Provider\MonologServiceProvider(), [
 
 
 /*************************************************
- * Twig extensions, global variables and other
+ * Twig extensions, global variables, filters and functions.
  ************************************************/
 
 $loader->add('Twig', ROOT.'/vendor/twig/extensions/lib');
@@ -103,6 +103,18 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
     $twig->addExtension(new Twig_Extensions_Extension_Intl());  // for 'localizeddate' filter
 
     $twig->addFilter('sum', new \Twig_Filter_Function('array_sum'));
+
+    $twig->addFilter('shuffle', new \Twig_Filter_Function(function ($array)
+    {
+        shuffle($array);
+        return $array;
+    }));
+
+    $twig->addFilter(
+        'richText',
+        new \Twig_Filter_Function([$app['richText'], 'transform']),
+        ['is_safe' => ['all']]
+    );
 
     return $twig;
 }));

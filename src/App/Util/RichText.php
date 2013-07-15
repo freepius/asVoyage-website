@@ -9,7 +9,7 @@ use Michelf\MarkdownExtra,
 /**
  * Transform a text using MarkdownExtra and SmartyPantsTypographer
  */
-class MarkdownTypo
+class RichText
 {
     const SCRIPT_TAG_PATTERN = '{<(\s*)script(.*)>.*<(\s*)/(\s*)script(.*)>}si';
 

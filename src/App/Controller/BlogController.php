@@ -44,7 +44,7 @@ class BlogController implements ControllerProviderInterface
         $this->repository     = $app['model.repository.blog'];
         $this->factoryArticle = $app['model.factory.article'];
         $this->factoryComment = $app['model.factory.comment'];
-        $this->markdownTypo   = $app['markdownTypo'];
+        $this->richText       = $app['richText'];
     }
 
     public function connect(\Silex\Application $app)
@@ -271,14 +271,14 @@ class BlogController implements ControllerProviderInterface
             $this->limitArticles, $skip, $fromDate, $toDate, $tag
         ));
 
-        // For text and summary : MarkdownTypo to Html
+        // For text and summary : RichText to Html
         foreach ($articles as & $article)
         {
             // avoid conflicts for footnote ids
-            $this->markdownTypo->markdown->fn_id_prefix = $article['slug'];
+            $this->richText->markdown->fn_id_prefix = $article['slug'];
 
-            $article['text']    = $this->markdownTypo->transform($article['text']);
-            $article['summary'] = trim($this->markdownTypo->transform($article['summary']));
+            $article['text']    = $this->richText->transform($article['text']);
+            $article['summary'] = trim($this->richText->transform($article['summary']));
         }
 
         return $this->app->render('blog/home.html.twig',
@@ -335,7 +335,7 @@ class BlogController implements ControllerProviderInterface
             return $this->app->redirect("/blog/{$article['slug']}/read");
         }
 
-        $article['text'] = $this->markdownTypo->transform($article['text']);
+        $article['text'] = $this->richText->transform($article['text']);
 
         return $this->app->render('article/read.html.twig',
             $this->retrieveFiltersAndPage($request) + $opComment + ['article' => $article]

@@ -46,36 +46,29 @@
     </div>
 
     <div class="span8">
-        <p><big>Nous sommes <strong>Marie</strong> et <strong>Mathieu</strong>, deux jeunes voyageurs.</big></p>
+        {% set home %}
+<big>Nous sommes **Marie** et **Mathieu**, deux jeunes voyageurs.</big>
 
-        <p>
-            L'espace web dans lequel vous venez d'entrer est notre petit jardin numérique, presque secret.
-            Doucement, humblement, nous y faisons pousser quelques idées vagabondes -- certaines douces et sucrées, d'autres amères et épicées, et d'autres encore.
-            Nous y semons, aussi, nos expériences, émotions et souvenirs de voyages.
-        </p>
+L'espace web dans lequel vous venez d'entrer est notre petit jardin numérique, presque secret.
+Doucement, humblement, nous y faisons pousser quelques idées vagabondes -- certaines douces et sucrées, d'autres amères et épicées, et d'autres encore.
+Nous y semons, aussi, nos expériences, émotions et souvenirs de voyages.
 
-        <p><big>Cet espace est en construction. Mais promenez-vous y et dénichez :</big></p>
+<big>Cet espace est en construction. Mais promenez-vous y et dénichez :</big>
 
-        <ul>
-            <li>une petite présentation de <a href="/about">nozigues</a> ;</li>
-            <li>
-                un dossier sur notre <a href="#">voyage de 2011</a>, notre premier périple au long-cours :
-                <em>3000 km en France, en kayak et à pied, durant 6 mois</em> ;
-            </li>
-            <li>
-                un autre sur notre prochain voyage <small>(départ septembre 2013)</small> :
-                <a href="#"><strong>Afrikapié</strong></a> ;
-            </li>
-            <li>quelques photos et cartes, de-ci de-là ;</li>
-            <li>et un <a href="/contact">pigeon voyageur</a>, pour nous contacter.</li>
-        </ul>
+* une petite présentation de [nozigues](/about) ;
+* un dossier sur notre [voyage de 2011](#), notre premier périple au long-cours :
+  3000 km en France, en kayak et à pied, durant 6 mois ;
+* un autre sur notre prochain voyage <small>(départ septembre 2013)</small> :
+  [**Afrikapié**](#) ;
+* quelques photos et cartes, de-ci de-là ;
+* et un [pigeon voyageur](/contact), pour nous contacter.
 
-        <p>
-            Actuellement, nous nous préparons ici :
-            <a id="current-place" href="#" data-toggle="modal"><em>N47° 17.867 W001° 57.804</em></a>,
-            dans notre belle région natale de l'<em>estuaire de Loire</em>.
-        </p>
+Actuellement, nous nous préparons ici :
+<a id="current-place" href="#" data-toggle="modal">*N47° 17.867 W001° 57.804*</a>,
+dans notre belle région natale de l'*estuaire de Loire*.
 
-        <p><big>Bonne balade.</big></p>
+<big>Bonne balade.</big>
+        {% endset %}
+        {{ home | richText | raw }}
     </div>
 {% endblock %}

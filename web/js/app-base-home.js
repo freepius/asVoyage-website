@@ -69,11 +69,12 @@
 
     function mapCurrentPlace() {
 
-        var marker = L.marker([47.18067, -1.57804], {
-            clickable: false,
-            icon: L.AwesomeMarkers.icon({ color: 'green' }),
-            zIndexOffset: 1000
-        });
+        var currentPlace = [47.18067, -1.57804],
+            marker = L.marker(currentPlace, {
+                clickable: false,
+                icon: L.AwesomeMarkers.icon({ color: 'green' }),
+                zIndexOffset: 1000
+            });
 
         $('#current-place').mouseenter(function () {
             map.addLayer(marker);
@@ -81,6 +82,12 @@
 
         $('#current-place').mouseleave(function () {
             map.removeLayer(marker);
+        });
+
+        $('#current-place').click(function (e) {
+            e.preventDefault();
+
+            map.setView(currentPlace, map.getMaxZoom());
         });
 
     }
