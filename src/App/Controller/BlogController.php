@@ -29,9 +29,6 @@ use Silex\ControllerProviderInterface,
  *      => crudComment
  *      => actionsOnComment [protected]
  *      => postComment      [protected]
- *
- *  -> OTHER / TECHNICAL ACTIONS :
- *      => changeCaptcha
  */
 class BlogController implements ControllerProviderInterface
 {
@@ -48,7 +45,6 @@ class BlogController implements ControllerProviderInterface
         $this->factoryArticle = $app['model.factory.article'];
         $this->factoryComment = $app['model.factory.comment'];
         $this->markdownTypo   = $app['markdownTypo'];
-        $this->captchaManager = $app['captcha.manager'];
     }
 
     public function connect(\Silex\Application $app)
@@ -108,9 +104,6 @@ class BlogController implements ControllerProviderInterface
             ->convert('article', $slugToArticle)
             ->value('idComment', null)
             ->assert('idComment', '\d+');
-
-        // Other / technical routes :
-        $blog->get('/captcha-change', [$this, 'changeCaptcha']);
 
         return $blog;
     }
@@ -565,20 +558,5 @@ class BlogController implements ControllerProviderInterface
             'isFirstCreation' => false,
             'isUpdating'      => null !== $idComment,
         ]];
-    }
-
-
-    /***************************************************************************
-     * OTHER / TECHNICAL ACTIONS
-     **************************************************************************/
-
-    /**
-     * Generate a new captcha for current user, and return the associated filename.
-     */
-    public function changeCaptcha()
-    {
-        $this->captchaManager->revoke();
-
-        return $this->captchaManager->getFilename();
     }
 }

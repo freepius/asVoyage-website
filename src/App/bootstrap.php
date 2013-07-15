@@ -48,6 +48,9 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
     'twig.path' => [APP.'/Resources/views'],
 ]);
 
+/* swiftmailer */
+$app->register(new Silex\Provider\SwiftmailerServiceProvider());
+
 /* validator */
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 
@@ -103,6 +106,21 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
 
     return $twig;
 }));
+
+
+/*************************************************
+ * SwiftMailer configuration
+ ************************************************/
+
+$app['swiftmailer.options'] =
+[
+    'host'       => 'smtp.alwaysdata.com',
+    'port'       => 587,
+    'username'   => 'contact@anarchos-semitas.net',
+    'password'   => '',
+    'encryption' => null,
+    'auth_mode'  => null,
+];
 
 
 /*************************************************
@@ -179,12 +197,17 @@ $app['model.factory.comment'] = $app->share(function ($app)
     return new \App\Model\Factory\Comment($app['validator'], $app['security'], $app['captcha.manager']);
 });
 
+$app['model.factory.contact'] = $app->share(function ($app)
+{
+    return new \App\Model\Factory\Contact($app['validator'], $app['captcha.manager']);
+});
+
 
 /*************************************************
  * Define the routes
  ************************************************/
 
-$app->mount('/'    , new \App\Controller\BaseController);
+$app->mount('/'    , new \App\Controller\BaseController($app));
 //$app->mount('/blog', new \App\Controller\BlogController($app));
 
 

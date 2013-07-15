@@ -12,21 +12,7 @@ $(document).ready(function () {
 {# Possibility to change the captcha #}
 {% if comment.entity.captcha is defined %}
 
-    $('#captcha-change').click(function () {
-
-        var $img = $('#captcha-img');
-
-        $img.attr('src', '/images/ajax-loader.gif');
-
-        $.ajax({
-            method  : 'GET',
-            url     : '/blog/captcha-change',
-            success : function (data) {
-                $img.attr('src', data);
-            }
-        });
-
-    });
+    $.enableChangeCaptcha();
 
 {% endif %}
 

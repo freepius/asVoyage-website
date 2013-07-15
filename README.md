@@ -39,19 +39,20 @@ TODO
 
 * Blog creating/updating page :
   * Add help for Markdown
-* Configure and make secure KCFinder
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 * Reorganize HTML5 => make semantic !
 * On Blog "reading" page : add box containing related articles/contents
 * STYLE : change some "em sizes" to "px sizes" (for style consistency) !
 * Make a Twig filter for MarkdownTypo service
+* Contact : log when a message is sent
+* Contact : make secure the message sending (with TLS)
 
 For production
 --------------
 
+* Make a git patch for PROD configs : password, swiftmailer config, mongodb config, etc.
 * Solve the TODOs
 * Update vendor and libraries
-* Change name and password for admin
 * Management of errors and exceptions
 * Index some Mongo fields ?
 * Cache (with APC/Memcached ?) :

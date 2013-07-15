@@ -6,7 +6,8 @@ namespace App;
 class Application extends \Silex\Application
 {
     use \Silex\Application\TranslationTrait,
-        \Silex\Application\TwigTrait;
+        \Silex\Application\TwigTrait,
+        \Silex\Application\SwiftmailerTrait;
 
 
     public function isGranted($attributes, $object = null)

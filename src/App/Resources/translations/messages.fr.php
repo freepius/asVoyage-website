@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Summary :
+ *  -> A list of various messages
+ *  -> Captcha
+ *  -> Contact
+ *  -> Languages
+ *  -> Literal numbers
+ *  -> Months
+ *  -> Navigation
+ */
+
 return [
     'Actions'         => 'Actions',
     'Articles'        => 'Articles',
@@ -37,6 +48,20 @@ return [
             "Veuillez recopier les caractères affichés dans l'image, afin d'empêcher les systèmes automatiques de <i>spammer</i>.",
 
         'help.change' => "Cliquez ici pour changer l'image",
+    ],
+
+    // Contact
+    'contact' => [
+        'sent'  => 'Votre pigeon voyageur a bien été envoyé !',
+        'title' => 'Nous contacter',
+
+        'field' => [
+            'captcha' => 'Système anti-spam',
+            'email'   => 'Votre email',
+            'message' => 'Votre message',
+            'name'    => 'Qui êtes-vous ?',
+            'subject' => 'Le sujet',
+        ],
     ],
 
     // Languages

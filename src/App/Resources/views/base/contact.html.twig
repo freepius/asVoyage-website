@@ -1,0 +1,74 @@
+{% set currentNav = 'contact' %}
+
+{% extends "layout.html.twig" %}
+
+{% from 'macros.twig' import cancel_link %}
+
+{% from 'form.html.twig' import captcha, input, list_errors, submit %}
+
+
+{% block javascripts %}
+<script>
+
+    $(document).ready(function () {
+        $.enableChangeCaptcha();
+    });
+
+</script>
+{% endblock %}
+
+
+{% block main %}
+    <h1 id="page-title">{{ 'contact.title'|trans }}</h1>
+
+    {{ list_errors(errors, 'contact') }}
+
+    <div class="row" style="margin-bottom: 20px;">
+        <img src="/images/base/pigeon-carrier.png" class="thumbnail span2">
+
+        <p class="span8">
+            {% if app.locale == 'fr' %}
+                Le formulaire ci-dessous vous permet de nous faire parvenir un pigeon voyageur.
+                <br>
+                Toutefois, si vous désirez nous écrire un message plus complexe, avec des pièces jointes, de la couleur, des images...
+                veuillez directement nous envoyer un email à l'adresse <b>contact&nbsp;(à-rot-base)&nbsp;anarchos-semitas.net</b> .
+                <!--<br><br>
+                Dans les deux cas, il est fort probable que nous ne répondons <em>pas avant une semaine à un mois</em>. Ne vous en offusquez pas...
+                -->
+            {% else %}
+                The form below allows you to send us a pigeon carrier.
+                <br>
+                However, if you want to write us a more complex message, with attachments, colors, pictures...
+                please directly send us an email at <b>contact&nbsp;(a-rot-base)&nbsp;anarchos-semitas.net</b> .
+                <!--<br><br>
+                In both cases, it is quite likely that <em>we don't respond before a week to a month</em>. Don't be offended...
+                -->
+            {% endif %}
+        </p>
+    </div>
+
+    <form action="/contact" method="post" class="form-horizontal">
+        <!-- Name or Nickname -->
+        {{ input('text', contact, errors, 'contact', 'name', {required: true}) }}
+
+        <!-- Email -->
+        {{ input('text', contact, errors, 'contact', 'email', {required: true}) }}
+
+        <!-- Subject -->
+        {{ input('text', contact, errors, 'contact', 'subject',
+            {required: true, size: 'input-xxlarge'}
+        ) }}
+
+        <!-- Message -->
+        {{ input('textarea', contact, errors, 'contact', 'message', {required: true}) }}
+
+        <!-- Captcha -->
+        {{ captcha(contact.captcha, errors.captcha | default) }}
+
+        <div class="controls">
+            {{ submit() }}
+            {{ cancel_link('/home') }}
+        </div>
+    </form>
+
+{% endblock %}
