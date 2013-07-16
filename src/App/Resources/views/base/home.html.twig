@@ -26,27 +26,28 @@
 
 
 {% block main %}
-    <h1 id="page-title">Bienvenue à tous !</h1>
+    <article itemscope itemtype="http://schema.org/Article">
+        <h1 id="page-title">Bienvenue à tous !</h1>
 
-    <div class="span4" style="margin-left: 0px;">
-        <!-- Some pictures -->
-        <div class="carousel slide thumbnail">
-            <div class="carousel-inner">
-                <div class="active item" data-offset="0"><img src="/images/home/0.jpg"></div>
-                {% for i in 1..19 %}
-                    <div class="item" data-offset="{{ i }}"><img src="/images/home/{{ i }}.jpg"></div>
-                {% endfor %}
+        <div class="span4" style="margin-left: 0px;">
+            <!-- Some pictures -->
+            <div class="carousel slide thumbnail">
+                <div class="carousel-inner">
+                    <div class="active item" data-offset="0"><img src="/images/home/0.jpg"></div>
+                    {% for i in 1..19 %}
+                        <div class="item" data-offset="{{ i }}"><img src="/images/home/{{ i }}.jpg"></div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Map related to these pictures -->
+            <div class="thumbnail">
+                <div id="map-pictures"></div>
             </div>
         </div>
 
-        <!-- Map related to these pictures -->
-        <div class="thumbnail">
-            <div id="map-pictures"></div>
-        </div>
-    </div>
-
-    <div class="span8">
-        {% set home %}
+        <div class="span8" itemprop="articleBody">
+            {%- set text -%}
 <big>Nous sommes **Marie** et **Mathieu**, deux jeunes voyageurs.</big>
 
 L'espace web dans lequel vous venez d'entrer est notre petit jardin numérique, presque secret.
@@ -68,7 +69,8 @@ Actuellement, nous nous préparons ici :
 dans notre belle région natale de l'*estuaire de Loire*.
 
 <big>Bonne balade.</big>
-        {% endset %}
-        {{ home | richText | raw }}
-    </div>
+            {%- endset -%}
+            {{ text | richText }}
+        </div>
+    </article>
 {% endblock %}

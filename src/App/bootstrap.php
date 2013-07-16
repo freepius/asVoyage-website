@@ -102,19 +102,18 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
 {
     $twig->addExtension(new Twig_Extensions_Extension_Intl());  // for 'localizeddate' filter
 
-    $twig->addFilter('sum', new \Twig_Filter_Function('array_sum'));
+    $twig->addFilter(new \Twig_SimpleFilter('sum', 'array_sum'));
 
-    $twig->addFilter('shuffle', new \Twig_Filter_Function(function ($array)
+    $twig->addFilter(new \Twig_SimpleFilter('shuffle', function ($array)
     {
         shuffle($array);
         return $array;
     }));
 
-    $twig->addFilter(
-        'richText',
-        new \Twig_Filter_Function([$app['richText'], 'transform']),
+    $twig->addFilter(new \Twig_SimpleFilter('richText',
+        [$app['richText'], 'transform'],
         ['is_safe' => ['all']]
-    );
+    ));
 
     return $twig;
 }));

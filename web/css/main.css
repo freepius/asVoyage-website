@@ -4972,6 +4972,21 @@ h2 small {
 #main .with-aside.little + aside {
   width: 36%;
 }
+.tags-box .size-1 {
+  font-size: 90%;
+}
+.tags-box .size-2 {
+  font-size: 100%;
+}
+.tags-box .size-3 {
+  font-size: 125%;
+}
+.tags-box .size-4 {
+  font-size: 150%;
+}
+.tags-box .size-5 {
+  font-size: 250%;
+}
 .decorated {
   margin-bottom: 20px;
   padding: 15px 25px;

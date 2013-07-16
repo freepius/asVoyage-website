@@ -2,56 +2,166 @@
 
 {% extends "layout.html.twig" %}
 
-{% from "macros.twig" import add_img_lightbox as add_img %}
+{% from "macros.twig" import tags_box, add_img_lightbox as add_img %}
+
+{% set tagsMathieu = [
+    [3, '1987'],
+    [4, '26 ans'],
+    [3, 'Asperge'],
+    [3, 'Barbu'],
+    [3, 'Baroudeur'],
+    [1, 'Bidouilleur'],
+    [2, 'Café allongé'],
+    [3, 'Curieux'],
+    [1, 'Gnu.42'],
+    [1, 'Gourmand'],
+    [2, 'Grimpeur'],
+    [1, 'Grognon'],
+    [1, 'Gueulard'],
+    [3, 'Océan'],
+    [1, 'Ouvert'],
+    [2, 'Pragmatique'],
+    [2, 'Rigueur'],
+    [2, 'Sportif'],
+    [3, 'Volontaire'],
+] %}
+
+{% set tagsMarie = [
+    [3, '1988'],
+    [4, '25 ans'],
+    [3, 'Biodiversité'],
+    [2, 'Blonde'],
+    [1, 'Bordelique'],
+    [1, 'Cuisine'],
+    [2, 'Endurante'],
+    [3, 'Fromage'],
+    [1, 'Grimpeuse'],
+    [2, 'Hobbit'],
+    [3, 'Joyeuse'],
+    [3, 'Lenteur'],
+    [2, 'Logisticienne'],
+    [1, 'Naïve'],
+    [3, 'Siestes'],
+    [2, 'Simple'],
+    [1, 'Super sympa !'],
+    [3, 'Ouverte'],
+] %}
+
+{% set tagsBoth = [
+    [1, 'Câlins'],
+    [1, 'Campagne'],
+    [1, 'Gueulards'],
+    [1, 'Ligériens'],
+    [2, 'Amoureux'],
+    [2, 'Décroissants'],
+    [2, 'Rêveurs'],
+    [3, 'Découverte'],
+    [3, 'Joyeux'],
+    [3, 'Nature'],
+    [3, 'Voyage'],
+    [4, '9 ans'],
+    [4, 'Écolos'],
+    [4, 'Long cours'],
+    [1, 'Bretons'],
+    [1, 'Clampins'],
+    [1, 'Croissants'],
+    [1, 'Loire-Atlantique'],
+    [1, 'Marais'],
+    [2, 'Bivouac'],
+    [2, 'Observateurs'],
+    [3, 'Curieux'],
+    [3, 'Écriture'],
+    [3, 'Marche'],
+    [3, 'Unis'],
+    [4, 'Éclectiques'],
+    [4, 'Liberté'],
+    [4, 'Vagabonds'],
+] %}
+
+{% set tagsBothMiddle = (tagsBoth | length) // 2 %}
+
+{% set tagsAnarchosSemitas = [
+    [1, 'زهر (zhar)'],
+    [2, 'ἀνἀρχός'],
+    [1, 'ἀναρχία'],
+    [1, 'anarchia'],
+    [1, 'Anarchie'],
+    [3, 'Anarchique'],
+    [3, 'Chemin'],
+    [2, 'Cheminement'],
+    [4, 'Démambulation'],
+    [1, 'Désorganisation'],
+    [4, 'Diversité'],
+    [3, 'Hasard'],
+    [3, 'Idée'],
+    [4, 'Pensée'],
+    [2, 'Sens'],
+    [1, 'Sensation'],
+    [2, 'Sēmita'],
+    [4, 'Sentier'],
+    [3, 'Tous azimuts'],
+] | shuffle %}
 
 
 {% block stylesheets %}
     <style>
-        aside > img { margin-top: 1em; }
+        #main h2 { text-align: center; }
+
+        #both { margin: 5px 100px; }
     </style>
 {% endblock %}
 
 
 {% block main %}
-    <article itemscope itemtype="http://schema.org/Article" class="with-aside">
-        <header>
-            <h1 itemprop="name" id="page-title">À propos...</h1>
-        </header>
+    <article itemscope itemtype="http://schema.org/Article">
+        <h1 itemprop="name" id="page-title">À propos...</h1>
 
         <div itemprop="articleBody">
             <h2>Qui sommes-nous ?</h2>
-            <p>
-                Nous sommes un vieux couple de jeunes. Mathieu et Marie ; alias, respectivement, <em>freepius</em> et <em>manalee</em>. Allez savoir pourquoi...
-                Cela fait {{ ('literal.'~yearsMMM)|trans }} ans que nous nous accompagnons. {{ ('literal.'~yearsMMM)|trans|title }} années durant lesquelles nos projets de vie et d'avenir se sont affirmés. Parmi eux – et ce sera l'unique thème de cet espace web – le voyage.
-            </p>
-            <p>
-                Chacun a des raisons, profondes et personnelles, d'envier l'idée du voyage ; ou plutôt, l'idée d'un voyage.
-                Car, nous semble-t-il, personne ne doit y voir les mêmes actes, émotions ou philosophies.
-                Les nôtres – d'idées du voyage – se sont rencontrées et apprivoisées, puis se sont construites, le long d'un même chemin.
-                Ces idées évoquent : la beauté et la grandeur de la nature ; la lenteur d'une marche ou d'une réflexion ; la perpétuité et l'infinie de la découverte. Elles proposent également la construction d'une certaine humilité, et l'amour pour une ouverture sans faille.
-            </p>
-            <p>Le nom du présent site web se veut leur écho.</p>
 
-            <h2>anarchos semitas</h2>
-            <p>
-                <em>« anarchos semitas »</em>, c'est l'idée que nos pas – physiquement et philosophiquement – se laisseront aller aux rencontres.
-                C'est l'idée, aussi, qu'ils essaieront de ne jamais suivre des routes et des pensées toutes tracées.
-                Nous avons un profond besoin – chacun de nous deux pour des raisons propres – de continuer, pas après pas, à découvrir et construire nos vies, sans préjugés ni buts stricts, le long de <em>« chemins anarchiques »</em>.
-            </p>
+            <div class="row">
+                {{ tags_box(tagsMathieu, 'Mathieu', 'span4 text-right') }}
 
-            <h2>Les débuts d'un long voyage</h2>
-            <p>
-                Des voyages, petits ou grands (en distance, en durée, en dureté...), nous aimerions en faire de nombreux.
-                S'est immiscée en nous l'envie que ces voyages ne fassent pas que ponctuer nos vies, mais en soient l'épine dorsale.
-                S'est immiscée en nous, également, l'envie d'y être comme des enfants et de considérer que – toujours – nous ne serions qu'à leurs débuts.
-                Des vies qui seront alors, peut-être, <em>« les débuts d'un long voyage »</em>.
-            </p>
+                <div class="span4">
+                    {{ add_img('/images/ourselves/freepius.jpg', 'global', false, null, 'span6') }}
+                    {{ add_img('/images/ourselves/manalee.jpg', 'global', false, null, 'span6') }}
+                </div>
+
+                {{ tags_box(tagsMarie, 'Marie', 'span4 text-left') }}
+            </div>
+
+            <div id="both" class="row">
+                {{ tags_box(tagsBoth[0:tagsBothMiddle], null, 'span4 text-right') }}
+
+                <div class="span4">
+                    {{ add_img('/images/ourselves/together.jpg', 'global') }}
+                </div>
+
+                {{ tags_box(tagsBoth[tagsBothMiddle:], null, 'span4 text-left') }}
+            </div>
+
+            <h2 style="margin-bottom: -10px;">anarchos semitas</h2>
+
+            <img src="/images/base/roots.png">
+
+            {{ tags_box(tagsAnarchosSemitas, null, 'muted text-center') }}
+
+            {%- set text -%}
+*"anarchos semitas"* c'est l'idée que nos pas -- physiquement et philosophiquement -- se laisseront aller aux vagabondages, aux rencontres, à la découverte.
+C'est l'idée, aussi, qu'ils essaieront de ne jamais suivre des routes et des pensées trop facilement tracées.
+Nous avons tous deux, en effet, un profond besoin de construire nos vies, sans préjugé ni but strict,
+le long de chemins de déambulation, de *"chemins anarchiques"*.
+
+## Les débuts d'un long voyage
+
+Des voyages, petits ou grands (en distance, en durée, en dureté...), nous aimerions en faire de nombreux,
+qu'ils poussent sur notre ligne de vie comme des herbes folles, qu'ils la ponctuent d'abord, puis s'étendent jusqu'à en devenir son paysage.
+Nous aimerions y être comme des enfants, naïfs et joyeux, et toujours considérer n'être qu'à nos débuts.
+Des vies qui seraient alors *les débuts d'un long voyage*.
+            {%- endset -%}
+            {{ text | richText }}
+
+            <img src="/images/base/fresco.png">
         </div>
     </article>
-
-    <aside>
-        {% for img in ['manalee', 'freepius', 'manalee-2', 'freepius-2'] %}
-            {{ add_img('/images/ourselves/'~img~'.jpg', 'ourselves') }}
-        {% endfor %}
-    </aside>
 {% endblock %}

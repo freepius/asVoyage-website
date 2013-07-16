@@ -4,6 +4,7 @@
  #  -> bool2icon
  #  -> cancel
  #  -> cancel_link
+ #  -> tags_box
  #}
 
 
@@ -11,14 +12,13 @@
  # Add an image (in a bootstrap style)
  # which can be open in a lightbox2 box under the `group` (if specified).
  #}
-{% macro add_img_lightbox(img, group, hasThumb, title) %}
+{% macro add_img_lightbox(img, group, hasThumb, caption, classes) %}
 {% spaceless %}
-    <a class="thumbnail" href="{{ img }}"
+    <a href="{{ img }}" class="thumbnail {{ classes|default }}"
        rel="lightbox{{- group|default ? '['~group~']' -}}"
-       {{ title|default ? 'title="'~title~'"' }}>
+       {{ caption|default ? 'title="'~caption~'"' }}>
 
         <img src="{{ (hasThumb|default(false) ? 'thumb_') ~ img  }}">
-
     </a>
 {% endspaceless %}
 {% endmacro %}
@@ -80,4 +80,30 @@
     </a>
 
 {% endspaceless %}
+{% endmacro %}
+
+
+{##
+ # Display a tags box where :
+ #  -> tags are sized depending on their weight ;
+ #  -> tags are shuffled ;
+ #  -> a special tag is inserted in the middle (if specified).
+ #
+ # "tags" = [weight (1 to 5), tag]+
+ #    eg  : [[1, 'Nature'], [1, 'Earth'], [3, 'Green']]
+ #}
+{% macro tags_box(tags, special, classes) %}
+    {% set tags = tags | shuffle %}
+
+    {% if special | default %}
+        {# Insert the special tag in the middle, with the bigger size #}
+        {% set middle = (tags | length) // 2 %}
+        {% set tags = tags[0:middle] | merge([[5, special]]) | merge(tags[middle:]) %}
+    {% endif %}
+
+    <ul class="inline tags-box {{ classes | default }}">
+        {% for tag in tags %}
+            <li class="size-{{ tag[0] }}">{{ tag[1] }}</li>
+        {% endfor %}
+    </ul>
 {% endmacro %}

@@ -38,7 +38,7 @@
 
     {% block stylesheets %}{% endblock %}
 </head>
-<body itemscope itemtype="http://schema.org/
+<body class="container" itemscope itemtype="http://schema.org/
     {{- currentNav == 'about'   ? 'AboutPage'   :
        (currentNav == 'contact' ? 'ContactPage' : 'WebPage') -}}">
 
