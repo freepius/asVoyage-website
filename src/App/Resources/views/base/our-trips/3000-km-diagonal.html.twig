@@ -1,0 +1,105 @@
+{% set currentNav = 'our-trips' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import tags_box %}
+
+{% import "carto.twig" as carto %}
+
+{% set tags = [
+    [4, '2011'],
+    [4, '3000 km'],
+    [4, '6 mois'],
+    [3, 'Bivouac'],
+    [2, 'Déambulation'],
+    [2, 'Diagonale'],
+    [3, 'Kayak'],
+    [3, 'Loire'],
+    [2, 'Long cours'],
+    [3, 'Marche'],
+    [3, 'Nantes - Nice'],
+    [2, 'Nature'],
+    [2, 'Précarité'],
+    [1, 'Alpilles'],
+    [1, 'Auvergne'],
+    [1, 'Brenne'],
+    [1, 'Camargue'],
+    [1, 'Cévennes'],
+    [1, 'Creuse'],
+    [1, 'Lubéron'],
+    [1, 'Touraine'],
+    [1, 'Verdon'],
+] %}
+
+
+{% block stylesheets %}
+    {{ carto.cssFiles() }}
+
+    <style>
+        #map { height: 300px; }
+    </style>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ carto.jsFiles() }}
+
+    <script>
+        {% include "base/our-trips/3000-km-diagonal.carto.js" %}
+
+        $(document).ready(function() {
+
+            var map = $.carto.addMap('map'),
+                downLoire = L.polyline(downLoire_points, {color: 'blue'}).bindPopup('Descente de Loire'),
+                longWalk  = L.polyline(longWalk_points,  {color: 'green'}).bindPopup('Grande marche'),
+                group     = L.featureGroup([downLoire, longWalk]);
+
+            group.setStyle({weight: 10}).addTo(map);
+
+            map.fitBounds(group.getBounds());
+        });
+    </script>
+{% endblock %}
+
+
+{% block main %}
+    <article itemscope itemtype="http://schema.org/Article" class="with-aside">
+        <h1 id="page-title">3000 km en diagonale</h1>
+
+        <div itemprop="articleBody">
+            {%- set text -%}
+## Présentation
+
+*"3000 km en diagonale"* c'est notre voyage initiatique. Réalisé en 2011, d'avril à octobre, il nous a fait parcourir
+des bouts de France, du Sud-Est au Nord-Ouest, aller-retour.
+
+Durant deux mois, nous avons descendu le plus long fleuve de France, de la source à l'océan :
+les 120 premiers kilomètres à pieds, à travers les monts d'Ardèche ;
+les 900 suivants en kayak, jusque dans la vase des marais de l'estuaire de Loire.  
+Ce fut notre <b>"Descente de Loire"</b>.
+
+Aussitôt rentrés au port, nous avons chaussé nos godillots terreux et repris la route, pour quatre mois.
+Initialement, nous voulions rejoindre les *chemins de Saint-Jacques-de-Compostelle* et les parcourir jusqu'à leur terme : le cap Finisterre en Espagne.
+Mais la vie de vagabonds dépouillés, enfouis en pleine nature, et la claque des rencontres ont dévié notre azimut.
+Finalement, nous sommes restés sur les sentiers français et avons rejoint Nantes à Nice, en 1700 km.  
+Ce fut notre <b>"Grande marche"</b>.
+
+De cette première expérience au long cours, brute et précaire, nature et surprenante, formatrice et joyeuse,
+passée en pensées et rêveries, découvertes et coups de gueule, observations et analyses,
+nous en avons tiré un ouvrage, petit condensé anarchique de tout ceci et de bien plus encore.  
+Cet ouvrage pèse une centaine de pages <!-- XX pages --> et, plus que gratuit, il est libre !  
+<b>Il sera disponible prochainement.</b>
+            {%- endset -%}
+            {{ text | richText }}
+        </div>
+    </article>
+
+    <aside>
+        <div id="map" class="box"></div>
+
+        <div class="box">
+            <h1>Mots-clés</h1>
+            {{ tags_box(tags, null, 'text-center') }}
+        </div>
+    </aside>
+{% endblock %}

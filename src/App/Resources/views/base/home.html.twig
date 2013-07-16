@@ -2,25 +2,20 @@
 
 {% extends "layout.html.twig" %}
 
+{% import "carto.twig" as carto %}
+
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.2/leaflet.css">
-    <!--[if lte IE 8]>
-        <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.2/leaflet.ie.css">
-    <![endif]-->
-
-    <link rel="stylesheet" href="/css/leaflet.awesome-markers.css">
+    {{ carto.cssFiles() }}
 
     <style>
-        #map-pictures { height: 220px; }
+        #map { height: 220px; }
     </style>
 {% endblock %}
 
 
 {% block javascripts %}
-    <script src="//cdn.leafletjs.com/leaflet-0.6.2/leaflet.js"></script>
-    <script src="//maps.stamen.com/js/tile.stamen.js?v1.2.2"></script>
-    <script src="/js/leaflet.awesome-markers.min.js"></script>
+    {{ carto.jsFiles() }}
     <script src="/js/app-base-home.js"></script>
 {% endblock %}
 
@@ -42,7 +37,7 @@
 
             <!-- Map related to these pictures -->
             <div class="thumbnail">
-                <div id="map-pictures"></div>
+                <div id="map"></div>
             </div>
         </div>
 
@@ -65,7 +60,7 @@ Nous y semons, aussi, nos expériences, émotions et souvenirs de voyages.
 * et un [pigeon voyageur](/contact), pour nous contacter.
 
 Actuellement, nous nous préparons ici :
-<a id="current-place" href="#" data-toggle="modal">*N47° 17.867 W001° 57.804*</a>,
+<a id="current-place" href="#" data-toggle="modal">*N47° 18.808 W001° 58.061</a>,
 dans notre belle région natale de l'*estuaire de Loire*.
 
 <big>Bonne balade.</big>

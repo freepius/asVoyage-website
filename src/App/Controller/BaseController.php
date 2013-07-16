@@ -40,6 +40,9 @@ class BaseController implements ControllerProviderInterface
         $base->get('/about'    , [$this, 'about']);
         $base->match('/contact', [$this, 'contact']);
 
+        // Our trips
+        $base->get('our-trips/3000-km-diagonal', [$this, 'diagonal3000Km']);
+
         // Technical routes
         $base->get('/login', [$this, 'login']);
 
@@ -70,11 +73,21 @@ class BaseController implements ControllerProviderInterface
 
     public function about()
     {
+        $now = time();
+
         return $this->app->render("base/about.{$this->app['locale']}.html.twig",
         [
             // Years together of Marie and Mathieu
-            // ("Today" - "2004/10/15 16:00:00") / (60 * 60 * 24 * 365.25)
-            'yearsMMM' => (int) round((time() - 1097769600) / 31557600),
+            // ("Now" - "2004/10/15 16:00:00") / (60 * 60 * 24 * 365.25)
+            'yearsMMM' => (int) round(($now - 1097769600) / 31557600),
+
+            // Years of Mathieu
+            // ("Now" - "1987/08/05 12:00:00") / (60 * 60 * 24 * 365.25)
+            'yearsMathieu' => (int) round(($now - 555156000) / 31557600),
+
+            // Years of Marie
+            // ("Now" - "1988/09/26 00:05:00") / (60 * 60 * 24 * 365.25)
+            'yearsMarie' => (int) round(($now - 591231900) / 31557600),
         ]);
     }
 
@@ -117,6 +130,11 @@ class BaseController implements ControllerProviderInterface
             'contact' => $contact,
             'errors'  => $errors,
         ]);
+    }
+
+    public function diagonal3000Km()
+    {
+        return $this->app->render('base/our-trips/3000-km-diagonal.html.twig');
     }
 
 

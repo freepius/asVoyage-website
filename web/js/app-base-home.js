@@ -12,7 +12,7 @@
 
     function mapPictures() {
 
-        var markers, i;
+        var markers, i, map = $.carto.maps.map;
 
         function resetMarker(marker) {
             // TODO : régler le chainage quand mon pullrequest sera accepté et leaflet MAJ
@@ -21,6 +21,7 @@
             marker.setOpacity(0.2);
             return marker;
         }
+
         function highlightMarker(marker) {
             // TODO : régler le chainage quand mon pullrequest sera accepté et leaflet MAJ
             marker.setZIndexOffset(250)
@@ -30,26 +31,26 @@
         }
 
         markers = [
-            [47.2694, 2.5559],
-            [47.14654, 0.13104],
-            [47.23446, -0.37787],
-            [47.23509, -0.24868],
-            [46.39422, 1.15759],
-            [46.09150, 1.34449],
-            [44.04720, 3.44194],
-            [43.49371, 5.37716],
-            [44.19329, 5.42288],
-            [47.17808, -1.58061],
-            [45.24578, 4.34668],
-            [46.09085, 5.51768],
-            [47.20248, -1.55887],
-            [44.45856, 4.12862],
-            [45.33816, 4.16199],
-            [45.34729, 4.15343],
-            [45.59028, 4.02036],
-            [46.48168, 3.31316],
-            [46.58939, 3.10183],
-            [47.13000, 2.59227]
+            [47.44900131, 2.92650008],
+            [47.24423218, 0.21733333],
+            [47.39076614, -0.62978333],
+            [47.39181519, -0.41446668],
+            [46.65703201, 1.26265001],
+            [46.15250015, 1.57414997],
+            [44.07866669, 3.73656678],
+            [43.83348465, 5.59130001],
+            [44.32215118, 5.70480013],
+            [47.31346512, -1.96768332],
+            [45.40963364, 4.57779980],
+            [46.15141678, 5.86280012],
+            [47.33746719, -1.93145001],
+            [44.76426697, 4.21436691],
+            [45.56359863, 4.26998329],
+            [45.57881546, 4.25571680],
+            [45.98379898, 4.03393316],
+            [46.80279922, 3.52193332],
+            [46.98231506, 3.16971660],
+            [47.21666718, 2.98711658]
         ].map(function (latLng) {
             return resetMarker(
                 L.marker(latLng, {clickable: false}).addTo(map)
@@ -69,7 +70,10 @@
 
     function mapCurrentPlace() {
 
-        var currentPlace = [47.18067, -1.57804],
+        var map = $.carto.maps.map,
+
+            currentPlace = [47.31346512, -1.96768332], // Lavau-sur-Loire, France
+
             marker = L.marker(currentPlace, {
                 clickable: false,
                 icon: L.AwesomeMarkers.icon({ color: 'green' }),
@@ -96,15 +100,12 @@
 
         $('.carousel').carousel();
 
-        map = L.map('map-pictures', {
-            center: [46.32433, 2.0], // center of France
-            zoom: 5,
+        // centered on France
+        $.carto.addMap('map', {
+            center: [46.0, 2.0],
             minZoom: 4,
-            maxZoom: 8,
-            layers: [new L.StamenTileLayer("watercolor")]
+            maxZoom: 8
         });
-
-        map.attributionControl.setPrefix('');
 
         mapPictures();
 

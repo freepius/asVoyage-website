@@ -1,0 +1,23 @@
+{##
+ # Summary :
+ #  -> cssFiles
+ #  -> jsFiles
+ #}
+
+
+{% macro cssFiles() %}
+    <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.2/leaflet.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.2/leaflet.ie.css">
+    <![endif]-->
+
+    <link rel="stylesheet" href="/css/leaflet.awesome-markers.css">
+{% endmacro %}
+
+
+{% macro jsFiles() %}
+    <script src="//cdn.leafletjs.com/leaflet-0.6.2/leaflet.js"></script>
+    <script src="//maps.stamen.com/js/tile.stamen.js?v1.2.2"></script>
+    <script src="/js/leaflet.awesome-markers.min.js"></script>
+    <script src="/js/app-carto.js"></script>
+{% endmacro %}

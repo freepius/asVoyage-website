@@ -45,7 +45,9 @@ TODO
 * STYLE : change some "em sizes" to "px sizes" (for style consistency) !
 * Contact : log when a message is sent
 * Contact : make secure the message sending (with TLS)
-* Change "richText" Twig filters to Twig token + node
+* Set RichText to write HTML5 (and not XHTML) !
+* Carto : conflict between Leaflet and Bootstrap styles
+* Traduction of new base pages (about, our-trips, etc.)
 
 For production
 --------------
