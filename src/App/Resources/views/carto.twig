@@ -6,17 +6,33 @@
 
 
 {% macro cssFiles() %}
-    <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.2/leaflet.css">
-    <!--[if lte IE 8]>
-        <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.2/leaflet.ie.css">
-    <![endif]-->
+    {# DEBUG mode => local files #}
+    {% if app.debug %}
+        <link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="/vendor/leaflet/leaflet.ie.css">
+        <![endif]-->
+    {% else %}
+    {# Else => files from CDNs #}
+        <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.3/leaflet.css">
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.3/leaflet.ie.css">
+        <![endif]-->
+    {% endif %}
 
     <link rel="stylesheet" href="/css/leaflet.awesome-markers.css">
 {% endmacro %}
 
 
 {% macro jsFiles() %}
-    <script src="//cdn.leafletjs.com/leaflet-0.6.2/leaflet.js"></script>
+    {# DEBUG mode => local files #}
+    {% if app.debug %}
+        <script src="/vendor/leaflet/leaflet-src.js"></script>
+    {% else %}
+    {# Else => files from CDNs #}
+        <script src="//cdn.leafletjs.com/leaflet-0.6.3/leaflet.js"></script>
+    {% endif %}
+
     <script src="//maps.stamen.com/js/tile.stamen.js?v1.2.2"></script>
     <script src="/js/leaflet.awesome-markers.min.js"></script>
     <script src="/js/app-carto.js"></script>

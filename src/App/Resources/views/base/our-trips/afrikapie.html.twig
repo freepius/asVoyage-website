@@ -1,0 +1,93 @@
+{% set currentNav = 'our-trips' %}
+
+{% extends "layout.html.twig" %}
+
+{% import "carto.twig" as carto %}
+
+
+{% block stylesheets %}
+    {{ carto.cssFiles() }}
+
+    <style>
+        #map { height: 500px; }
+    </style>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ carto.jsFiles() }}
+
+    <script>
+        {% include "base/our-trips/afrikapie.carto.js" %}
+
+        $(document).ready(function() {
+
+            var map  = $.carto.addMap('map'),
+                alt  = L.multiPolyline([altNamibia_points, altMali_points], {color: 'green', weight: 5}),
+                main = L.polyline(main_points, {color: 'brown', weight: 10, opacity: 1.0});
+
+            map.fitBounds(main, {reset: true});
+
+            alt.addTo(map);
+            main.addTo(map);
+        });
+    </script>
+{% endblock %}
+
+
+{% block main %}
+    <article itemscope itemtype="http://schema.org/Article">
+        <h1 id="page-title">Afrikapie</h1>
+
+        <div itemprop="articleBody">
+            {%- set text -%}
+## Projet original
+
+**Afrikapié** c'est notre nouveau projet de voyage au long cours ; le second.
+
+Partant du Nord-Est marocain, nous voulons traverser l'Afrique, du Nord au Sud, puis d'Ouest en Est, pour rejoindre l'île rouge : Madagascar <small class="muted">[\[voir carte\]](#map)</small>.
+Ce projet est ambitieux. Il nous fera vagabonder sur terre, à pieds, durant 2 à 3 années.
+D'avance, nos mollets se crispent et nos peaux blanches rougissent.
+
+Il peut paraître un peu fou, aussi. Car d'ici, de nos contrées occidentales prospères, l'Afrique -- ce grand continent largement méconnu, aux 1100 millions d'habitants et aux 54 pays -- semble accablé de mille maux terrifiants.
+
+Certes, l'Afrique a une géopolitique hypercomplexe, une pauvreté encore endémique et est criblée d'épidémies et de conflits en tous genres.
+Elle panse, toujours, les plaies de son histoire contemporaine tragique.
+
+Mais, c'est aussi un continent en hypercroissance, qui se démocratise à grands pas et qui devient une puissance qui compte.
+C'est, encore, un territoire à l'extrême diversité : de paysages, de climats, de peuples, de cultures, de langues, d'histoires...
+
+Voilà pourquoi l'Afrique.  
+Parce que nous l'avons rêvée cent et cent fois.  
+Parce que sa diversité et ses espérances gonflent les nôtres.
+
+Et voici sa carte, en tête de zèbre orientée plein sud.  
+En marron, notre trajet principal ; en vert, nos alternatives.  
+Ceux-ci, bien sûr, seront raffinés dans les prochaines semaines !
+
+<div class="thumbnail container" style="width: 70%; margin-bottom: 20px;">
+    <div id="map"></div>
+</div>
+
+Notre objectif premier est d'atteindre le Bénin en un an, en longeant la côté Atlantique.  
+Le reste suivra...
+
+Pour aller au plus près des populations, au cœur des environnements, prendre le temps de la découverte et de l'apprentissage, nous voyagerons à pieds.
+La marche, comme mode de déplacement majeur, fera de ce voyage un défi à la fois sportif, humain et écologique.
+
+Aimant les voyages libérés de buts stricts et cloisonnés, nous laisserons la déambulation -- physique et mentale -- guider nos pas et tracer son trait sur notre carte.
+Il se peut, pourtant, qu'elle se laisse influencer par quelques uns de nos thèmes de prédilections :
+
+* l'eau : réservoirs et cours d'eau, biodiversité, gestion, pollution... ;
+* les espaces naturels et protégés ;
+* le quotidien des hommes et des femmes : nécessités élémentaires, cultures, religions, place de la femme... ;
+* l'aménagement des territoires ;
+* le développement durable : agriculture bio, commerce équitable, énergies renouvelables...
+
+Sur le présent site web, nous rendrons régulièrement compte de nos avancées, expériences, observations, analyses, rencontres, etc.
+Nous y écrirons des articles et y déposerons photos, vidéos et sons, pour tenter de vous immerger dans notre aventure.
+            {%- endset -%}
+            {{ text | richText }}
+        </div>
+    </article>
+{% endblock %}

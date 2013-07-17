@@ -49,14 +49,13 @@
 
         $(document).ready(function() {
 
-            var map = $.carto.addMap('map'),
+            var map       = $.carto.addMap('map'),
                 downLoire = L.polyline(downLoire_points, {color: 'blue'}).bindPopup('Descente de Loire'),
                 longWalk  = L.polyline(longWalk_points,  {color: 'green'}).bindPopup('Grande marche'),
                 group     = L.featureGroup([downLoire, longWalk]);
 
             group.setStyle({weight: 10}).addTo(map);
-
-            map.fitBounds(group.getBounds());
+            map.fitBounds(group.getBounds(), {reset: true});
         });
     </script>
 {% endblock %}

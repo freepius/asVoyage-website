@@ -25,24 +25,26 @@
     <img id="logo" src="/images/logo.png" alt="Logo of anarchos semitas">
 
     <section id="navigation">
-        <nav id="nav-lang">
+        {#<nav id="nav-lang">
             <ul class="inline">
                 {{ add_lang('fr', app.locale) }}
                 {{ add_lang('en', app.locale) }}
             </ul>
-        </nav>
+        </nav>#}
 
-        <nav id="nav-main">
+        <nav id="nav-main" style="margin-top: 20px;">
             <ul class="nav nav-pills">
                 {{ add_nav('home'     , currentNav) }}
                 {{ add_nav('about'    , currentNav) }}
                 {{ add_nav('contact'  , currentNav) }}
-                {{ add_nav('our-trips', currentNav) }}
+                {# add_nav('our-trips', currentNav) #}
             </ul>
         </nav>
     </section>
 
     <div class="notification">
-        {% block headerNotification %}{% endblock %}
+        {% block headerNotification %}
+            Nombreuses mises à jour à venir !
+        {% endblock %}
     </div>
 </header>

@@ -15,19 +15,15 @@
         var markers, i, map = $.carto.maps.map;
 
         function resetMarker(marker) {
-            // TODO : régler le chainage quand mon pullrequest sera accepté et leaflet MAJ
-            marker.setZIndexOffset(0)
-                .setIcon(L.AwesomeMarkers.icon({color: 'blue', icon: null}));
-            marker.setOpacity(0.2);
-            return marker;
+            return marker.setZIndexOffset(0)
+                .setIcon(L.AwesomeMarkers.icon({color: 'blue', icon: null}))
+                .setOpacity(0.2);
         }
 
         function highlightMarker(marker) {
-            // TODO : régler le chainage quand mon pullrequest sera accepté et leaflet MAJ
-            marker.setZIndexOffset(250)
-                .setIcon(L.AwesomeMarkers.icon({color: 'red', icon: null}));
-            marker.setOpacity(1.0);
-            return marker;
+            return marker.setZIndexOffset(250)
+                .setIcon(L.AwesomeMarkers.icon({color: 'red', icon: null}))
+                .setOpacity(1.0);
         }
 
         markers = [
