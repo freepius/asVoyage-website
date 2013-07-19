@@ -21,6 +21,9 @@ class RichText
         $this->markdown = new MarkdownExtra();
         $this->smartypants = @ new SmartyPantsTypographer('qgD:+;+m+h+H+f+u+t');
 
+        // HTML output
+        $this->markdown->empty_element_suffix = ">";
+
         // French quotes
         $this->smartypants->smart_doublequote_open  = '&#171;';
         $this->smartypants->smart_doublequote_close = '&#187;';

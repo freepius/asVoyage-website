@@ -1,6 +1,6 @@
 {##
  # Summary :
- #  -> add_img_lightbox
+ #  -> add_linked_img
  #  -> bool2icon
  #  -> cancel
  #  -> cancel_link
@@ -12,13 +12,13 @@
  # Add an image (in a bootstrap style)
  # which can be open in a lightbox2 box under the `group` (if specified).
  #}
-{% macro add_img_lightbox(img, group, hasThumb, caption, classes) %}
+{% macro add_linked_img(img, group, caption, classes, thumb) %}
 {% spaceless %}
     <a href="{{ img }}" class="thumbnail {{ classes|default }}"
        rel="lightbox{{- group|default ? '['~group~']' -}}"
        {{ caption|default ? 'title="'~caption~'"' }}>
 
-        <img src="{{ (hasThumb|default(false) ? 'thumb_') ~ img  }}">
+        <img src="{{ thumb|default ?: img  }}">
     </a>
 {% endspaceless %}
 {% endmacro %}
