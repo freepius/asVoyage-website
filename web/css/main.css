@@ -4742,7 +4742,7 @@ a#back2top {
   position: fixed;
   bottom: 0;
   right: 0;
-  z-index: 10000;
+  z-index: 2000;
   padding: 1em;
   background-color: #625D50;
   border-top: 4px solid #3B372E;
@@ -4873,6 +4873,15 @@ article.summary [itemprop="articleBody"] {
   float: left;
   margin: 0 1em;
   padding: 0 1em;
+}
+.leaflet-container form.leaflet-control-layers-list {
+  margin: 0;
+}
+.leaflet-container form.leaflet-control-layers-list input {
+  margin: 0;
+}
+.leaflet-container form.leaflet-control-layers-list label {
+  line-height: 16px;
 }
 #page-title {
   color: #CF5B37;

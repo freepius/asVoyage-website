@@ -1,0 +1,11 @@
+// Rework Leaflet styles to avoid conflicts with Bootstrap styles.
+.leaflet-container
+{
+    form.leaflet-control-layers-list
+    {
+        margin: 0;
+
+        input { margin: 0; }
+        label { line-height: @baseFontSize; }
+    }
+}

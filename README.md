@@ -46,7 +46,6 @@ TODO
 * Contact : log when a message is sent
 * Contact : make secure the message sending (with TLS)
 * Set RichText to write HTML5 (and not XHTML) !
-* Carto : conflict between Leaflet and Bootstrap styles
 * Carto : improve !!!
 * Traduction of new base pages (about, our-trips, etc.)
 
