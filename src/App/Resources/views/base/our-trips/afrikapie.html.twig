@@ -37,7 +37,12 @@
 
 {% block main %}
     <article itemscope itemtype="http://schema.org/Article">
-        <h1 id="page-title">Afrikapie</h1>
+
+        <!-- Breadcrumb + title -->
+        <header>
+            <nav><a href="/our-trips">{{ 'nav.our-trips'|trans }}</a> »</nav>
+            <h1 id="page-title">Afrikapié</h1>
+        </header>
 
         <div itemprop="articleBody">
             {%- set text -%}

@@ -54,7 +54,7 @@
 
             $.ajax({
                 method  : 'POST',
-                url     : '/render-markdown',
+                url     : '/render-richtext',
                 data    : { text: text },
                 success : function (data) {
                     $(preview).html(data);

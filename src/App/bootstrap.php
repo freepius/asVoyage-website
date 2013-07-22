@@ -153,7 +153,7 @@ $app['security.firewalls'] = [
 $app['security.access_rules'] =
 [[
     '^/admin'                   .'|'.
-    '^/render-markdown'         .'|'.
+    '^/render-richtext'         .'|'.
     '^/blog/(dashboard|create)' .'|'.
     '^/blog/.+/(update|delete)' .'|'.
     '^/blog/.+/read/.+'         .'|'.   // <=> CRUD for comment

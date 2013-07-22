@@ -14,7 +14,7 @@
  #}
 {% macro add_linked_img(img, group, caption, classes, thumb) %}
 {% spaceless %}
-    <a href="{{ img }}" class="thumbnail {{ classes|default }}"
+    <a href="{{ img }}" class="{{ classes|default }}"
        rel="lightbox{{- group|default ? '['~group~']' -}}"
        {{ caption|default ? 'title="'~caption~'"' }}>
 
@@ -84,24 +84,37 @@
 
 
 {##
- # Display a tags box where :
- #  -> tags are sized depending on their weight ;
- #  -> tags are shuffled ;
- #  -> a special tag is inserted in the middle (if specified).
+ # Display a tags box where tags are sized depending on their weight.
  #
  # "tags" = [weight (1 to 5), tag]+
  #    eg  : [[1, 'Nature'], [1, 'Earth'], [3, 'Green']]
  #}
-{% macro tags_box(tags, special, classes) %}
-    {% set tags = tags | shuffle %}
+{% macro tags_box(tags, options) %}
+    {##
+     # align : "center" || "left" || "right"
+     # style : "inline" || "unstyled" || null
+     #}
+    {%- set o = {
+            align   : 'center',
+            class   : '',
+            shuffle : true,
+            special : null,
+            style   : 'inline',
+        }
+        | merge(options | default({}))
+    -%}
 
-    {% if special | default %}
-        {# Insert the special tag in the middle, with the bigger size #}
-        {% set middle = (tags | length) // 2 %}
-        {% set tags = tags[0:middle] | merge([[5, special]]) | merge(tags[middle:]) %}
+    {% if o.shuffle %}
+        {% set tags = tags | shuffle %}
     {% endif %}
 
-    <ul class="inline tags-box {{ classes | default }}">
+    {% if o.special %}
+        {# Insert the special tag in the middle, with the bigger size #}
+        {% set middle = (tags | length) // 2 %}
+        {% set tags = tags[0:middle] | merge([[5, o.special]]) | merge(tags[middle:]) %}
+    {% endif %}
+
+    <ul class="tags-box text-{{- o.align }} {{ o.style }} {{ o.class }}">
         {% for tag in tags %}
             <li class="size-{{ tag[0] }}">{{ tag[1] }}</li>
         {% endfor %}

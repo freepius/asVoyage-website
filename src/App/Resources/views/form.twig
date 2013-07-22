@@ -48,14 +48,13 @@
 
 
 {% macro input(type, entity, errors, module, field, options) %}
-    {%- set options =
-        {
+    {%- set o = {
             error_inline : false,
             help         : false,
             help_inline  : false,
             required     : false,
         }
-        | merge(options)
+        | merge(options | default({}))
     -%}
 
     <div class="control-group {{ errors[field] is defined ? 'error' }}">
@@ -63,19 +62,19 @@
 
         <div class="controls">
             {% if type == 'checkbox' %}
-                {{ _self.input_checkbox(entity, errors, module, field, options) }}
+                {{ _self.input_checkbox(entity, field) }}
             {% elseif type == 'textarea' %}
-                {{ _self.textarea(entity, errors, module, field, options) }}
+                {{ _self.textarea(entity, field, o) }}
             {% else %}
-                {{ _self.input_text(entity, errors, module, field, options) }}
+                {{ _self.input_text(entity, field, o) }}
             {% endif %}
 
             {% if errors[field] is defined %}
-                <span class="help-{{ options.error_inline ? 'inline' : 'block' }}">{{ errors[field] }}</span>
+                <span class="help-{{ o.error_inline ? 'inline' : 'block' }}">{{ errors[field] }}</span>
             {% endif %}
 
-            {% if options.help %}
-                <span class="help-{{ options.help_inline ? 'inline' : 'block' }}">
+            {% if o.help %}
+                <span class="help-{{ o.help_inline ? 'inline' : 'block' }}">
                     {{ (module ~ '.help.' ~ field) | trans | raw }}
                 </span>
             {% endif %}
@@ -85,35 +84,33 @@
 
 
 {# /!\ Don't use it directly #}
-{% macro input_text(entity, errors, module, field, options) %}
-    {%- set options =
-        {
+{% macro input_text(entity, field, options) %}
+    {%- set o = {
             size : 'input-xlarge',
         }
-        | merge(options)
+        | merge(options | default({}))
     -%}
 
-    <input type="text" id="{{ field }}" name="{{ field }}" class="{{ options.size }}" value="{{ entity[field] }}" {{ options.required ? 'required' }}>
+    <input type="text" id="{{ field }}" name="{{ field }}" class="{{ o.size }}" value="{{ entity[field] }}" {{ o.required ? 'required' }}>
 {% endmacro %}
 
 
 {# /!\ Don't use it directly #}
-{% macro input_checkbox(entity, errors, module, field, options) %}
+{% macro input_checkbox(entity, field) %}
     <input type="checkbox" id="{{ field }}" name="{{ field }}" {{ entity[field] ? 'checked="checked"' }}>
 {% endmacro %}
 
 
 {# /!\ Don't use it directly #}
-{% macro textarea(entity, errors, module, field, options) %}
-    {%- set options =
-        {
+{% macro textarea(entity, field, options) %}
+    {%- set o = {
             rows : 8,
             size : 'input-xxlarge',
         }
-        | merge(options)
+        | merge(options | default({}))
     -%}
 
-    <textarea id="{{ field }}" name="{{ field }}" class="{{ options.size }}" rows="{{ options.rows }}" {{ options.required ? 'required' }}>
+    <textarea id="{{ field }}" name="{{ field }}" class="{{ o.size }}" rows="{{ o.rows }}" {{ o.required ? 'required' }}>
         {{- entity[field] -}}
     </textarea>
 {% endmacro %}

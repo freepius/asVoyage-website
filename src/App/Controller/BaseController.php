@@ -22,6 +22,7 @@ use Silex\ControllerProviderInterface,
  *      => login
  *      => switchLocale
  *      => changeCaptcha
+ *      => renderRichText
  */
 class BaseController implements ControllerProviderInterface
 {
@@ -54,12 +55,7 @@ class BaseController implements ControllerProviderInterface
 
         $base->get('/captcha-change', [$this, 'changeCaptcha']);
 
-        $base->post('/render-markdown', function (Application $app)
-        {
-            return $app['markdownTypo']->transform(
-                $app['request']->request->get('text')
-            );
-        });
+        $base->post('/render-richtext', [$this, 'renderRichText']);
 
         return $base;
     }
@@ -175,5 +171,12 @@ class BaseController implements ControllerProviderInterface
         $captchaManager->revoke();
 
         return $captchaManager->getFilename();
+    }
+
+    public function renderRichText(Request $request)
+    {
+        return $this->app['richText']->transform(
+            $request->request->get('text')
+        );
     }
 }
