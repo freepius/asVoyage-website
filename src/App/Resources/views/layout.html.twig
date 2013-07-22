@@ -32,7 +32,10 @@
     {# Red borders for ADMIN ! #}
     {% if is_granted('ROLE_ADMIN') %}
         <style>
-            body { border : 5px solid #CF5B37; }
+            body {
+                padding: 0 15px;
+                border: 5px solid #CF5B37;
+            }
         </style>
     {% endif %}
 
@@ -47,7 +50,7 @@
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
         <a href="/admin/logout" class="label label-important"
-           style="position: absolute; left: 10px; top: 10px;"
+           style="position: absolute; top: 10px;"
         >
             <i class="icon-off icon-white"></i> {{ 'Logout'|trans }}
         </a>

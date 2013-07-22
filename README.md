@@ -42,7 +42,6 @@ TODO
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 * Reorganize HTML5 => make semantic !
 * On Blog "reading" page : add box containing related articles/contents
-* STYLE : change some "em sizes" to "px sizes" (for style consistency) !
 * Contact : log when a message is sent
 * Contact : make secure the message sending (with TLS)
 * Carto : improve !!!

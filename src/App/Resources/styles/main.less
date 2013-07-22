@@ -20,15 +20,23 @@ strong {
     font-family: 'GorriSansRegular';
 }
 
+.decorated
+{
+    margin-bottom: 20px;
+    padding: 15px 25px;
+    background-color: white;
+    .border-radius(10px);
+    border: 1px solid gray;
+}
+
 
 /*************************************************
  * Generic
  ************************************************/
 
-body { padding: 0 2em 1em; }
-
 .row { margin-left: 0; }
 
+// Official "special font" for anarchos-semitas
 @font-face {
     font-family: 'GorriSansRegular';
     src: url('/fonts/gorrisans-webfont.eot');
@@ -40,6 +48,7 @@ body { padding: 0 2em 1em; }
     font-style: normal;
 }
 
+// Never underline icons
 a [class^="icon-"], a [class*=" icon-"],
 .btn-link [class^="icon-"], .btn-link [class*=" icon-"],
 {
@@ -72,7 +81,7 @@ h2 small { font-size: @baseFontSize; }
 #header
 {
     height: 150px;
-    margin-bottom: 1.5em;
+    margin-bottom: 25px;
     border-bottom: 5px solid @secondaryColor;
 
     #logo { float: left; }
@@ -81,7 +90,7 @@ h2 small { font-size: @baseFontSize; }
     {
         clear: right;
         float: right;
-        margin-right: 1em;
+        margin-right: 20px;
     }
 }
 
@@ -116,7 +125,7 @@ h2 small { font-size: @baseFontSize; }
 
 
 /*************************************************
- * Tags box
+ * Tags
  ************************************************/
 
 .tags-box
@@ -133,20 +142,10 @@ h2 small { font-size: @baseFontSize; }
  * Other styles
  ************************************************/
 
-.decorated
-{
-    margin-bottom: 20px;
-    padding: 15px 25px;
-    background-color: white;
-    .border-radius(10px);
-    border: 1px solid gray;
-}
-
 div.preview // textarea style
 {
     overflow: auto;
     padding: 4px 6px;
-    margin-bottom: @baseLineHeight / 2;
     .border-radius(@inputBorderRadius);
     border: 1px solid @inputBorder;
     background-color: white;
