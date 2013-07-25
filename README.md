@@ -46,6 +46,7 @@ TODO
 * Contact : make secure the message sending (with TLS)
 * Carto : improve !!!
 * Traduction of new base pages (about, our-trips, etc.)
+* CSS : p => text-align: justify ??
 
 For production
 --------------

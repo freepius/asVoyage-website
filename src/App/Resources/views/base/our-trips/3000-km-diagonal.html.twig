@@ -31,6 +31,32 @@
     [1, 'Verdon'],
 ] %}
 
+{% set theNumbers = [
+    [4, '168 jours'],
+    [4, '1846 km à pieds'],
+    [4, '857 km en kayak'],
+    [4, '149 bivouacs'],
+    [3, '102 jours de beau temps'],
+    [3, '19 jours de pluie'],
+    [3, '6 gros orages'],
+    [3, '19 sommets grimpés'],
+    [3, '18 belles rencontres animales'],
+    [3, '11 bibliothèques visitées'],
+    [3, '7 frayeurs'],
+    [2, '20 rencontres humaines fortes'],
+    [2, '14 journées très chaudes'],
+    [2, '3 bonnes engueulades'],
+    [2, '6 espèces invasives'],
+    [2, '13 bonnes baignades'],
+    [2, '523 photos'],
+    [2, '24 restos'],
+    [1, '200 km motorisés'],
+    [1, '7 jours consécutifs de pluie'],
+    [1, '35 jours de repos'],
+    [1, '5 gros n\'importe quoi'],
+    [1, '2 feux d\'artifice'],
+] %}
+
 
 {% block stylesheets %}
     {{ carto.cssFiles() }}
@@ -56,13 +82,14 @@
 
             group.setStyle({weight: 10}).addTo(map);
             map.fitBounds(group.getBounds(), {reset: true});
+
         });
     </script>
 {% endblock %}
 
 
 {% block main %}
-    <article itemscope itemtype="http://schema.org/Article" class="with-aside">
+    <article itemscope itemtype="http://schema.org/Article" class="with-aside little">
 
         <!-- Breadcrumb + title -->
         <header>
@@ -107,6 +134,12 @@ Cet ouvrage pèse une centaine de pages <!-- TODO : XX pages --> et, plus que gr
         <div class="box">
             <h1>Mots-clés</h1>
             {{ tags_box(tags) }}
+        </div>
+
+        <!-- The numbers -->
+        <div class="box">
+            <h1>Les chiffres</h1>
+            {{ tags_box(theNumbers, {shuffle: false, style: 'unstyled'}) }}
         </div>
     </aside>
 {% endblock %}
