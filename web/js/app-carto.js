@@ -33,7 +33,7 @@
                 layers  : [$.carto.layers[o.layer]]
             });
 
-        map.attributionControl.setPrefix('Map data © OpenStreetMap contributors');
+        map.attributionControl.setPrefix('');
 
         L.control.layers($.carto.layers).addTo(map);
 

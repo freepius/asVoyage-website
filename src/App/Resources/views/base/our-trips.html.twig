@@ -1,0 +1,108 @@
+{% set currentNav = 'our-trips' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import add_linked_img, tags_box %}
+
+
+{% block main %}
+    <h1 id="page-title">Nos voyages</h1>
+
+    <!-- Afrikapié -->
+    <div id="afrikapie" class="trip span4">
+
+        <h2>
+            <a href="/our-trips/afrikapie">Afrikapié</a>
+        </h2>
+
+        <div class="frieze">
+            <div class="inner">2013 - 2016 : 2 à 3 ans</div>
+        </div>
+
+        <p>
+            Notre premier voyage hors des frontières françaises.
+            Le continent africain nous accueillera, on l'espère, pour un long long périple.
+            Il permettra de nous accomplir comme voyageurs de grands chemins.
+            <big><a href="/our-trips/afrikapie">» Lire plus</a></big>
+        <p>
+
+        {% set tags = [
+            [4, 'Afrique'],
+            [2, 'Cultures'],
+            [3, 'Découvertes'],
+            [2, 'Humain'],
+            [4, 'Marche'],
+            [2, 'Nature'],
+        ] %}
+        {{ tags_box(tags, {class: 'muted'}) }}
+    </div>
+
+    <!-- =================================================================== -->
+
+    <!-- 3000 km in diagonal, in 2011 -->
+    <div id="diagonal-3000-km" class="trip span4">
+
+        <h2>
+            <a href="/our-trips/3000-km-diagonal">3000 km en diagonale</a>
+        </h2>
+
+        <div class="frieze">
+            <div class="inner">Avril - Octobre 2011 : 6 mois</div>
+        </div>
+
+        <p>
+            Notre premier voyage au long cours.
+            À travers la France, nous nous sommes immergés au cœur de multiples territoires.
+            Nous y avons assis notre désir de vies de voyage.
+            <big><a href="/our-trips/3000-km-diagonal">» Lire plus</a></big>
+        <p>
+
+        {% set tags = [
+            [2, 'Déambulation'],
+            [2, 'France'],
+            [4, 'Kayak'],
+            [3, 'Loire'],
+            [4, 'Marche'],
+            [3, 'Nantes - Nice'],
+        ] %}
+        {{ tags_box(tags, {class: 'muted'}) }}
+
+        <div class="pictures">
+            {% for i in 0..2 %}
+                {{ add_linked_img(
+                    '/images/our-trips/3000-km-diagonal-'~i~'.jpg',
+                    'diagonal', null, 'span4',
+                    '/images/our-trips/thumb/3000-km-diagonal-'~i~'.jpg'
+                ) }}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+
+    <!-- The Nantes-Brest channel, in 2008 -->
+    <div id="channel-2008" class="trip span4">
+        <h2>Canal de Nantes à Brest</h2>
+
+        <div class="frieze">
+            <div class="inner">Juin 2008 : 2 semaines</div>
+        </div>
+
+        <p class="main">
+            Notre première « aventure » en itinérance, à vélo.
+            Nous étions alors novices en de nombreux domaines : camping, cyclisme, débrouille...
+            Rallier la côte bretonne par nos propres moyens fit s'épanouir nos rêves de voyage et de liberté.
+        </p>
+
+        <div class="pictures">
+            {% for i in 0..2 %}
+                {{ add_linked_img(
+                    '/images/our-trips/channel-2008-'~i~'.jpg',
+                    'channel', null, 'span4',
+                    '/images/our-trips/thumb/channel-2008-'~i~'.jpg'
+                ) }}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+#afrikapie
+{
+    margin-left: 0;
+    border-color: #CD853F;
+    .frieze { background-color: #CD853F; }
+}
+
+#diagonal-3000-km
+{
+    border-color: #778899;
+    .frieze { background-color: #778899; }
+}
+
+#channel-2008
+{
+    border-color: #2E8B57;
+    .frieze { background-color: #2E8B57; }
+}
+
+.trip
+{
+    border: 2px solid;
+    .border-radius(10px);
+
+    h2 {
+        margin: 0;
+        font-size: 22px;
+        text-align: center;
+        a { color: @textColor; }
+    }
+
+    p {
+        margin: 10px 20px;
+        text-align: justify;
+    }
+
+    .pictures {
+        .clearfix();
+        margin: 5px;
+    }
+
+    .frieze
+    {
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        background: url('/images/base/frieze-left.png') no-repeat left;
+
+        .inner {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            background: url('/images/base/frieze-right.png') no-repeat right;
+        }
+    }
+}

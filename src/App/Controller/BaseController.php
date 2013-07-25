@@ -15,6 +15,7 @@ use Silex\ControllerProviderInterface,
  *      => home
  *      => about
  *      => contact
+ *      => ourTrips
  *      => diagonal3000Km [our-trips]
  *      => afrikapie      [our-trips]
  *
@@ -44,6 +45,7 @@ class BaseController implements ControllerProviderInterface
         $base->match('/contact', [$this, 'contact']);
 
         // Our trips
+        $base->get('our-trips'                 , [$this, 'ourTrips']);
         $base->get('our-trips/3000-km-diagonal', [$this, 'diagonal3000Km']);
         $base->get('our-trips/afrikapie'       , [$this, 'afrikapie']);
 
@@ -129,6 +131,11 @@ class BaseController implements ControllerProviderInterface
             'contact' => $contact,
             'errors'  => $errors,
         ]);
+    }
+
+    public function ourTrips()
+    {
+        return $this->app->render('base/our-trips.html.twig');
     }
 
     public function diagonal3000Km()
