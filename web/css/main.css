@@ -5068,6 +5068,21 @@ h2 small {
 .tags-box .size-5 {
   font-size: 250%;
 }
+.tags-box.unstyled .size-1 {
+  line-height: 21.6px;
+}
+.tags-box.unstyled .size-2 {
+  line-height: 26.4px;
+}
+.tags-box.unstyled .size-3 {
+  line-height: 28.8px;
+}
+.tags-box.unstyled .size-4 {
+  line-height: 36px;
+}
+.tags-box.unstyled .size-5 {
+  line-height: 60px;
+}
 div.preview {
   overflow: auto;
   padding: 4px 6px;
