@@ -2,7 +2,7 @@
  * Some global/bulk javascript
  */
 
-/*global document, $ */
+/*global document, window, $ */
 
 (function () {
     "use strict";
@@ -33,10 +33,22 @@
         $('a[title], i[title], button[title]').tooltip();
     };
 
+    /**
+     * Manage #back2top link.
+     */
+    $(window).scroll(function () {
+
+        if (this.pageYOffset > 200) {
+            $('#back2top').fadeIn(600);
+        } else {
+            $('#back2top').fadeOut(400);
+        }
+
+    });
+
+
     $(document).ready(function () {
-
         $.autoTooltip();
-
     });
 
 }());
