@@ -40,6 +40,11 @@ class BaseController implements ControllerProviderInterface
         $base->get('/',     [$this, 'home']);
         $base->get('/home', [$this, 'home']);
 
+        // Redirec to home
+        // TODO : remove these 2 links in some months
+        $base->get('/voyage' , function () use ($app) { return $app->redirect('/'); });
+        $base->get('/voyage/', function () use ($app) { return $app->redirect('/'); });
+
         // Various pages
         $base->get('/about'    , [$this, 'about']);
         $base->match('/contact', [$this, 'contact']);
