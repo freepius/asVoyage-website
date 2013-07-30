@@ -48,6 +48,9 @@ TODO
 * Traduction of new base pages (about, our-trips, etc.)
 * CSS : p => text-align: justify ??
 * "Our trips" page : no wrap for the "» Read more" !
+* Use JPEG for photos (smaller size) !
+* CSS and Bootstrap : use *clearfix* instead of *row*
+* Error => not always redirection or 404 !
 
 For production
 --------------

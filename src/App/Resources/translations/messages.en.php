@@ -19,6 +19,7 @@ return [
     //'Comments'        => '',
     //'Delete'          => '',
     //'Edit'            => '',
+    //'Error'           => '',
     'Error(s)'        => "There is/are <b>0</b> error/s : at 1.",
     //'General'         => '',
     //'Login'           => '',

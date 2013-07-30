@@ -19,6 +19,7 @@ return [
     'Comments'        => 'Commentaires',
     'Delete'          => 'Supprimer',
     'Edit'            => 'Éditer',
+    'Error'           => 'Erreur',
     'Error(s)'        => "Il y a <b>0</b> erreur(s) : à 1.",
     'General'         => 'Général',
     'Login'           => 'Connexion',

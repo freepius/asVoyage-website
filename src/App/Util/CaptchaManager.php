@@ -29,7 +29,7 @@ class CaptchaManager
     }
 
     /**
-     * Generate a captcha as jpg image, and return its filename
+     * Generate a captcha as jpeg image, and return its filename
      * (relative to the WEB directory).
      * If a captcha already exists in session, return its filename directly.
      */
@@ -40,7 +40,7 @@ class CaptchaManager
         // Randomly execute garbage collection
         $imageFileHandler->collectGarbage();
 
-        // If a captcha already exists => return it directly
+        // If a captcha already exists in session => return it directly
         if (($captcha = $this->session->get($this->sessionKey))
             && ($filename = @ $captcha['filename'])
             && file_exists($this->webPath .'/'. $filename))
