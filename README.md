@@ -46,7 +46,6 @@ TODO
 * Carto : improve !!!
 * Traduction of new base pages (about, our-trips, etc.)
 * CSS : p => text-align: justify ??
-* "Our trips" page : no wrap for the "» Read more" !
 * CSS and Bootstrap : use *clearfix* instead of *row*
 * Remove some DIVs from templates !
 * Improve *add_linked_img* Twig macro
