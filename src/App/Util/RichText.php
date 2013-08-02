@@ -3,7 +3,7 @@
 namespace App\Util;
 
 use Michelf\MarkdownExtra,
-    michelf\SmartyPantsTypographer;
+    Michelf\SmartyPantsTypographer;
 
 
 /**
@@ -16,17 +16,20 @@ class RichText
     public $markdown;
     public $smartypants;
 
-    public function __construct()
+    public function __construct($locale = 'en')
     {
         $this->markdown = new MarkdownExtra();
-        $this->smartypants = @ new SmartyPantsTypographer('qgD:+;+m+h+H+f+u+t');
+        $this->smartypants = new SmartyPantsTypographer('qgD:+;+m+h+H+f+u+t');
 
         // HTML output
         $this->markdown->empty_element_suffix = ">";
 
-        // French quotes
-        $this->smartypants->smart_doublequote_open  = '&#171;';
-        $this->smartypants->smart_doublequote_close = '&#187;';
+        if ('fr' === $locale)
+        {
+            // French quotes
+            $this->smartypants->smart_doublequote_open  = '&#171;';
+            $this->smartypants->smart_doublequote_close = '&#187;';
+        }
     }
 
     public function transform($text)

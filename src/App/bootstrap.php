@@ -9,11 +9,6 @@ $loader = require ROOT.'/vendor/autoload.php';
 // Locale of the application
 setlocale(LC_ALL, 'fr_FR.UTF-8');
 
-// Hack to load SmartyPantsTypographer class :-/
-// TODO : delete this when corrected by author
-$loader->add('michelf', ROOT.'/vendor/michelf/php-smartypants');
-\michelf\SmartyPants::SMARTYPANTS_VERSION;
-
 // Enable _method request parameter support
 \Symfony\Component\HttpFoundation\Request::enableHttpMethodParameterOverride();
 
@@ -66,8 +61,8 @@ $app->register(new \Silex\Provider\SecurityServiceProvider());
 $app->register(new \Nicl\Silex\AutolinkServiceProvider());
 
 /* richText (markdown and typo) */
-$app['richText'] = $app->share(function () {
-    return new \App\Util\RichText();
+$app['richText'] = $app->share(function ($app) {
+    return new \App\Util\RichText($app['locale']);
 });
 
 /* captcha manager */
