@@ -43,7 +43,6 @@ TODO
 * Reorganize HTML5 => make semantic !
 * On Blog "reading" page : add box containing related articles/contents
 * Contact : log when a message is sent
-* Contact : make secure the message sending (with TLS)
 * Carto : improve !!!
 * Traduction of new base pages (about, our-trips, etc.)
 * CSS : p => text-align: justify ??
@@ -51,6 +50,9 @@ TODO
 * Use JPEG for photos (smaller size) !
 * CSS and Bootstrap : use *clearfix* instead of *row*
 * Error => not always redirection or 404 !
+* RichText must also format english text (if locale is english)...
+* Remove some DIVs from templates !
+* Improve *add_linked_img* Twig macro
 
 For production
 --------------
@@ -58,12 +60,12 @@ For production
 * Make a git patch for PROD configs : password, swiftmailer config, mongodb config, etc.
 * Solve the TODOs
 * Update vendor and libraries
-* Management of errors and exceptions
 * Index some Mongo fields ?
 * Cache (with APC/Memcached ?) :
   * Blog repository => caching for listTags() and countArticlesByYearMonth()
   * Blog controller => caching the generated HTML from RichText
 * Minified JS and CSS files
+* Contact : make secure the message sending (with TLS)
 
 Low priority
 ------------

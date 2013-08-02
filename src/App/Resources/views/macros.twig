@@ -1,11 +1,25 @@
 {##
  # Summary :
+ #  -> indent
  #  -> add_linked_img
  #  -> bool2icon
  #  -> cancel
  #  -> cancel_link
  #  -> tags_box
  #}
+
+
+{##
+ # Indent an element (with a left margin, an arrow and the .muted class).
+ #}
+{% macro indent(element) %}
+{% spaceless %}
+    <br>
+    <small class="muted" style="margin-left: 15px;">
+        <i class="icon-arrow-right"></i>&nbsp;{{- element | raw -}}
+    </small>
+{% endspaceless %}
+{% endmacro %}
 
 
 {##

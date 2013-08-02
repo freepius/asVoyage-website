@@ -5,6 +5,7 @@
  *  -> A list of various messages
  *  -> Captcha
  *  -> Contact
+ *  -> Error
  *  -> Languages
  *  -> Literal numbers
  *  -> Months
@@ -62,6 +63,22 @@ return [
             'message' => 'Your message',
             'name'    => 'Who are you ?',
             'subject' => 'The subject',
+        ],
+    ],
+
+    // Error
+    'error' => [
+        'go2home'   => 'Maybe you should <a href="/home">go back to home</a> ?!',
+        'contactUs' => 'Or <a href="/contact">contact us</a> if the problem seems fishy...',
+
+        'title' => [
+            '404'   => 'Hu hu 404 ! You are lost !',
+            'other' => 'Hu hu ! Fatal error !',
+        ],
+
+        'message' => [
+            '404'   => 'The requested page could not be found.',
+            'other' => 'We are sorry, but something went terribly wrong.',
         ],
     ],
 

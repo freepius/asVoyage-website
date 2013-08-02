@@ -5,6 +5,7 @@
  *  -> A list of various messages
  *  -> Captcha
  *  -> Contact
+ *  -> Error
  *  -> Languages
  *  -> Literal numbers
  *  -> Months
@@ -62,6 +63,22 @@ return [
             'message' => 'Votre message',
             'name'    => 'Qui êtes-vous ?',
             'subject' => 'Le sujet',
+        ],
+    ],
+
+    // Error
+    'error' => [
+        'go2home'   => 'Peut-être devriez-vous <a href="/home">retourner à l\'accueil</a> ?!',
+        'contactUs' => 'Ou <a href="/contact">contactez-nous</a> si le problème vous paraît louche...',
+
+        'title' => [
+            '404'   => 'Hu hu 404 ! Vous êtes perdus !',
+            'other' => 'Hu hu ! Erreur fatale !',
+        ],
+
+        'message' => [
+            '404'   => "La page que vous cherchez n'existe pas (ou plus).",
+            'other' => "Quelque chose a mal tourné. C'est terrible !",
         ],
     ],
 

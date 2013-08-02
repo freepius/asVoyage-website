@@ -1,0 +1,33 @@
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import indent, add_linked_img %}
+
+
+{% block main %}
+    <h1 id="page-title">
+        {{ ('error.title.' ~ (code == 404 ? '404' : 'other')) | trans }}
+    </h1>
+
+    {% set img = random(5) ~ '.jpg' %}
+
+    {{ add_linked_img(
+        '/images/errors/' ~ img,
+        null, null, 'span4 thumbnail',
+        '/images/errors/thumb/' ~ img
+    ) }}
+
+    <p class="span7 lead">
+        {{ ('error.message.' ~ (code == 404 ? '404' : 'other')) | trans }}
+
+        {{ message ? indent(message) }}
+
+        <br><br>
+
+        {{ 'error.go2home' | trans | raw }}
+
+        <br>
+
+        <small>{{ 'error.contactUs' | trans | raw }}</small>
+    </p>
+
+{% endblock %}

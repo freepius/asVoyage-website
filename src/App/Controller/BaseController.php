@@ -24,6 +24,7 @@ use Silex\ControllerProviderInterface,
  *      => switchLocale
  *      => changeCaptcha
  *      => renderRichText
+ *      => manageErrors
  */
 class BaseController implements ControllerProviderInterface
 {
@@ -39,11 +40,6 @@ class BaseController implements ControllerProviderInterface
         // Home
         $base->get('/',     [$this, 'home']);
         $base->get('/home', [$this, 'home']);
-
-        // Redirec to home
-        // TODO : remove these 2 links in some months
-        $base->get('/voyage' , function () use ($app) { return $app->redirect('/'); });
-        $base->get('/voyage/', function () use ($app) { return $app->redirect('/'); });
 
         // Various pages
         $base->get('/about'    , [$this, 'about']);
@@ -63,6 +59,8 @@ class BaseController implements ControllerProviderInterface
         $base->get('/captcha-change', [$this, 'changeCaptcha']);
 
         $base->post('/render-richtext', [$this, 'renderRichText']);
+
+        $app->error([$this, 'manageErrors']);
 
         return $base;
     }
@@ -190,5 +188,21 @@ class BaseController implements ControllerProviderInterface
         return $this->app['richText']->transform(
             $request->request->get('text')
         );
+    }
+
+    public function manageErrors(\Exception $e, $code)
+    {
+        if ($this->app['debug']) { return; }
+
+        // Hack to don't make shout the "isGranted" function, in "layout.html.twig".
+        $this->app['security']->setToken(
+            new \Symfony\Component\Security\Core\Authentication\Token\AnonymousToken('', '')
+        );
+
+        return $this->app->render('base/error.html.twig',
+        [
+            'message' => $e->getMessage(),
+            'code'    => $code,
+        ]);
     }
 }
