@@ -134,7 +134,7 @@ class BlogController implements ControllerProviderInterface
         // Do we come from the reading page of a Blog article ?
         if (preg_match('{^blog/.*/read}', $url))
         {
-            return $this->app->getSession('blog_filters_and_page',
+            return $this->app->getSession('blog.filters_and_page',
             [
                 'hasTagFilter'   => false,
                 'hasYearFilter'  => false,
@@ -153,7 +153,7 @@ class BlogController implements ControllerProviderInterface
 
             if ('tag' === $filter)
             {
-                $tag  = strtok('/');
+                $tag  = strip_tags(strtok('/'));
                 $page = strtok('');
             }
             elseif ('year' === $filter)
@@ -177,7 +177,7 @@ class BlogController implements ControllerProviderInterface
             }
         }
 
-        $this->app->setSession('blog_filters_and_page', $result =
+        $this->app->setSession('blog.filters_and_page', $result =
         [
             'hasTagFilter'   => null !== $tag,
             'hasYearFilter'  => null !== $year && null === $month,
@@ -194,7 +194,7 @@ class BlogController implements ControllerProviderInterface
 
     /**
      * From its slug ($article param.), retrieve an article as array.
-     * If $article doesn't match any article, add a flash error and return null.
+     * If $article doesn't match any article, abort with 404 error code.
      */
     public function slugToArticle($article)
     {
@@ -204,11 +204,8 @@ class BlogController implements ControllerProviderInterface
         }
         catch (BlogArticleNotFound $e)
         {
-            $this->app->addFlash('error', $this->app->trans(
-                'blog.notFound', [$article]
-            ));
-
-            return null;
+            $article = strip_tags($article);
+            $this->app->abort(404, $this->app->trans('blog.notFound', [$article]));
         }
     }
 
@@ -239,7 +236,7 @@ class BlogController implements ControllerProviderInterface
          * Process the filters.
          * User can used them only one by one !
          */
-        $tag   = $tag;
+        $tag   = strip_tags($tag);
         $year  = (int) $year;
         $month = min((int) $month, 12);
 
@@ -322,11 +319,6 @@ class BlogController implements ControllerProviderInterface
      */
     public function read(Request $request, $article, $idComment = null)
     {
-        if (null === $article)
-        {
-            return $this->app->redirect('/blog');
-        }
-
         $article['comments'] = $this->repository->getCommentsById($article['_id']);
 
         $opComment = $this->actionsOnComment($request, $article, $idComment);
@@ -348,11 +340,6 @@ class BlogController implements ControllerProviderInterface
      */
     public function post(Request $request, $article = [])
     {
-        if (null === $article)
-        {
-            return $this->app->redirect('/blog/dashboard');
-        }
-
         if ($isCreation = [] === $article)
         {
             $article = $this->factoryArticle->instantiate();
@@ -391,11 +378,6 @@ class BlogController implements ControllerProviderInterface
 
     public function delete(Request $request, $article)
     {
-        if (null === $article)
-        {
-            return $this->app->redirect('/blog/dashboard');
-        }
-
         if ($request->isMethod('POST'))
         {
             $this->repository->deleteById($article['_id']);
@@ -423,11 +405,6 @@ class BlogController implements ControllerProviderInterface
      */
     public function crudComment(Request $request, $article, $idComment = null)
     {
-        if (null === $article)
-        {
-            return $this->app->redirect('/blog/dashboard');
-        }
-
         $article['comments'] = $this->repository->getCommentsById($article['_id']);
 
         $opComment = $this->actionsOnComment($request, $article, $idComment);
