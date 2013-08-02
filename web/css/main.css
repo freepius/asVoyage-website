@@ -4831,7 +4831,6 @@ article > header time {
   color: #999;
 }
 article [itemprop="articleBody"] {
-  text-align: justify;
   margin-bottom: 50px;
 }
 article.summary {
@@ -4918,7 +4917,6 @@ article.summary [itemprop="articleBody"] {
 }
 .trip p {
   margin: 10px 20px;
-  text-align: justify;
 }
 .trip .pictures {
   *zoom: 1;
@@ -4964,6 +4962,9 @@ strong {
 }
 body {
   padding-bottom: 50px;
+}
+p {
+  text-align: justify;
 }
 .row {
   margin-left: 0;
@@ -5091,7 +5092,6 @@ div.preview {
   border-radius: 4px;
   border: 1px solid #ccc;
   background-color: white;
-  text-align: justify;
 }
 .actions-right {
   *zoom: 1;

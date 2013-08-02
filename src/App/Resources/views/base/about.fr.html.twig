@@ -138,9 +138,7 @@
             <div id="both" class="row">
                 {{ tags_box(tagsBoth[0:tagsBothMiddle], {align: 'right', class: 'span4'}) }}
 
-                <div class="span4">
-                    {{ linked_img('/images/ourselves', 'together.jpg') }}
-                </div>
+                {{ linked_img('/images/ourselves', 'together.jpg', {class: 'span4'}) }}
 
                 {{ tags_box(tagsBoth[tagsBothMiddle:], {align: 'left', class: 'span4'}) }}
             </div>

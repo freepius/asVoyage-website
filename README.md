@@ -45,9 +45,7 @@ TODO
 * Contact : log when a message is sent
 * Carto : improve !!!
 * Traduction of new base pages (about, our-trips, etc.)
-* CSS : p => text-align: justify ??
 * CSS and Bootstrap : use *clearfix* instead of *row*
-* Remove some DIVs from templates !
 
 For production
 --------------
