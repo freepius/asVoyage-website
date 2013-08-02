@@ -2,7 +2,7 @@
 
 {% extends "layout.html.twig" %}
 
-{% from "macros.twig" import add_linked_img %}
+{% from "macros.twig" import linked_img %}
 
 {% import "carto.twig" as carto %}
 
@@ -32,11 +32,7 @@
                 <div class="carousel-inner">
                     {% for i in 0..19 %}
                         <div class="item {{ loop.first ? 'active' }}" data-offset="{{ i }}">
-                            {{ add_linked_img(
-                                '/images/home/'~i~'.jpg',
-                                'carousel', null, null,
-                                '/images/home/thumb/'~i~'.jpg'
-                            ) }}
+                            {{ linked_img('/images/home', i~'.jpg', {thumb: true}) }}
                         </div>
                     {% endfor %}
                 </div>

@@ -48,7 +48,6 @@ TODO
 * CSS : p => text-align: justify ??
 * CSS and Bootstrap : use *clearfix* instead of *row*
 * Remove some DIVs from templates !
-* Improve *add_linked_img* Twig macro
 
 For production
 --------------

@@ -2,7 +2,7 @@
 
 {% extends "layout.html.twig" %}
 
-{% from "macros.twig" import add_linked_img, tags_box %}
+{% from "macros.twig" import linked_img, tags_box %}
 
 
 {% block main %}
@@ -69,11 +69,11 @@
 
         <div class="pictures">
             {% for i in 0..2 %}
-                {{ add_linked_img(
-                    '/images/our-trips/3000-km-diagonal-'~i~'.jpg',
-                    'diagonal', null, 'span4',
-                    '/images/our-trips/thumb/3000-km-diagonal-'~i~'.jpg'
-                ) }}
+                {{ linked_img('/images/our-trips', '3000-km-diagonal-'~i~'.jpg', {
+                    class: 'span4',
+                    group: 'diagonal',
+                    thumb: true,
+                }) }}
             {% endfor %}
         </div>
     </div>
@@ -96,11 +96,11 @@
 
         <div class="pictures">
             {% for i in 0..2 %}
-                {{ add_linked_img(
-                    '/images/our-trips/channel-2008-'~i~'.jpg',
-                    'channel', null, 'span4',
-                    '/images/our-trips/thumb/channel-2008-'~i~'.jpg'
-                ) }}
+                {{ linked_img('/images/our-trips', 'channel-2008-'~i~'.jpg', {
+                    class: 'span4',
+                    group: 'channel',
+                    thumb: true,
+                }) }}
             {% endfor %}
         </div>
     </div>

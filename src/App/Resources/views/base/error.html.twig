@@ -1,6 +1,6 @@
 {% extends "layout.html.twig" %}
 
-{% from "macros.twig" import indent, add_linked_img %}
+{% from "macros.twig" import indent, linked_img %}
 
 
 {% block main %}
@@ -10,11 +10,11 @@
 
     {% set img = random(5) ~ '.jpg' %}
 
-    {{ add_linked_img(
-        '/images/errors/' ~ img,
-        null, null, 'span4 thumbnail',
-        '/images/errors/thumb/' ~ img
-    ) }}
+    {{ linked_img('/images/errors/', img, {
+        class: 'span4 thumbnail',
+        group: null,
+        thumb: true,
+    }) }}
 
     <p class="span7 lead">
         {{ ('error.message.' ~ (code == 404 ? '404' : 'other')) | trans }}

@@ -2,7 +2,7 @@
 
 {% extends "layout.html.twig" %}
 
-{% from "macros.twig" import tags_box, add_linked_img %}
+{% from "macros.twig" import tags_box, linked_img %}
 
 {% set tagsMathieu = [
     [3, '1987'],
@@ -124,8 +124,8 @@
                 {{ tags_box(tagsMathieu, {align: 'right', class: 'span4', special: 'Mathieu'}) }}
 
                 <div class="span4">
-                    {{ add_linked_img('/images/ourselves/freepius.jpg', 'global', null, 'span6') }}
-                    {{ add_linked_img('/images/ourselves/manalee.jpg', 'global', null, 'span6') }}
+                    {{ linked_img('/images/ourselves', 'freepius.jpg', {class: 'span6'}) }}
+                    {{ linked_img('/images/ourselves', 'manalee.jpg',  {class: 'span6'}) }}
                 </div>
 
                 {{ tags_box(tagsMarie, {align: 'left', class: 'span4', special: 'Marie'}) }}
@@ -139,7 +139,7 @@
                 {{ tags_box(tagsBoth[0:tagsBothMiddle], {align: 'right', class: 'span4'}) }}
 
                 <div class="span4">
-                    {{ add_linked_img('/images/ourselves/together.jpg', 'global') }}
+                    {{ linked_img('/images/ourselves', 'together.jpg') }}
                 </div>
 
                 {{ tags_box(tagsBoth[tagsBothMiddle:], {align: 'left', class: 'span4'}) }}

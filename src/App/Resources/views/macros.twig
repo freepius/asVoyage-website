@@ -1,7 +1,7 @@
 {##
  # Summary :
  #  -> indent
- #  -> add_linked_img
+ #  -> linked_img
  #  -> bool2icon
  #  -> cancel
  #  -> cancel_link
@@ -23,16 +23,29 @@
 
 
 {##
- # Add an image (in a bootstrap style)
- # which can be open in a lightbox2 box under the `group` (if specified).
+ # Add an image :
+ #  -> with a link for larger view
+ #  -> which can be open in a lightbox2 box under the `group` (if specified).
  #}
-{% macro add_linked_img(img, group, caption, classes, thumb) %}
+{% macro linked_img(folder, img, options) %}
 {% spaceless %}
-    <a href="{{ img }}" class="{{ classes|default }}"
-       rel="lightbox{{- group|default ? '['~group~']' -}}"
-       {{ caption|default ? 'title="'~caption~'"' }}>
+    {##
+     # group : null for an individual image OR a string
+     #}
+    {%- set o = {
+            caption : '',
+            class   : '',
+            group   : 'global',
+            thumb   : false,
+        }
+        | merge(options | default({}))
+    -%}
 
-        <img src="{{ thumb|default ?: img  }}">
+    <a href="{{ folder~'/'~img }}" class="{{ o.class }}"
+       rel="lightbox{{- o.group ? '['~o.group~']' -}}"
+       {{ o.caption ? 'title="'~o.caption~'"' }}>
+
+        <img src="{{ o.thumb ? (folder~'/thumb/'~img) : (folder~'/'~img) }}">
     </a>
 {% endspaceless %}
 {% endmacro %}
