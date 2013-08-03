@@ -7,7 +7,7 @@
 
 {% block main %}
 
-    <header class="row">
+    <header class="clearfix">
         <!-- Breadcrumb + title -->
         <div class="pull-left">
             <nav><a href="/blog">{{ 'blog.home'|trans }}</a> »</nav>
@@ -16,11 +16,9 @@
         </div>
 
         <!-- Create an article -->
-        <div class="pull-right">
-            <a href="/blog/create" class="btn btn-success">
-                <i class="icon-plus-sign icon-white"></i> {{ 'blog.create'|trans }}
-            </a>
-        </div>
+        <a href="/blog/create" class="btn btn-success pull-right">
+            <i class="icon-plus-sign icon-white"></i> {{ 'blog.create'|trans }}
+        </a>
     </header>
 
     <!-- List of all blog articles -->

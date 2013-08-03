@@ -5,7 +5,7 @@
 
 {% block main %}
 
-<header class="row">
+<header class="clearfix">
     <!-- Title -->
     <h1 class="pull-left">
         <span id="page-title">{{ 'blog.home'|trans }}</span>
@@ -31,11 +31,9 @@
 
     {% if is_granted('ROLE_ADMIN') %}
         <!-- Go to dashboard -->
-        <div class="pull-right">
-            <a href="/blog/dashboard" class="btn">
-                <i class="icon-list-alt"></i> {{ 'blog.dashboard'|trans }}
-            </a>
-        </div>
+        <a href="/blog/dashboard" class="btn pull-right">
+            <i class="icon-list-alt"></i> {{ 'blog.dashboard'|trans }}
+        </a>
     {% endif %}
 </header>
 

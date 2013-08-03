@@ -1,6 +1,6 @@
 <article itemscope itemtype="http://schema.org/BlogPosting" class="summary">
 
-    <header class="row">
+    <header class="clearfix">
         <h1 itemprop="name" class="pull-left">{{ title }}</h1>
 
         <time itemprop="datePublished" datetime="{{ pubDatetime }}" class="pull-right">
@@ -9,7 +9,7 @@
     </header>
 
 
-    <div class="row" itemprop="articleBody">
+    <div class="clearfix" itemprop="articleBody">
         {{ (summary ?: text) | raw }}
 
         <big class="pull-right">

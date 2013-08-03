@@ -236,7 +236,7 @@ class BlogController implements ControllerProviderInterface
          * Process the filters.
          * User can used them only one by one !
          */
-        $tag   = strip_tags($tag);
+        $tag   = $tag ? strip_tags($tag) : null;
         $year  = (int) $year;
         $month = min((int) $month, 12);
 
