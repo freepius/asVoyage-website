@@ -45,7 +45,6 @@ TODO
 * Contact : log when a message is sent
 * Carto : improve !!!
 * Traduction of new base pages (about, our-trips, etc.)
-* CSS and Bootstrap : use *clearfix* instead of *row*
 
 For production
 --------------

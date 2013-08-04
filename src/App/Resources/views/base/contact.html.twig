@@ -4,7 +4,7 @@
 
 {% from 'macros.twig' import cancel_link %}
 
-{% from 'form.twig' import captcha, input, list_errors, submit %}
+{% from 'form.twig' import list_errors, render_fields, submit %}
 
 
 {% block javascripts %}
@@ -24,9 +24,9 @@
     {{ list_errors(errors, 'contact') }}
 
     <div class="row" style="margin-bottom: 20px;">
-        <img src="/images/base/pigeon-carrier.png" class="thumbnail span2">
+        <img src="/images/base/pigeon-carrier.png" class="col-2 img-rounded">
 
-        <p class="span8">
+        <p class="col-8">
             {% if app.locale == 'fr' %}
                 Le formulaire ci-dessous vous permet de nous faire parvenir un pigeon voyageur.
                 <br>
@@ -50,24 +50,23 @@
     </div>
 
     <form action="/contact" method="post" class="form-horizontal">
-        <!-- Name or Nickname -->
-        {{ input('text', contact, errors, 'contact', 'name', {required: true}) }}
-
-        <!-- Email -->
-        {{ input('text', contact, errors, 'contact', 'email', {required: true}) }}
-
-        <!-- Subject -->
-        {{ input('text', contact, errors, 'contact', 'subject',
-            {required: true, size: 'input-xxlarge'}
+        {{ render_fields(contact, errors, 'contact', {required: true},
+            [
+                {name: 'name'},
+                {name: 'email'},
+                {
+                    name: 'subject',
+                    size: 8
+                },
+                {
+                    type: 'textarea',
+                    name: 'message',
+                },
+                {type: 'captcha'}
+            ]
         ) }}
 
-        <!-- Message -->
-        {{ input('textarea', contact, errors, 'contact', 'message', {required: true}) }}
-
-        <!-- Captcha -->
-        {{ captcha(contact.captcha, errors.captcha | default) }}
-
-        <div class="controls">
+        <div class="col-lg-offset-3">
             {{ submit() }}
             {{ cancel_link('/home') }}
         </div>

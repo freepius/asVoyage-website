@@ -3,7 +3,7 @@
     <!-- Filter articles by tags -->
     <h2>{{ 'blog.by-tag'|trans }}</h2>
 
-    <ul class="inline">
+    <ul class="list-inline">
         {% for tag, weight in tags %}
 
             {% set fontSize = (100 + weight.1) ~ '%' %}

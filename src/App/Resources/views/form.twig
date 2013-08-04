@@ -7,13 +7,19 @@
  #  -> input_checkbox [private]
  #  -> textarea       [private]
  #  -> captcha
- #  -> textarea_and_preview
+ #  -> textarea_with_preview
  #}
 
 
+{##
+ # Render errors as list of links to the fields.
+ #
+ # errors : array whose key = field name, value = error as string (value is not used).
+ # module : a prefix for translations.
+ #}
 {% macro list_errors(errors, module) %}
     {% if errors %}
-        <p class="alert alert-error">
+        <p class="alert alert-danger">
             {% set fields_trans = [] %}
 
             {% for field in errors | keys %}
@@ -32,6 +38,9 @@
 {% endmacro %}
 
 
+{##
+ # Display a submit button (colored and with icon).
+ #}
 {% macro submit(text, classes) %}
 {% spaceless %}
 
@@ -47,34 +56,77 @@
 {% endmacro %}
 
 
+{##
+ # Render multiple fields in the order of `fields` parameter.
+ #
+ # entity        : array in which the data are picked up.
+ # errors        : array whose key = field name, value = error as string.
+ # module        : a prefix for translations.
+ # globalOptions : array of global options.
+ # fields        : array of associative arrays containing info of each field.
+ #}
+{% macro render_fields(entity, errors, module, globalOptions, fields) %}
+
+    {% set globalOptions = globalOptions | default({}) %}
+
+    {% for field in fields %}
+
+        {% set type = field.type | default('text') %}
+
+        {% set options = globalOptions | merge(field) %}
+
+        {% if type in ['text', 'textarea'] %}
+            {{ _self.input(type, entity, errors, module, field.name, options) }}
+        {% elseif type == 'checkbox' %}
+            {{ _self.checkbox(entity, module, field.name, options) }}
+        {% elseif type == 'captcha' %}
+            {{ _self.captcha(entity.captcha, errors.captcha | default) }}
+        {% elseif type == 'textarea_with_preview' %}
+            {{ _self.textarea_with_preview(entity, errors, module, field.name) }}
+        {% endif %}
+
+    {% endfor %}
+
+{% endmacro %}
+
+
+{##
+ # type = 'text' || 'textarea'.
+ #}
 {% macro input(type, entity, errors, module, field, options) %}
+
     {%- set o = {
             error_inline : false,
             help         : false,
             help_inline  : false,
             required     : false,
+            size         : (type == 'textarea' ? 12 : 6),
         }
         | merge(options | default({}))
     -%}
 
-    <div class="control-group {{ errors[field] is defined ? 'error' }}">
-        <label class="control-label" for="{{ field }}">{{ (module ~ '.field.' ~ field) | trans }}</label>
+    <div class="form-group {{ errors[field] is defined ? 'has-error' }}">
+        <label class="control-label col-lg-3" for="{{ field }}">
+            {{ (module ~ '.field.' ~ field) | trans }}
+        </label>
 
-        <div class="controls">
-            {% if type == 'checkbox' %}
-                {{ _self.input_checkbox(entity, field) }}
-            {% elseif type == 'textarea' %}
-                {{ _self.textarea(entity, field, o) }}
-            {% else %}
-                {{ _self.input_text(entity, field, o) }}
-            {% endif %}
+        <div class="col-lg-9">
+            <div class="col-{{ o.size }}">
+                {% if type == 'textarea' %}
+                    {{ _self.textarea(entity, field, o) }}
+                {% else %}
+                    {{ _self.input_text(entity, field, o) }}
+                {% endif %}
+            </div>
 
             {% if errors[field] is defined %}
-                <span class="help-{{ o.error_inline ? 'inline' : 'block' }}">{{ errors[field] }}</span>
+                <span class="help-block {{ not o.error_inline ? 'col-12' }}">
+                    {{ errors[field] }}
+                </span>
             {% endif %}
 
             {% if o.help %}
-                <span class="help-{{ o.help_inline ? 'inline' : 'block' }}">
+                <span class="help-block {{ not o.help_inline ? 'col-12' }}">
                     {{ (module ~ '.help.' ~ field) | trans | raw }}
                 </span>
             {% endif %}
@@ -85,19 +137,7 @@
 
 {# /!\ Don't use it directly #}
 {% macro input_text(entity, field, options) %}
-    {%- set o = {
-            size : 'input-xlarge',
-        }
-        | merge(options | default({}))
-    -%}
-
-    <input type="text" id="{{ field }}" name="{{ field }}" class="{{ o.size }}" value="{{ entity[field] }}" {{ o.required ? 'required' }}>
-{% endmacro %}
-
-
-{# /!\ Don't use it directly #}
-{% macro input_checkbox(entity, field) %}
-    <input type="checkbox" id="{{ field }}" name="{{ field }}" {{ entity[field] ? 'checked="checked"' }}>
+    <input type="text" id="{{ field }}" name="{{ field }}" class="form-control" value="{{ entity[field] }}" {{ options.required ? 'required' }}>
 {% endmacro %}
 
 
@@ -105,55 +145,89 @@
 {% macro textarea(entity, field, options) %}
     {%- set o = {
             rows : 8,
-            size : 'input-xxlarge',
         }
         | merge(options | default({}))
     -%}
 
-    <textarea id="{{ field }}" name="{{ field }}" class="{{ o.size }}" rows="{{ o.rows }}" {{ o.required ? 'required' }}>
+    <textarea id="{{ field }}" name="{{ field }}" class="form-control" rows="{{ o.rows }}" {{ o.required ? 'required' }}>
         {{- entity[field] -}}
     </textarea>
 {% endmacro %}
 
 
-{% macro captcha(img_src, error) %}
-    <div class="control-group {{ error ? 'error' }}">
-        <label class="control-label" for="captcha">{{ 'captcha.field'|trans }}</label>
+{##
+ # Render a checkbox.
+ #}
+{% macro checkbox(entity, module, field, options) %}
+    {%- set o = {
+            help : false,
+        }
+        | merge(options | default({}))
+    -%}
 
-        <div class="controls">
-            <!-- Input + error -->
-            <p>
-                <input type="text" id="captcha" name="captcha" class="input-medium" required>
+    <div class="form-group">
+        <label class="control-label col-lg-3" for="{{ field }}">
+            {{ (module ~ '.field.' ~ field) | trans }}
+        </label>
 
-                {% if error %}
-                    <span class="help-inline">{{ error }}</span>
-                {% endif %}
-            </p>
+        <div class="col-lg-9 checkbox">
+            <input type="checkbox" id="{{ field }}" name="{{ field }}" {{ entity[field] ? 'checked' }}>
 
-            <!-- Captcha image + "change" action -->
-            <p>
-                <i id="captcha-change" class="icon-refresh" style="cursor: pointer;"
-                   title="{{ 'captcha.help.change'|trans }}"></i>
-
-                <img id="captcha-img" src="{{ img_src }}">
-            </p>
-
-            <span class="help-block">{{ 'captcha.help' | trans | raw }}</span>
+            {% if o.help %}
+                <span class="help-block" style="margin-top: 0;">
+                    {{ (module ~ '.help.' ~ field) | trans | raw }}
+                </span>
+            {% endif %}
         </div>
     </div>
 {% endmacro %}
 
 
+{##
+ # Render a captcha widget with :
+ #  -> the captcha as image
+ #  -> a "refresh button" to change the captcha
+ #  -> an input['text']
+ #  -> a little help/info box
+ #}
+{% macro captcha(img_src, error) %}
+    <div class="form-group {{ error ? 'has-error' }}">
+        <label class="control-label col-lg-3" for="captcha">{{ 'captcha.field'|trans }}</label>
+
+        <div class="col-lg-9">
+            <div class="pull-left">
+                <img id="captcha-img" src="{{ img_src }}">
+
+                <i id="captcha-change" class="icon-refresh" style="cursor: pointer;"
+                   title="{{ 'captcha.help.change'|trans }}"></i>
+            </div>
+
+            <div class="col-5" style="margin-top: 12px;">
+                <input type="text" id="captcha" name="captcha" class="form-control" required>
+                <span class="help-block">{{ error }}</span>
+            </div>
+
+            <span class="help-block col-12">{{ 'captcha.help' | trans | raw }}</span>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{##
+ # Render a textarea in two parts accessible with tabs :
+ #  -> the 1-st to input the text
+ #  -> the 2-nd to preview the text
+ #}
 {% macro textarea_with_preview(entity, errors, module, field) %}
 
 <!-- {{ field }} : Edit and Preview tabs -->
-<div class="control-group {{ errors[field] is defined ? 'error' }}">
-    <label class="control-label" for="{{ field }}">{{ (module ~ '.field.' ~ field) | trans }}</label>
+<div class="form-group {{ errors[field] is defined ? 'has-error' }}">
+    <label class="control-label col-lg-3" for="{{ field }}">{{ (module ~ '.field.' ~ field) | trans }}</label>
 
-    <div class="controls tabbable">
+    <div class="tabbable col-lg-9">
 
         <!-- Links to tabs -->
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" style="margin-bottom: 10px;">
             <li class="active">
                 <a href="#{{ field }}-edit" data-toggle="tab">{{ 'Edit'|trans }}</a>
             </li>
@@ -172,7 +246,7 @@
                     <span class="help-block text-error">{{ errors[field] }}</span>
                 {% endif %}
 
-                <textarea id="{{ field }}" name="{{ field }}" class="input-block-level">
+                <textarea id="{{ field }}" name="{{ field }}" class="form-control">
                     {{- entity[field] -}}
                 </textarea>
             </div>

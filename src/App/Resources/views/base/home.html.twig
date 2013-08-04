@@ -12,6 +12,14 @@
 
     <style>
         #map { height: 220px; }
+
+        .carousel-inner img { width: 100%; }
+
+        #main .col-4 > div
+        {
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 {% endblock %}
 
@@ -26,25 +34,21 @@
     <article itemscope itemtype="http://schema.org/Article">
         <h1 id="page-title">Bienvenue à tous !</h1>
 
-        <div class="span4" style="margin-left: 0px;">
+        <div class="col-4">
             <!-- Some pictures -->
-            <div class="carousel slide thumbnail">
-                <div class="carousel-inner">
-                    {% for i in 0..19 %}
-                        <div class="item {{ loop.first ? 'active' }}" data-offset="{{ i }}">
-                            {{ linked_img('/images/home', i~'.jpg', {thumb: true}) }}
-                        </div>
-                    {% endfor %}
-                </div>
+            <div class="carousel-inner slide">
+                {% for i in 0..19 %}
+                    <div class="item {{ loop.first ? 'active' }}" data-offset="{{ i }}">
+                        {{ linked_img('/images/home', i~'.jpg', {thumb: true}) }}
+                    </div>
+                {% endfor %}
             </div>
 
             <!-- Map related to these pictures -->
-            <div class="thumbnail">
-                <div id="map"></div>
-            </div>
+            <div id="map"></div>
         </div>
 
-        <div class="span8" itemprop="articleBody">
+        <div class="col-8" itemprop="articleBody">
             {%- set text -%}
 <big>Nous sommes **Marie** et **Mathieu**, deux jeunes voyageurs.</big>
 

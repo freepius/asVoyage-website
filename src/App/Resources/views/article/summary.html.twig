@@ -3,8 +3,10 @@
     <header class="clearfix">
         <h1 itemprop="name" class="pull-left">{{ title }}</h1>
 
-        <time itemprop="datePublished" datetime="{{ pubDatetime }}" class="pull-right">
-            {{ pubDatetime | localizeddate('full') | capitalize }}
+        <time itemprop="datePublished" datetime="{{ pubDatetime }}" class="pull-right text-right">
+            {{ pubDatetime | localizeddate('medium', 'none') }}
+            <br>
+            {{ pubDatetime | localizeddate('none', 'short') }}
         </time>
     </header>
 
@@ -20,7 +22,7 @@
 
     <footer class="row">
         <!-- Tags -->
-        <div class="span8">
+        <div class="col-8">
             <b>{{ 'blog.field.tags'|trans }} :</b>
 
             {% if tags is empty %}
@@ -31,7 +33,7 @@
         </div>
 
         <!-- Comments -->
-        <div class="pull-right" style="margin-left: 1em;">
+        <div class="pull-right" style="margin-left: 15px;">
             <meta itemprop="interactionCount" content="UserComments:{{- countComments -}}">
 
             <a itemprop="discussionUrl" href="/blog/{{- slug -}}/read#comments"
@@ -43,7 +45,7 @@
 
         {% if is_granted('ROLE_ADMIN') %}
             <!-- Actions on article -->
-            <div class="pull-right" style="margin-right: 1em;">
+            <div class="pull-right" style="margin-right: 15px;">
                 <!-- Update -->
                 <a href="/blog/{{- slug -}}/update" title="{{ 'Update'|trans }}">
                     <i class="icon-pencil"></i></a>

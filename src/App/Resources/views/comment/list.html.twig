@@ -1,6 +1,6 @@
 {% from 'macros.twig' import cancel_link %}
 
-{% from 'form.twig' import captcha, input, submit %}
+{% from 'form.twig' import render_fields, submit %}
 
 
 <meta itemprop="interactionCount" content="UserComments:{{- article.countComments -}}">
@@ -24,21 +24,18 @@
 
 <form action="{{ url_prefix ~ (comment.isUpdating ? '/'~comment.id) }}" method="post" class="form-horizontal">
 
-    <!-- Name or Nickname -->
-    {{ input('text', comment.entity, comment.errors, 'comment', 'name', {required: true}) }}
-
-    <!-- Text -->
-    {{ input('textarea', comment.entity, comment.errors, 'comment', 'text', {
-            help: true,
-            required: true
-    }) }}
+    {% set fields = [
+        {name: 'name'},
+        {name: 'text', type: 'textarea', help: true} ] %}
 
     {% if comment.entity.captcha is defined %}
-        {{ captcha(comment.entity.captcha, comment.errors.captcha | default) }}
+        {% set fields = fields | merge([{type: 'captcha'}]) %}
     {% endif %}
 
+    {{ render_fields(comment.entity, comment.errors, 'comment', {required: true}, fields) }}
+
     <!-- Form actions -->
-    <div class="controls">
+    <div class="col-lg-offset-3">
         {% if not comment.isFirstCreation %}
             {{ cancel_link(url_prefix) }}
         {% endif %}

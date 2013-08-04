@@ -41,7 +41,7 @@
                 <tr>
                     <td>{{ article.title }}</td>
                     <td>{{ article.slug }}</td>
-                    <td>{{ article.pubDatetime | localizeddate }}</td>
+                    <td>{{ article.pubDatetime | localizeddate('short', 'short') }}</td>
                     <td>{{ bool2icon(article.isPublished) }}</td>
                     <td>{{ bool2icon(article.beCommented) }}</td>
                     <td>{{ article.countComments }}</td>

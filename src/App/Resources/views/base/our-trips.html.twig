@@ -9,7 +9,7 @@
     <h1 id="page-title">Nos voyages</h1>
 
     <!-- Afrikapié -->
-    <div id="afrikapie" class="trip span4">
+    <div id="afrikapie" class="trip">
 
         <h2>
             <a href="/our-trips/afrikapie">Afrikapié</a>
@@ -34,13 +34,13 @@
             [4, 'Marche'],
             [2, 'Nature'],
         ] %}
-        {{ tags_box(tags, {class: 'muted'}) }}
+        {{ tags_box(tags, {class: 'text-muted'}) }}
     </div>
 
     <!-- =================================================================== -->
 
     <!-- 3000 km in diagonal, in 2011 -->
-    <div id="diagonal-3000-km" class="trip span4">
+    <div id="diagonal-3000-km" class="trip">
 
         <h2>
             <a href="/our-trips/3000-km-diagonal">3000 km en diagonale</a>
@@ -65,12 +65,12 @@
             [4, 'Marche'],
             [3, 'Nantes - Nice'],
         ] %}
-        {{ tags_box(tags, {class: 'muted'}) }}
+        {{ tags_box(tags, {class: 'text-muted'}) }}
 
         <div class="pictures">
             {% for i in 0..2 %}
                 {{ linked_img('/images/our-trips', '3000-km-diagonal-'~i~'.jpg', {
-                    class: 'span4',
+                    class: 'col-lg-4',
                     group: 'diagonal',
                     thumb: true,
                 }) }}
@@ -81,7 +81,7 @@
     <!-- =================================================================== -->
 
     <!-- The Nantes-Brest channel, in 2008 -->
-    <div id="channel-2008" class="trip span4">
+    <div id="channel-2008" class="trip">
         <h2>Canal de Nantes à Brest</h2>
 
         <div class="frieze">
@@ -97,7 +97,7 @@
         <div class="pictures">
             {% for i in 0..2 %}
                 {{ linked_img('/images/our-trips', 'channel-2008-'~i~'.jpg', {
-                    class: 'span4',
+                    class: 'col-lg-4',
                     group: 'channel',
                     thumb: true,
                 }) }}

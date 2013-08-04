@@ -1,6 +1,6 @@
 {% set currentNav = 'blog' %}
 
-{% set form_action = isCreation ? '/blog/create' : ('/blog/'~article.slug~'/update') %}
+{% set form_action = isCreation ? '/blog/create' : ('/blog/'~originalSlug~'/update') %}
 
 {% extends "layout.html.twig" %}
 
@@ -25,7 +25,7 @@
         <div class="actions-right">
             {% if not isCreation %}
                 <!-- Go to the article reading page -->
-                <a href="/blog/{{- article.slug -}}/read" class="btn">
+                <a href="/blog/{{- originalSlug -}}/read" class="btn btn-default">
                     <i class="icon-eye-open"></i>
                     {{ 'Read'|trans }}
                 </a>
@@ -39,13 +39,13 @@
 
     {% if not isCreation %}
         <!-- Various actions for the article editing -->
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" style="margin-bottom: 15px;">
             <li {{ tab == 'general' ? 'class="active"' }}>
-                <a href="/blog/{{ article.slug }}/update">{{ 'General'|trans }}</a>
+                <a href="/blog/{{ originalSlug }}/update">{{ 'General'|trans }}</a>
             </li>
 
             <li {{ tab == 'comments' ? 'class="active"' }}>
-                <a href="/blog/{{ article.slug }}/comments">
+                <a href="/blog/{{ originalSlug }}/comments">
                     {{ 'Comments'|trans }} ({{ article.countComments }})
                 </a>
             </li>

@@ -2,7 +2,7 @@
 
 {% extends "article/post.html.twig" %}
 
-{% from "form.twig" import input, list_errors, submit, textarea_with_preview %}
+{% from "form.twig" import render_fields, list_errors, submit %}
 
 
 {% block stylesheets %}
@@ -30,32 +30,20 @@
 
     <form action="{{ form_action }}" method="post" class="form-horizontal">
 
-        <!-- Title -->
-        {{ input('text', article, errors, 'blog', 'title', {required: true}) }}
+        {% set article = article | merge({tags: article.tags | join(', ')}) %}
 
-        <!-- Slug -->
-        {{ input('text', article, errors, 'blog', 'slug',
-            {error_inline: true, help: true, required: true}
+        {{ render_fields(article, errors, 'blog', {},
+            [
+                {name: 'title'      , required: true, error_inline: true},
+                {name: 'slug'       , required: true, error_inline: true, help: true},
+                {name: 'pubDatetime', required: true, error_inline: true, help: true},
+                {name: 'isPublished', type: 'checkbox', help: true},
+                {name: 'beCommented', type: 'checkbox', help: true},
+                {name: 'tags'       , help: true, size: 10},
+                {name: 'text'       , type: 'textarea_with_preview'},
+                {name: 'summary'    , type: 'textarea_with_preview'},
+            ]
         ) }}
-
-        <!-- Publication DateTime -->
-        {{ input('text', article, errors, 'blog', 'pubDatetime',
-            {error_inline: true, help: true, required: true, size: ''}
-        ) }}
-
-        <!-- Is it published ? -->
-        {{ input('checkbox', article, [], 'blog', 'isPublished', {help: true, help_inline: true}) }}
-
-        <!-- Can be commented ? -->
-        {{ input('checkbox', article, [], 'blog', 'beCommented', {help: true, help_inline: true}) }}
-
-        <!-- Tags -->
-        {% set tags = {tags: article.tags |  join(', ')} %}
-        {{ input('text', tags, errors, 'blog', 'tags', {help: true, size: 'input-xxlarge'}) }}
-
-        {# Text and Summary #}
-        {{ textarea_with_preview(article, errors, 'blog', 'text') }}
-        {{ textarea_with_preview(article, errors, 'blog', 'summary') }}
 
         {{ submit() }}
     </form>

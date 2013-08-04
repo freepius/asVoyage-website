@@ -5,6 +5,8 @@
 <html lang="{{ app.locale }}">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <title>
@@ -33,7 +35,7 @@
     {% if is_granted('ROLE_ADMIN') %}
         <style>
             body {
-                padding: 0 15px;
+                padding: 0 15px 15px 15px;
                 border: 5px solid #CF5B37;
             }
         </style>
@@ -49,7 +51,7 @@
     {# Is authenticated ? If yes, allow to logout. #}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-        <a href="/admin/logout" class="label label-important"
+        <a href="/admin/logout" class="label label-danger"
            style="position: absolute; top: 10px;"
         >
             <i class="icon-off icon-white"></i> {{ 'Logout'|trans }}
@@ -59,7 +61,7 @@
 
 
     <!-- Link to back up -->
-    <a href="#header" id="back2top" class="hide">
+    <a href="#header" id="back2top" style="display: none;">
         <i class="icon-arrow-up icon-white"></i> {{ 'Top'|trans }}
     </a>
 
@@ -73,7 +75,7 @@
     ================================================== -->
     <section id="notifications">
     {% block notifications %}
-        {% for level in ['success', 'error', 'info', 'warning']
+        {% for level in ['success', 'danger', 'info']
             if app.session.flashbag.has(level)
         %}
 
@@ -100,7 +102,7 @@
 
     <!-- Main content
     ================================================== -->
-    <section id="main" class="row-fluid">
+    <section id="main">
         {% block main %}{% endblock %}
     </section>
 
@@ -116,11 +118,14 @@
     {# DEBUG mode => local files #}
     {% if app.debug %}
         <script src="/vendor/jquery-1.10.2.js"></script>
-        <script src="/vendor/bootstrap.min.js"></script>
+        <script src="/vendor/bootstrap-3.0.0-wip.min.js"></script>
     {% else %}
     {# Else => files from CDNs #}
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+        {# Restore this when 3.0.0-rc2 will be on CDN #}
+        {#<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>#}
+        <script src="/vendor/bootstrap-3.0.0-wip.min.js"></script>
     {% endif %}
 
     <script src="/js/modernizr.js"></script>

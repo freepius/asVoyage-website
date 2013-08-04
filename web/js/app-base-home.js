@@ -55,7 +55,7 @@
 
         highlightMarker(markers[0]);
 
-        $('.carousel').on('slide', function (e) {
+        $('.carousel-inner').on('slide.bs.carousel', function (e) {
             var i = $(e.relatedTarget).data('offset'),
                 prev = (i - 1) >= 0 ? (i - 1) : (markers.length - 1);
 
@@ -94,7 +94,7 @@
 
     $(document).ready(function () {
 
-        $('.carousel').carousel();
+        $('.carousel-inner').carousel();
 
         // centered on France
         $.carto.addMap('map', {

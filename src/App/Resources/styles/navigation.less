@@ -6,10 +6,10 @@ a#back2top
     z-index: 2000;
 
     padding: 15px;
-    background-color: @tertiaryColor;
-    border-top: 4px solid @primaryColor;
-    border-left: 4px solid @primaryColor;
-    .border-radius(10px 0 0);
+    background-color: @tertiary-color;
+    border-top: 4px solid @primary-color;
+    border-left: 4px solid @primary-color;
+    border-radius: 10px 0 0;
 
     color: white;
     font-weight: bold;
@@ -25,24 +25,23 @@ a#back2top
     margin-top: 20px;
 }
 
-.nav-main(@radius: 10px, @lineHeight: 40px)
+.nav-main(@radius: 10px, @line-height: 40px)
 {
     padding: 10px;
-    .border-radius(@radius);
-    background: 0 0 repeat url('/images/brown-texture.png') @primaryColor;
-    font-size: 16px;
+    border-radius: @radius;
+    background: 0 0 repeat url('/images/brown-texture.png') @primary-color;
     font-weight: bold;
 
     & > li > a {
         padding: 0 10px;
-        line-height: @lineHeight;
+        line-height: @line-height;
         color: white;
     }
 
-    & > li > a:hover { color: @primaryColor; }
+    & > li > a:hover { color: @primary-color; }
 
     & > li.active > a,
-    & > li > a:hover { background-color: @secondaryColor; }
+    & > li > a:hover { background-color: @secondary-color; }
 }
 
 #nav-lang > ul
@@ -54,7 +53,7 @@ a#back2top
         margin: 0 3px;
         padding: 3px 0 0;
 
-        &.active { border-top: 3px solid @secondaryColor; }
+        &.active { border-top: 3px solid @secondary-color; }
     }
 }
 
@@ -63,7 +62,8 @@ a#back2top
     float: left;
 
     & > ul {
-        .nav-main(10px 10px 0 10px);
+        //.nav-main(10px 10px 0 10px);
+        .nav-main();
     }
 }
 

@@ -169,9 +169,9 @@ class BlogController implements ControllerProviderInterface
             else { $page = $params; }
 
             // Despite appearances, we don't come from Blog home page !
-            if (! (null === $year  || is_numeric($year))  ||
-                ! (null === $month || is_numeric($month)) ||
-                ! (''   === $page  || is_numeric($page)))
+            if (! (null  === $year  || is_numeric($year))  ||
+                ! (null  === $month || is_numeric($month)) ||
+                ! (false === $page  || is_numeric($page)))
             {
                 $tag = $year = $month = $page = null;
             }
@@ -347,6 +347,8 @@ class BlogController implements ControllerProviderInterface
 
         $errors = [];
 
+        $originalSlug = $article['slug'];
+
         // Process of the creation / updating
         if ($request->isMethod('POST'))
         {
@@ -370,9 +372,10 @@ class BlogController implements ControllerProviderInterface
 
         return $this->app->render('article/post-general.html.twig',
         [
-            'article'    => $article,
-            'errors'     => $errors,
-            'isCreation' => $isCreation,
+            'originalSlug' => $originalSlug,
+            'article'      => $article,
+            'errors'       => $errors,
+            'isCreation'   => $isCreation,
         ]);
     }
 
@@ -413,9 +416,11 @@ class BlogController implements ControllerProviderInterface
             return $this->app->redirect("/blog/{$article['slug']}/comments");
         }
 
-        return $this->app->render('comment/crud.html.twig',
-            $opComment + ['article' => $article]
-        );
+        return $this->app->render('comment/crud.html.twig', $opComment +
+        [
+            'originalSlug' => $article['slug'],
+            'article'      => $article
+        ]);
     }
 
     /**
@@ -447,7 +452,7 @@ class BlogController implements ControllerProviderInterface
         // Comment not found !
         if (null !== $idComment && ! isset($article['comments'][$idComment]))
         {
-            $this->app->addFlash('error', $this->app->trans(
+            $this->app->addFlash('danger', $this->app->trans(
                 'comment.notFound', [$idComment]
             ));
 
@@ -520,7 +525,7 @@ class BlogController implements ControllerProviderInterface
 
         // Some errors => add a flash message + a captcha if needed
 
-        $this->app->addFlash('error', $this->app->trans(
+        $this->app->addFlash('danger', $this->app->trans(
             (null === $idComment) ? 'comment.creation.error(s)' : 'comment.updating.error(s)'
         ));
 

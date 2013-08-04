@@ -121,33 +121,33 @@
             <h2>Qui sommes-nous ?</h2>
 
             <div class="row">
-                {{ tags_box(tagsMathieu, {align: 'right', class: 'span4', special: 'Mathieu'}) }}
+                {{ tags_box(tagsMathieu, {align: 'right', class: 'col-4', special: 'Mathieu'}) }}
 
-                <div class="span4">
-                    {{ linked_img('/images/ourselves', 'freepius.jpg', {class: 'span6'}) }}
-                    {{ linked_img('/images/ourselves', 'manalee.jpg',  {class: 'span6'}) }}
+                <div class="col-4">
+                    {{ linked_img('/images/ourselves', 'freepius.jpg', {class: 'col-6'}) }}
+                    {{ linked_img('/images/ourselves', 'manalee.jpg',  {class: 'col-6'}) }}
                 </div>
 
-                {{ tags_box(tagsMarie, {align: 'left', class: 'span4', special: 'Marie'}) }}
+                {{ tags_box(tagsMarie, {align: 'left', class: 'col-4', special: 'Marie'}) }}
             </div>
 
-            <div class="row text-center" style="margin-top: 5px;">
+            <div class="row text-center">
                 <strong>Mathieu et Marie</strong>
             </div>
 
             <div id="both" class="row">
-                {{ tags_box(tagsBoth[0:tagsBothMiddle], {align: 'right', class: 'span4'}) }}
+                {{ tags_box(tagsBoth[0:tagsBothMiddle], {align: 'right', class: 'col-4'}) }}
 
-                {{ linked_img('/images/ourselves', 'together.jpg', {class: 'span4'}) }}
+                {{ linked_img('/images/ourselves', 'together.jpg', {class: 'col-4'}) }}
 
-                {{ tags_box(tagsBoth[tagsBothMiddle:], {align: 'left', class: 'span4'}) }}
+                {{ tags_box(tagsBoth[tagsBothMiddle:], {align: 'left', class: 'col-4'}) }}
             </div>
 
-            <h2 style="margin-bottom: -10px;">anarchos semitas</h2>
+            <h2>anarchos semitas</h2>
 
             <img src="/images/base/roots.png">
 
-            {{ tags_box(tagsAnarchosSemitas, {class: 'muted'}) }}
+            {{ tags_box(tagsAnarchosSemitas, {class: 'text-muted'}) }}
 
             {%- set text -%}
 *"anarchos semitas"* c'est l'idée que nos pas -- physiquement et philosophiquement -- se laisseront aller aux vagabondages, aux rencontres, à la découverte.

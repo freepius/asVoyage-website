@@ -1,4 +1,4 @@
-@import 'bootstrap.less';
+@import 'bootstrap/bootstrap.less';
 @import 'variables.less';
 @import 'navigation.less';
 @import 'article.less';
@@ -13,7 +13,7 @@
 
 #page-title
 {
-    color: @secondaryColor;
+    color: @secondary-color;
     font-family: 'GorriSansRegular';
 }
 
@@ -21,13 +21,14 @@ strong {
     font-family: 'GorriSansRegular';
 }
 
-.decorated
+.box
 {
+    .clearfix();
     margin-bottom: 20px;
-    padding: 15px 25px;
+    padding: 15px;
     background-color: white;
-    .border-radius(10px);
-    border: 1px solid gray;
+    border-radius: @border-radius-base;
+    border: 1px solid @gray-dark;
 }
 
 
@@ -35,11 +36,9 @@ strong {
  * Generic
  ************************************************/
 
-body { padding-bottom: 50px; }
+body { padding-bottom: 50px; } // TODO : keep this while no footer
 
 p { text-align: justify; }
-
-.row { margin-left: 0; }
 
 // Official "special font" for anarchos-semitas
 @font-face {
@@ -54,10 +53,31 @@ p { text-align: justify; }
 }
 
 // Never underline icons
-a [class^="icon-"], a [class*=" icon-"],
-.btn-link [class^="icon-"], .btn-link [class*=" icon-"],
+a, .btn-link
 {
-    text-decoration: none;
+    [class^="icon-"], [class*=" icon-"]
+    {
+        text-decoration: none;
+    }
+}
+
+.list-inline > li {
+    line-height: @line-height-computed;
+}
+
+.alert-success a {
+    color: darken(@alert-success-text, 10%) !important;
+    font-weight: bold;
+}
+
+.alert-danger a {
+    color: darken(@alert-danger-text, 10%) !important;
+    font-weight: bold;
+}
+
+.alert-info a {
+    color: darken(@alert-info-text, 10%) !important;
+    font-weight: bold;
 }
 
 
@@ -65,18 +85,20 @@ a [class^="icon-"], a [class*=" icon-"],
  * Titles
  ************************************************/
 
-h1, h2, h3, h4, h5, h6 { margin: 0; }
+h1, h2, h3, h4, h5, h6
+{
+    margin: 0;
+    small { font-size: 0.7em; }
+}
+
 h1, h2 { margin-bottom: 0.5em; }
 
-h1 { font-size: @baseFontSize * 1.75; }
-h2 { font-size: @baseFontSize * 1.5; }
-h3 { font-size: @baseFontSize * 1.25; }
-h4 { font-size: @baseFontSize; }
+h1 { font-size: 1.75em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.25em; }
+h4 { font-size: 1em; }
 h5,
-h6 { font-size: @baseFontSize * 0.85; }
-
-h1 small { font-size: @baseFontSize * 1.25; }
-h2 small { font-size: @baseFontSize; }
+h6 { font-size: 0.85em; }
 
 
 /*************************************************
@@ -85,9 +107,9 @@ h2 small { font-size: @baseFontSize; }
 
 #header
 {
-    height: 150px;
-    margin-bottom: 25px;
-    border-bottom: 5px solid @secondaryColor;
+    height: 155px;
+    margin-bottom: 35px;
+    border-bottom: 5px solid @secondary-color;
 
     #logo { float: left; }
 
@@ -95,6 +117,7 @@ h2 small { font-size: @baseFontSize; }
     {
         clear: right;
         float: right;
+        margin-top: 20px;
         margin-right: 20px;
     }
 }
@@ -106,26 +129,10 @@ h2 small { font-size: @baseFontSize; }
 
 #main
 {
-    .with-aside {
-        width: 68%;
-        float: left;
-
-        & + aside {
-            width: 28%;
-            float: right;
-
-            .box {
-                .decorated;
-                background-color: @grayLighter;
-                border: 0;
-            }
-        }
-
-        &.little {
-            width: 60%;
-            & + aside { width: 36%; }
-        }
-    }
+    aside > .box {
+        background-color: @gray-lighter;
+        border: 0;
+    };
 }
 
 
@@ -141,13 +148,13 @@ h2 small { font-size: @baseFontSize; }
     .size-4 { font-size: 150%; }
     .size-5 { font-size: 250%; }
 
-    &.unstyled
+    &.list-unstyled
     {
-        .size-1 { line-height: @baseLineHeight * 0.9; }
-        .size-2 { line-height: @baseLineHeight * 1.1; }
-        .size-3 { line-height: @baseLineHeight * 1.2; }
-        .size-4 { line-height: @baseLineHeight * 1.5; }
-        .size-5 { line-height: @baseLineHeight * 2.5; }
+        .size-1 { line-height: 90%; }
+        .size-2 { line-height: 110%; }
+        .size-3 { line-height: 120%; }
+        .size-4 { line-height: 150%; }
+        .size-5 { line-height: 250%; }
     }
 }
 
@@ -160,8 +167,8 @@ div.preview // textarea style
 {
     overflow: auto;
     padding: 4px 6px;
-    .border-radius(@inputBorderRadius);
-    border: 1px solid @inputBorder;
+    border-radius: @input-border-radius;
+    border: 1px solid @input-border;
     background-color: white;
 }
 
@@ -182,6 +189,7 @@ div.preview // textarea style
 
 #captcha-img
 {
+    height: 66px;
     border: 3px solid black;
-    .border-radius(10px);
+    border-radius: 10px;
 }
