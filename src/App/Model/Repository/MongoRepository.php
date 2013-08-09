@@ -23,11 +23,11 @@ abstract class MongoRepository
      */
     public function deleteById($id)
     {
-        if (! $id instanceof \MongoId) { $id = new \MongoId($id); }
+        $id = new \MongoId($id);
 
         $result = $this->collection->remove(['_id' => $id]);
 
-        return $result['n'] > 0;
+        return $result['err'] === null;
     }
 
     /**
@@ -46,9 +46,11 @@ abstract class MongoRepository
         }
         // create
         else {
+            $entity['_id'] = new \MongoId();
+
             $result = $this->collection->insert($entity);
         }
 
-        return $result['n'] > 0;
+        return $result['err'] === null;
     }
 }

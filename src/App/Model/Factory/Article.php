@@ -20,29 +20,6 @@ class Article extends EntityFactory
     }
 
     /**
-     * @param  string  $tags  Tags separated by ','
-     *
-     * Return an array (without duplicates) of tags as strings (non-empty, natural sorted).
-     */
-    protected static function normalizeTags($tags)
-    {
-        // A tag is lowercase ; its first letter us uppercase
-        $processTag = function ($tag) {
-            return ucfirst(strtolower(trim($tag)));
-        };
-
-        $tags = explode(',', $tags);
-
-        // No blank value
-        $tags = array_filter(array_map($processTag, $tags));
-
-        natsort($tags);
-
-        // Remove duplicates + rearrange
-        return array_values(array_unique($tags));
-    }
-
-    /**
      * @{inheritdoc}
      */
     public function instantiate()
@@ -74,7 +51,7 @@ class Article extends EntityFactory
             'beCommented' => array_key_exists('beCommented', $data),
             'text'        => $data['text'],
             'summary'     => $data['summary'],
-            'tags'        => self::normalizeTags($data['tags']),
+            'tags'        => StringUtil::normalizeTags($data['tags']),
         ];
     }
 

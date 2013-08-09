@@ -9,11 +9,22 @@ class Application extends \Silex\Application
         \Silex\Application\TwigTrait,
         \Silex\Application\SwiftmailerTrait;
 
+    /**
+     * Return true if the request is done through ajax.
+     */
+    public function isXmlHttpRequest()
+    {
+        return $this['request']->isXmlHttpRequest();
+    }
+
+    // Security shortcuts
 
     public function isGranted($attributes, $object = null)
     {
         return $this['security']->isGranted($attributes, $object);
     }
+
+    // Session shortcuts
 
     public function getSession($name, $default = null)
     {
@@ -23,6 +34,11 @@ class Application extends \Silex\Application
     public function setSession($name, $value)
     {
         return $this['session']->set($name, $value);
+    }
+
+    public function removeSession($name)
+    {
+        return $this['session']->remove($name);
     }
 
     public function addFlash($type, $message)

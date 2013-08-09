@@ -357,7 +357,7 @@ class BlogController implements ControllerProviderInterface
             $errors = $this->factoryArticle->bind($article, $httpData);
 
             // No error => store the article + redirect to dashboard
-            if ([] === $errors)
+            if (! $errors)
             {
                 $this->repository->store($article);
 
@@ -511,7 +511,7 @@ class BlogController implements ControllerProviderInterface
         $errors = $this->factoryComment->bind($comment, $inputData);
 
         // No error => store the created/updated comment
-        if ([] === $errors)
+        if (! $errors)
         {
             $this->repository->storeComment($article['_id'], $idComment, $comment);
 

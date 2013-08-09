@@ -235,7 +235,7 @@ class Blog extends MongoRepository
             ]
         );
 
-        return $result['n'] > 0;
+        return $result['err'] === null;
     }
 
     /**

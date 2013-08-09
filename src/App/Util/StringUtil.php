@@ -28,4 +28,27 @@ class StringUtil
 
         return strtolower($text);
     }
+
+    /**
+     * @param  string  $tags  Tags separated by ','
+     *
+     * Return an array (without duplicates) of tags as strings (non-empty, natural sorted).
+     */
+    public static function normalizeTags($tags)
+    {
+        // A tag is lowercase ; its first letter us uppercase
+        $processTag = function ($tag) {
+            return ucfirst(strtolower(trim($tag)));
+        };
+
+        $tags = explode(',', $tags);
+
+        // No blank value
+        $tags = array_filter(array_map($processTag, $tags));
+
+        natsort($tags);
+
+        // Remove duplicates + rearrange
+        return array_values(array_unique($tags));
+    }
 }

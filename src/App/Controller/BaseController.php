@@ -112,7 +112,7 @@ class BaseController implements ControllerProviderInterface
             $errors = $factoryContact->bind($contact, $httpData);
 
             // No error => send a mail + redirect to home
-            if ([] === $errors)
+            if (! $errors)
             {
                 $this->app->mail(\Swift_Message::newInstance()
                     ->setSubject($contact['subject'])

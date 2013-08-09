@@ -185,7 +185,8 @@ foreach ($locales as $locale) {
 
 $app['model.repository.blog'] = $app->share(function ($app)
 {
-    return new \App\Model\Repository\Blog($app['mongo.database']->article);
+    return new \App\Model\Repository\Blog($app['mongo.database']->blog);
+});
 });
 
 
