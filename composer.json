@@ -9,22 +9,16 @@
             "email": "freepius44@gmail.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "https://github.com/michelf/php-smartypants.git"
-        }
-    ],
     "minimum-stability": "dev",
     "require": {
         "silex/silex": "*",
         "twig/twig": "*",
         "twig/extensions": "*",
+        "symfony/twig-bridge": "*",
         "symfony/config": "*",
         "symfony/translation": "*",
-        "symfony/twig-bridge": "*",
         "symfony/validator": "*",
-        "symfony/security": "*",
+        "symfony/security": "2.3.3",
         "symfony/finder": "*",
         "swiftmailer/swiftmailer": "5.*",
         "michelf/php-markdown": "1.3.*@dev",
