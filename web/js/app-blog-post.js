@@ -48,7 +48,7 @@
 
             preview.html(
                 '<div style="text-align: center;">' +
-                    '<img src="/images/ajax-loader.gif" />' +
+                    '<img src="/images/loading.gif" />' +
                 '</div>'
             );
 

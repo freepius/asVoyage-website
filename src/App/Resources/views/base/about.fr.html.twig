@@ -108,7 +108,12 @@
     <style>
         #main h2 { text-align: center; }
 
-        #both { margin: 5px 90px; }
+        #both { margin: 5px 0; }
+
+        @media (min-width: 992px)
+        {
+            #both { margin: 5px 90px; }
+        }
     </style>
 {% endblock %}
 
@@ -145,7 +150,9 @@
 
             <h2>anarchos semitas</h2>
 
-            <img src="/images/base/roots.png">
+            <div class="col-12 text-center">
+                <img src="/images/base/roots.png" class="img-responsive">
+            </div>
 
             {{ tags_box(tagsAnarchosSemitas, {class: 'text-muted'}) }}
 
@@ -164,7 +171,9 @@ Des vies qui seraient alors *les débuts d'un long voyage*.
             {%- endset -%}
             {{ text | richText }}
 
-            <img src="/images/base/fresco.png">
+            <div class="col-12 text-center">
+                <img src="/images/base/fresco.png" class="img-responsive">
+            </div>
         </div>
     </article>
 {% endblock %}

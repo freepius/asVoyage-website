@@ -15,7 +15,7 @@
 
             var $img = $('#captcha-img');
 
-            $img.attr('src', '/images/ajax-loader.gif');
+            $img.attr('src', '/images/loading.gif');
 
             $.ajax({
                 method  : 'GET',
@@ -24,13 +24,6 @@
             });
 
         });
-    };
-
-    /**
-     * Auto-tooltip <a/>, <i/> and <button/>
-     */
-    $.autoTooltip = function () {
-        $('a[title], i[title], button[title]').tooltip();
     };
 
     /**
@@ -46,9 +39,8 @@
 
     });
 
-
     $(document).ready(function () {
-        $.autoTooltip();
+        $('[title]').tooltip();
     });
 
 }());

@@ -1317,7 +1317,7 @@ input[type="number"]::-webkit-inner-spin-button {
   color: #555555;
   vertical-align: middle;
   background-color: #ffffff;
-  border: 1px solid #cccccc;
+  border: 1px solid #333333;
   border-radius: 6px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -1888,7 +1888,7 @@ input[type="button"].btn-block {
   line-height: 1;
   text-align: center;
   background-color: #e5e5d5;
-  border: 1px solid #cccccc;
+  border: 1px solid #333333;
   border-radius: 6px;
 }
 .input-group-addon.input-sm {
@@ -4718,7 +4718,7 @@ div.preview {
   overflow: auto;
   padding: 4px 6px;
   border-radius: 6px;
-  border: 1px solid #cccccc;
+  border: 1px solid #333333;
   background-color: white;
 }
 .actions-right:before,
