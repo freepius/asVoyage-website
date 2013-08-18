@@ -4,7 +4,8 @@ namespace App\Model\Factory;
 
 use Symfony\Component\Validator\Constraints as Assert,
     Symfony\Component\Validator\ValidatorInterface,
-    App\Util\CaptchaManager;
+    App\Util\CaptchaManager,
+    App\Util\StringUtil;
 
 
 class Contact extends EntityFactory
@@ -53,7 +54,7 @@ class Contact extends EntityFactory
             'name'    => trim($data['name']),
             'email'   => trim($data['email']),
             'subject' => trim($data['subject']),
-            'message' => trim($data['message']),
+            'message' => StringUtil:cleanText($data['message']),
             'captcha' => $this->captcha->isValid((string) $data['captcha']),
         ];
     }

@@ -14,6 +14,8 @@ setlocale(LC_ALL, 'fr_FR.UTF-8');
 
 $app = new \App\Application();
 
+$app['route_class'] = 'App\\Route';
+
 /* debug */
 $app['debug'] = true;
 

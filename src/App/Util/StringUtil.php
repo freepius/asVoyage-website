@@ -68,7 +68,7 @@ class StringUtil
 
         if ($keepNl) {
             // max 3 nl
-            $text = preg_replace('/\n{4, }/', "\n\n\n", $text);
+            $text = preg_replace('/\n{4,}/', "\n\n\n", $text);
         }
 
         return $text;

@@ -9,14 +9,6 @@ class Application extends \Silex\Application
         \Silex\Application\TwigTrait,
         \Silex\Application\SwiftmailerTrait;
 
-    /**
-     * Return true if the request is done through ajax.
-     */
-    public function isXmlHttpRequest()
-    {
-        return $this['request']->isXmlHttpRequest();
-    }
-
     // Security shortcuts
 
     public function isGranted($attributes, $object = null)

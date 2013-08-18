@@ -22,8 +22,8 @@ use Silex\ControllerProviderInterface,
  *  -> TECHNICAL ACTIONS :
  *      => login
  *      => switchLocale
- *      => changeCaptcha
- *      => renderRichText
+ *      => changeCaptcha    [ajax]
+ *      => renderRichText   [ajax]
  *      => manageErrors
  */
 class BaseController implements ControllerProviderInterface
@@ -56,9 +56,11 @@ class BaseController implements ControllerProviderInterface
         $base->get('/switch-locale/{locale}', [$this, 'switchLocale'])
             ->assert('locale', 'en|fr');
 
-        $base->get('/captcha-change', [$this, 'changeCaptcha']);
+        $base->get('/captcha-change', [$this, 'changeCaptcha'])
+            ->mustBeAjax();
 
-        $base->post('/render-richtext', [$this, 'renderRichText']);
+        $base->post('/render-richtext', [$this, 'renderRichText'])
+            ->mustBeAjax();
 
         $app->error([$this, 'manageErrors']);
 
