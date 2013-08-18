@@ -20,6 +20,6 @@ return ['comment' => [
 
     'help' => [
         'text' => '<i class="icon-info-sign"></i> '.
-            'HTML code is displayed as text and URL are automatically converted.',
+            'HTML code is removed and URL are automatically converted.',
     ],
 ]];

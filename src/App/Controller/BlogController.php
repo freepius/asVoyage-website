@@ -449,6 +449,12 @@ class BlogController implements ControllerProviderInterface
      */
     protected function actionsOnComment(Request $request, array $article, $idComment)
     {
+        // Some security
+        if (null !== $idComment)
+        {
+            $idComment = strip_tags($idComment);
+        }
+
         // Comment not found !
         if (null !== $idComment && ! isset($article['comments'][$idComment]))
         {

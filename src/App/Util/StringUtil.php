@@ -51,4 +51,26 @@ class StringUtil
         // Remove duplicates + rearrange
         return array_values(array_unique($tags));
     }
+
+    /**
+     * Clean a text :
+     *  -> strip tags
+     *  -> trim
+     *  -> remove "\n" if $keepNl is false
+     */
+    public static function cleanText($text, $keepNl = true)
+    {
+        $text = trim(strip_tags($text));
+
+        // if $keepNl => unix nl
+        // else       => replace each nl by one space
+        $text = str_replace(["\r\n", "\n", "\r"], $keepNl ? "\n" : ' ', $text);
+
+        if ($keepNl) {
+            // max 3 nl
+            $text = preg_replace('/\n{4, }/', "\n\n\n", $text);
+        }
+
+        return $text;
+    }
 }

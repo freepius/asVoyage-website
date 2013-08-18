@@ -5,7 +5,8 @@ namespace App\Model\Factory;
 use Symfony\Component\Validator\Constraints as Assert,
     Symfony\Component\Validator\ValidatorInterface,
     Symfony\Component\Security\Core\SecurityContextInterface,
-    App\Util\CaptchaManager;
+    App\Util\CaptchaManager,
+    App\Util\StringUtil;
 
 
 class Comment extends EntityFactory
@@ -18,15 +19,6 @@ class Comment extends EntityFactory
         parent::__construct($validator);
         $this->security = $security;
         $this->captcha = $captcha;
-    }
-
-    protected static function cleanText($text)
-    {
-        $text = trim($text);
-        $text = preg_replace('/\r\n?/' , "\n"    , $text);  // unix nl
-        $text = preg_replace('/\n{4,}/', "\n\n\n", $text);  // max. 3 nl
-
-        return $text;
     }
 
     /**
@@ -72,7 +64,7 @@ class Comment extends EntityFactory
     {
         return [
             'name'     => trim($data['name']),
-            'text'     => self::cleanText($data['text']),
+            'text'     => StringUtil::cleanText($data['text']),
             'datetime' => date('Y-m-d H:i:s'), // now
             'captcha'  => $this->needCaptcha() ?
                           $this->captcha->isValid((string) @ $data['captcha']) : true,
