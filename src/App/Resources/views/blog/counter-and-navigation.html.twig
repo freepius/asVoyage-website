@@ -23,13 +23,13 @@
 
     {% if page > 1 %}
         <a class="pull-left" href="{{ url ~ (page-1) }}" style="font-size: 1.5em;">
-            « {{ 'blog.younger'|trans }}
+            « {{ 'Younger'|trans }}
         </a>
     {% endif %}
 
     {% if page < totalPage %}
         <a class="pull-right" href="{{ url ~ (page+1) }}" style="font-size: 1.5em;">
-            {{ 'blog.older'|trans }} »
+            {{ 'Older'|trans }} »
         </a>
     {% endif %}
 </nav>

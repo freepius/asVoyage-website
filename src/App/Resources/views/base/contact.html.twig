@@ -24,9 +24,9 @@
     {{ list_errors(errors, 'contact') }}
 
     <div class="row" style="margin-bottom: 20px;">
-        <img src="/images/base/pigeon-carrier.png" class="col-2 img-rounded">
+        <img src="/images/base/pigeon-carrier.png" class="col-xs-2 img-rounded">
 
-        <p class="col-8">
+        <p class="col-xs-8">
             {% if app.locale == 'fr' %}
                 Le formulaire ci-dessous vous permet de nous faire parvenir un pigeon voyageur.
                 <br>
@@ -66,7 +66,7 @@
             ]
         ) }}
 
-        <div class="col-lg-offset-3">
+        <div class="col-md-offset-3">
             {{ submit() }}
             {{ cancel_link('/home') }}
         </div>

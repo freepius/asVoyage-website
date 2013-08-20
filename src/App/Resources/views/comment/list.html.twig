@@ -35,7 +35,7 @@
     {{ render_fields(comment.entity, comment.errors, 'comment', {required: true}, fields) }}
 
     <!-- Form actions -->
-    <div class="col-lg-offset-3">
+    <div class="col-md-offset-3">
         {% if not comment.isFirstCreation %}
             {{ cancel_link(url_prefix) }}
         {% endif %}

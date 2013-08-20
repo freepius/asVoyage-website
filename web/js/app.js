@@ -40,7 +40,9 @@
     });
 
     $(document).ready(function () {
-        $('[title]').tooltip();
+        $('body').tooltip({
+            selector: '[title]'
+        });
     });
 
 }());

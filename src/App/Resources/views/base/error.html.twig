@@ -11,13 +11,13 @@
     {% set img = random(5) ~ '.jpg' %}
 
     {{ linked_img('/images/errors/', img, {
-        class: 'col-4',
+        class: 'col-xs-4',
         class_img: 'img-rounded',
         group: null,
         thumb: true,
     }) }}
 
-    <p class="col-7 lead">
+    <p class="col-xs-7 lead">
         {{ ('error.message.' ~ (code == 404 ? '404' : 'other')) | trans }}
 
         {{ message ? indent(message) }}

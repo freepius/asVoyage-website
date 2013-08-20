@@ -32,23 +32,23 @@ a#back2top
     background: 0 0 repeat url('/images/brown-texture.png') @primary-color;
     font-weight: bold;
 
-    & > li > a {
+    > li > a {
         padding: 0 10px;
         line-height: @line-height;
         color: white;
     }
 
-    & > li > a:hover { color: @primary-color; }
+    > li > a:hover { color: @primary-color; }
 
-    & > li.active > a,
-    & > li > a:hover { background-color: @secondary-color; }
+    > li.active > a,
+    > li > a:hover { background-color: @secondary-color; }
 }
 
 #nav-lang > ul
 {
     margin: 0;
 
-    & > li {
+    > li {
         line-height: 0;
         margin: 0 3px;
         padding: 3px 0 0;
@@ -61,7 +61,7 @@ a#back2top
 {
     float: left;
 
-    & > ul {
+    > ul {
         //.nav-main(10px 10px 0 10px);
         .nav-main();
     }
@@ -71,12 +71,12 @@ a#back2top
 {
     float: left;
 
-    & > b {
+    > b {
         display: block;
         text-align: center;
     }
 
-    & > ul {
+    > ul {
         .nav-main(0 10px 10px 0, 20px);
         border-left: 2px solid white;
     }
