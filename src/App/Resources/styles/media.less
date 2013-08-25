@@ -1,0 +1,103 @@
+/*************************************************
+ * Media home page
+ ************************************************/
+
+#media
+{
+    p { text-align: center; }
+
+    .thumbnail
+    {
+        border-radius: 0;
+        text-align: center;
+
+        // WARNING: no transition because of $.mediaViews.equalizeThumbnails() in "web/js/app.media.js" file
+        .transition(none);
+    }
+
+    /**
+     * Short view :
+     *  -> beautiful view
+     *  -> only content displayed
+     *  -> caption in tooltip
+     */
+    &.view-short
+    {
+        .caption, .meta, .technical { display: none; }
+
+        .thumbnail
+        {
+            width: auto;
+            height: auto !important;
+            padding: 0;
+
+            // height same as : $app['media.config']['image.thumb.size'] in bootstrap.php
+            .content { height: 120px; }
+
+            &:hover {
+                z-index: @zindex-tooltip - 1;
+                img {
+                    border-top: 5px solid @thumbnail-bg;
+                    border-bottom: 5px solid @thumbnail-bg;
+                }
+            }
+        }
+    }
+
+    /**
+     * Medium view :
+     *  -> only 2 media elements per line
+     *  -> content and caption displayed
+     *  -> rest of info in popover
+     */
+    &.view-medium
+    {
+        .meta, .technical { display: none; }
+    }
+
+    /**
+     * Full view :
+     *  -> only 2 media elements per line
+     *  -> all info displayed
+     */
+    &.view-full
+    {
+
+    }
+}
+
+
+/*************************************************
+ * Styles for uploading
+ ************************************************/
+
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  font-size: 23px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+.fileupload-loading {
+  float: right;
+  width: 32px;
+  height: 32px;
+  background: url(/images/loading.gif) center no-repeat;
+  background-size: contain;
+  display: none;
+}
+
+.fileupload-processing .fileupload-loading {
+  display: block;
+}

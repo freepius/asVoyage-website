@@ -1,0 +1,42 @@
+<script id="template-upload" type="text/x-tmpl">
+
+[% var media = o.files[0]; %]
+
+<tr class="template-upload fade [% if (media.error) { %]danger[% } %]">
+
+    [% if (media.error) { %]
+        <td style="text-align: center;">
+            <i class="icon-ban-circle icon-4x"></i>
+        </td>
+    [% } else { %]
+        <!-- Preview -->
+        <td><span class="preview"></span></td>
+    [% } %]
+
+    <!-- Element info -->
+    <td>
+        <b>[%=media.name%]</b><br>
+        [%=media.type%]<br>
+        [%=o.formatFileSize(media.size)%]
+    </td>
+
+    <!-- Various info about uploading -->
+    <td colspan="2">
+        [% if (media.error) { %]
+            <span class="label label-danger">{{ 'Error'|trans }}</span>
+            [%=media.error%]
+        [% } else { %]
+            <div class="progress active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+            </div>
+        [% } %]
+    </td>
+
+    <!-- Actions -->
+    <td class="actions">
+        <button class="btn btn-warning cancel" title="{{ 'Cancel'|trans }}">
+            <i class="icon-ban-circle icon-white"></i>
+        </button>
+    </td>
+</tr>
+</script>

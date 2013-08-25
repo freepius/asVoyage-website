@@ -19,6 +19,7 @@ External libraries used
 * [Modernizr](http://modernizr.com/)
 * [jQuery](http://jquery.com/) and plugins :
   * [Lightbox 2](https://github.com/javierjulio/lightbox2) : an advanced fork of [this](http://lokeshdhakar.com/projects/lightbox2/)
+  * [jQuery File Upload](http://blueimp.github.io/jQuery-File-Upload/) : file upload widget
   * [Elastic](http://unwrongest.com/projects/elastic/) : auto grows textareas
 * [Leaflet](http://leafletjs.com/) and plugins :
   * [awesome-markers plugin](https://github.com/lvoogdt/Leaflet.awesome-markers)
@@ -40,11 +41,18 @@ TODO
 * Blog creating/updating page :
   * Add help for RichText
 * Improve the inclusion of JS and CSS files (if not using => do not include)
-* Reorganize HTML5 => make semantic !
 * On Blog "reading" page : add box containing related articles/contents
 * Contact : log when a message is sent
 * Carto : improve !!!
 * Traduction of new base pages (about, our-trips, etc.)
+* Revoir le CSS : les marges pour les titres, le centrage dans about, l'affichage sur grand et petit écran, etc.
+* Blog -> article -> tags styled with "label" or "badge" ?
+* Media -> gérer les raccourcis "Tab" (textarea caption qui se suivent ; toggle qui se suivent...)
+* Media -> better set meta actions (+/- tags ; +/- hours...)
+* Make RSS or newsletter
+* Media -> build a full garbage collector (scann all files in "media" dir and compare with MongoCollection)
+* Lightbox2 -> doesn't work with IE9
+* In DEBUG => when Logout => error
 
 For production
 --------------

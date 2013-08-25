@@ -1,0 +1,33 @@
+{% from 'media/macros.twig' import media_caption, media_meta, media_render, media_technical %}
+
+{% set hostMedia = host ~ '/media/' %}
+
+
+<div class="thumbnail col-xs-6"
+    itemscope itemtype="http://schema.org/
+    {{- mainType in ['audio', 'image', 'video'] ? (mainType | title) : 'Media' -}}
+Object">
+
+    <meta itemprop="contentURL" content="{{ hostMedia ~ content }}">
+
+    {% if mainType == 'image' %}
+        <meta itemprop="thumbnailURL" content="{{ hostMedia }}thumb/{{ content }}">
+    {% endif %}
+
+    <div class="content">
+        {{ media_render(_context) }}
+    </div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <input name="{{ _id }}" class="toggle" type="checkbox">
+    {% endif %}
+
+    {{ media_caption(caption) }}
+
+    {{ media_meta(_context) }}
+
+    <small class="technical">
+        {{ media_technical(_context, '&nbsp;&nbsp;') }}
+    </small>
+
+</div>

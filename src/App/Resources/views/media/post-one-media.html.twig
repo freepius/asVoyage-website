@@ -1,0 +1,59 @@
+{% from 'media/macros.twig' import media_render, media_technical %}
+
+{% from _self import input_meta %}
+
+
+{% macro input_meta(media, field, icon) %}
+    <div class="input-group {{ media.errors[field] is defined ? 'has-error' }} input-group-sm"
+        style="margin-bottom: 5px;"
+    >
+        <span class="input-group-addon" title="{{ ('media.' ~ field) | trans }}">
+            <i class="icon-fixed-width icon-{{ icon }}"></i>
+        </span>
+
+        <input name="{{ media._id ~ '[' ~ field ~ ']' }}" type="text" class="form-control"
+            value="{{ media[field] }}" placeholder="{{ ('media.placeholder.' ~ field) | trans }}">
+    </div>
+{% endmacro %}
+
+
+<!-- Preview -->
+<td>{{ media_render(_context) }}</td>
+
+<!-- Technical info -->
+<td>{{ media_technical(_context) }}</td>
+
+<!-- Caption -->
+<td class="{{ errors.caption is defined ? 'has-error' }}">
+    <textarea name="{{ _id }}[caption]" rows="4" class="form-control"
+        placeholder="{{ 'media.placeholder.caption'|trans }}"
+    >
+        {{- caption -}}
+    </textarea>
+</td>
+
+<!-- Metadata -->
+<td>
+    <!-- Creation date -->
+    {{ input_meta(_context, 'creationDate', 'calendar') }}
+
+    <!-- Geo. coords -->
+    {{ input_meta(_context, 'geoCoords', 'globe') }}
+
+    <!-- Tags -->
+    {% set tags = tags | join(', ') %}
+    {{ input_meta(_context, 'tags', 'tags') }}
+</td>
+
+<!-- Actions -->
+<td class="actions">
+    <input type="checkbox" class="toggle">
+
+    {% if isTmp %}
+        <button class="btn btn-danger delete" title="{{ 'Delete'|trans }}"
+            data-type="GET" data-url="/media/delete-uploaded/{{ _id }}"
+        >
+            <i class="icon-trash icon-white"></i>
+        </button>
+    {% endif %}
+</td>

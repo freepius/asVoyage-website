@@ -1,0 +1,90 @@
+{% set currentNav = 'media' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "media/macros.twig" import switch_view_btns %}
+
+
+{% if elements is not empty %}
+    {% block javascripts %}
+        <script src="/js/app-media.js"></script>
+        <script src="/js/app-media-home.js"></script>
+        <script>
+            $.media.deleteMessage = "{{ 'media.deleting.confirm'|trans }}";
+        </script>
+    {% endblock %}
+{% endif %}
+
+
+{% block main %}
+
+<header class="clearfix">
+    {{ titleAndFilters | raw }}
+
+    <div class="actions-right">
+        {% if is_granted('ROLE_ADMIN') %}
+            <!-- Element counters -->
+            <div style="margin: 6px 0;">
+                {{ 'media.counter' | trans | raw }}
+            </div>
+
+            <!-- Select / unselect all elements -->
+            <input type="checkbox" class="toggle-all"
+                title="{{ 'media.selectAll'|trans }}" style="margin: 12px 5px;">
+
+            <!-- Update -->
+            <button id="update" title="{{ 'Update'|trans }}"
+                class="btn btn-default control-elements">
+                <i class="icon-pencil"></i>
+            </button>
+
+            <!-- Delete -->
+            <button id="delete" title="{{ 'Delete'|trans }}"
+                class="btn btn-danger control-elements">
+                <i class="icon-trash"></i>
+            </button>
+
+            <hr>
+
+            <!-- Create -->
+            <a href="/media/create" title="{{ 'media.creation'|trans }}"
+                class="btn btn-success">
+                <i class="icon-plus"></i>
+            </a>
+
+            <hr>
+        <!-- END_ROLE_ADMIN -->
+        {% endif %}
+
+        {{ switch_view_btns() }}
+    </div>
+</header>
+
+
+{% if elements is empty %}
+
+    <big>{{ 'media.noElement'|trans }}</big>
+
+{% else %}
+
+    <form id="media" method="POST" class="col-xs-8 view-short">
+        {% for media in elements %}
+            {% include 'media/read.html.twig' with media only %}
+        {% endfor %}
+    </form>
+
+    <aside class="col-xs-4">
+        {{ counterAndNavigation | raw }}
+
+        <nav class="box">
+            <h1>{{ 'Search' | trans }}</h1>
+
+            {{ tagsFilter | raw }}
+
+            {{ datesFilter | raw }}
+        </nav>
+    </aside>
+
+{% endif %}
+
+{% endblock %}

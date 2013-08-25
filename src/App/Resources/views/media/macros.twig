@@ -1,0 +1,148 @@
+{##
+ # Summary :
+ #  -> media_img
+ #  -> media_render
+ #  -> media_technical
+ #  -> media_caption
+ #  -> media_meta
+ #  -> switch_view_btns
+ #}
+
+
+{##
+ # A "linked image" for the Media module.
+ #}
+{% macro media_img(img, options) %}
+
+    {% from 'macros.twig' import linked_img %}
+
+    {{ linked_img(
+        '/media/web', img,
+        options | default({}) | merge({thumb: '/media/thumb'})
+    ) }}
+{% endmacro %}
+
+
+{##
+ # Render the media element
+ # (the content ; not its technical info, caption or metadata).
+ #}
+{% macro media_render(e) %}
+{% spaceless %}
+
+    {% from 'macros.twig' import audio %}
+
+    {% if e.mainType == 'image' %}
+        {{ _self.media_img(e.content, {caption: e.caption}) }}
+
+    {% elseif e.mainType == 'audio' %}
+        {{ audio('/media', e.content) }}
+
+    {% endif %}
+
+{% endspaceless %}
+{% endmacro %}
+
+
+{##
+ # Display technical info (original name, size, type...).
+ #}
+{% macro media_technical(e, sep) %}
+
+    {% from 'macros.twig' import format_file_size %}
+
+    {% set sep = sep | default('<br>') %}
+
+    <b itemprop="name">{{ e.originalName }}</b>
+    <br>
+    {{ e.mainType }}/<span itemprop="encodingFormat">{{ e.subType }}</span>
+    {{ sep | raw }}
+    <span itemprop="contentSize">{{ format_file_size(e.size) }}</span>
+
+    {% if e.mainType == 'image' %}
+        {{ sep | raw }}
+        <span itemprop="width">{{ e.width }}</span>
+        {{- 'x' -}}
+        <span itemprop="height">{{ e.height }}</span>
+    {% endif %}
+
+{% endmacro %}
+
+
+{##
+ # Display caption (if not empty).
+ #}
+{% macro media_caption(caption) %}
+
+    {% if caption %}
+        <p class="caption">
+            <i class="icon-leaf" title="{{ 'media.caption'|trans }}"></i>
+            <em itemprop="description">{{ caption | raw }}</em>
+        </p>
+    {% endif %}
+
+{% endmacro %}
+
+
+{##
+ # Display metadata (if not empty) : creation date, geo coords and tags.
+ #}
+{% macro media_meta(e) %}
+
+{% if e.creationDate or e.geoCoords or e.tags %}
+<p class="meta">
+
+    {% if e.creationDate %}
+        <i class="icon-calendar" title="{{ 'media.creationDate'|trans }}"></i>
+        <time itemprop="dateCreated" datetime="{{ e.creationDate }}">
+            {{ e.creationDate | localizeddate('medium', 'none') }}
+            {{ 'at'|trans }}
+            {{ e.creationDate | localizeddate('none', 'short') }}
+        </time>
+        <br>
+    {% endif %}
+
+    {% if e.geoCoords %}
+        <i class="icon-globe" title="{{ 'media.geoCoords'|trans }}"></i>
+        <span itemprop="contentLocation">{{ e.geoCoords }}</span>
+        <br>
+    {% endif %}
+
+    {% if e.tags %}
+        <i class="icon-tags" title="{{ 'media.tags'|trans }}"></i>
+        <small itemprop="keywords">
+            {% for tag in e.tags %}
+                <span class="label label-default">{{ tag }}</span>
+            {% endfor %}
+        </small>
+    {% endif %}
+
+</p>
+{% endif %}
+
+{% endmacro %}
+
+
+{##
+ # Display the 3 buttons to switch view.
+ #}
+{% macro switch_view_btns() %}
+
+<div class="btn-group" data-toggle="buttons">
+    <label id="view-short" title="{{ 'media.view-short'|trans }}" class="btn btn-default">
+        <input type="radio">
+        <i class="icon-th"></i>
+    </label>
+
+    <label id="view-medium" title="{{ 'media.view-medium'|trans }}" class="btn btn-default">
+        <input type="radio">
+        <i class="icon-th-large"></i>
+    </label>
+
+    <label id="view-full" title="{{ 'media.view-full'|trans }}" class="btn btn-default">
+        <input type="radio">
+        <i class="icon-th-list"></i>
+    </label>
+</div>
+
+{% endmacro %}

@@ -1,0 +1,29 @@
+{% from 'macros.twig' import format_file_size %}
+
+
+<!-- Preview -->
+<td style="text-align: center;">
+    <i class="icon-ban-circle icon-4x"></i>
+</td>
+
+<!-- Element info -->
+<td>
+    <b>{{ originalName }}</b><br>
+    {{ mainType ~'/'~ subType }}<br>
+    {{ format_file_size(size) }}
+</td>
+
+<!-- Print error  -->
+<td colspan="2">
+    <span class="label label-danger">{{ 'Error'|trans }}</span>
+    {{ error }}
+</td>
+
+<!-- Actions -->
+<td class="actions">
+    <input type="checkbox" class="toggle">
+
+    <button class="btn btn-danger delete" title="{{ 'Delete'|trans }}">
+        <i class="icon-trash icon-white"></i>
+    </button>
+</td>

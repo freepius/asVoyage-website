@@ -1,0 +1,179 @@
+{% set currentNav = 'media' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import indent, cancel %}
+
+{% from "form.twig" import submit %}
+
+
+{% block javascripts %}
+
+    <script src="/js/app-media.js"></script>
+
+    <script>
+        $.mediaMeta.messages = {
+            creationDate : "{{ 'media.setMeta.creationDate'|trans }}",
+            geoCoords    : "{{ 'media.setMeta.geoCoords'   |trans }}",
+            tags         : "{{ 'media.setMeta.tags'        |trans }}",
+        };
+
+        $(document).ready(function () {
+            $.media.init();
+            $.mediaMeta.handler();
+        });
+    </script>
+
+    {% if isCreation %}
+        {% include 'media/create-multiple.js.twig' %}
+    {% endif %}
+
+{% endblock %}
+
+
+{% block stylesheets %}
+    <style>
+        .actions { text-align: right; }
+        .img-responsive, audio { max-width: 160px; }
+    </style>
+{% endblock %}
+
+
+{% block main %}
+
+    <header class="clearfix">
+        <!-- Breadcrumb + title -->
+        <div class="pull-left">
+            <nav><a href="/media">{{ 'media.home'|trans }}</a> »</nav>
+
+            <h1 id="page-title">
+                {{ (isCreation ? 'media.creation' : 'media.updating') | trans }}
+            </h1>
+        </div>
+
+        <div class="actions-right">
+            <!-- Cancel creation / updating -->
+            {{ cancel('/media') }}
+        </div>
+    </header>
+
+
+    {{ isCreation ? '<form id="fileupload" method="POST" enctype="multipart/form-data">' }}
+    <div class="fileupload-buttonbar row form-inline">
+
+        <div class="col-xs-7">
+            <!-- Presentation and helps -->
+            <div class="box">
+                {% include 'media/post-help.html.twig' %}
+            </div>
+
+            {% if isCreation %}
+                <!-- The global progress information -->
+                <div class="fileupload-progress fade">
+                    <!-- The global progress bar -->
+                    <div class="progress active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="margin: 0;">
+                        <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                    </div>
+
+                    <!-- The extended global progress information -->
+                    <div class="progress-extended" style="margin: -24px 0 15px 15px;">&nbsp;</div>
+                </div>
+            {% endif %}
+        </div>
+
+        <aside class="col-xs-5">
+            <!-- Actions on elements -->
+            <div class="box">
+                <h2>{{ 'Actions'|trans }}</h2>
+
+                {% if isCreation %}
+                    <!-- Add local elements with auto-uploading -->
+                    <span class="btn btn-success fileinput-button">
+                        {{ 'media.addLocal' | trans }}
+                        <input type="file" name="files[]" multiple>
+                    </span>
+
+                    <!-- The loading indicator is shown during element processing -->
+                    <span class="fileupload-loading"></span>
+
+                    <br><br>
+                {% endif %}
+
+                <!-- Select / unselect all elements -->
+                <label>
+                    <input type="checkbox" class="toggle-all">
+                    {{ 'media.selectAll'|trans }}
+                </label>
+
+                <!-- Element counters -->
+                {{ indent('media.counter' | trans) }}
+
+                <br><br>
+
+                {% if isCreation %}
+                    <!-- Delete -->
+                    <button type="button" class="btn btn-danger delete control-elements">
+                        <i class="icon-trash icon-white"></i>
+                        {{ 'Delete'|trans }}
+                    </button>
+                {% endif %}
+
+                <!-- Set creation date -->
+                <button type="button" class="btn btn-default set-meta control-elements"
+                    data-meta="creationDate" title="{{ 'media.setCreationDate'|trans }}"
+                >
+                    <i class="icon-calendar"></i>
+                </button>
+
+                <!-- Set geo. coordinates -->
+                <button type="button" class="btn btn-default set-meta control-elements"
+                    data-meta="geoCoords" title="{{ 'media.setGeoCoords'|trans }}"
+                >
+                    <i class="icon-globe"></i>
+                </button>
+
+                <!-- Set tags -->
+                <button type="button" class="btn btn-default set-meta control-elements"
+                    data-meta="tags" title="{{ 'media.setTags'|trans }}"
+                >
+                    <i class="icon-tags"></i>
+                </button>
+            </div>
+        </aside>
+
+    </div>
+    {{ isCreation ? '</form>' }}
+
+    <!-- This table lists the media elements -->
+    <form action="{{ isCreation ? '/media/create' : '/media/update' }}" method="POST">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-xs-2">{{ 'media.preview'|trans }}</th>
+                    <th class="col-xs-2">{{ 'media.file'|trans }}</th>
+                    <th>{{ 'media.caption'|trans }}</th>
+                    <th>{{ 'media.metadata'|trans }}</th>
+                    <th>{{ 'Actions'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody id="media">
+                {% for media in listMedia | default %}
+                    <tr class="template-download">
+                        {% include "media/post-one-media.html.twig" with media only %}
+                    </tr>
+                {% endfor %}
+
+                {% if isCreation %}
+                    <tr class="no-element">
+                        <td colspan="5">{{ 'media.noElement'|trans }}</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <div id="submit-media">
+            {{ submit() }}
+        </div>
+    </form>
+
+{% endblock %}

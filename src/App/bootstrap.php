@@ -156,7 +156,10 @@ $app['security.access_rules'] =
     '^/blog/(dashboard|create)' .'|'.
     '^/blog/.+/(update|delete)' .'|'.
     '^/blog/.+/read/.+'         .'|'.   // <=> CRUD for comment
-    '^/blog/.+/comments.*'              // <=> idem
+    '^/blog/.+/comments.*'      .'|'.   // <=> idem
+
+    // All Media pages excepted home
+    '^/media/(create|delete|delete-uploaded|init-update|update|upload)'
 ,
 'ROLE_ADMIN']];
 
@@ -174,7 +177,7 @@ $app['security.firewall'];
 $translator = $app['translator'];
 $transDir   = APP.'/Resources/translations';
 $locales    = ['fr', 'en'];
-$resources  = ['messages', 'blog', 'comment'];
+$resources  = ['messages', 'blog', 'comment', 'media'];
 
 foreach ($locales as $locale) {
     foreach ($resources as $resource) {
@@ -191,6 +194,10 @@ $app['model.repository.blog'] = $app->share(function ($app)
 {
     return new \App\Model\Repository\Blog($app['mongo.database']->blog);
 });
+
+$app['model.repository.media'] = $app->share(function ($app)
+{
+    return new \App\Model\Repository\Media($app['mongo.database']->media, $app['path.web']);
 });
 
 
@@ -213,13 +220,38 @@ $app['model.factory.contact'] = $app->share(function ($app)
     return new \App\Model\Factory\Contact($app['validator'], $app['captcha.manager']);
 });
 
+$app['model.factory.media'] = $app->share(function ($app)
+{
+    return new \App\Model\Factory\Media($app['validator']);
+});
+
+$app['model.factory.media.uploaded'] = $app->share(function ($app)
+{
+    return new \App\Model\Factory\MediaUploaded($app['validator'], $app['path.web'], $app['media.config']);
+});
+
+
+/*************************************************
+ * Configuration for media platform
+ ************************************************/
+
+$app['media.config'] =
+[
+    'image.web.size'       => 1200,     // size of small side in px
+    'image.thumb.size'     => 120,      // size of small side in px
+    'maxFileSize'          => 10000000, // 10M
+    'acceptTypes.mime'     => ['application/ogg', 'audio/ogg', 'image/jpeg', 'image/png'],
+    'acceptTypes.jsRegexp' => '/(\.|\/)(oga|ogg|ogx|jpe?g|png)$/i',
+];
+
 
 /*************************************************
  * Define the routes
  ************************************************/
 
 $app->mount('/'    , new \App\Controller\BaseController($app));
-//$app->mount('/blog', new \App\Controller\BlogController($app));
+$app->mount('/blog', new \App\Controller\BlogController($app));
+$app->mount('/media', new \App\Controller\MediaController($app));
 
 
 return $app;
