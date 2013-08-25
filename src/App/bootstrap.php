@@ -99,6 +99,8 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
 {
     $twig->addExtension(new Twig_Extensions_Extension_Intl());  // for 'localizeddate' filter
 
+    $twig->addGlobal('host', $app['request']->getUriForPath('/'));
+
     $twig->addFilter(new \Twig_SimpleFilter('sum', 'array_sum'));
 
     $twig->addFilter(new \Twig_SimpleFilter('shuffle', function ($array)

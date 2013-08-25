@@ -6,28 +6,7 @@
 {% block main %}
 
 <header class="clearfix">
-    <!-- Title -->
-    <h1 class="pull-left">
-        <span id="page-title">{{ 'blog.home'|trans }}</span>
-
-        {% if hasTagFilter or hasYearFilter or hasMonthFilter %}
-            <!-- Filter used -->
-            <small style="margin-left: 0.5em;"> »
-                {% if hasTagFilter %}
-                    {{ 'blog.having-tag' | trans([tag]) | raw }}
-                {% elseif hasYearFilter %}
-                    {{ 'blog.having-year' | trans([year]) | raw }}
-                {% elseif hasMonthFilter %}
-                    {{ 'blog.having-year-month' | trans([year, ('month.'~month)|trans]) | raw }}
-                {% endif %}
-
-                <!-- Remove filter -->
-                <a href="/blog" title="{{ 'blog.remove-filter'|trans }}">
-                    <i class="icon-remove" style="margin-top: 4px;"></i>
-                </a>
-            </small>
-        {% endif %}
-    </h1>
+    {{ titleAndFilters | raw }}
 
     {% if is_granted('ROLE_ADMIN') %}
         <!-- Go to dashboard -->
@@ -37,21 +16,20 @@
     {% endif %}
 </header>
 
-
-{% if articles is empty %}
+{% if elements is empty %}
 
     <big>{{ 'blog.noArticle'|trans }}</big>
 
 {% else %}
 
-    <div class="col-8">
-        {% for article in articles %}
-            {% include 'article/summary.html.twig' with article only %}
+    <div class="col-xs-8">
+        {% for article in elements %}
+            {% include 'blog/summary.html.twig' with article only %}
         {% endfor %}
     </div>
 
-    <aside class="col-4">
-        {% include 'blog/counter-and-navigation.html.twig' %}
+    <aside class="col-xs-4">
+        {{ counterAndNavigation | raw }}
 
         <nav class="box">
             <h1>{{ 'Search' | trans }}</h1>

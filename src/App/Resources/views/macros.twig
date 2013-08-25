@@ -1,11 +1,13 @@
 {##
  # Summary :
  #  -> indent
- #  -> linked_img
  #  -> bool2icon
  #  -> cancel
  #  -> cancel_link
+ #  -> format_file_size
  #  -> tags_box
+ #  -> audio
+ #  -> linked_img
  #}
 
 
@@ -18,37 +20,6 @@
     <small class="text-muted" style="margin-left: 15px;">
         <i class="icon-arrow-right"></i>&nbsp;{{- element | raw -}}
     </small>
-{% endspaceless %}
-{% endmacro %}
-
-
-{##
- # Add an image :
- #  -> with a link for larger view
- #  -> which can be open in a lightbox2 box under the `group` (if specified).
- #}
-{% macro linked_img(folder, img, options) %}
-{% spaceless %}
-    {##
-     # group : null for an individual image OR a string
-     #}
-    {%- set o = {
-            caption   : '',
-            class     : '',
-            class_img : '',
-            group     : 'global',
-            thumb     : false,
-        }
-        | merge(options | default({}))
-    -%}
-
-    <a href="{{ folder~'/'~img }}" class="{{ o.class }}"
-       rel="lightbox{{- o.group ? '['~o.group~']' -}}"
-       {{ o.caption ? 'title="'~o.caption~'"' }}>
-
-        <img src="{{ o.thumb ? (folder~'/thumb/'~img) : (folder~'/'~img) }}"
-            class="img-responsive {{ o.class_img }}">
-    </a>
 {% endspaceless %}
 {% endmacro %}
 
@@ -113,6 +84,28 @@
 
 
 {##
+ # Format a file size from bytes to kilo/mega/giga-bytes,
+ # depending on the size magnitude.
+ #}
+{% macro format_file_size(bytes) %}
+{% spaceless %}
+
+    {% if bytes >= 1000000000 %}
+        {{ (bytes / 1000000000) | number_format(2) }} GB
+
+    {% elseif bytes >= 1000000 %}
+        {{ (bytes / 1000000) | number_format(2) }} MB
+
+    {% else %}
+        {{ (bytes / 1000) | number_format(2) }} KB
+
+    {% endif %}
+
+{% endspaceless %}
+{% endmacro %}
+
+
+{##
  # Display a tags box where tags are sized depending on their weight.
  #
  # "tags" = [weight (1 to 5), tag]+
@@ -148,4 +141,53 @@
             <li class="size-{{ tag[0] }}">{{ tag[1] }}</li>
         {% endfor %}
     </ul>
+{% endmacro %}
+
+
+{##
+ # Add a <audio> tag.
+ #}
+{% macro audio(folder, file) %}
+{% spaceless %}
+    <audio controls preload="none">
+        <source src="{{ folder~'/'~file }}">
+    </audio>
+{% endspaceless %}
+{% endmacro %}
+
+
+{##
+ # Add an image :
+ #  -> with a link for larger view
+ #  -> which can be open in a lightbox2 box under the `group` (if specified).
+ #}
+{% macro linked_img(folder, img, options) %}
+{% spaceless %}
+    {##
+     # group : null for an individual image OR a string
+     # thumb : false OR true OR a string for a specific path
+     #}
+    {%- set o = {
+            caption   : '',
+            class     : '',
+            class_img : '',
+            group     : 'global',
+            thumb     : false,
+        }
+        | merge(options | default({}))
+    -%}
+
+    {% set img = '/' ~ img %}
+
+    {% set img_src =
+        o.thumb is sameas(true) ? (folder ~ '/thumb') : (o.thumb ?: folder)
+    %}
+
+    <a href="{{ folder~img }}" class="{{ o.class }}"
+       rel="lightbox{{- o.group ? '['~o.group~']' -}}"
+       {# o.caption ? ('title="'~o.caption~'"') | raw #}>
+
+        <img src="{{- img_src ~ img -}}" class="img-responsive {{ o.class_img }}">
+    </a>
+{% endspaceless %}
 {% endmacro %}

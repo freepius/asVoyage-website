@@ -31,23 +31,23 @@
             {% else %}
 
                 {# Eventual link to filtered Blog home page #}
-                {% if hasTagFilter %}
-                    {% set url = '/blog/tag-' ~tag %}
+                {% if hasTagsFilter %}
+                    {% set url = '/blog/' ~ (countTags == 1 ? 'tag-' : 'tags-') ~ tags %}
 
                     <a href="{{ url }}">
-                        {{ 'blog.having-tag' | trans([tag]) | raw }}</a> »
+                        {{ 'filter.tags' | transchoice(countTags, [tags]) | raw }}</a> »
 
                 {% elseif hasYearFilter %}
-                    {% set url = '/blog/year-' ~year %}
+                    {% set url = '/blog/year-' ~ year %}
 
                     <a href="{{ url }}">
-                        {{ 'blog.having-year' | trans([year]) | raw }}</a> »
+                        {{ 'filter.year' | trans([year]) | raw }}</a> »
 
                 {% elseif hasMonthFilter %}
-                    {% set url = '/blog/year-' ~year~ '/month-' ~month %}
+                    {% set url = '/blog/year-' ~ year ~ '/month-' ~ month %}
 
                     <a href="{{ url }}">
-                        {{ 'blog.having-year-month' | trans([year, ('month.'~month)|trans]) | raw }}</a> »
+                        {{ 'filter.year-month' | trans([year, ('month.'~month)|trans]) | raw }}</a> »
                 {% endif %}
 
                 {# Eventual link to Blog home page by page number #}
@@ -63,7 +63,7 @@
     </header>
 
     <div itemprop="articleBody">
-        {{ article.text | raw }}
+        {{ article.text | richText }}
     </div>
 
     <div id="comments" itemprop="comment">
@@ -123,13 +123,13 @@
 
         {% if is_granted('ROLE_ADMIN') %}
             <div class="actions-right">
-                <!-- Delete -->
-                <a href="/blog/{{- article.slug -}}/delete" title="{{ 'Delete'|trans }}">
-                    <i class="icon-trash"></i></a>
-
                 <!-- Update -->
                 <a href="/blog/{{- article.slug -}}/update" title="{{ 'Update'|trans }}">
                     <i class="icon-pencil"></i></a>
+
+                <!-- Delete -->
+                <a href="/blog/{{- article.slug -}}/delete" title="{{ 'Delete'|trans }}">
+                    <i class="icon-trash"></i></a>
             </div>
         {% endif %}
     </div>

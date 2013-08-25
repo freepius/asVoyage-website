@@ -36,15 +36,15 @@ class StringUtil
      */
     public static function normalizeTags($tags)
     {
-        // A tag is lowercase ; its first letter us uppercase
-        $processTag = function ($tag) {
-            return ucfirst(strtolower(trim($tag)));
+        $cleanTag = function ($tag) {
+            return ucfirst(trim($tag));
         };
 
-        $tags = explode(',', $tags);
+        // Strip tags for security
+        $tags = explode(',', strip_tags($tags));
 
         // No blank value
-        $tags = array_filter(array_map($processTag, $tags));
+        $tags = array_filter(array_map($cleanTag, $tags));
 
         natsort($tags);
 

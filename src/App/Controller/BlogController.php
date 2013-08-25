@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use Silex\ControllerProviderInterface,
     Symfony\Component\HttpFoundation\Request,
-    App\Exception\BlogArticleNotFound;
+    App\Exception\BlogArticleNotFound,
+    App\Util\StringUtil;
 
 
 /**
@@ -13,11 +14,8 @@ use Silex\ControllerProviderInterface,
  *  -> connect
  *  -> retrieveFiltersAndPage [protected]
  *  -> slugToArticle
- *  -> renderTagsFilter  [protected]
- *  -> renderDatesFilter [protected]
  *
  *  -> GLOBAL ACTIONS :
- *      => home
  *      => dashboard
  *
  *  -> ACTIONS ON ARTICLE :
@@ -32,19 +30,22 @@ use Silex\ControllerProviderInterface,
  */
 class BlogController implements ControllerProviderInterface
 {
+    use TaggedDatedTrait;
+
+    const MODULE = 'blog';
+
     // On "home" page, max number of articles
-    protected $limitArticles;
+    protected $limitInHome;
 
 
     public function __construct(\App\Application $app)
     {
-        $this->limitArticles = $app['debug'] ? 2 : 10;
+        $this->limitInHome = $app['debug'] ? 2 : 10;
 
         $this->app            = $app;
         $this->repository     = $app['model.repository.blog'];
         $this->factoryArticle = $app['model.factory.article'];
         $this->factoryComment = $app['model.factory.comment'];
-        $this->richText       = $app['richText'];
     }
 
     public function connect(\Silex\Application $app)
@@ -53,28 +54,8 @@ class BlogController implements ControllerProviderInterface
 
         $slugToArticle = [$this, 'slugToArticle'];
 
-        // Home : a list of articles, for basic users
-        $blog->get('/{page}', [$this, 'home'])
-            ->value('page', 1)
-            ->assert('page', '\d+');
-
-        // ...filtered by tag
-        $blog->get('/tag-{tag}/{page}', [$this, 'home'])
-            ->value('page', 1)
-            ->assert('page', '\d+');
-
-        // ...filtered by year
-        $blog->get('/year-{year}/{page}', [$this, 'home'])
-            ->value('page', 1)
-            ->assert('page', '\d+')
-            ->assert('year', '\d{4}');
-
-        // ...filtered by year and month
-        $blog->get('/year-{year}/month-{month}/{page}', [$this, 'home'])
-            ->value('page', 1)
-            ->assert('page' , '\d+')
-            ->assert('year' , '\d{4}')
-            ->assert('month', '\d{1,2}');
+        // Home page
+        $this->addHomeRoutes($blog);
 
         // Admin dashboard
         $blog->get('/dashboard', [$this, 'dashboard']);
@@ -119,6 +100,7 @@ class BlogController implements ControllerProviderInterface
      * Url of Blog home page is one of the following ({page} is optional) :
      *  -> blog/{page}
      *  -> blog/tag-{tag}/{page}
+     *  -> blog/tags-{tags}/{page}
      *  -> blog/year-{year}/{page}
      *  -> blog/year-{year}/mont-{month}/{page}
      */
@@ -136,14 +118,15 @@ class BlogController implements ControllerProviderInterface
         {
             return $this->app->getSession('blog.filters_and_page',
             [
-                'hasTagFilter'   => false,
+                'hasTagsFilter'  => false,
                 'hasYearFilter'  => false,
                 'hasMonthFilter' => false,
                 'hasPage'        => false,
             ]);
         }
 
-        $tag = $year = $month = $page = null;
+        $year = $month = $page = null;
+        $tags = [];
 
         // Do we come from Blog home page ?
         if ('blog' === strtok($url, '/'))
@@ -151,9 +134,9 @@ class BlogController implements ControllerProviderInterface
             $params = strtok('');
             $filter = strtok($params, '-');
 
-            if ('tag' === $filter)
+            if ('tag' === $filter || 'tags' === $filter)
             {
-                $tag  = strip_tags(strtok('/'));
+                $tags = StringUtil::normalizeTags(urldecode(strtok('/')));
                 $page = strtok('');
             }
             elseif ('year' === $filter)
@@ -173,17 +156,19 @@ class BlogController implements ControllerProviderInterface
                 ! (null  === $month || is_numeric($month)) ||
                 ! (false === $page  || is_numeric($page)))
             {
-                $tag = $year = $month = $page = null;
+                $year = $month = $page = null;
+                $tags = [];
             }
         }
 
         $this->app->setSession('blog.filters_and_page', $result =
         [
-            'hasTagFilter'   => null !== $tag,
-            'hasYearFilter'  => null !== $year && null === $month,
-            'hasMonthFilter' => null !== $month,
+            'hasTagsFilter'  => (bool) $tags,
+            'hasYearFilter'  => $year && !$month,
+            'hasMonthFilter' => (bool) $month,
             'hasPage'        => is_numeric((string) $page),
-            'tag'            => urldecode($tag),
+            'countTags'      => count($tags),
+            'tags'           => implode(',', $tags),
             'year'           => $year,
             'month'          => $month,
             'page'           => (string) $page,
@@ -209,103 +194,16 @@ class BlogController implements ControllerProviderInterface
         }
     }
 
-    // TODO : cache HTML until one article is edit/create.
-    protected function renderTagsFilter()
-    {
-        return $this->app->renderView('blog/filter-by-tags.html.twig', [
-            'tags' => $this->repository->listTags()
-        ]);
-    }
-
-    // TODO : cache HTML until one article is edit/create.
-    protected function renderDatesFilter()
-    {
-        return $this->app->renderView('blog/filter-by-dates.html.twig', [
-            'countByYearMonth' => $this->repository->countArticlesByYearMonth(),
-        ]);
-    }
-
 
     /***************************************************************************
      * GLOBAL ACTIONS
      **************************************************************************/
 
-    public function home(Request $request, $page = 1, $tag = null, $year = null, $month = null)
-    {
-        /**
-         * Process the filters.
-         * User can used them only one by one !
-         */
-        $tag   = $tag ? strip_tags($tag) : null;
-        $year  = (int) $year;
-        $month = min((int) $month, 12);
-
-        $hasTagFilter   = null !== $tag;                      // priority = 1
-        $hasYearFilter  = !$hasTagFilter && $year && !$month; //          = 2
-        $hasMonthFilter = !$hasTagFilter && $year && $month;  //          = 3
-
-        if ($hasYearFilter || $hasMonthFilter)
-        {
-            $nextDate = ($year + (int) $hasYearFilter) .'-'. ($month + (int) $hasMonthFilter);
-
-            $fromDate = date('Y-m-d H:i:s', strtotime("$year-$month"));
-            $toDate   = date('Y-m-d H:i:s', strtotime($nextDate));
-        }
-        else { $fromDate = $toDate = null; }
-
-        // Total number of articles depending on filters
-        $total = $this->repository->countArticles($fromDate, $toDate, $tag);
-
-        $totalPages = (int) ceil($total / $this->limitArticles);
-
-        $page = (int) min($totalPages, $page);
-
-        // Number of previous articles
-        $skip = ($page - 1) * $this->limitArticles;
-
-        // Retrieve articles depending on filters
-        $articles = iterator_to_array($this->repository->listArticles(
-            $this->limitArticles, $skip, $fromDate, $toDate, $tag
-        ));
-
-        // For text and summary : RichText to Html
-        foreach ($articles as & $article)
-        {
-            // avoid conflicts for footnote ids
-            $this->richText->markdown->fn_id_prefix = $article['slug'];
-
-            $article['text']    = $this->richText->transform($article['text']);
-            $article['summary'] = trim($this->richText->transform($article['summary']));
-        }
-
-        return $this->app->render('blog/home.html.twig',
-        [
-            'articles' => $articles,
-
-            // For counter and navigation
-            'count'         => count($articles),
-            'countPrevious' => $skip,
-            'page'          => $page,
-            'total'         => $total,
-            'totalPage'     => $totalPages,
-
-            // Related to filter
-            'tagsFilter'     => $this->renderTagsFilter(),
-            'datesFilter'    => $this->renderDatesFilter(),
-            'hasTagFilter'   => $hasTagFilter,
-            'hasYearFilter'  => $hasYearFilter,
-            'hasMonthFilter' => $hasMonthFilter,
-            'tag'            => $tag,
-            'year'           => $year,
-            'month'          => $month,
-        ]);
-    }
-
     public function dashboard()
     {
         return $this->app->render('blog/dashboard.html.twig',
         [
-            'articles' => $this->repository->listAllArticles(),
+            'articles' => $this->repository->listAll(),
         ]);
     }
 
@@ -327,9 +225,7 @@ class BlogController implements ControllerProviderInterface
             return $this->app->redirect("/blog/{$article['slug']}/read");
         }
 
-        $article['text'] = $this->richText->transform($article['text']);
-
-        return $this->app->render('article/read.html.twig',
+        return $this->app->render('blog/read.html.twig',
             $this->retrieveFiltersAndPage($request) + $opComment + ['article' => $article]
         );
     }
@@ -370,7 +266,7 @@ class BlogController implements ControllerProviderInterface
             }
         }
 
-        return $this->app->render('article/post-general.html.twig',
+        return $this->app->render('blog/post-general.html.twig',
         [
             'originalSlug' => $originalSlug,
             'article'      => $article,
@@ -392,7 +288,7 @@ class BlogController implements ControllerProviderInterface
             return $this->app->redirect('/blog/dashboard');
         }
 
-        return $this->app->render('article/delete.html.twig',
+        return $this->app->render('blog/delete.html.twig',
         [
             'article' => $article,
         ]);

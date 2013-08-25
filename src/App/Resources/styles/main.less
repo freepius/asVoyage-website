@@ -52,6 +52,13 @@ p { text-align: justify; }
     font-style: normal;
 }
 
+
+/*************************************************
+ * Overloading of Bootstrap styles
+ ************************************************/
+
+.lead { margin: 0; }
+
 // Never underline icons
 a, .btn-link
 {
@@ -61,12 +68,14 @@ a, .btn-link
     }
 }
 
-.img-responsive {
-    .img-responsive(inline-block);
+// eg: in views/generic/filter-by-tags.html.twig => Filter by multiple tags
+.input-group-btn > .btn-link
+{
+    border-color: @input-border;
 }
 
-.list-inline > li {
-    line-height: @line-height-computed;
+.img-responsive {
+    .img-responsive(inline-block);
 }
 
 .alert-success a {
@@ -152,6 +161,10 @@ h6 { font-size: 0.85em; }
     .size-4 { font-size: 150%; }
     .size-5 { font-size: 250%; }
 
+    &.list-inline > li {
+        line-height: @line-height-computed;
+    }
+
     &.list-unstyled
     {
         .size-1 { line-height: 90%; }
@@ -179,9 +192,18 @@ div.preview // textarea style
 .actions-right
 {
     .clearfix();
+    float: right;
+
+    // Vertical divider (styles related to .btn class)
+    > hr {
+        height: @line-height-computed;
+        margin: @padding-base-vertical 15px;
+        border: 0;
+        border-left: 1px solid @gray-dark;
+    }
 
     > * {
-        float: right;
+        float: left;
         margin: 0 2px;
     }
 

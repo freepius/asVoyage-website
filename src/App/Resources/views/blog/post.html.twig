@@ -23,6 +23,9 @@
         </div>
 
         <div class="actions-right">
+            <!-- Cancel creation / updating -->
+            {{ cancel('/blog/dashboard') }}
+
             {% if not isCreation %}
                 <!-- Go to the article reading page -->
                 <a href="/blog/{{- originalSlug -}}/read" class="btn btn-default">
@@ -30,9 +33,6 @@
                     {{ 'Read'|trans }}
                 </a>
             {% endif %}
-
-            <!-- Cancel creation / updating -->
-            {{ cancel('/blog/dashboard') }}
         </div>
     </header>
 

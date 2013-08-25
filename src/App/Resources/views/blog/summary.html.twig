@@ -12,7 +12,7 @@
 
 
     <div class="clearfix" itemprop="articleBody">
-        {{ (summary ?: text) | raw }}
+        {{ (summary|trim ? summary : text) | richText }}
 
         <big class="pull-right">
             <a itemprop="url" href="/blog/{{- slug -}}/read">» {{ 'Read more'|trans }}</a>

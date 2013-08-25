@@ -34,6 +34,9 @@ class RichText
 
     public function transform($text)
     {
+        // avoid conflicts for footnote ids
+        $this->markdown->fn_id_prefix = uniqid();
+
         $text = $this->markdown->transform($text);
 
         $text = $this->smartypants->transform($text);

@@ -6,41 +6,48 @@
  *  -> Captcha
  *  -> Contact
  *  -> Error
+ *  -> Filter
  *  -> Languages
  *  -> Literal numbers
  *  -> Months
  *  -> Navigation
+ *  -> Placeholder
  */
 
 return [
-    //'Actions'         => '',
-    //'Articles'        => '',
-    //'Bad credentials' => '',
-    //'Cancel'          => '',
-    //'Comments'        => '',
-    //'Delete'          => '',
-    //'Edit'            => '',
-    //'Error'           => '',
-    'Error(s)'        => "There is/are <b>0</b> error/s : at 1.",
-    //'General'         => '',
-    //'Login'           => '',
-    //'Logout'          => '',
-    //'No'              => '',
-    //'none'            => '',
-    //'Password'        => '',
-    //'Post'            => '',
-    //'Posted by'       => '',
-    //'Preview'         => '',
-    //'Read'            => '',
-    //'Read more'       => '',
-    //'Search'          => '',
-    //'Submit'          => '',
-    //'Tags'            => '',
-    //'to'              => '',
-    //'Top'             => '',
-    //'Update'          => '',
-    //'website'         => '',
-    //'Yes'             => '',
+    //'Actions'          => '',
+    //'at'               => '',
+    //'Bad credentials'  => '',
+    //'by date'          => '',
+    //'by tag'           => '',
+    //'Cancel'           => '',
+    //'Comments'         => '',
+    //'Delete'           => '',
+    //'Delete filter(s)' => '',
+    //'Edit'             => '',
+    //'Error'            => '',
+    'Error(s)'           => "There is/are <b>0</b> error/s : at 1.",
+    //'General'          => '',
+    //'Login'            => '',
+    //'Logout'           => '',
+    //'No'               => '',
+    //'none'             => '',
+    //'Older'            => '',
+    //'Password'         => '',
+    //'Post'             => '',
+    //'Posted by'        => '',
+    //'Preview'          => '',
+    //'Read'             => '',
+    //'Read more'        => '',
+    //'Run search'       => '',
+    //'Search'           => '',
+    //'Submit'           => '',
+    //'to'               => '',
+    //'Top'              => '',
+    //'Update'           => '',
+    //'website'          => '',
+    //'Yes'              => '',
+    //'Younger'          => '',
 
     // Captcha
     'captcha' => [
@@ -80,6 +87,14 @@ return [
             '404'   => 'The requested page could not be found.',
             'other' => 'We are sorry, but something went terribly wrong.',
         ],
+    ],
+
+    // Filter
+    'filter' => [
+        'tags'       => 'Filtered by tag <b>0</b>|'.
+                        'Filtered by tags <b>0</b>',
+        'year'       => "Filtered by year <b>0</b>",
+        'year-month' => "Filtered by date <b>1 0</b>",
     ],
 
     // Languages
@@ -126,5 +141,10 @@ return [
         'blog'      => 'Blog',
         'gallery'   => 'Gallery',
         'map'       => 'Map',
+    ],
+
+    // Placeholder
+    'placeholder' => [
+        'tags' => 'Tags separated by a comma',
     ],
 ];

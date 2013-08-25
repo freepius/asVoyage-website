@@ -6,41 +6,48 @@
  *  -> Captcha
  *  -> Contact
  *  -> Error
+ *  -> Filter
  *  -> Languages
  *  -> Literal numbers
  *  -> Months
  *  -> Navigation
+ *  -> Placeholder
  */
 
 return [
-    'Actions'         => 'Actions',
-    'Articles'        => 'Articles',
-    'Bad credentials' => 'Mot de passe erroné',
-    'Cancel'          => 'Annuler',
-    'Comments'        => 'Commentaires',
-    'Delete'          => 'Supprimer',
-    'Edit'            => 'Éditer',
-    'Error'           => 'Erreur',
-    'Error(s)'        => "Il y a <b>0</b> erreur(s) : à 1.",
-    'General'         => 'Général',
-    'Login'           => 'Connexion',
-    'Logout'          => 'Déconnexion',
-    'No'              => 'Non',
-    'none'            => 'aucun',
-    'Password'        => 'Mot de passe',
-    'Post'            => 'Poster',
-    'Posted by'       => 'Posté par',
-    'Preview'         => 'Prévisualiser',
-    'Read'            => 'Lire',
-    'Read more'       => 'Lire plus',
-    'Search'          => 'Chercher',
-    'Submit'          => 'Envoyer',
-    'Tags'            => 'Mots-clés',
-    'to'              => 'à',
-    'Top'             => 'Haut',
-    'Update'          => 'Mettre à jour',
-    'website'         => 'site web',
-    'Yes'             => 'Oui',
+    'Actions'          => 'Actions',
+    'at'               => 'à',
+    'Bad credentials'  => 'Mot de passe erroné',
+    'by date'          => 'par date',
+    'by tag'           => 'par mot-clé',
+    'Cancel'           => 'Annuler',
+    'Comments'         => 'Commentaires',
+    'Delete'           => 'Supprimer',
+    'Delete filter(s)' => 'Supprimer le(s) filtre(s)',
+    'Edit'             => 'Éditer',
+    'Error'            => 'Erreur',
+    'Error(s)'         => "Il y a <b>0</b> erreur(s) : à 1.",
+    'General'          => 'Général',
+    'Login'            => 'Connexion',
+    'Logout'           => 'Déconnexion',
+    'No'               => 'Non',
+    'none'             => 'aucun',
+    'Older'            => 'Plus anciens',
+    'Password'         => 'Mot de passe',
+    'Post'             => 'Poster',
+    'Posted by'        => 'Posté par',
+    'Preview'          => 'Prévisualiser',
+    'Read'             => 'Lire',
+    'Read more'        => 'Lire plus',
+    'Run search'       => 'Lancer la recherche',
+    'Search'           => 'Chercher',
+    'Submit'           => 'Envoyer',
+    'to'               => 'à',
+    'Top'              => 'Haut',
+    'Update'           => 'Mettre à jour',
+    'website'          => 'site web',
+    'Yes'              => 'Oui',
+    'Younger'          => 'Plus récents',
 
     // Captcha
     'captcha' => [
@@ -80,6 +87,14 @@ return [
             '404'   => "La page que vous cherchez n'existe pas (ou plus).",
             'other' => "Quelque chose a mal tourné. C'est terrible !",
         ],
+    ],
+
+    // Filter
+    'filter' => [
+        'tags'       => 'Filtré par le mot-clé <b>0</b>|'.
+                        'Filtré par les mots-clés <b>0</b>',
+        'year'       => "Filtré par l'année <b>0</b>",
+        'year-month' => "Filtré par la date <b>1 0</b>",
     ],
 
     // Languages
@@ -126,5 +141,10 @@ return [
         'blog'      => 'Blog',
         'gallery'   => 'Galerie',
         'map'       => 'Carte',
+    ],
+
+    // Placeholder
+    'placeholder' => [
+        'tags' => 'Mots-clés séparés par une virgule',
     ],
 ];

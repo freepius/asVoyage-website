@@ -1,7 +1,7 @@
 <div id="comment-{{ id }}" class="comment" itemscope itemtype="http://schema.org/Comment">
 
     <header>
-        <time itemprop="datePublished" datetime="{{ comment.datetime }}">
+        <time itemprop="datePublished" datetime="{{ comment.datetime }}" class="clearfix">
             <strong>{{ comment.datetime | localizeddate('medium', 'none') }} </strong><br>
             <em>    {{ comment.datetime | localizeddate('none'  , 'short') }}</em>
         </time>
@@ -9,6 +9,10 @@
         {# Actions on comment #}
         {% if is_granted('ROLE_ADMIN') %}
         <div class="actions-right">
+
+            <!-- Update -->
+            <a href="{{ url_comment }}#comment-post" title="{{ 'Update'|trans }}">
+                <i class="icon-pencil"></i></a>
 
             <!-- Delete -->
             <form action="{{ url_comment }}" method="post">
@@ -18,10 +22,6 @@
                     <i class="icon-trash"></i>
                 </button>
             </form>
-
-            <!-- Update -->
-            <a href="{{ url_comment }}#comment-post" title="{{ 'Update'|trans }}">
-                <i class="icon-pencil"></i></a>
 
         </div>
         {% endif %}

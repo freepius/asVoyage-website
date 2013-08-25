@@ -3584,11 +3584,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
   display: none;
 }
 .label-default {
-  background-color: #999999;
+  background-color: #3b372e;
 }
 .label-default[href]:hover,
 .label-default[href]:focus {
-  background-color: #808080;
+  background-color: #1e1c18;
 }
 .label-primary {
   background-color: #428bca;
@@ -5466,16 +5466,67 @@ article.summary [itemprop="articleBody"] {
   margin: 0 15px;
   padding: 0 15px;
 }
-#media .actions {
-  text-align: right;
+/*************************************************
+ * Media home page
+ ************************************************/
+#media {
+  /**
+     * Short view :
+     *  -> beautiful view
+     *  -> only content displayed
+     *  -> caption in tooltip
+     */
+
+  /**
+     * Medium view :
+     *  -> only 2 media elements per line
+     *  -> content and caption displayed
+     *  -> rest of info in popover
+     */
+
+  /**
+     * Full view :
+     *  -> only 2 media elements per line
+     *  -> all info displayed
+     */
+
 }
-#media img,
-#media audio {
-  max-width: 160px;
+#media p {
+  text-align: center;
 }
-/**
- * Styles for uploading.
- */
+#media .thumbnail {
+  border-radius: 0;
+  text-align: center;
+  -webkit-transition: none;
+  transition: none;
+}
+#media.view-short .caption,
+#media.view-short .meta,
+#media.view-short .technical {
+  display: none;
+}
+#media.view-short .thumbnail {
+  width: auto;
+  height: auto !important;
+  padding: 0;
+}
+#media.view-short .thumbnail .content {
+  height: 120px;
+}
+#media.view-short .thumbnail:hover {
+  z-index: 1029;
+}
+#media.view-short .thumbnail:hover img {
+  border-top: 5px solid #faf7e9;
+  border-bottom: 5px solid #faf7e9;
+}
+#media.view-medium .meta,
+#media.view-medium .technical {
+  display: none;
+}
+/*************************************************
+ * Styles for uploading
+ ************************************************/
 .fileinput-button {
   position: relative;
   overflow: hidden;
@@ -5645,19 +5696,25 @@ p {
   font-weight: normal;
   font-style: normal;
 }
+/*************************************************
+ * Overloading of Bootstrap styles
+ ************************************************/
+.lead {
+  margin: 0;
+}
 a [class^="icon-"],
 .btn-link [class^="icon-"],
 a [class*=" icon-"],
 .btn-link [class*=" icon-"] {
   text-decoration: none;
 }
+.input-group-btn > .btn-link {
+  border-color: #333333;
+}
 .img-responsive {
   display: inline-block;
   max-width: 100%;
   height: auto;
-}
-.list-inline > li {
-  line-height: 24px;
 }
 .alert-success a {
   color: #356635 !important;
@@ -5752,6 +5809,9 @@ h6 {
 .tags-box .size-5 {
   font-size: 250%;
 }
+.tags-box.list-inline > li {
+  line-height: 24px;
+}
 .tags-box.list-unstyled .size-1 {
   line-height: 90%;
 }
@@ -5777,17 +5837,8 @@ div.preview {
   border: 1px solid #333333;
   background-color: white;
 }
-.actions-right:before,
-.actions-right:after {
-  content: " ";
-  /* 1 */
-
-  display: table;
-  /* 2 */
-
-}
-.actions-right:after {
-  clear: both;
+.actions-right {
+  float: right;
 }
 .actions-right:before,
 .actions-right:after {
@@ -5800,9 +5851,27 @@ div.preview {
 }
 .actions-right:after {
   clear: both;
+}
+.actions-right:before,
+.actions-right:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.actions-right:after {
+  clear: both;
+}
+.actions-right > hr {
+  height: 24px;
+  margin: 6px 15px;
+  border: 0;
+  border-left: 1px solid #333333;
 }
 .actions-right > * {
-  float: right;
+  float: left;
   margin: 0 2px;
 }
 .actions-right .btn-link {

@@ -1,8 +1,6 @@
 <?php
 
 return ['blog' => [
-    'by-date'           => 'by date',
-    'by-tag'            => 'by tag',
     'create'            => 'Create an article',
     'created'           => 'Article <b>0</b> created.',
     'creation'          => "Creation of an article",
@@ -10,19 +8,14 @@ return ['blog' => [
     'deleted'           => 'Article <b>0</b> deleted.',
     'deleting'          => "Deleting of an article",
     'deleting.confirm'  => "Do you confirm the deleting of article <b>0</b> ?",
-    'having-tag'        => 'Filtered by tag <b>0</b>',
-    'having-year'       => "Filtered by year <b>0</b>",
-    'having-year-month' => "Filtered by date <b>1 0</b>",
+    'elements'          => 'Articles',
     'home'              => 'Blog home',
     'isUnpublished'     => 'Unpublished',
     'noArticle'         => 'No article found.',
     'notFound'          => "Article <em>\"0\"</em> doesn't exist.",
-    'older'             => 'Older',
     'page-number'       => 'Page n°0',
-    'remove-filter'     => 'Delete filter',
     'updated'           => 'Article <b>0</b> updated.',
     'updating'          => "Updating of an article",
-    'younger'           => 'Younger',
 
     'field' => [
         'beCommented'   => 'Accept comments ?',

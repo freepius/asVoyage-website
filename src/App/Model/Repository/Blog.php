@@ -2,18 +2,19 @@
 
 namespace App\Model\Repository;
 
-use App\Exception\BlogArticleNotFound;
+use App\Exception\BlogArticleNotFound,
+    App\Util\Group;
 
 
 /**
  * Summary :
- *  -> filterArticles [protected]
- *  -> listAllArticles
+ *  -> filter   [protected]
+ *  -> listAll
  *  -> getBySlug
- *  -> countArticles
- *  -> listArticles
+ *  -> count
+ *  -> find
  *  -> listTags
- *  -> countArticlesByYearMonth
+ *  -> countByYearMonth
  *  -> storeComment
  *  -> deleteComment
  *  -> getCommentsById
@@ -22,35 +23,41 @@ class Blog extends MongoRepository
 {
     /**
      * Return some filters for querying articles :
-     *    -> depending on your admin rights
-     *    -> between two publication datetime ($from and $to, included)
-     *    -> having at least one of $tags
+     *    -> depending on your admin rights ($isAdmin param)
+     *    -> between two publication datetime ("from" and "to", included)
+     *    -> having all "tags"
      *
-     * Null (or equivalent) parameters are ignored.
+     * Null (or equivalent) filter are ignored.
      *
-     * @param bool          $isAdmin  Query with admin rights or not
-     * @param string        $from     The old bound date   ; format = Y-m-d (H:i:s)
-     * @param string        $to       The young bound date ; format = Y-m-d (H:i:s)
-     * @param string|array  $tags     A string or an array of strings
+     * $filters =
+     * {
+     *      from :  The old bound date   ; format = Y-m-d (H:i:s)
+     *      to   :  The young bound date ; format = Y-m-d (H:i:s)
+     *      tags :  An array of strings
+     * }
      *
      * @return array
      */
-    protected function filterArticles($isAdmin = false, $from = null, $to = null, $tags = null)
+    protected function filter($isAdmin = false, array $filters = [])
     {
         $query = [];
 
-        if ($from) { $query['pubDatetime']['$gte'] = (string) $from; }
-        if ($to)   { $query['pubDatetime']['$lte'] = (string) $to; }
-        if ($tags) { $query['tags']['$in'] = (array) $tags; }
+        $from = @ $filters['from'];
+        $to   = @ $filters['to'];
+        $tags = @ $filters['tags'];
 
-        // if not admin => unpublished articles, as those postdated, stay hidden !
+        if ($from) { $query['pubDatetime']['$gte'] = $from; }
+        if ($to)   { $query['pubDatetime']['$lte'] = $to; }
+        if ($tags) { $query['tags']['$all'] = $tags; }
+
+        // if not admin => unpublished or postdated articles stay hidden !
         if (! $isAdmin)
         {
             $query['isPublished'] = true;
 
             $query['pubDatetime']['$lte'] = min
             (
-                (string) $to ?: '9999',
+                $to ?: '9999',
                 date('Y-m-d H:i:s') // < or == to 'now'
             );
         }
@@ -62,7 +69,7 @@ class Blog extends MongoRepository
      * Return the main data of all articles.
      * WARNING : use this function only for admin purpose (eg: admin dashboard).
      */
-    public function listAllArticles()
+    public function listAll()
     {
         return $this->collection->find([], [
             'title', 'slug', 'pubDatetime',
@@ -76,7 +83,7 @@ class Blog extends MongoRepository
      */
     public function getBySlug($slug, $isAdmin = false)
     {
-        $query = $this->filterArticles($isAdmin);
+        $query = $this->filter($isAdmin);
 
         $query['slug'] = $slug;
 
@@ -90,19 +97,17 @@ class Blog extends MongoRepository
     }
 
     /**
-     * Count articles depending on some filters { @see filterArticles }.
+     * Count articles depending on some filters { @see filter }.
      *
      * @return integer
      */
-    public function countArticles($from = null, $to = null, $tags = null)
+    public function count(array $filters = [])
     {
-        return $this->collection->count(
-            $this->filterArticles(false, $from, $to, $tags)
-        );
+        return $this->collection->count($this->filter(false, $filters));
     }
 
     /**
-     * Search articles depending on some filters { @see filterArticles } and :
+     * Search articles depending on some filters { @see filter } and :
      *
      *    -> sorted DESC by publication datetime (ie, younger first)
      *    -> with $limit occurences max.
@@ -113,9 +118,9 @@ class Blog extends MongoRepository
      *
      * @return \MongoCursor
      */
-    public function listArticles($limit = 0, $skip = 0, $from = null, $to = null, $tags = null)
+    public function find($limit = 0, $skip = 0, array $filters = [])
     {
-        $query = $this->filterArticles(false, $from, $to, $tags);
+        $query = $this->filter(false, $filters);
 
         // Articles without comments
         $articles = $this->collection->find($query, ['comments' => 0])
@@ -128,74 +133,24 @@ class Blog extends MongoRepository
     }
 
     /**
-     * Return an array, "natural sorted" by keys, whose :
-     *    Key   = a unique tag
-     *    Value = [0 => occurrences of it ; 1 => its percentage on the total]
+     * @see \App\Util\Group::byTags
      */
     public function listTags()
     {
-        $total  = 0;
-        $result = [];
-
-        $articles = $this->collection->find(
-            $this->filterArticles(false), ['tags' => 1]
+        return Group::byTags(
+            $this->collection->find($this->filter(false), ['tags' => 1])
         );
-
-        // Retrieve all tags + their occurrences
-        foreach ($articles as $article)
-        {
-            $tags = $article['tags'];
-
-            foreach ($tags as $tag)
-            {
-                $total++;
-                $occ = & $result[$tag];
-                $occ++;
-            }
-        }
-
-        // Compute the percentage of each
-        $result = array_map(function ($nOcc) use ($total)
-        {
-            return [$nOcc, (int) round($nOcc / $total * 100)];
-        },
-        $result);
-
-        // "Natural sort" by keys
-        uksort($result, '\strnatcmp');
-
-        return $result;
     }
 
     /**
-     * Return a two-dimensional array whose :
-     *    Key   = a year
-     *    Value = { a month (1 to 12) : number of articles on this "year-month" }+
+     * @see \App\Util\Group::byYearMonth
      */
-    public function countArticlesByYearMonth($from = null, $to = null)
+    public function countByYearMonth()
     {
-        $result = [];
-
-        $articles = $this->collection->find(
-            $this->filterArticles(false, $from, $to), ['pubDatetime' => 1]
+        return Group::byYearMonth(
+            $this->collection->find($this->filter(false), ['pubDatetime' => 1]),
+            'pubDatetime'
         );
-
-        foreach ($articles as $article)
-        {
-            $year  = (int) substr($article['pubDatetime'], 0, 4);
-            $month = (int) substr($article['pubDatetime'], 5, 2);
-
-            $occ = & $result[$year][$month];
-            $occ++;
-        }
-
-        // Sort by year DESC
-        krsort($result);
-
-        // Sort by month DESC
-        foreach ($result as $year) { krsort($year); }
-
-        return $result;
     }
 
     /**
