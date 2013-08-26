@@ -93,7 +93,11 @@
             {% if article.tags is empty %}
                 {{ 'none'|trans }}
             {% else %}
-                <span itemprop="keywords">{{ article.tags | join(', ') }}</span>
+                <span itemprop="keywords">
+                    {% for tag in article.tags %}
+                        <span class="label label-default">{{ tag }}</span>
+                    {% endfor %}
+                </span>
             {% endif %}
         </p>
 

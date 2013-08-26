@@ -46,7 +46,6 @@ TODO
 * Carto : improve !!!
 * Traduction of new base pages (about, our-trips, etc.)
 * Revoir le CSS : les marges pour les titres, le centrage dans about, l'affichage sur grand et petit écran, etc.
-* Blog -> article -> tags styled with "label" or "badge" ?
 * Media -> better set meta actions (+/- tags ; +/- hours...)
 * Make RSS or newsletter
 * BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)

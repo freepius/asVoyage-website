@@ -23,12 +23,16 @@
     <footer class="row">
         <!-- Tags -->
         <div class="col-xs-8">
-            <b>{{ 'blog.field.tags'|trans }} :</b>
+            <i class="icon-tags" title="{{ 'blog.field.tags'|trans }}"></i>
 
             {% if tags is empty %}
                 {{ 'none'|trans }}
             {% else %}
-                <span itemprop="keywords">{{ tags | join(', ') }}</span>
+                <span itemprop="keywords">
+                    {% for tag in tags %}
+                        <span class="label label-default">{{ tag }}</span>
+                    {% endfor %}
+                </span>
             {% endif %}
         </div>
 
