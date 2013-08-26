@@ -18,7 +18,7 @@ External libraries used
 * [Font-Awesome](http://fortawesome.github.io/Font-Awesome/) : iconic font designed for Bootstrap
 * [Modernizr](http://modernizr.com/)
 * [jQuery](http://jquery.com/) and plugins :
-  * [Lightbox 2](https://github.com/javierjulio/lightbox2) : an advanced fork of [this](http://lokeshdhakar.com/projects/lightbox2/)
+  * [Lightbox 2](http://lokeshdhakar.com/projects/lightbox2/)
   * [jQuery File Upload](http://blueimp.github.io/jQuery-File-Upload/) : file upload widget
   * [Elastic](http://unwrongest.com/projects/elastic/) : auto grows textareas
 * [Leaflet](http://leafletjs.com/) and plugins :
@@ -51,7 +51,6 @@ TODO
 * Media -> better set meta actions (+/- tags ; +/- hours...)
 * Make RSS or newsletter
 * Media -> build a full garbage collector (scann all files in "media" dir and compare with MongoCollection)
-* Lightbox2 -> doesn't work with IE9
 * In DEBUG => when Logout => error
 
 For production

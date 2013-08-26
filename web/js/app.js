@@ -41,7 +41,7 @@
 
     $(document).ready(function () {
         $('body').tooltip({
-            selector: '[title]'
+            selector: '[title]:not([data-lightbox])'
         });
     });
 

@@ -184,9 +184,8 @@
     %}
 
     <a href="{{ folder~img }}" class="{{ o.class }}"
-       rel="lightbox{{- o.group ? '['~o.group~']' -}}"
-       {# o.caption ? ('title="'~o.caption~'"') | raw #}>
-
+       data-lightbox={{ o.group }}" title="{{ o.caption }}"
+    >
         <img src="{{- img_src ~ img -}}" class="img-responsive {{ o.class_img }}">
     </a>
 {% endspaceless %}

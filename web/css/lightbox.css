@@ -1,149 +1,223 @@
-#lightbox {
-  background-color: #111;
-  bottom: 0;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  -webkit-transition: opacity 0.2s ease-in, z-index 0s ease-in 0s;
-  -moz-transition: opacity 0.2s ease-in, z-index 0s ease-in 0s;
-  -o-transition: opacity 0.2s ease-in, z-index 0s ease-in 0s;
-  transition: opacity 0.2s ease-in, z-index 0s ease-in 0s;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  /* our click handler is on the #lightbox event */
-  z-index: 2500;
-}
-#lightbox.transition-hidden {
-  opacity: 0;
-  -webkit-transition: opacity 0.2s ease-in, z-index 0s ease-in 0.2s;
-  -moz-transition: opacity 0.2s ease-in, z-index 0s ease-in 0.2s;
-  -o-transition: opacity 0.2s ease-in, z-index 0s ease-in 0.2s;
-  transition: opacity 0.2s ease-in, z-index 0s ease-in 0.2s;
-  /* delay z-index change so overlay fades out and then z-index is applied to hide it */
-  z-index: -5;
+/* line 7, ../sass/lightbox.sass */
+body:after {
+  content: url(../images/close.png) url(../images/loading.gif) url(../images/prev.png) url(../images/next.png);
+  display: none;
 }
 
-.lb-image-container {
-  bottom: 70px;
-  left: 0;
+/* line 11, ../sass/lightbox.sass */
+.lightboxOverlay {
   position: absolute;
-  right: 0;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: black;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+  display: none;
+}
+
+/* line 20, ../sass/lightbox.sass */
+.lightbox {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
   text-align: center;
-  /* so we can center <img> without specifying a container width */
-  top: 50px;
+  line-height: 0;
+  font-weight: normal;
+}
+/* line 28, ../sass/lightbox.sass */
+.lightbox .lb-image {
+  display: block;
+  height: auto;
+  max-width: inherit;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+/* line 33, ../sass/lightbox.sass */
+.lightbox a img {
+  border: none;
 }
 
-.lb-image {
-  max-height: 100%;
-  max-width: 100%;
-  -webkit-transition: opacity 0.2s ease-in;
-  -moz-transition: opacity 0.2s ease-in;
-  -o-transition: opacity 0.2s ease-in;
-  transition: opacity 0.2s ease-in;
-  vertical-align: middle;
-  /* by setting line-height on image container using JS, image will always vertically center */
+/* line 36, ../sass/lightbox.sass */
+.lb-outerContainer {
+  position: relative;
+  background-color: white;
+  *zoom: 1;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
 }
-.lb-image.transition-hidden {
-  opacity: 0;
-  -webkit-transition: opacity 0.2s ease-out;
-  -moz-transition: opacity 0.2s ease-out;
-  -o-transition: opacity 0.2s ease-out;
-  transition: opacity 0.2s ease-out;
+/* line 38, ../../../../.rvm/gems/ruby-1.9.3-p392/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.lb-outerContainer:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-.lb-progress-container, .lb-nav {
-  bottom: 0;
+/* line 45, ../sass/lightbox.sass */
+.lb-container {
+  padding: 4px;
+}
+
+/* line 48, ../sass/lightbox.sass */
+.lb-loader {
+  position: absolute;
+  top: 43%;
+  left: 0%;
+  height: 25%;
+  width: 100%;
+  text-align: center;
+  line-height: 0;
+}
+
+/* line 57, ../sass/lightbox.sass */
+.lb-cancel {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin: 0 auto;
+  background: url(../images/loading.gif) no-repeat;
+}
+
+/* line 64, ../sass/lightbox.sass */
+.lb-nav {
+  position: absolute;
+  top: 0;
   left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.lb-progress {
-  background-color: #1a1a1a;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-box-shadow: inset 0 0 1px 1px #333333, 0 0 10px rgba(0, 0, 0, 0.7);
-  -moz-box-shadow: inset 0 0 1px 1px #333333, 0 0 10px rgba(0, 0, 0, 0.7);
-  box-shadow: inset 0 0 1px 1px #333333, 0 0 10px rgba(0, 0, 0, 0.7);
-  color: #eee;
-  height: 50px;
-  left: 50%;
-  line-height: 50px;
-  margin: -25px 0 0 -45px;
-  position: absolute;
-  top: 50%;
-  width: 90px;
-}
-
-.lb-prev, .lb-next {
-  background-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
-  /* Trick IE into showing hover */
-  bottom: 0;
   height: 100%;
-  outline: none;
-  position: absolute;
-  top: 0;
-  width: 49%;
+  width: 100%;
+  z-index: 10;
 }
 
+/* line 72, ../sass/lightbox.sass */
+.lb-container > .nav {
+  left: 0;
+}
+
+/* line 75, ../sass/lightbox.sass */
+.lb-nav a {
+  outline: none;
+}
+
+/* line 78, ../sass/lightbox.sass */
+.lb-prev, .lb-next {
+  width: 49%;
+  height: 100%;
+  cursor: pointer;
+  /* Trick IE into showing hover */
+  display: block;
+}
+
+/* line 85, ../sass/lightbox.sass */
 .lb-prev {
   left: 0;
+  float: left;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -webkit-transition: opacity 0.6s;
+  -moz-transition: opacity 0.6s;
+  -o-transition: opacity 0.6s;
+  transition: opacity 0.6s;
 }
+/* line 90, ../sass/lightbox.sass */
 .lb-prev:hover {
-  background: url("../images/prev.png") left 48% no-repeat;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+  background: url(../images/prev.png) left 48% no-repeat;
 }
 
+/* line 94, ../sass/lightbox.sass */
 .lb-next {
   right: 0;
+  float: right;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -webkit-transition: opacity 0.6s;
+  -moz-transition: opacity 0.6s;
+  -o-transition: opacity 0.6s;
+  transition: opacity 0.6s;
 }
+/* line 99, ../sass/lightbox.sass */
 .lb-next:hover {
-  background: url("../images/next.png") right 48% no-repeat;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+  background: url(../images/next.png) right 48% no-repeat;
 }
 
-.lb-footer {
-  background-color: #1a1a1a;
-  border-top: 1px solid #222;
-  bottom: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  left: 0;
-  min-height: 50px;
-  padding: 10px 15px;
-  position: absolute;
-  right: 0;
+/* line 103, ../sass/lightbox.sass */
+.lb-dataContainer {
+  margin: 0 auto;
+  padding-top: 5px;
+  *zoom: 1;
+  width: 100%;
+  -moz-border-radius-bottomleft: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
-.lb-footer .lb-title-container {
+/* line 38, ../../../../.rvm/gems/ruby-1.9.3-p392/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.lb-dataContainer:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* line 110, ../sass/lightbox.sass */
+.lb-data {
+  padding: 0 4px;
+  color: #bbbbbb;
+}
+/* line 113, ../sass/lightbox.sass */
+.lb-data .lb-details {
+  width: 85%;
   float: left;
+  text-align: left;
+  line-height: 1.1em;
 }
-.lb-footer .lb-number {
-  color: #999;
+/* line 118, ../sass/lightbox.sass */
+.lb-data .lb-caption {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1em;
+}
+/* line 122, ../sass/lightbox.sass */
+.lb-data .lb-number {
+  display: block;
+  clear: left;
+  padding-bottom: 1em;
   font-size: 12px;
+  color: #999999;
 }
-.lb-footer .lb-title {
-  font-size: 14px;
-}
-.lb-footer .lb-title, .lb-footer .lb-title a {
-  color: #fff;
-}
-
-.lb-close {
-  color: #888;
-  cursor: pointer;
-  font-size: 26px;
-  height: 50px;
-  line-height: 50px;
+/* line 128, ../sass/lightbox.sass */
+.lb-data .lb-close {
+  display: block;
+  float: right;
+  width: 30px;
+  height: 30px;
+  background: url(../images/close.png) top right no-repeat;
+  text-align: right;
   outline: none;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  text-decoration: none;
-  top: 0;
-  width: 50px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
+  -webkit-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  transition: opacity 0.2s;
 }
-.lb-close:hover {
-  color: #eee;
-  text-decoration: none;
+/* line 138, ../sass/lightbox.sass */
+.lb-data .lb-close:hover {
+  cursor: pointer;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
 }
