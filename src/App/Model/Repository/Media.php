@@ -82,8 +82,7 @@ class Media extends MongoRepository
      */
     public function collectGarbage()
     {
-        //$oneDayBefore = time() - 86400; // now - 24 hours
-        $oneDayBefore = time() - 1; // TODO : change before PROD !!
+        $oneDayBefore = time() - 86400; // now - 24 hours
 
         $query = ['isTmp' => true, 'insertionTime' => ['$lt' => $oneDayBefore]];
 

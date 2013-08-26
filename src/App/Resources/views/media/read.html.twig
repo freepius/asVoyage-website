@@ -19,7 +19,7 @@ Object">
     </div>
 
     {% if is_granted('ROLE_ADMIN') %}
-        <input name="{{ _id }}" class="toggle" type="checkbox">
+        <input name="{{ _id }}" class="toggle" type="checkbox" tabindex="100">
     {% endif %}
 
     {{ media_caption(caption) }}

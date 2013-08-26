@@ -11,8 +11,9 @@
             <i class="icon-fixed-width icon-{{ icon }}"></i>
         </span>
 
-        <input name="{{ media._id ~ '[' ~ field ~ ']' }}" type="text" class="form-control"
-            value="{{ media[field] }}" placeholder="{{ ('media.placeholder.' ~ field) | trans }}">
+        <input name="{{ media._id ~ '[' ~ field ~ ']' }}" type="text"
+            class="form-control" value="{{ media[field] }}"
+            placeholder="{{ ('media.placeholder.' ~ field) | trans }}" tabindex="75">
     </div>
 {% endmacro %}
 
@@ -26,7 +27,7 @@
 <!-- Caption -->
 <td class="{{ errors.caption is defined ? 'has-error' }}">
     <textarea name="{{ _id }}[caption]" rows="4" class="form-control"
-        placeholder="{{ 'media.placeholder.caption'|trans }}"
+        placeholder="{{ 'media.placeholder.caption'|trans }}" tabindex="50"
     >
         {{- caption -}}
     </textarea>
@@ -47,7 +48,7 @@
 
 <!-- Actions -->
 <td class="actions">
-    <input type="checkbox" class="toggle">
+    <input type="checkbox" class="toggle" tabindex="100">
 
     {% if isTmp %}
         <button class="btn btn-danger delete" title="{{ 'Delete'|trans }}"

@@ -183,10 +183,9 @@
         o.thumb is sameas(true) ? (folder ~ '/thumb') : (o.thumb ?: folder)
     %}
 
-    <a href="{{ folder~img }}" class="{{ o.class }}"
-       data-lightbox={{ o.group }}" title="{{ o.caption }}"
-    >
-        <img src="{{- img_src ~ img -}}" class="img-responsive {{ o.class_img }}">
+    <a href="{{ folder~img }}" data-lightbox={{ o.group }}" class="{{ o.class }}">
+        <img src="{{- img_src ~ img -}}" alt="{{ o.caption }}
+            "class="img-responsive {{ o.class_img }}">
     </a>
 {% endspaceless %}
 {% endmacro %}

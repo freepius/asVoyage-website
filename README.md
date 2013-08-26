@@ -47,11 +47,9 @@ TODO
 * Traduction of new base pages (about, our-trips, etc.)
 * Revoir le CSS : les marges pour les titres, le centrage dans about, l'affichage sur grand et petit écran, etc.
 * Blog -> article -> tags styled with "label" or "badge" ?
-* Media -> gérer les raccourcis "Tab" (textarea caption qui se suivent ; toggle qui se suivent...)
 * Media -> better set meta actions (+/- tags ; +/- hours...)
 * Make RSS or newsletter
-* Media -> build a full garbage collector (scann all files in "media" dir and compare with MongoCollection)
-* In DEBUG => when Logout => error
+* BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)
 
 For production
 --------------
@@ -65,6 +63,7 @@ For production
   * Blog controller => caching the generated HTML from RichText
 * Minified JS and CSS files
 * Contact : make secure the message sending (with TLS)
+* Improve accessibility of pages !
 
 Low priority
 ------------
