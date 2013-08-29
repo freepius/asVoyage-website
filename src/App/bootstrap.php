@@ -107,6 +107,9 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
 
     $twig->addGlobal('host', $app['request']->getUriForPath('/'));
 
+    // TODO: change this just before Afrikapié starting !
+    $twig->addGlobal('afrikapie_days2wait', round((strtotime('2013-10-01') - time()) / (60 * 60 * 24)));
+
     $twig->addFilter(new \Twig_SimpleFilter('sum', 'array_sum'));
 
     $twig->addFilter(new \Twig_SimpleFilter('shuffle', function ($array)
