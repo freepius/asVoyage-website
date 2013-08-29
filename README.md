@@ -8,7 +8,7 @@ Requirements
 ------------
 
 - Any flavor of PHP 5.4 or above should do
-- PHP extension : Fileinfo, GD
+- PHP extension : Fileinfo, GD, Exif
 - [optional] PHPUnit 3.5+ to execute the test suite (phpunit --version)
 
 External libraries used

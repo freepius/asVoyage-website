@@ -177,7 +177,8 @@ class MediaUploaded extends EntityFactory
         {
             $exif = exif_read_data($filePath);
 
-            $entity['creationDate'] = date(
+            $entity['creationDate'] = (! @ $exif['DateTimeOriginal']) ? null :
+            date(
                 'Y-m-d H:i:s',
                 strtotime($exif['DateTimeOriginal'])
             );
