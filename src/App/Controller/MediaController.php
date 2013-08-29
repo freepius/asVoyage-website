@@ -38,7 +38,7 @@ class MediaController implements ControllerProviderInterface
 
     public function __construct(\App\Application $app)
     {
-        $this->limitInHome = $app['debug'] ? 10 : 50;
+        $this->limitInHome = $app['debug'] ? 10 : 100;
 
         $this->app             = $app;
         $this->config          = $app['media.config'];

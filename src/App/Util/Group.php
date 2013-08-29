@@ -74,7 +74,7 @@ class Group
         krsort($result);
 
         // Sort by month DESC
-        foreach ($result as $year) { krsort($year); }
+        foreach ($result as & $year) { krsort($year); }
 
         return $result;
     }
