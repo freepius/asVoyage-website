@@ -1,5 +1,5 @@
 /**
- * Some javascript for Media home page
+ * Some javascript for Media home page in ADMIN mode.
  */
 
 /*jslint regexp: true */
@@ -11,8 +11,6 @@
     $(document).ready(function () {
 
         $.media.init();
-
-        $.mediaViews.init();
 
         // Update checked media elements
         $('#update').click(function () {

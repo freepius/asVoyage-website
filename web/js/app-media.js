@@ -15,18 +15,22 @@
      **************************************************************************/
     $.media = {
 
+        // Used in multiple selection (with Shift key)
+        lastToggle: undefined,
+
         init: function () {
-            this.eventHandlers();
+            this.shiftCheckboxHandler();
             this.refresh();
         },
 
-        eventHandlers: function () {
-            $('.toggle').change($.media.refresh);
-
-            $('.toggle-all').change(function () {
-                $.media.toggleCheckboxes();
-                $.media.refresh();
-            });
+        shiftCheckboxHandler: function () {
+            $('#media .actions')
+                .off('.shiftcheckbox')
+                .shiftcheckbox({
+                    checkboxSelector: '.toggle',
+                    selectAll: $('.toggle-all'),
+                    onChange: $.media.refresh
+                });
         },
 
         /**
@@ -59,13 +63,6 @@
         refreshCounters: function () {
             $('.counter-elements').html($.media.count());
             $('.counter-selected-elements').html($.media.countSelected());
-        },
-
-        toggleCheckboxes: function () {
-            $('.toggle').prop(
-                'checked',
-                $('.toggle-all').is(':checked')
-            );
         }
     };
 
@@ -168,7 +165,7 @@
     $.mediaViews = {
 
         init: function () {
-            this.handler();
+            $.mediaViews.handler();
             $('#view-short').click(); // default : short view
         },
 

@@ -8,9 +8,8 @@
 
 
 {% block javascripts %}
-
+    <script src="/js/jquery.shiftcheckbox.js"></script>
     <script src="/js/app-media.js"></script>
-
     <script>
         $.mediaMeta.messages = {
             creationDate : "{{ 'media.setMeta.creationDate'|trans|raw }}",
@@ -27,7 +26,6 @@
     {% if isCreation %}
         {% include 'media/create-multiple.js.twig' %}
     {% endif %}
-
 {% endblock %}
 
 

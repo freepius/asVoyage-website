@@ -5513,10 +5513,10 @@ article.summary [itemprop="articleBody"] {
 #media.view-short .thumbnail .content {
   height: 120px;
 }
-#media.view-short .thumbnail:hover {
+#media.view-short .thumbnail .content:hover {
   z-index: 1029;
 }
-#media.view-short .thumbnail:hover img {
+#media.view-short .thumbnail .content:hover img {
   border-top: 5px solid #faf7e9;
   border-bottom: 5px solid #faf7e9;
 }

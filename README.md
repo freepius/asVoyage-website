@@ -21,6 +21,7 @@ External libraries used
   * [Lightbox 2](http://lokeshdhakar.com/projects/lightbox2/)
   * [jQuery File Upload](http://blueimp.github.io/jQuery-File-Upload/) : file upload widget
   * [Elastic](http://unwrongest.com/projects/elastic/) : auto grows textareas
+  * [ShiftCheckbox](https://github.com/nylen/shiftcheckbox) : handle a "select all" widget + selecting ranges of checkboxes via Shift+Click
 * [Leaflet](http://leafletjs.com/) and plugins :
   * [awesome-markers plugin](https://github.com/lvoogdt/Leaflet.awesome-markers)
 

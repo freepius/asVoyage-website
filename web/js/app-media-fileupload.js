@@ -39,12 +39,9 @@
             return (uploadedValid === $.media.count()) && (uploadedValid > 0);
         },
 
-        _refresh: function (e, data) {
+        _refresh: function () {
 
-            if (data) {
-                data.context.find('.toggle').change($.media.refresh);
-            }
-
+            $.media.shiftCheckboxHandler();
             $.media.refresh();
 
             if ($.media.count() > 0) {
