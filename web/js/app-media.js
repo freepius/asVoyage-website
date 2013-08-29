@@ -86,16 +86,73 @@
             $('.set-meta').click(function (e) {
                 e.preventDefault();
 
-                var meta = $(e.currentTarget).data('meta'),
+                var meta    = $(e.currentTarget).data('meta'),
                     message = $this.messages[meta],
-                    value = window.prompt(message);
+                    value   = window.prompt(message),
+                    checked;
 
                 if (null !== value) {
-                    $('.toggle:checked').closest('tr')
-                        .find('input[name*="' + meta + '"]')
-                        .val(value);
+                    checked = $('.toggle:checked').closest('tr')
+                        .find('input[name*="' + meta + '"]');
+
+                    $.mediaMeta[meta](value, checked);
                 }
             });
+        },
+
+        creationDate: function (value, checked) {
+            return checked.val(value);
+        },
+
+        geoCoords: function (value, checked) {
+            return checked.val(value);
+        },
+
+        /**
+         * Change tags of selected elements :
+         *  -> no prefix    : replace tags by "value"
+         *  -> '+' prefixed : add "value" to tags
+         *  -> '-' prefixed : delete "value" to tags
+         *
+         * "value" param. must be tags separated by comma.
+         */
+        tags: function (value, checked) {
+            value = $.trim(value);
+
+            var normalizeTags = function (tags) {
+                    return $.map(
+                        tags.split(','),
+                        function (tag) { return $.trim(tag); }
+                    );
+                },
+                op = value[0],
+                tags;
+
+            switch (op) {
+            // Delete tags
+            case '-':
+                tags = normalizeTags(value.substr(1));
+
+                checked.each(function () {
+                    var current = $.map(
+                        window.array_diff(normalizeTags(this.value), tags),
+                        function (v) { return v; }
+                    );
+                    $(this).val(current.join(', '));
+                });
+                break;
+
+            // Add tags
+            case '+':
+                checked.each(function () {
+                    this.value += ', ' + value.substr(1);
+                });
+                break;
+
+            // Replace tags
+            default:
+                checked.val(value);
+            }
         }
     };
 

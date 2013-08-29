@@ -13,9 +13,9 @@
 
     <script>
         $.mediaMeta.messages = {
-            creationDate : "{{ 'media.setMeta.creationDate'|trans }}",
-            geoCoords    : "{{ 'media.setMeta.geoCoords'   |trans }}",
-            tags         : "{{ 'media.setMeta.tags'        |trans }}",
+            creationDate : "{{ 'media.setMeta.creationDate'|trans|raw }}",
+            geoCoords    : "{{ 'media.setMeta.geoCoords'   |trans|raw }}",
+            tags         : "{{ 'media.setMeta.tags'        |trans|raw }}",
         };
 
         $(document).ready(function () {

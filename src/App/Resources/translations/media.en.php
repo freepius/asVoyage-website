@@ -58,6 +58,7 @@ return ['media' => [
                        'Coordinates format must be "Longitude ; Latitude" (eg: 42.123456 ; 0.987654).',
 
         'tags' => 'Please enter the tags to give to selected elements.\n'.
-                  'Tags must be comma-separated (eg: Family, Nature, Picnic).',
+                  'Tags must be comma-separated (eg: Family, Nature, Picnic).\n'.
+                  "Prefix with '+' to add and with '-' to delete.",
     ],
 ]];
