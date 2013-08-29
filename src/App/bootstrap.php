@@ -4,6 +4,12 @@ define('APP' , __DIR__);
 define('SRC' , dirname(APP));
 define('ROOT', dirname(SRC));
 
+/*
+ * Include host-dependent configuration parameters
+ * (with servernames, keywords...).
+ */
+include APP.'/config.php';
+
 $loader = require ROOT.'/vendor/autoload.php';
 
 // Locale of the application
@@ -17,11 +23,11 @@ $app = new \App\Application();
 $app['route_class'] = 'App\\Route';
 
 /* debug */
-$app['debug'] = true;
+$app['debug'] = DEBUG;
 
 /* MongoDB config */
-$app['mongo.connection'] = new \MongoClient(); // default connection
-$app['mongo.database'] = $app['mongo.connection']->selectDB('asVoyage');
+$app['mongo.connection'] = new \MongoClient(MONGO_SERVER); // default connection
+$app['mongo.database'] = $app['mongo.connection']->selectDB(MONGO_DB);
 
 /* Paths and directories */
 $app['path.web'] = ROOT.'/web';
@@ -127,7 +133,7 @@ $app['swiftmailer.options'] =
     'host'       => 'smtp.alwaysdata.com',
     'port'       => 587,
     'username'   => 'contact@anarchos-semitas.net',
-    'password'   => '',
+    'password'   => SMTP_PASSWORD,
     'encryption' => null,
     'auth_mode'  => null,
 ];
@@ -144,7 +150,7 @@ $app['security.firewalls'] = [
         'form'      => ['login_path' => '/login', 'check_path' => '/admin/login_check'],
         'logout'    => ['logout_path' => '/admin/logout'],
         'users'     => [
-            'vagabond' => ['ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='],
+            'vagabond' => ['ROLE_ADMIN', ADMIN_PASSWORD],
         ],
     ],
 ];

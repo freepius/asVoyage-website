@@ -49,11 +49,11 @@ TODO
 * Media -> better set meta actions (+/- tags ; +/- hours...)
 * Make RSS or newsletter
 * BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)
+* Follow my pullrequest for Lightbox2.
 
 For production
 --------------
 
-* Make a git patch for PROD configs : password, swiftmailer config, mongodb config, etc.
 * Solve the TODOs
 * Update vendor and libraries
 * Index some Mongo fields ?
