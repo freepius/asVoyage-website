@@ -11,7 +11,7 @@ class Group
     /**
      * Return an array, "natural sorted" by keys, whose :
      *    Key   = a unique tag
-     *    Value = [0 => occurrences of it ; 1 => its percentage on the total]
+     *    Value = [0 => occurrences of it ; 1 => its percentage on elements number]
      *
      * Each element of $collection must :
      *  -> be an array or \ArrayAccess
@@ -26,10 +26,10 @@ class Group
         foreach ($collection as $element)
         {
             $tags = $element['tags'];
+            $total++;
 
             foreach ($tags as $tag)
             {
-                $total++;
                 $occ = & $result[$tag];
                 $occ++;
             }

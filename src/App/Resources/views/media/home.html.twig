@@ -6,18 +6,18 @@
 
 
 {% block javascripts %}
+    <script src="/js/app-media.js"></script>
+    <script>
+        $(document).ready($.mediaViews.init);
+    </script>
+
     {% if is_granted('ROLE_ADMIN') %}
         <script src="/js/jquery.shiftcheckbox.js"></script>
-        <script src="/js/app-media.js"></script>
         <script src="/js/app-media-home.js"></script>
         <script>
             $.media.deleteMessage = "{{ 'media.deleting.confirm'|trans }}";
         </script>
     {% endif %}
-
-    <script>
-        $(document).ready($.mediaViews.init);
-    </script>
 {% endblock %}
 
 
