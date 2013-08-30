@@ -15,9 +15,6 @@
      **************************************************************************/
     $.media = {
 
-        // Used in multiple selection (with Shift key)
-        lastToggle: undefined,
-
         init: function () {
             this.shiftCheckboxHandler();
             this.refresh();
@@ -31,6 +28,10 @@
                     selectAll: $('.toggle-all'),
                     onChange: $.media.refresh
                 });
+
+            $('#media .toggle')
+                .unbind('change')
+                .change($.media.refresh);
         },
 
         /**
