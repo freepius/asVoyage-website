@@ -137,10 +137,7 @@ return [
         'about'     => 'À propos',
         'contact'   => 'Contact',
         'our-trips' => 'Nos voyages',
-        'roadbook'  => 'Carnet de route',
-        'blog'      => 'Blog',
-        'gallery'   => 'Galerie',
-        'map'       => 'Carte',
+        'media'     => 'Nos médias',
     ],
 
     // Placeholder
