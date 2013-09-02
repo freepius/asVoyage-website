@@ -82,7 +82,7 @@
             <i class="icon-calendar" title="{{ 'blog.field.pubDatetime'|trans }}"></i>
 
             <time itemprop="datePublished" datetime="{{ article.pubDatetime }}">
-                {{ article.pubDatetime | localizeddate('full', 'short') | capitalize }}
+                {{ article.pubDatetime | localizeddate('medium', 'short') | capitalize }}
             </time>
         </p>
 
