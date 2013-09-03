@@ -145,7 +145,17 @@ class BaseController implements ControllerProviderInterface
 
     public function diagonal3000Km()
     {
-        return $this->app->render('base/our-trips/3000-km-diagonal.html.twig');
+        $repository = $this->app['model.repository.media'];
+
+        // Retrieve 4 favorite images per trip
+        $downLoireImgs = $repository->randomImagesByTags(['Favori', 'Descente de Loire'], 4);
+        $longWalkImgs  = $repository->randomImagesByTags(['Favori', 'Grande marche']    , 4);
+
+        return $this->app->render('base/our-trips/3000-km-diagonal.html.twig',
+        [
+            'downLoireImgs' => $downLoireImgs,
+            'longWalkImgs'  => $longWalkImgs,
+        ]);
     }
 
     public function afrikapie()

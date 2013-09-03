@@ -19,6 +19,7 @@ use App\Exception\MediaElementNotFound,
  *  -> find
  *  -> listTags
  *  -> countByYearMonth
+ *  -> randomImagesByTags
  */
 class Media extends MongoRepository
 {
@@ -190,5 +191,25 @@ class Media extends MongoRepository
             $this->collection->find(['isTmp' => false], ['creationDate' => 1]),
             'creationDate'
         );
+    }
+
+    /**
+     * Return $limit random images containing all $tags.
+     *
+     * Warning : use this function for a small set of images !
+     * Indeed, the random selection of $limit images is realized from a PHP array
+     * (and not directly by MongoDB engine).
+     */
+    public function randomImagesByTags(array $tags, $limit = null)
+    {
+        $query = ['mainType' => 'image'];
+
+        if ($tags) { $query['tags']['$all'] = $tags; }
+
+        $media = iterator_to_array($this->collection->find($query));
+
+        shuffle($media);
+
+        return array_slice(array_values($media), 0, $limit);
     }
 }

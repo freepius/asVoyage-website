@@ -27,15 +27,20 @@
  # Render the media element
  # (the content ; not its technical info, caption or metadata).
  #}
-{% macro media_render(e) %}
+{% macro media_render(e, options) %}
 {% spaceless %}
 
     {% from 'macros.twig' import audio %}
 
     {% if e.mainType == 'image' %}
-        {{ _self.media_img(e.content, {caption: e.caption}) }}
+
+        {{ _self.media_img(
+            e.content,
+            options | default({}) | merge({caption: e.caption})
+        ) }}
 
     {% elseif e.mainType == 'audio' %}
+
         {{ audio('/media', e.content) }}
 
     {% endif %}

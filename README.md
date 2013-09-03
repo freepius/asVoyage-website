@@ -52,6 +52,7 @@ TODO
 * BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)
 * Follow my pullrequest for Lightbox2.
 * Clarify using of strong and b tags
+* Make a translation table for tags
 
 For production
 --------------
