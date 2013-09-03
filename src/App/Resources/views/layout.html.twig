@@ -116,14 +116,14 @@
     {# DEBUG mode => local files #}
     {% if app.debug %}
         <script src="/vendor/jquery-1.10.2.js"></script>
-        <script src="/vendor/bootstrap-3.0.0-wip.min.js"></script>
+        <script src="/vendor/bootstrap.min.js"></script>
     {% else %}
     {# Else => files from CDNs #}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
         {# TODO: Restore this when 3.0.0 will be on CDN #}
         {#<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>#}
-        <script src="/vendor/bootstrap-3.0.0-wip.min.js"></script>
+        <script src="/vendor/bootstrap.min.js"></script>
     {% endif %}
 
     <script src="/js/modernizr.js"></script>

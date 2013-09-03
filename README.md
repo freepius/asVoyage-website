@@ -51,6 +51,7 @@ TODO
 * Make RSS or newsletter
 * BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)
 * Follow my pullrequest for Lightbox2.
+* Clarify using of strong and b tags
 
 For production
 --------------
