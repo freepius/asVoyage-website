@@ -56,6 +56,8 @@ class Group
      * Each element of $collection must :
      *  -> be an array or \ArrayAccess
      *  -> have an array indexed by the $field key / offset
+     *
+     * Note : empty/bad dates are ignored !
      */
     public static function byYearMonth(\Iterator $collection, $field)
     {
@@ -66,8 +68,11 @@ class Group
             $year  = (int) substr($element[$field], 0, 4);
             $month = (int) substr($element[$field], 5, 2);
 
-            $occ = & $result[$year][$month];
-            $occ++;
+            if ($year && $month)
+            {
+                $occ = & $result[$year][$month];
+                $occ++;
+            }
         }
 
         // Sort by year DESC
