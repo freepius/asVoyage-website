@@ -45,7 +45,7 @@ return ['media' => [
     'placeholder' => [
         'caption'      => '',
         'creationDate' => 'AAAA-MM-JJ hh:mm:ss',
-        'geoCoords'    => 'ex : 42.123456 ; 0.987654',
+        'geoCoords'    => 'ex : 42.123456 , 0.987654',
         'tags'         => 'Séparateur = virgule',
     ],
 
@@ -55,7 +55,7 @@ return ['media' => [
                           'Le format doit être AAAA-MM-JJ hh:mm:ss (ex : 2013-10-26 12:42:00).',
 
         'geoCoords' => 'Entrez les coordonées geo. à donner aux éléments sélectionnés.\n'.
-                       'Le format doit être « Latitude ; Longitude » (ex : 42.123456 ; 0.987654).',
+                       'Le format doit être « Latitude , Longitude » (ex : 42.123456 , 0.987654).',
 
         'tags' => 'Entrez les mots-clés à donner aux éléments sélectionnés.\n'.
                   'Le séparateur est la virgule (ex : Famille, Nature, Pique-nique).\n'.

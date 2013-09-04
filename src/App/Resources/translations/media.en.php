@@ -45,7 +45,7 @@ return ['media' => [
     'placeholder' => [
         'caption'      => '',
         'creationDate' => 'YYYY-MM-DD hh:mm:ss',
-        'geoCoords'    => 'eg: 42.123456 ; 0.987654',
+        'geoCoords'    => 'eg: 42.123456 , 0.987654',
         'tags'         => 'Comma-separated',
     ],
 
@@ -55,7 +55,7 @@ return ['media' => [
                           'Date format must be YYYY-MM-DD hh:mm:ss (eg: 2013-10-26 12:42:00).',
 
         'geoCoords' => 'Please enter the geo. coordinates to give to selected elements.\n'.
-                       'Coordinates format must be "Longitude ; Latitude" (eg: 42.123456 ; 0.987654).',
+                       'Coordinates format must be "Longitude , Latitude" (eg: 42.123456 , 0.987654).',
 
         'tags' => 'Please enter the tags to give to selected elements.\n'.
                   'Tags must be comma-separated (eg: Family, Nature, Picnic).\n'.
