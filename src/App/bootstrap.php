@@ -166,6 +166,7 @@ $app['security.access_rules'] =
     '^/blog/.+/(update|delete)' .'|'.
     '^/blog/.+/read/.+'         .'|'.   // <=> CRUD for comment
     '^/blog/.+/comments.*'      .'|'.   // <=> idem
+    '^/register/post'           .'|'.
 
     // All Media pages excepted home
     '^/media/(create|delete|delete-uploaded|init-update|update|upload)'
@@ -186,7 +187,7 @@ $app['security.firewall'];
 $translator = $app['translator'];
 $transDir   = APP.'/Resources/translations';
 $locales    = ['fr', 'en'];
-$resources  = ['messages', 'blog', 'comment', 'media'];
+$resources  = ['messages', 'blog', 'comment', 'media', 'register'];
 
 foreach ($locales as $locale) {
     foreach ($resources as $resource) {
@@ -207,6 +208,11 @@ $app['model.repository.blog'] = $app->share(function ($app)
 $app['model.repository.media'] = $app->share(function ($app)
 {
     return new \App\Model\Repository\Media($app['mongo.database']->media, $app['path.web']);
+});
+
+$app['model.repository.register'] = $app->share(function ($app)
+{
+    return new \App\Model\Repository\Register($app['mongo.database']->register);
 });
 
 
@@ -239,6 +245,11 @@ $app['model.factory.media.uploaded'] = $app->share(function ($app)
     return new \App\Model\Factory\MediaUploaded($app['validator'], $app['path.web'], $app['media.config']);
 });
 
+$app['model.factory.register'] = $app->share(function ($app)
+{
+    return new \App\Model\Factory\Register($app['validator']);
+});
+
 
 /*************************************************
  * Configuration for media platform
@@ -258,9 +269,10 @@ $app['media.config'] =
  * Define the routes
  ************************************************/
 
-$app->mount('/'    , new \App\Controller\BaseController($app));
-$app->mount('/blog', new \App\Controller\BlogController($app));
-$app->mount('/media', new \App\Controller\MediaController($app));
+$app->mount('/'        , new \App\Controller\BaseController($app));
+$app->mount('/blog'    , new \App\Controller\BlogController($app));
+$app->mount('/media'   , new \App\Controller\MediaController($app));
+$app->mount('/register', new \App\Controller\RegisterController($app));
 
 
 return $app;

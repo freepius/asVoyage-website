@@ -4,7 +4,8 @@ namespace App\Model\Factory;
 
 use Symfony\Component\Validator\Constraints as Assert,
     Symfony\Component\Validator\ValidatorInterface,
-    App\Util\StringUtil;
+    App\Util\StringUtil,
+    App\Util\Geo;
 
 
 class Media extends EntityFactory
@@ -35,7 +36,7 @@ class Media extends EntityFactory
         return new Assert\Collection([
             'caption'      => new Assert\Length(['max' => 100]),
             'creationDate' => new Assert\DateTime(),
-            'geoCoords'    => new Assert\Regex(['pattern' => '/^\d+(\.\d+)?\s*,\s*\d+(\.\d+)?$/']),
+            'geoCoords'    => new Assert\Regex(['pattern' => Geo::LAT_LON_DD_PATTERN]),
             'tags'         => null,
         ]);
     }

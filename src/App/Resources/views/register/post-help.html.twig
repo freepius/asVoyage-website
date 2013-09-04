@@ -1,0 +1,79 @@
+{% from "macros.twig" import indent %}
+
+{% if app.locale == 'fr' %}
+
+    Saisir, dans la <a href="#entries">zone de texte ci-dessous</a>,
+    une <em>entrée au registre de voyage</em> par ligne.
+    <br>
+    Chaque entrée est composée des données suivantes, séparées par le <em>dièse</em> <b>#</b> :
+    <ul>
+        <li>
+            <i class="icon-calendar"></i>
+            une <b>date unique</b> au format <nobr><em>« AAAA-MM-JJ hh:mm:ss »</em></nobr>
+            {{ indent('ex : 2013-05-28 12:42:03') }}
+        </li>
+        <li>
+            <i class="icon-globe"></i>
+            des <b>coordonées géographiques</b> au format <nobr>« Latitude , Longitude »</nobr>,
+            exprimées en <em>degrés décimaux</em>
+            {{ indent('ex : 46.242000 , -2.837461') }}
+        </li>
+        <li>
+            <i class="icon-sort-by-attributes-alt"></i>
+            une <b>température</b> exprimée en <em>degrés Celsius (°C)</em>
+            {{ indent('ex : 32') }}
+        </li>
+        <li>
+            <i class="icon-cloud"></i>
+            une information <b>météo</b> exprimée par un <em>nombre de 1 à 7</em>
+            {{ indent(
+                '1 = Grand soleil ; 2 = Quelques nuages ; 3 = Ciel couvert ; ' ~
+                '4 = Pluie faible ; 5 = Pluie forte ; 6 = Orage, tempête ; 7 = Brouillard'
+            ) }}
+        </li>
+        <li>
+            <i class="icon-leaf"></i>
+            un <b>message</b> comportant 500 caractères maximum
+            {{ indent('ex : Superbe lever de soleil sur fond bleu violacé. Bonne humeur ! :-)') }}
+        </li>
+    </ul>
+
+{% else %}
+
+    Write, in the <a href="#entries">textarea below</a>,
+    an <em>entry in the travel register</em> per line.
+    <br>
+    Each entry is composed of the following data, separated by a <em>sharp</em> <b>#</b> :
+    <ul>
+        <li>
+            <i class="icon-calendar"></i>
+            a <b>unique date</b> in format <nobr><em>"YYYY-MM-DD hh:mm:ss"</em></nobr>
+            {{ indent('eg: 2013-05-28 12:42:03') }}
+        </li>
+        <li>
+            <i class="icon-map-marker"></i>
+            <b>geographic coordinates</b> in format <nobr>"Latitude , Longitude"</nobr>,
+            expressed in <em>decimal degrees</em>
+            {{ indent('eg: 46.242000 , -2.837461') }}
+        </li>
+        <li>
+            <i class="icon-sort-by-attributes-alt"></i>
+            a <b>temperature</b> expressed in <em>degrees Celsius (°C)</em>
+            {{ indent('eg: 32') }}
+        </li>
+        <li>
+            <i class="icon-cloud"></i>
+            a <b>meteo</b> information expressed by a <em>number between 1 and 7</em>
+            {{ indent(
+                '1 = Sunny ; 2 = Partly cloudy ; 3 = Overcast ; ' ~
+                '4 = Rain ; 5 = Heavy rain ; 6 = Storm ; 7 = Fog'
+            ) }}
+        </li>
+        <li>
+            <i class="icon-leaf"></i>
+            a <b>message</b> having 500 characters maximum
+            {{ indent('eg: Beautiful sunrise on violet-blue background. Good mood! :-)') }}
+        </li>
+    </ul>
+
+{% endif %}

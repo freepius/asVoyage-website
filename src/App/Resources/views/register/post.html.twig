@@ -1,0 +1,45 @@
+{% set currentNav = 'register' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import cancel %}
+
+{% from "form.twig" import submit %}
+
+
+{% block main %}
+
+    <header class="clearfix">
+        <!-- Breadcrumb + title -->
+        <div class="pull-left">
+            <nav>{{ 'register.home'|trans }} »</nav>
+
+            <h1 id="page-title">
+                {{ 'register.posting'|trans }}
+            </h1>
+        </div>
+
+        <div class="actions-right">
+            <!-- Cancel posting -->
+            {{ cancel('/home') }}
+        </div>
+    </header>
+
+    <!-- Some helps -->
+    <div class="box">
+        {% include 'register/post-help.html.twig' %}
+    </div>
+
+    <form action="/register/post" method="POST" class="form-horizontal">
+        <div class="form-group col-xs-12">
+            <textarea id="entries" name="entries" rows="8" class="form-control"
+                placeholder="{{ 'register.placeholder.posting'|trans }}" required
+            >
+                {{- entries | default -}}
+            </textarea>
+        </div>
+
+        {{ submit() }}
+    </form>
+
+{% endblock %}
