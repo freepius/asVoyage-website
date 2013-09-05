@@ -7,7 +7,7 @@ class Geo
 {
     // Regex pattern for geo. coords in format "Latitude , Longitude"
     // expressed in decimal degrees
-    const LAT_LON_DD_PATTERN = '/^\d+(\.\d+)?\s*,\s*\d+(\.\d+)?$/';
+    const LAT_LON_DD_PATTERN = '/^[-+]?\d+(\.\d+)?\s*,\s*[-+]?\d+(\.\d+)?$/';
 
     /**
      * Transform a geo. coordinate from EXIF format to decimal format.
