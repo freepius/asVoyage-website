@@ -20,17 +20,14 @@
     <script>
         {% include "base/our-trips/afrikapie.carto.js" %}
 
-        $(document).ready(function() {
+        var map  = asCarto.addMap('map'),
+            alt  = L.multiPolyline([altNamibia_points, altMali_points], {color: 'green', weight: 5}),
+            main = L.polyline(main_points, {color: 'brown', weight: 10, opacity: 1.0});
 
-            var map  = $.carto.addMap('map'),
-                alt  = L.multiPolyline([altNamibia_points, altMali_points], {color: 'green', weight: 5}),
-                main = L.polyline(main_points, {color: 'brown', weight: 10, opacity: 1.0});
+        map.fitBounds(main, {reset: true});
 
-            map.fitBounds(main, {reset: true});
-
-            alt.addTo(map);
-            main.addTo(map);
-        });
+        alt.addTo(map);
+        main.addTo(map);
     </script>
 {% endblock %}
 

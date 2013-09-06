@@ -3,16 +3,18 @@
  */
 
 /*jslint regexp: true */
-/*global document, $, L */
+/*global document, $, L, asCarto */
 
 (function () {
     "use strict";
 
-    var map;
-
+    /**
+     * Display on map the markers related to pictures +
+     * highlight marker of the current picture.
+     */
     function mapPictures() {
 
-        var markers, i, map = $.carto.maps.map;
+        var markers, i, map = asCarto.maps.map;
 
         function resetMarker(marker) {
             return marker.setZIndexOffset(0)
@@ -55,18 +57,24 @@
 
         highlightMarker(markers[0]);
 
-        $('.carousel-inner').on('slide.bs.carousel', function (e) {
-            var i = $(e.relatedTarget).data('offset'),
-                prev = (i - 1) >= 0 ? (i - 1) : (markers.length - 1);
+        // Highlight marker of the current picture
+        $(document).ready(function () {
+            $('.carousel-inner').on('slide.bs.carousel', function (e) {
+                var i = $(e.relatedTarget).data('offset'),
+                    prev = (i - 1) >= 0 ? (i - 1) : (markers.length - 1);
 
-            resetMarker(markers[prev]);
-            highlightMarker(markers[i]);
+                resetMarker(markers[prev]);
+                highlightMarker(markers[i]);
+            });
         });
     }
 
+    /**
+     * Currently, we (Marie and Mathieu) are at Lavau-sur-Loire, France.
+     */
     function mapCurrentPlace() {
 
-        var map = $.carto.maps.map,
+        var map = asCarto.maps.map,
 
             currentPlace = [47.31346512, -1.96768332], // Lavau-sur-Loire, France
 
@@ -86,27 +94,22 @@
 
         $('#current-place').click(function (e) {
             e.preventDefault();
-
             map.setView(currentPlace, map.getMaxZoom());
         });
-
     }
 
+    // Map centered on France
+    asCarto.addMap('map', {
+        center: [46.0, 2.0],
+        minZoom: 4,
+        maxZoom: 8
+    });
+
+    mapPictures();
+
     $(document).ready(function () {
-
         $('.carousel-inner').carousel();
-
-        // centered on France
-        $.carto.addMap('map', {
-            center: [46.0, 2.0],
-            minZoom: 4,
-            maxZoom: 8
-        });
-
-        mapPictures();
-
         mapCurrentPlace();
-
     });
 
 }());
