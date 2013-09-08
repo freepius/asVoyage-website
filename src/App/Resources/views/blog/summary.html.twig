@@ -36,16 +36,18 @@
             {% endif %}
         </div>
 
-        <!-- Comments -->
-        <div class="pull-right" style="margin-left: 15px;">
-            <meta itemprop="interactionCount" content="UserComments:{{- countComments -}}">
+        {% if beCommented or countComments > 0 %}
+            <!-- Comments -->
+            <div class="pull-right" style="margin-left: 15px;">
+                <meta itemprop="interactionCount" content="UserComments:{{- countComments -}}">
 
-            <a itemprop="discussionUrl" href="/blog/{{- slug -}}/read#comments"
-                title="{{ 'comment.count'|trans([countComments]) }}"
-            >
-                <i class="icon-comments"></i> {{ countComments }}
-            </a>
-        </div>
+                <a itemprop="discussionUrl" href="/blog/{{- slug -}}/read#comments"
+                    title="{{ 'comment.count'|trans([countComments]) }}"
+                >
+                    <i class="icon-comments"></i> {{ countComments }}
+                </a>
+            </div>
+        {% endif %}
 
         {% if is_granted('ROLE_ADMIN') %}
             <!-- Actions on article -->
