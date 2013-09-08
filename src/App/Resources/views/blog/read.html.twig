@@ -101,24 +101,26 @@
             {% endif %}
         </p>
 
-        <!-- Comments : count + link to read + link to create/update -->
-        <p>
-            <i class="icon-comments"></i>
-            <a href="#comments">
-                {{ 'comment.count'|trans([article.countComments]) }}
-            </a>
+        {% if article.beCommented or article.countComments > 0 %}
+            <!-- Comments : count + link to read + link to create/update -->
+            <p>
+                <i class="icon-comments"></i>
+                <a href="#comments">
+                    {{ 'comment.count'|trans([article.countComments]) }}
+                </a>
 
-            <br>
+                <br>
 
-            {% if article.beCommented or comment.isUpdating %}
-                <small style="margin-left: 15px;">
-                    <i class="icon-arrow-right"></i>
-                    <a href="#comment-post">
-                        {{ (comment.isCreation ? 'comment.create' : 'comment.update') | trans }}
-                    </a>
-                </small>
-            {% endif %}
-        </p>
+                {% if article.beCommented or comment.isUpdating %}
+                    <small style="margin-left: 15px;">
+                        <i class="icon-arrow-right"></i>
+                        <a href="#comment-post">
+                            {{ (comment.isCreation ? 'comment.create' : 'comment.update') | trans }}
+                        </a>
+                    </small>
+                {% endif %}
+            </p>
+        {% endif %}
 
         {% if isUnpublished %}
             <!-- Article unpublished -->
