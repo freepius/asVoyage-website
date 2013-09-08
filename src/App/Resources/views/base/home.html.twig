@@ -8,7 +8,7 @@
 
 
 {% block stylesheets %}
-    {{ carto.cssFiles() }}
+    {{ carto.cssBase() }}
 
     <style>
         #map { height: 300px; }
@@ -25,7 +25,7 @@
 
 
 {% block javascripts %}
-    {{ carto.jsFiles() }}
+    {{ carto.jsBase() }}
     <script src="/js/app-base-home.js"></script>
 {% endblock %}
 
@@ -35,19 +35,7 @@
         <h1 id="page-title">Bienvenue à tous !</h1>
 
         <aside class="col-xs-4">
-            <!-- Pub for our book : 3000 kilomètres en diagonale -->
-            <div class="box">
-                <a href="http://www.atramenta.net/books/3000-kilometres-en-diagonale/179"
-                    title="Acheter «&nbsp;3&nbsp;000 kilomètres en diagonale&nbsp;» sur atramenta.net"
-                    style="margin-right: 10px;" class="pull-left"
-                >
-                    <img src="http://www.atramenta.net/images/books/179-3000-kilometres-en-diagonale_cb.png"
-                        alt="Acheter 3000 kilomètres en diagonale !">
-                </a>
-                <h2 style="margin-top: 10px; font-size: 1em;"><strong>Auto-édition</strong></h2>
-                Plongez dans le récit de notre premier périple au long cours,
-                en vente sur <a href="http://www.atramenta.net/books/3000-kilometres-en-diagonale/179">atramenta.net</a> !
-            </div>
+            {% include "base/our-trips/3000-km-diagonal-book-pub.html.twig" only %}
 
             <!-- Some pictures -->
             <div class="carousel-inner slide">
@@ -64,7 +52,7 @@
 
         <div class="col-xs-8" itemprop="articleBody">
             {%- set text -%}
-<big>Nous sommes **Marie** et **Mathieu**, deux jeunes voyageurs.</big>
+<big>Nous sommes <strong class="special">Marie et Mathieu</strong>, deux jeunes voyageurs.</big>
 
 L'espace web dans lequel vous venez d'entrer est notre petit jardin numérique, presque secret.
 Doucement, humblement, nous y faisons pousser quelques idées vagabondes -- certaines douces et sucrées, d'autres amères et épicées, et d'autres encore.
@@ -76,7 +64,7 @@ Nous y semons, aussi, nos expériences, émotions et souvenirs de voyages.
 * un dossier sur notre [voyage de 2011](/our-trips/3000-km-diagonal), notre premier périple au long-cours :
   3000 km en France, en kayak et à pied, durant 6 mois ;
 * un autre sur notre prochain voyage <small>(départ septembre 2013)</small> :
-  [**Afrikapié**](/our-trips/afrikapie) ;
+  [**Afrikapié**](/our-trips/afrikapie) {.special} ;
 * quelques photos et cartes, de-ci de-là ;
 * et un [pigeon voyageur](/contact), pour nous contacter.
 

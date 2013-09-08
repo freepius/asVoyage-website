@@ -1,0 +1,23 @@
+{% from "macros.twig" import indent %}
+
+<!-- Pub for our book : 3000 kilomètres en diagonale -->
+<div class="box">
+    <h1 class="special text-right" style="font-size: 1em;">Auto-édition</h1>
+
+    <div class="row">
+        <a href="http://www.atramenta.net/books/3000-kilometres-en-diagonale/179"
+           title="Acheter «&nbsp;3&nbsp;000 kilomètres en diagonale&nbsp;» sur atramenta.net"
+           class="pull-left" style="margin: -35px 10px 5px 0;"
+        >
+            <img src="/images/base/3000-kilometres-en-diagonale.png">
+        </a>
+
+        Plongez dans le récit de notre premier périple au long cours,
+        en vente sur <a href="http://www.atramenta.net/books/3000-kilometres-en-diagonale/179">atramenta.net</a> !
+    </div>
+
+    <div>
+        {{ indent('<a href="http://www.atramenta.net/books/3000-kilometres-en-diagonale/179">version papier 12 €</a>', true) }}
+        {{ indent('<a href="http://www.atramenta.net/ebooks/3000-kilometres-en-diagonale/111">numérique 2,99 €</a>') }}
+    </div>
+</div>

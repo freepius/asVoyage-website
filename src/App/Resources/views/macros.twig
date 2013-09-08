@@ -14,9 +14,9 @@
 {##
  # Indent an element (with a left margin, an arrow and the .text-muted class).
  #}
-{% macro indent(element) %}
+{% macro indent(element, nobr) %}
 {% spaceless %}
-    <br>
+    {{ not nobr ? '<br>' }}
     <small class="text-muted" style="margin-left: 15px;">
         <i class="icon-arrow-right"></i>&nbsp;{{- element | raw -}}
     </small>

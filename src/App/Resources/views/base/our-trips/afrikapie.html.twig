@@ -6,7 +6,7 @@
 
 
 {% block stylesheets %}
-    {{ carto.cssFiles() }}
+    {{ carto.cssBase() }}
 
     <style>
         #map { height: 500px; }
@@ -15,19 +15,18 @@
 
 
 {% block javascripts %}
-    {{ carto.jsFiles() }}
+    {{ carto.jsBase() }}
 
     <script>
         {% include "base/our-trips/afrikapie.carto.js" %}
 
-        var map  = asCarto.addMap('map'),
-            alt  = L.multiPolyline([altNamibia_points, altMali_points], {color: 'green', weight: 5}),
+        var alt  = L.multiPolyline([altNamibia_points, altMali_points], {color: 'green', weight: 5}),
             main = L.polyline(main_points, {color: 'brown', weight: 10, opacity: 1.0});
 
-        map.fitBounds(main, {reset: true});
-
-        alt.addTo(map);
-        main.addTo(map);
+        asCarto.addMap('map')
+            .addLayer(main)
+            .addLayer(alt)
+            .fitBounds(main, {reset: true});
     </script>
 {% endblock %}
 
@@ -43,9 +42,7 @@
 
         <div itemprop="articleBody">
             {%- set text -%}
-## Projet original
-
-**Afrikapié** c'est notre nouveau projet de voyage au long cours ; le second.
+*"Afrikapié"* c'est notre nouveau projet de voyage au long cours ; le second.
 
 Partant du Nord-Est marocain, nous voulons traverser l'Afrique, du Nord au Sud, puis d'Ouest en Est, pour rejoindre l'île rouge : Madagascar <small>[\[voir carte\]](#map)</small>.
 Ce projet est ambitieux. Il nous fera vagabonder sur terre, à pied, durant 2 à 3 années.

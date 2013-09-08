@@ -61,7 +61,7 @@
 
 
 {% block stylesheets %}
-    {{ carto.cssFiles() }}
+    {{ carto.cssBase() }}
 
     <style>
         #map { height: 300px; }
@@ -70,19 +70,23 @@
 
 
 {% block javascripts %}
-    {{ carto.jsFiles() }}
+    {{ carto.jsBase() }}
 
     <script>
         {% include "base/our-trips/3000-km-diagonal.carto.js" %}
 
-        var map       = asCarto.addMap('map'),
-            downLoire = L.polyline(downLoire_points, {color: 'blue'}).bindPopup('Descente de Loire'),
-            longWalk  = L.polyline(longWalk_points,  {color: 'green'}).bindPopup('Grande marche'),
-            group     = L.featureGroup([downLoire, longWalk]);
+        var downLoire = L.polyline(downLoire_points, {color: 'blue'})
+                .bindPopup('Descente de Loire'),
 
-        group.setStyle({weight: 10}).addTo(map);
-        map.fitBounds(group.getBounds(), {reset: true});
+            longWalk = L.polyline(longWalk_points,  {color: 'green'})
+                .bindPopup('Grande marche'),
 
+            group = L.featureGroup([downLoire, longWalk])
+                .setStyle({weight: 10});
+
+        asCarto.addMap('map')
+            .addLayer(group)
+            .fitBounds(group.getBounds(), {reset: true});
     </script>
 {% endblock %}
 
@@ -99,15 +103,13 @@
 
         <div itemprop="articleBody">
             {%- set text -%}
-## Présentation
-
 *"3000 km en diagonale"* c'est notre voyage initiatique. Réalisé en 2011, d'avril à octobre, il nous a fait parcourir
 des bouts de France, du Sud-Est au Nord-Ouest, aller-retour.
 
 Durant deux mois, nous avons descendu le plus long fleuve de France, de la source à l'océan :
 les 120 premiers kilomètres à pied, à travers les monts d'Ardèche ;
 les 900 suivants en kayak, jusque dans la vase des marais de l'estuaire de Loire.  
-Ce fut notre <b>"Descente de Loire"</b>.
+Ce fut notre **"Descente de Loire"**.
 
 <p class="row">
     {% for img in downLoireImgs %}
@@ -122,7 +124,7 @@ Aussitôt rentrés au port, nous avons chaussé nos godillots terreux et repris 
 Initialement, nous voulions rejoindre les *chemins de Saint-Jacques-de-Compostelle* et les parcourir jusqu'à leur terme : le cap Finisterre en Espagne.
 Mais la vie de vagabonds dépouillés, enfouis en pleine nature, et la claque des rencontres ont dévié notre azimut.
 Finalement, nous sommes restés sur les sentiers français et avons rejoint Nantes à Nice, en 1700 km.  
-Ce fut notre <b>"Grande marche"</b>.
+Ce fut notre **"Grande marche"**.
 
 <p class="row">
     {% for img in longWalkImgs %}
@@ -136,7 +138,7 @@ De cette première expérience au long cours, brute et précaire, nature et surp
 passée en pensées et rêveries, découvertes et coups de gueule, observations et analyses,
 nous en avons tiré un ouvrage, petit condensé anarchique de tout ceci et de bien plus encore.  
 Cet ouvrage pèse 172 pages, est auto-édité et est publié sous une [licence libre][].
-<b>Retrouvez-le en version papier (à 12 €) sur [atramenta.net][].</b>
+**Retrouvez-le en version papier (12 €) et numérique (2,99 €) sur [atramenta.net][].**
 
 [licence libre]: http://fr.wikipedia.org/wiki/Licence_libre
 [atramenta.net]: http://www.atramenta.net/books/3000-kilometres-en-diagonale/179
@@ -146,19 +148,7 @@ Cet ouvrage pèse 172 pages, est auto-édité et est publié sous une [licence l
     </article>
 
     <aside class="col-xs-4">
-        <!-- Pub for our book : 3000 kilomètres en diagonale -->
-        <div class="box">
-            <a href="http://www.atramenta.net/books/3000-kilometres-en-diagonale/179"
-                title="Acheter «&nbsp;3&nbsp;000 kilomètres en diagonale&nbsp;» sur atramenta.net"
-                style="margin-left: 10px;" class="pull-right"
-            >
-                <img src="http://www.atramenta.net/images/books/179-3000-kilometres-en-diagonale_cb.png"
-                    alt="Acheter 3000 kilomètres en diagonale !">
-            </a>
-            <h2 style="margin-top: 10px; font-size: 1em;"><strong>Auto-édition</strong></h2>
-            Plongez dans le récit de notre premier périple au long cours,
-            en vente sur <a href="http://www.atramenta.net/books/3000-kilometres-en-diagonale/179">atramenta.net</a> !
-        </div>
+        {% include "base/our-trips/3000-km-diagonal-book-pub.html.twig" only %}
 
         <!-- Map -->
         <div id="map" class="box"></div>
