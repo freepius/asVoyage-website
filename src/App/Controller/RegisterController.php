@@ -45,7 +45,7 @@ class RegisterController implements ControllerProviderInterface
         if ($filters)
         {
             $entries = iterator_to_array(
-                $this->repository->find(50, $filters)
+                $this->repository->find(100, $filters)
             );
 
             foreach ($entries as & $e) {

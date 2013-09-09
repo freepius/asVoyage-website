@@ -3,10 +3,17 @@
  */
 
 /*jslint regexp: true */
-/*global document, $, L, asCarto */
+/*global document, $, L, asCarto, currentPlace, currentPlaceMessage */
 
 (function () {
     "use strict";
+
+    // Map centered on the (last registered) current place
+    var map = asCarto.addMap('map', {
+        center: currentPlace,
+        minZoom: 2,
+        maxZoom: 8
+    });
 
     /**
      * Display on map the markers related to pictures +
@@ -14,7 +21,7 @@
      */
     function mapPictures() {
 
-        var markers, i, map = asCarto.maps.map;
+        var i, map = asCarto.maps.map, markers;
 
         function resetMarker(marker) {
             return marker.setZIndexOffset(0)
@@ -28,28 +35,7 @@
                 .setOpacity(1.0);
         }
 
-        markers = [
-            [47.44900131, 2.92650008],
-            [47.24423218, 0.21733333],
-            [47.39076614, -0.62978333],
-            [47.39181519, -0.41446668],
-            [46.65703201, 1.26265001],
-            [46.15250015, 1.57414997],
-            [44.07866669, 3.73656678],
-            [43.83348465, 5.59130001],
-            [44.32215118, 5.70480013],
-            [47.31346512, -1.96768332],
-            [45.40963364, 4.57779980],
-            [46.15141678, 5.86280012],
-            [47.33746719, -1.93145001],
-            [44.76426697, 4.21436691],
-            [45.56359863, 4.26998329],
-            [45.57881546, 4.25571680],
-            [45.98379898, 4.03393316],
-            [46.80279922, 3.52193332],
-            [46.98231506, 3.16971660],
-            [47.21666718, 2.98711658]
-        ].map(function (latLng) {
+        markers = [].map(function (latLng) {
             return resetMarker(
                 L.marker(latLng, {clickable: false}).addTo(map)
             );
@@ -70,26 +56,21 @@
     }
 
     /**
-     * Currently, we (Marie and Mathieu) are at Lavau-sur-Loire, France.
+     * Display and handle the "current place" marker.
      */
     function mapCurrentPlace() {
 
-        var map = asCarto.maps.map,
-
-            currentPlace = [47.31346512, -1.96768332], // Lavau-sur-Loire, France
-
-            marker = L.marker(currentPlace, {
-                clickable: false,
+        var marker = L.marker(currentPlace, {
                 icon: L.AwesomeMarkers.icon({ color: 'green' }),
                 zIndexOffset: 1000
-            });
+            }).addTo(map);
+
+        if (currentPlaceMessage) {
+            marker.bindPopup(currentPlaceMessage);
+        }
 
         $('#current-place').mouseenter(function () {
-            map.addLayer(marker);
-        });
-
-        $('#current-place').mouseleave(function () {
-            map.removeLayer(marker);
+            map.setView(currentPlace, 5);
         });
 
         $('#current-place').click(function (e) {
@@ -98,14 +79,7 @@
         });
     }
 
-    // Map centered on France
-    asCarto.addMap('map', {
-        center: [46.0, 2.0],
-        minZoom: 4,
-        maxZoom: 8
-    });
-
-    mapPictures();
+    /*mapPictures();*/
 
     $(document).ready(function () {
         $('.carousel-inner').carousel();

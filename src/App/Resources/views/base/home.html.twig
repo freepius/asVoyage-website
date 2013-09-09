@@ -6,8 +6,6 @@
 
 {% from "macros.twig" import linked_img %}
 
-{% from "media/macros.twig" import media_render %}
-
 
 {% block stylesheets %}
     {{ carto.cssBase() }}
@@ -28,71 +26,50 @@
 
 {% block javascripts %}
     {{ carto.jsBase() }}
+    <script>
+        var currentPlace = [{{ lastGeoEntry.geoCoords }}],
+            currentPlaceMessage = "{{ lastGeoEntry.message }}",
+            geoCoords = [
+                {% for entry in geoEntries %}
+                    [{{ entry.geoCoords }}],
+                {% endfor %}
+            ];
+    </script>
     <script src="/js/app-base-home.js"></script>
 {% endblock %}
 
 
 {% block main %}
-    <h1 id="page-title">Bienvenue à tous !</h1>
-
     <aside class="col-xs-4">
         {% include "base/our-trips/3000-km-diagonal-book-pub.html.twig" only %}
 
-        <!-- Some pictures -->
+        <!-- Carousel of last favorite images -->
         <div class="carousel-inner slide">
-            {% for i in 0..19 %}
-                <div class="item {{ loop.first ? 'active' }}" data-offset="{{ i }}">
-                    {{ linked_img('/images/home', i~'.jpg', {thumb: true}) }}
+            {% for img in favoriteImages %}
+                <div class="item {{ loop.first ? 'active' }}">
+                    {{ linked_img('/media/web', img.content) }}
                 </div>
             {% endfor %}
         </div>
 
-        <!-- Map related to these pictures -->
+        <!-- Link to media platform -->
+        <div class="clearfix small special" style="margin-bottom: 1.5em;">
+            <a href="/media" class="pull-right">» {{ 'See more images'|trans }}</a>
+        </div>
+
+        <!-- Mini-map -->
         <div id="map"></div>
     </aside>
 
     <div class="col-xs-8">
-        {%- set text -%}
-<big>Nous sommes <strong class="special">Marie et Mathieu</strong>, deux jeunes voyageurs.</big>
-
-L'espace web dans lequel vous venez d'entrer est notre petit jardin numérique, presque secret.
-Doucement, humblement, nous y faisons pousser quelques idées vagabondes -- certaines douces et sucrées, d'autres amères et épicées, et d'autres encore.
-Nous y semons, aussi, nos expériences, émotions et souvenirs de voyages.
-
-<big>Cet espace est en construction. Mais promenez-vous y et dénichez :</big>
-
-* une petite présentation de [nozigues](/about) ;
-* un dossier sur notre [voyage de 2011](/our-trips/3000-km-diagonal), notre premier périple au long-cours :
-  3000 km en France, en kayak et à pied, durant 6 mois ;
-* un autre sur notre prochain voyage <small>(départ septembre 2013)</small> :
-  [**Afrikapié**](/our-trips/afrikapie) {.special} ;
-* quelques photos et cartes, de-ci de-là ;
-* et un [pigeon voyageur](/contact), pour nous contacter.
-
-Actuellement, nous nous préparons ici :
-<a id="current-place" href="#" data-toggle="modal">*N47° 18.808 W001° 58.061*</a>,
-dans notre belle région natale de l'*estuaire de Loire*.
-
-<big>Bonne balade.</big>
-        {%- endset -%}
-        {{ text | richText }}
-
-        <!-- Last blog articles -->
-        <h2 style="margin-top: 1em;">{{ 'Last published articles'|trans }}</h2>
+        <div class="box">
+            {% include "base/home-welcome-text.html.twig" %}
+        </div>
 
         {% include "blog/summary.html.twig" with articles|first only %}
 
         <a href="/blog" class="strong special pull-right">» {{ 'See more articles'|trans }}</a>
 
         {% include "blog/mini-list.html.twig" with {articles: articles[1:]} only %}
-    </div>
-
-    <!-- Last favorite images -->
-    <div class="img-thumbnail" style="margin-top: 2em;">
-        {% for img in favoriteImages %}
-            {{ media_render(img, {class: 'col-xs-2', group: 'favorite'}) }}
-        {% endfor %}
-
-        <a href="/media" class="strong special pull-right">» {{ 'See more images'|trans }}</a>
     </div>
 {% endblock %}

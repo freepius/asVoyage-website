@@ -28,7 +28,6 @@ return [
     //'Error'                   => '',
     'Error(s)'                  => "There is/are <b>0</b> error/s : at 1.",
     //'General'                 => '',
-    //'Last published articles' => '',
     //'Login'                   => '',
     //'Logout'                  => '',
     //'No'                      => '',

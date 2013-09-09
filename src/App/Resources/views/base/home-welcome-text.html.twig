@@ -1,0 +1,51 @@
+{##
+ # Links scattered in "Welcome text"
+ #}
+{% set links %}
+[1]: /about
+[2]: /our-trips/3000-km-diagonal
+[3]: /our-trips/afrikapie           {.special}
+[4]: /media
+[5]: /map
+[6]: /contact
+
+{% endset %}
+
+
+{##
+ # Welcome text depending on locale
+ #}
+{% if app.locale == 'fr' %}
+    {% set text -%}
+# Bienvenue à tous ! { #page-title  }
+
+<big>Nous sommes <strong class="special">Marie et Mathieu</strong>, deux jeunes voyageurs.</big>
+
+L'espace web dans lequel vous venez d'entrer est notre petit jardin numérique, presque secret.
+Doucement, humblement, nous y faisons pousser quelques idées vagabondes -- certaines douces et sucrées, d'autres amères et épicées, et d'autres encore.
+Nous y semons, aussi, nos expériences, émotions et souvenirs de voyages.
+
+<big>Promenez-vous y et dénichez :</big>
+
+* une petite présentation de [nozigues][1] ;
+* un dossier sur notre [voyage de 2011][2], notre premier périple au long-cours :
+  3000 km en France, en kayak et à pied, durant 6 mois ;
+* un autre sur notre prochain voyage <small>(départ octobre 2013)</small> :
+{#* un autres sur notre voyage actuel <small>(commencé en octobre 2013)</small> : #}
+  [**Afrikapié**][3] ;
+  * quelques [photos][4] et cartes {#[cartes][5]#}, de-ci de-là ;
+* et un [pigeon voyageur][6], pour nous contacter.
+
+Actuellement, nous nous préparons ici :
+{#Actuellement, nous nous trouvons ici :#}
+<a id="current-place" href="#">*{{- lastGeoEntry.geoCoords -}}*</a>,
+dans notre belle région natale de l'*estuaire de Loire*.
+
+<big>Bonne balade.</big>
+    {%- endset %}
+{% else %}
+    {% set text -%}
+    {%- endset %}
+{% endif %}
+
+{{ (links ~ text) | richText }}

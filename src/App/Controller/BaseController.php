@@ -28,6 +28,9 @@ use Silex\ControllerProviderInterface,
  */
 class BaseController implements ControllerProviderInterface
 {
+    // TODO : real date !!
+    const CURRENT_TRAVEL_BEGIN_DATE = '2013-09-03';
+
     public function __construct(\App\Application $app)
     {
         $this->app = $app;
@@ -79,14 +82,21 @@ class BaseController implements ControllerProviderInterface
             $this->app['model.repository.blog']->find(6)
         );
 
-        // The 6 last favorite images
+        // The 20 last favorite images
         $lastImages = $this->app['model.repository.media']
-            ->find(6, 0, ['tags' => ['Favori'], 'type' => 'image']);
+            ->find(20, 0, [/*'tags' => ['Favori'], */'type' => 'image']);
+
+        // The "Travel Register" entries for mini-map
+        $geoEntries = $this->app['model.repository.register']
+            ->find(0, ['from' => self::CURRENT_TRAVEL_BEGIN_DATE, 'geo' => true]);
+        $geoEntries->next();
 
         return $this->app->render('base/home.html.twig',
         [
             'articles'       => $lastArticles,
             'favoriteImages' => $lastImages,
+            'geoEntries'     => $geoEntries,
+            'lastGeoEntry'   => $geoEntries->current(),
         ]);
     }
 

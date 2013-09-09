@@ -28,7 +28,6 @@ return [
     'Error'                   => 'Erreur',
     'Error(s)'                => "Il y a <b>0</b> erreur(s) : à 1.",
     'General'                 => 'Général',
-    'Last published articles' => 'Derniers articles publiés',
     'Login'                   => 'Connexion',
     'Logout'                  => 'Déconnexion',
     'No'                      => 'Non',

@@ -42,7 +42,7 @@
     $(document).ready(function () {
         $('body').tooltip({
             container: 'body',
-            selector: '[title]:not([data-lightbox])'
+            selector: '[title]'
         });
     });
 
