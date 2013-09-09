@@ -44,7 +44,6 @@ TODO
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 * On Blog "reading" page : add box containing related articles/contents
 * Contact : log when a message is sent
-* Carto : improve !!!
 * Traduction of new base pages (about, our-trips, etc.)
 * Revoir le CSS : les marges pour les titres, le centrage dans about, l'affichage sur grand et petit écran, etc.
 * Media -> better set meta actions (+/- hours...)
@@ -53,6 +52,11 @@ TODO
 * Follow my pullrequest for Lightbox2.
 * Follow my pullrequest for Leaflet Zoom Control.
 * Make a translation table for tags
+* Blog : macro to include a media in a blog article
+* New hom page !!
+* BUG on IE 9 : problem to refresh captcha (eg: on contact page)
+* Improve tags size on tags box ?!
+* Media module : add an "info box" on home page
 
 For production
 --------------
