@@ -84,7 +84,7 @@ class BaseController implements ControllerProviderInterface
 
         // The 20 last favorite images
         $lastImages = $this->app['model.repository.media']
-            ->find(20, 0, [/*'tags' => ['Favori'], */'type' => 'image']);
+            ->find(20, 0, ['tags' => ['Favori'], 'type' => 'image']);
 
         // The "Travel Register" entries for mini-map
         $geoEntries = $this->app['model.repository.register']
