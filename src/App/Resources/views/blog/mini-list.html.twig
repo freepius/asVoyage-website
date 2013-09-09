@@ -1,0 +1,26 @@
+{% if articles|length > 0 %}
+<ul>
+    {% for article in articles %}
+        <li>
+            {# Date : day + month #}
+            <b>
+                {{ article.pubDatetime | date('d') }}
+                {{ article.pubDatetime | date('F') | trans | lower }} :
+            </b>
+
+            {# Title + link to read article #}
+            <a href="/blog/{{- article.slug -}}/read">{{ article.title }}</a>
+
+            {# Count of comments + link to read them #}
+            {% if article.countComments > 0 %}
+                <a href="/blog/{{- article.slug -}}/read#comments"
+                    title="{{ 'comment.count' | trans([article.countComments]) }}"
+                    class="indent small"
+                >
+                    <i class="icon-comments"></i> {{ article.countComments }}
+                </a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}

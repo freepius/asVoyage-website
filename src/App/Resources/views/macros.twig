@@ -17,7 +17,7 @@
 {% macro indent(element, nobr) %}
 {% spaceless %}
     {{ not nobr ? '<br>' }}
-    <small class="text-muted" style="margin-left: 15px;">
+    <small class="text-muted indent">
         <i class="icon-arrow-right"></i>&nbsp;{{- element | raw -}}
     </small>
 {% endspaceless %}

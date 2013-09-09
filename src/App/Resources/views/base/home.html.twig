@@ -31,27 +31,26 @@
 
 
 {% block main %}
-    <article itemscope itemtype="http://schema.org/Article">
-        <h1 id="page-title">Bienvenue à tous !</h1>
+    <h1 id="page-title">Bienvenue à tous !</h1>
 
-        <aside class="col-xs-4">
-            {% include "base/our-trips/3000-km-diagonal-book-pub.html.twig" only %}
+    <aside class="col-xs-4">
+        {% include "base/our-trips/3000-km-diagonal-book-pub.html.twig" only %}
 
-            <!-- Some pictures -->
-            <div class="carousel-inner slide">
-                {% for i in 0..19 %}
-                    <div class="item {{ loop.first ? 'active' }}" data-offset="{{ i }}">
-                        {{ linked_img('/images/home', i~'.jpg', {thumb: true}) }}
-                    </div>
-                {% endfor %}
-            </div>
+        <!-- Some pictures -->
+        <div class="carousel-inner slide">
+            {% for i in 0..19 %}
+                <div class="item {{ loop.first ? 'active' }}" data-offset="{{ i }}">
+                    {{ linked_img('/images/home', i~'.jpg', {thumb: true}) }}
+                </div>
+            {% endfor %}
+        </div>
 
-            <!-- Map related to these pictures -->
-            <div id="map"></div>
-        </aside>
+        <!-- Map related to these pictures -->
+        <div id="map"></div>
+    </aside>
 
-        <div class="col-xs-8" itemprop="articleBody">
-            {%- set text -%}
+    <div class="col-xs-8">
+        {%- set text -%}
 <big>Nous sommes <strong class="special">Marie et Mathieu</strong>, deux jeunes voyageurs.</big>
 
 L'espace web dans lequel vous venez d'entrer est notre petit jardin numérique, presque secret.
@@ -73,8 +72,16 @@ Actuellement, nous nous préparons ici :
 dans notre belle région natale de l'*estuaire de Loire*.
 
 <big>Bonne balade.</big>
-            {%- endset -%}
-            {{ text | richText }}
-        </div>
-    </article>
+        {%- endset -%}
+        {{ text | richText }}
+
+        <!-- Last blog articles -->
+        <h2 style="margin-top: 1em;">{{ 'Last published articles'|trans }}</h2>
+
+        {% include "blog/summary.html.twig" with articles|first only %}
+
+        <a href="/blog" class="lead pull-right">» {{ 'See more articles'|trans }}</a>
+
+        {% include "blog/mini-list.html.twig" with {articles: articles[1:]} only %}
+    </div>
 {% endblock %}

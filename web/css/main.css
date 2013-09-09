@@ -5858,6 +5858,9 @@ h2 {
 /*************************************************
  * Other styles
  ************************************************/
+.indent {
+  margin-left: 1em;
+}
 div.preview {
   overflow: auto;
   padding: 4px 6px;

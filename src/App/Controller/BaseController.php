@@ -74,7 +74,15 @@ class BaseController implements ControllerProviderInterface
 
     public function home()
     {
-        return $this->app->render('base/home.html.twig');
+        // The 6 last blog articles
+        $lastArticles = iterator_to_array(
+            $this->app['model.repository.blog']->find(6)
+        );
+
+        return $this->app->render('base/home.html.twig',
+        [
+            'articles' => $lastArticles,
+        ]);
     }
 
     public function about()
