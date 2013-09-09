@@ -43,6 +43,7 @@ return [
     //'Run search'              => '',
     //'Search'                  => '',
     //'See more articles'       => '',
+    //'See more images'         => '',
     //'Submit'                  => '',
     //'to'                      => '',
     //'Top'                     => '',

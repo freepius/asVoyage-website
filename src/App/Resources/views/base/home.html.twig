@@ -2,9 +2,11 @@
 
 {% extends "layout.html.twig" %}
 
+{% import "carto.twig" as carto %}
+
 {% from "macros.twig" import linked_img %}
 
-{% import "carto.twig" as carto %}
+{% from "media/macros.twig" import media_render %}
 
 
 {% block stylesheets %}
@@ -80,8 +82,17 @@ dans notre belle région natale de l'*estuaire de Loire*.
 
         {% include "blog/summary.html.twig" with articles|first only %}
 
-        <a href="/blog" class="lead pull-right">» {{ 'See more articles'|trans }}</a>
+        <a href="/blog" class="strong special pull-right">» {{ 'See more articles'|trans }}</a>
 
         {% include "blog/mini-list.html.twig" with {articles: articles[1:]} only %}
+    </div>
+
+    <!-- Last favorite images -->
+    <div class="img-thumbnail" style="margin-top: 2em;">
+        {% for img in favoriteImages %}
+            {{ media_render(img, {class: 'col-xs-2', group: 'favorite'}) }}
+        {% endfor %}
+
+        <a href="/media" class="strong special pull-right">» {{ 'See more images'|trans }}</a>
     </div>
 {% endblock %}

@@ -112,14 +112,16 @@ class Media extends MongoRepository
      *    -> not the temporary elements
      *    -> between two creation datetime ("from" and "to", included)
      *    -> having all "tags"
+     *    -> being of a certain "type"
      *
      * Null (or equivalent) filter are ignored.
      *
      * $filters =
      * {
-     *      from :  The old bound date   ; format = Y-m-d (H:i:s)
-     *      to   :  The young bound date ; format = Y-m-d (H:i:s)
-     *      tags :  An array of strings
+     *      from : The old bound date   ; format = Y-m-d (H:i:s)
+     *      to   : The young bound date ; format = Y-m-d (H:i:s)
+     *      tags : An array of strings
+     *      type : A string
      * }
      *
      * @return array
@@ -131,10 +133,12 @@ class Media extends MongoRepository
         $from = @ $filters['from'];
         $to   = @ $filters['to'];
         $tags = @ $filters['tags'];
+        $type = @ $filters['type'];
 
         if ($from) { $query['creationDate']['$gte'] = $from; }
         if ($to)   { $query['creationDate']['$lte'] = $to; }
         if ($tags) { $query['tags']['$all'] = $tags; }
+        if ($type) { $query['mainType'] = $type; }
 
         return $query;
     }
@@ -202,11 +206,9 @@ class Media extends MongoRepository
      */
     public function randomImagesByTags(array $tags, $limit = null)
     {
-        $query = ['mainType' => 'image'];
-
-        if ($tags) { $query['tags']['$all'] = $tags; }
-
-        $media = iterator_to_array($this->collection->find($query));
+        $media = iterator_to_array($this->collection->find(
+            $this->filter(['tags' => $tags, 'type' => 'image'])
+        ));
 
         shuffle($media);
 

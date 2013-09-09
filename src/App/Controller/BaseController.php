@@ -79,9 +79,14 @@ class BaseController implements ControllerProviderInterface
             $this->app['model.repository.blog']->find(6)
         );
 
+        // The 6 last favorite images
+        $lastImages = $this->app['model.repository.media']
+            ->find(6, 0, ['tags' => ['Favori'], 'type' => 'image']);
+
         return $this->app->render('base/home.html.twig',
         [
-            'articles' => $lastArticles,
+            'articles'       => $lastArticles,
+            'favoriteImages' => $lastImages,
         ]);
     }
 

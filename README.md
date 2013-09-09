@@ -53,7 +53,7 @@ TODO
 * Follow my pullrequest for Leaflet Zoom Control.
 * Make a translation table for tags
 * Blog : macro to include a media in a blog article
-* New hom page !
+* New hom page
 * BUG on IE 9 : problem to refresh captcha (eg: on contact page)
 * Improve tags size on tags box ?!
 * Media module : add an "info box" on home page

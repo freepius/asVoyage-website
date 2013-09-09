@@ -43,6 +43,7 @@ return [
     'Run search'              => 'Lancer la recherche',
     'Search'                  => 'Chercher',
     'See more articles'       => "Voir plus d'articles",
+    'See more images'         => "Voir plus d'images",
     'Submit'                  => 'Envoyer',
     'to'                      => 'à',
     'Top'                     => 'Haut',
