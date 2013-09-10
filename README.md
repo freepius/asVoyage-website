@@ -43,10 +43,8 @@ TODO
   * Add help for RichText
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 * On Blog "reading" page : add box containing related articles/contents
-* Contact : log when a message is sent
 * Traduction of new base pages (about, our-trips, etc.)
 * Revoir le CSS : les marges pour les titres, le centrage dans about, l'affichage sur grand et petit écran, etc.
-* Media -> better set meta actions (+/- hours...)
 * Make RSS or newsletter
 * BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)
 * Follow my pullrequest for Lightbox2.
@@ -68,8 +66,6 @@ For production
   * Blog repository => caching for listTags() and countArticlesByYearMonth()
   * Blog controller => caching the generated HTML from RichText
 * Minified JS and CSS files
-* Contact : make secure the message sending (with TLS)
-* Improve accessibility of pages !
 
 Low priority
 ------------
