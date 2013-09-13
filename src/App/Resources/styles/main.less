@@ -29,17 +29,12 @@
     .clearfix();
     margin-bottom: 20px;
     padding: 15px;
-    background-color: white;
-    border-radius: @border-radius-base;
-    border: 1px solid @gray-dark;
 }
 
 
 /*************************************************
  * Generic
  ************************************************/
-
-body { padding-bottom: 50px; } // TODO : keep this while no footer
 
 p { text-align: justify; }
 
@@ -129,14 +124,29 @@ h1, h2 { margin-bottom: 0.5em; }
 
 
 /*************************************************
+ * Footer
+ ************************************************/
+
+#footer {
+    .clearfix();
+    margin: 4em 0 2em;
+    padding: 3em 1.5em;
+    background-color: @gray-lighter;
+    border-radius: @border-radius-base;
+}
+
+
+/*************************************************
  * Main section
  ************************************************/
 
 #main
 {
+    .clearfix();
+
     aside > .box {
         background-color: @gray-lighter;
-        border: 0;
+        border-radius: @border-radius-base;
     };
 }
 
@@ -212,4 +222,12 @@ div.preview // textarea style
     height: 66px;
     border: 3px solid black;
     border-radius: 10px;
+}
+
+h2#home-last-published-articles
+{
+    margin: 10px;
+    color: @gray-light;
+    border-bottom: 1px solid @gray-light;
+    font-size: 1em;
 }

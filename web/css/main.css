@@ -5435,9 +5435,6 @@ article [itemprop="articleBody"] {
 article.summary {
   margin-bottom: 20px;
   padding: 15px;
-  background-color: white;
-  border-radius: 6px;
-  border: 1px solid #333333;
 }
 article.summary:before,
 article.summary:after {
@@ -5464,9 +5461,13 @@ article.summary:after {
   clear: both;
 }
 article.summary [itemprop="articleBody"] {
-  margin: 10px 0;
+  margin: 0;
   padding: 15px 0;
-  border-bottom: 1px solid gray;
+}
+article.summary footer {
+  padding: 10px 0;
+  border-top: 1px solid gray;
+  border-bottom: 2px solid #333333;
 }
 .leaflet-container form.leaflet-control-layers-list {
   margin: 0;
@@ -5704,9 +5705,6 @@ article.summary [itemprop="articleBody"] {
 .box {
   margin-bottom: 20px;
   padding: 15px;
-  background-color: white;
-  border-radius: 6px;
-  border: 1px solid #333333;
 }
 .box:before,
 .box:after {
@@ -5735,9 +5733,6 @@ article.summary [itemprop="articleBody"] {
 /*************************************************
  * Generic
  ************************************************/
-body {
-  padding-bottom: 50px;
-}
 p {
   text-align: justify;
 }
@@ -5813,11 +5808,68 @@ h2 {
   margin-right: 20px;
 }
 /*************************************************
+ * Footer
+ ************************************************/
+#footer {
+  margin: 4em 0 2em;
+  padding: 3em 1.5em;
+  background-color: #e5e5d5;
+  border-radius: 6px;
+}
+#footer:before,
+#footer:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+#footer:after {
+  clear: both;
+}
+#footer:before,
+#footer:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+#footer:after {
+  clear: both;
+}
+/*************************************************
  * Main section
  ************************************************/
+#main:before,
+#main:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+#main:after {
+  clear: both;
+}
+#main:before,
+#main:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+#main:after {
+  clear: both;
+}
 #main aside > .box {
   background-color: #e5e5d5;
-  border: 0;
+  border-radius: 6px;
 }
 /*************************************************
  * Tags
@@ -5913,4 +5965,10 @@ div.preview {
   height: 66px;
   border: 3px solid black;
   border-radius: 10px;
+}
+h2#home-last-published-articles {
+  margin: 10px;
+  color: #999999;
+  border-bottom: 1px solid #999999;
+  font-size: 1em;
 }

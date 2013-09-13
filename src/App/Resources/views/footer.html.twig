@@ -1,0 +1,49 @@
+{% from "macros.twig" import indent %}
+
+
+<footer id="footer">
+
+    <!-- Partners -->
+    <section id="partners" class="col-xs-6">
+        <a href="//rayonrando.com">
+            <img src="/images/logo-rayonrando.jpg" alt="RayonRando.com logo"
+                class="img-rounded" title="{{ 'Visit RayonRando.com'|trans }}">
+        </a>
+        {{ indent('<a href="/blog/rayonrando-nous-soutient/read">' ~ ('They support us!'|trans) ~ '</a>') }}
+    </section>
+
+    <!-- About license -->
+    <section id="license" class="col-xs-6">
+        <p>
+            {% if app.locale == 'fr' %}
+                Sauf mention contraire, ce site web et l'ensemble de son contenu sont publiés sous la
+                <a href="//creativecommons.org/publicdomain/zero/1.0/deed.fr">licence libre CC0</a>.
+                <br>
+                Cela inclut les <a href="/blog">articles</a>, les <a href="/media">images</a>, etc.
+                <br>
+                Cela inclut également le
+                <a href="https://github.com/freepius44/asVoyage-website">
+                    code source
+                    <i class="icon-github" style="font-size: 1.5em;" title="Voir sur GitHub"></i>
+                </a> de ce site.
+            {% else %}
+                Unless otherwise specified, this website and all its contents are published under the
+                <a href="//creativecommons.org/publicdomain/zero/1.0">CC0 license</a>.
+                <br>
+                This includes <a href="/blog">articles</a>, <a href="/media">images</a>, etc.
+                <br>
+                This also includes the
+                <a href="https://github.com/freepius44/asVoyage-website">
+                    source code
+                    <i class="icon-github" style="font-size: 1.5em;" title="View on GitHub"></i>
+                </a> of this website.
+            {% endif %}
+        </p>
+
+        <a href="//creativecommons.org/publicdomain/zero/1.0/deed.{{ app.locale }}">
+            <img src="/images/logo-cc-zero.jpg" alt="Logo of CC0 license"
+                title="{{ 'Contents under CC0 license'|trans }}">
+        </a>
+    </section>
+
+</footer>

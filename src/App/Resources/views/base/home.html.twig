@@ -66,6 +66,8 @@
             {% include "base/home-welcome-text.html.twig" %}
         </div>
 
+        <h2 id="home-last-published-articles">{{ 'Last published articles'|trans }}</h2>
+
         {% include "blog/summary.html.twig" with articles|first only %}
 
         <a href="/blog" class="strong special pull-right">» {{ 'See more articles'|trans }}</a>

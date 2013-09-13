@@ -58,12 +58,6 @@
     {% endif %}
 
 
-    <!-- Link to back up -->
-    <a href="#header" id="back2top" style="display: none;">
-        <i class="icon-arrow-up icon-white"></i> {{ 'Top'|trans }}
-    </a>
-
-
     <!-- Header
     ================================================== -->
     {% embed "header.html.twig" %}{% endembed %}
@@ -103,6 +97,17 @@
     <section id="main">
         {% block main %}{% endblock %}
     </section>
+
+
+    <!-- Footer
+    ================================================== -->
+    {% embed "footer.html.twig" %}{% endembed %}
+
+
+    <!-- Link to back up -->
+    <a href="#header" id="back2top" style="display: none;">
+        <i class="icon-arrow-up icon-white"></i> {{ 'Top'|trans }}
+    </a>
 
 
     <!-- Javascripts
