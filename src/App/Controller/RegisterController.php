@@ -255,12 +255,12 @@ class RegisterController implements ControllerProviderInterface
     /**
      * A SMS is part of a multi-SMS if :
      *  -> 1-st char is a digit (except 0)
-     *  -> 2-nd char is '/' or '§' (for the last part)
+     *  -> 2-nd char is '/' or '$' (for the last part)
      */
     protected function isMultiSms($smsBody)
     {
         return ($smsBody[0] >= '1' && $smsBody[0] <= '9') &&
-               ($smsBody[1] === '/' || $smsBody[1] === '§');
+               ($smsBody[1] === '/' || $smsBody[1] === '$');
     }
 
     /**
@@ -284,7 +284,7 @@ class RegisterController implements ControllerProviderInterface
         $multi[$numPart] = $smsBody;
 
         // If last part => store the number of expected parts
-        if ('§' === $code || 9 === $numPart) {
+        if ('$' === $code || 9 === $numPart) {
             $multi['count'] = $numPart;
         }
 
