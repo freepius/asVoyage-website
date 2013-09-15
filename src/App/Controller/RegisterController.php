@@ -13,6 +13,8 @@ use Silex\ControllerProviderInterface,
  *  -> initPost
  *  -> post
  *  -> postOneFromSms
+ *  -> isMultiSms       [protected]
+ *  -> processMultiSms  [protected]
  */
 class RegisterController implements ControllerProviderInterface
 {
@@ -34,7 +36,7 @@ class RegisterController implements ControllerProviderInterface
         $register->get('/post' , [$this, 'initPost']);
         $register->post('/post', [$this, 'post']);
 
-        // Post one entry from a SMS (currently throught Twilio services : http://twilio.com)
+        // Post one entry from SMS (currently throught Twilio services : http://twilio.com)
         $register->post('/public-post-one', [$this, 'postOneFromSms']);
 
         return $register;
@@ -147,6 +149,9 @@ class RegisterController implements ControllerProviderInterface
      *  -> 'To' param. is the good Twilio number
      *
      *  -> 'Boby' param. respects the following format :
+     *
+     *      multi-SMS format (see isMultiSms() function)
+     *      OR
      *      date # geoCoords # temperature # meteo and security code # message
      *
      *      => date          : mandatory ; format = MMDDhhmm (implicitly : year === current year ; seconds === 00)
@@ -183,8 +188,21 @@ class RegisterController implements ControllerProviderInterface
             return false;
         }
 
-        // Retrieve the SMS body
-        $httpEntry = array_map('trim', explode('#', $httpData->get('Body')));
+        $smsBody = trim($httpData->get('Body', ''));
+
+        /**
+         * If the current SMS is part of a multi-SMS :
+         *  -> if this one is not complete => return true without any storing !
+         *  -> else => $smsBody var. contains the full SMS (because it is passed by reference).
+         */
+        if ($this->isMultiSms($smsBody) &&
+            ! $this->processMultiSms($smsBody, $httpData->get('From'))
+        ) {
+            return true;
+        }
+
+        // Extract data from SMS body
+        $httpEntry = array_map('trim', explode('#', $smsBody));
 
         if (count($httpEntry) !== 5)
         {
@@ -231,6 +249,67 @@ class RegisterController implements ControllerProviderInterface
         $this->repository->store($entry);
 
         // TODO: log the good insertion
+        return true;
+    }
+
+    /**
+     * A SMS is part of a multi-SMS if :
+     *  -> 1-st char is a digit (except 0)
+     *  -> 2-nd char is '/' or '§' (for the last part)
+     */
+    protected function isMultiSms($smsBody)
+    {
+        return ($smsBody[0] >= '1' && $smsBody[0] <= '9') &&
+               ($smsBody[1] === '/' || $smsBody[1] === '§');
+    }
+
+    /**
+     * Store in session each part of a multi-SMS (one multi-SMS per sender).
+     * When it is complete => assemble the entire SMS in $smsBody + return true.
+     * Else => return false.
+     */
+    protected function processMultiSms(& $smsBody, $fromNumber)
+    {
+        // From session, retrieve the list of incomplete multi-SMS
+        $multiList = $this->app->getSession('register.multiSms', []);
+
+        // Get multi-SMS of the current sender
+        $multi =& $multiList[$fromNumber];
+
+        $numPart = (int) $smsBody[0];
+        $code    = $smsBody[1];
+        $smsBody = substr($smsBody, 2);
+
+        // Store the new part
+        $multi[$numPart] = $smsBody;
+
+        // If last part => store the number of expected parts
+        if ('§' === $code || 9 === $numPart) {
+            $multi['count'] = $numPart;
+        }
+
+        $this->app->setSession('register.multiSms', $multiList);
+
+        // If the multi-SMS is not complete => return false
+        if (! array_key_exists('count', $multi)) { return false; }
+
+        for ($i = 1; $i <= $multi['count']; $i++)
+        {
+            if (! array_key_exists($i, $multi)) { return false; }
+        }
+
+        // Else => assemble it in $smsBody + return true
+        $smsBody = '';
+
+        for ($i = 1; $i <= $multi['count']; $i++)
+        {
+            $smsBody .= $multi[$i];
+        }
+
+        // Remove it from the incomplete multi-SMS list
+        unset($multiList[$fromNumber]);
+        $this->app->setSession('register.multiSms', $multiList);
+
         return true;
     }
 }

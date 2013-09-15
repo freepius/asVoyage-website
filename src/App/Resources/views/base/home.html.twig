@@ -27,8 +27,8 @@
 {% block javascripts %}
     {{ carto.jsBase() }}
     <script>
-        var currentPlace = [{{ lastGeoEntry.geoCoords }}],
-            currentPlaceMessage = "{{ lastGeoEntry.message }}",
+        var currentPlace = [{{ lastGeoEntry.geoCoords | default('0, 0') }}],
+            currentPlaceMessage = "{{ lastGeoEntry.message | default }}",
             geoCoords = [
                 {% for entry in geoEntries %}
                     [{{ entry.geoCoords }}],
