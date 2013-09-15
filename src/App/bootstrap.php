@@ -272,7 +272,7 @@ $app['media.config'] =
 $app->mount('/'        , new \App\Controller\BaseController($app));
 $app->mount('/blog'    , new \App\Controller\BlogController($app));
 $app->mount('/media'   , new \App\Controller\MediaController($app));
-$app->mount('/register', new \App\Controller\RegisterController($app));
+$app->mount('/register', new \App\Controller\RegisterController($app, TWILIO_ACCOUNT_SID, TWILIO_NUMBER));
 
 
 return $app;

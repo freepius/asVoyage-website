@@ -18,7 +18,7 @@ class Register extends EntityFactory
      */
     protected function processInputData(array $data)
     {
-        $data = array_map('trim', explode('#', $data[0]));
+        $data = array_map('trim', $data);
 
         return [
             '_id'         => @ $data[0], // the unique datetime !
