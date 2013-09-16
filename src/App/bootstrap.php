@@ -52,6 +52,7 @@ $app->register(new \Silex\Provider\HttpCacheServiceProvider(), [
 /* twig */
 $app->register(new \Silex\Provider\TwigServiceProvider(), [
     'twig.path' => [APP.'/Resources/views'],
+    'twig.options' => ['cache' => DEBUG ? null : (ROOT.'/cache')],
 ]);
 
 /* swiftmailer */
