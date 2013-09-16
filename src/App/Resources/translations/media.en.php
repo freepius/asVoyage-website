@@ -16,6 +16,7 @@ return ['media' => [
     'metadata'         => 'Metadata',
     'noElement'        => 'No element',
     'preview'          => 'Preview',
+    'seeOriginal'      => 'See the original file',
     'selectAll'        => 'Select all elements',
     'setCreationDate'  => 'Set the creations dates',
     'setGeoCoords'     => 'Set the geo. coordinates',

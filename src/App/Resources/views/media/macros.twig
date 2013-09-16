@@ -5,6 +5,7 @@
  #  -> media_technical
  #  -> media_caption
  #  -> media_meta
+ #  -> media_public_actions
  #  -> switch_view_btns
  #}
 
@@ -124,6 +125,22 @@
 
 </p>
 {% endif %}
+
+{% endmacro %}
+
+
+{##
+ # Propose various public actions for a given media :
+ #  -> a link to the original file
+ #}
+{% macro media_public_actions(e) %}
+
+    <div class="public-actions">
+        <!-- Original file -->
+        <a href="/media/{{ e.content }}" title="{{ 'media.seeOriginal'|trans }}">
+            <i class="icon-external-link"></i>
+        </a>
+    </div>
 
 {% endmacro %}
 

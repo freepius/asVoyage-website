@@ -5546,6 +5546,9 @@ article.summary footer {
 #media p {
   text-align: center;
 }
+#media .public-actions {
+  margin-top: 5px;
+}
 #media .thumbnail {
   margin: 0;
   border-radius: 0;
@@ -5555,7 +5558,8 @@ article.summary footer {
 }
 #media.view-short .caption,
 #media.view-short .meta,
-#media.view-short .technical {
+#media.view-short .technical,
+#media.view-short .public-actions {
   display: none;
 }
 #media.view-short .thumbnail {
@@ -5574,7 +5578,8 @@ article.summary footer {
   border-bottom: 5px solid #faf7e9;
 }
 #media.view-medium .meta,
-#media.view-medium .technical {
+#media.view-medium .technical,
+#media.view-medium .public-actions {
   display: none;
 }
 /*************************************************

@@ -1,4 +1,7 @@
-{% from 'media/macros.twig' import media_caption, media_meta, media_render, media_technical %}
+{% from 'media/macros.twig' import
+    media_caption, media_meta, media_render, media_technical,
+    media_public_actions
+%}
 
 {% set hostMedia = host ~ '/media/' %}
 
@@ -31,5 +34,7 @@ Object">
     <small class="technical">
         {{ media_technical(_context, '&nbsp;&nbsp;') }}
     </small>
+
+    {{ media_public_actions(_context) }}
 
 </div>

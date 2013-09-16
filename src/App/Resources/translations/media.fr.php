@@ -16,6 +16,7 @@ return ['media' => [
     'metadata'         => 'Métadonnées',
     'noElement'        => 'Aucun élément',
     'preview'          => 'Aperçu',
+    'seeOriginal'      => 'Voir le fichier original',
     'selectAll'        => 'Sélectionner tous les éléments',
     'setCreationDate'  => 'Définir les dates de création',
     'setGeoCoords'     => 'Définir les coordonées géo.',
