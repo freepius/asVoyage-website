@@ -33,6 +33,9 @@ $app['mongo.database'] = $app['mongo.connection']->selectDB(MONGO_DB);
 $app['path.web'] = ROOT.'/web';
 $app['dir.captcha'] = 'tmp/captcha';
 
+/* Config. parameters in bulk */
+$app['currentTravel.startingDate'] = '2013-10-02';
+
 
 /*************************************************
  * Register services
@@ -107,8 +110,10 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
 
     $twig->addGlobal('host', $app['request']->getUriForPath('/'));
 
-    // TODO: change this just before Afrikapié starting !
-    $twig->addGlobal('afrikapie_days2wait', round((strtotime('2013-10-01') - time()) / (60 * 60 * 24)));
+    // TODO: change this when the Afrikapié trip will finish !
+    $twig->addGlobal('afrikapie_days',
+        round((time() - strtotime($app['currentTravel.startingDate'])) / (60 * 60 * 24))
+    );
 
     $twig->addFilter(new \Twig_SimpleFilter('sum', 'array_sum'));
 
