@@ -8,6 +8,7 @@ use App\Exception\BlogArticleNotFound,
 
 /**
  * Summary :
+ *  -> init
  *  -> filter   [protected]
  *  -> listAll
  *  -> getBySlug
@@ -21,6 +22,16 @@ use App\Exception\BlogArticleNotFound,
  */
 class Blog extends MongoRepository
 {
+    /**
+     * Create some indexes.
+     */
+    protected function init()
+    {
+        $this->collection->ensureIndex('slug', ['unique' => true]);
+        $this->collection->ensureIndex('pubDatetime');
+        $this->collection->ensureIndex('tags');
+    }
+
     /**
      * Return some filters for querying articles :
      *    -> depending on your admin rights ($isAdmin param)
@@ -83,9 +94,7 @@ class Blog extends MongoRepository
      */
     public function getBySlug($slug, $isAdmin = false)
     {
-        $query = $this->filter($isAdmin);
-
-        $query['slug'] = $slug;
+        $query = ['slug' => $slug] + $this->filter($isAdmin);
 
         $article = $this->collection->findOne($query, ['comments' => 0]);
 

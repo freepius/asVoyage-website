@@ -10,12 +10,22 @@ abstract class MongoRepository
     public function __construct(\MongoCollection $collection)
     {
         $this->collection = $collection;
+        $this->init();
     }
 
     public function getCollection()
     {
         return $this->collection;
     }
+
+    /**
+     * Various initializations before to use the collection.
+     * Examples:
+     *  -> create indexes
+     *  -> garbage collection
+     *  -> etc.
+     */
+    protected function init() { }
 
     /**
      * Delete an entity from its id.

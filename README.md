@@ -61,7 +61,6 @@ For production
 
 * Solve the TODOs
 * Update vendor and libraries
-* Index some Mongo fields ?
 * Cache (with APC/Memcached ?) :
   * Blog repository => caching for listTags() and countArticlesByYearMonth()
   * Blog controller => caching the generated HTML from RichText

@@ -9,6 +9,7 @@ use App\Exception\MediaElementNotFound,
 /**
  * Summary :
  *  -> __construct
+ *  -> init
  *  -> getById
  *  -> deleteById
  *  -> store
@@ -29,6 +30,15 @@ class Media extends MongoRepository
     {
         parent::__construct($collection);
         $this->webPath = $webPath;
+    }
+
+    /**
+     * Create some indexes.
+     */
+    protected function init()
+    {
+        $this->collection->ensureIndex('creationDate');
+        $this->collection->ensureIndex('tags');
     }
 
     /**
