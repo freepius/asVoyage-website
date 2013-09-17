@@ -71,4 +71,6 @@ Low priority
 
 * Use DataTable jquery plugin to Blog dashboard ?
 * Transform App\Util\RichText to Silex provider ?
-* Locale depending on geo-localization
+* Locale depending on :
+  * user preferences (the 'Accept-Languages' HTTP header)
+  * geo-localization

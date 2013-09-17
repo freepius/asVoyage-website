@@ -12,15 +12,21 @@ include APP.'/config.php';
 
 $loader = require ROOT.'/vendor/autoload.php';
 
-// Locale of the application
-setlocale(LC_ALL, 'fr_FR.UTF-8');
-
-// Enable _method request parameter support
+/* Enable _method request parameter support */
 \Symfony\Component\HttpFoundation\Request::enableHttpMethodParameterOverride();
 
 $app = new \App\Application();
 
 $app['route_class'] = 'App\\Route';
+
+/* Locale of the application */
+setlocale(LC_ALL, 'fr_FR.UTF-8');
+
+/* Locale of the current request */
+$app['locale'] = $app->share(function ($app)
+{
+    return $app->getSession('locale') ?: 'fr';
+});
 
 /* debug */
 $app['debug'] = DEBUG;
@@ -44,15 +50,18 @@ $app['currentTravel.startingDate'] = '2013-10-02';
 /* session */
 $app->register(new \Silex\Provider\SessionServiceProvider());
 
-/* cache */
-$app->register(new \Silex\Provider\HttpCacheServiceProvider(), [
-    'http_cache.cache_dir' => ROOT.'/cache'
-]);
+/* http cache */
+if (! DEBUG)
+{
+    $app->register(new \App\HttpCache\ServiceProvider(), [
+        'http_cache.cache_dir' => ROOT.'/cache/http',
+    ]);
+}
 
 /* twig */
 $app->register(new \Silex\Provider\TwigServiceProvider(), [
     'twig.path' => [APP.'/Resources/views'],
-    'twig.options' => ['cache' => DEBUG ? null : (ROOT.'/cache')],
+    'twig.options' => ['cache' => DEBUG ? null : (ROOT.'/cache/twig')],
 ]);
 
 /* swiftmailer */
@@ -62,9 +71,7 @@ $app->register(new Silex\Provider\SwiftmailerServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 
 /* translator */
-$app->register(new \Silex\Provider\TranslationServiceProvider(), [
-    'locale' => $app['session']->get('locale') ?: 'fr',
-]);
+$app->register(new \Silex\Provider\TranslationServiceProvider());
 
 /* security */
 $app->register(new \Silex\Provider\SecurityServiceProvider());
@@ -110,11 +117,6 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
     $twig->addExtension(new Twig_Extensions_Extension_Intl());  // for 'localizeddate' filter
 
     $twig->addGlobal('host', $app['request']->getUriForPath('/'));
-
-    // TODO: change this when the Afrikapié trip will finish !
-    $twig->addGlobal('afrikapie_days',
-        round((time() - strtotime($app['currentTravel.startingDate'])) / (60 * 60 * 24))
-    );
 
     $twig->addFilter(new \Twig_SimpleFilter('sum', 'array_sum'));
 

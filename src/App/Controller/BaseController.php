@@ -28,12 +28,13 @@ use Silex\ControllerProviderInterface,
  */
 class BaseController implements ControllerProviderInterface
 {
-    // TODO : real date !!
-    const CURRENT_TRAVEL_BEGIN_DATE = '2013-09-03';
-
     public function __construct(\App\Application $app)
     {
         $this->app = $app;
+
+        // TODO: change this when Afrikapié start
+        $this->currentTravelStartingDate = '2013-09-03';
+        //$this->currentTravelStartingDate = $app['currentTravel.startingDate'];
     }
 
     public function connect(\Silex\Application $app)
@@ -88,7 +89,7 @@ class BaseController implements ControllerProviderInterface
 
         // The "Travel Register" entries for mini-map
         $geoEntries = $this->app['model.repository.register']
-            ->find(0, ['from' => self::CURRENT_TRAVEL_BEGIN_DATE, 'geo' => true]);
+            ->find(0, ['from' => $this->currentTravelStartingDate, 'geo' => true]);
         $geoEntries->next();
 
         return $this->app->render('base/home.html.twig',
@@ -100,7 +101,10 @@ class BaseController implements ControllerProviderInterface
         ]);
     }
 
-    public function about()
+    /**
+     * CACHE: public ; 30 days
+     */
+    public function about(Request $request)
     {
         $now = time();
 
@@ -117,6 +121,8 @@ class BaseController implements ControllerProviderInterface
             // Years of Marie
             // ("Now" - "1988/09/26 00:05:00") / (60 * 60 * 24 * 365.25)
             'yearsMarie' => (int) round(($now - 591231900) / 31557600),
+        ])
+        ->setSharedMaxAge(3600 * 24 * 30);
         ]);
     }
 
@@ -161,11 +167,18 @@ class BaseController implements ControllerProviderInterface
         ]);
     }
 
+    /**
+     * CACHE: public ; 30 days
+     */
     public function ourTrips()
     {
-        return $this->app->render('base/our-trips.html.twig');
+        return $this->app->render('base/our-trips.html.twig')
+            ->setSharedMaxAge(3600 * 24 * 30);
     }
 
+    /**
+     * CACHE: public ; 30 days
+     */
     public function diagonal3000Km()
     {
         $repository = $this->app['model.repository.media'];
@@ -178,7 +191,8 @@ class BaseController implements ControllerProviderInterface
         [
             'downLoireImgs' => $downLoireImgs,
             'longWalkImgs'  => $longWalkImgs,
-        ]);
+        ])
+        ->setSharedMaxAge(3600 * 24 * 30);
     }
 
     public function afrikapie()

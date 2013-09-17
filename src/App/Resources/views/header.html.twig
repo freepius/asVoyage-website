@@ -49,14 +49,11 @@
     <div class="notification">
         {% block headerNotification %}
 
-            <strong class="special">
-                <a href="/our-trips/afrikapie">Afrikapié</a>
+            <strong>
+                {{ 'Current trip'|trans }}
+                &nbsp;<i class="icon-double-angle-right"></i>&nbsp;
+                <a href="/our-trips/afrikapie" class="special">Afrikapié</a>
             </strong>
-
-            &nbsp;&nbsp;&#8211;&nbsp;&nbsp;
-
-            {{ 'starting'|trans }} <em>{{ 'D-day'|trans }}
-            {{ afrikapie_days > 0 ? '+' : '-' }} {{ afrikapie_days | abs }}</em>
 
         {% endblock %}
     </div>
