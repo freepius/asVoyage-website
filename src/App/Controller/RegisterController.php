@@ -172,26 +172,29 @@ class RegisterController implements ControllerProviderInterface
      *
      * Then, from the checked http POST request, post a new entry in the travel register.
      *
-     *      eg: 2013-12-31 12:42:00 # 42.1234, -2.5678 # 20 # 7 # Hello world !
+     *      eg: 2013-12-31 12:42:00 # 42.1234, -2.5678 # 20 # 7 # Hello world!
      *
-     * In all cases, log the operation !
+     * NOTE    : If the SMS body is invalid, responds by a SMS describing the problem!
+     * WARNING : This response isn't free (with Twilio)
      */
     public function postOneFromSms(Request $request)
     {
         // http POST data
         $httpData = $request->request;
 
+        // Possible responses
+        $emptyResponse = '<Response/>';                                // nothing sent
+        $smsResponse   = '<Response><Message>%s</Message></Response>'; // SMS sent ; 0.07$ (with Twilio)
+
         // SMS handled by the good Twilio account ?
         if ($this->twilioAccount !== $httpData->get('AccountSid'))
         {
-            // TODO : log BAD ACCOUNT
             return false;
         }
 
         // SMS sent to the good Twilio number ?
         if ($this->twilioNumber !== $httpData->get('To'))
         {
-            // TODO : log BAD NUMBER
             return false;
         }
 
@@ -199,13 +202,13 @@ class RegisterController implements ControllerProviderInterface
 
         /**
          * If the current SMS is part of a multi-SMS :
-         *  -> if this one is not complete => return true without any storing !
+         *  -> if this one is not complete => return an empty response without any storing !
          *  -> else => $smsBody var. contains the full SMS (because it is passed by reference).
          */
         if ($this->isMultiSms($smsBody) &&
             ! $this->processMultiSms($smsBody, $httpData->get('From'))
         ) {
-            return true;
+            return $emptyResponse;
         }
 
         // Extract data from SMS body
@@ -213,8 +216,7 @@ class RegisterController implements ControllerProviderInterface
 
         if (count($httpEntry) !== 5)
         {
-            // TODO : log BAD PARAMS NUMBER
-            return false;
+            return sprintf($smsResponse, 'Bad number of parameters: '.count($httpEntry).' found');
         }
 
         // Check the security code
@@ -223,8 +225,7 @@ class RegisterController implements ControllerProviderInterface
 
         if ($securityCode !== $waitedSecurityCode)
         {
-            // TODO : log BAD SECURITY CODE
-            return false;
+            return sprintf($smsResponse, 'Bad security code');
         }
 
         // Transform date from MMDDhhmm to YYYY-MM-DD hh:mm:ss format
@@ -243,8 +244,7 @@ class RegisterController implements ControllerProviderInterface
         // If date is invalid => reject the entry
         if (@ $errors['_id'])
         {
-            // TODO: log BAD DATE
-            return false;
+            return sprintf($smsResponse, 'Bad date: '.$entry['_id']);
         }
 
         // Clear or correct invalid data
@@ -256,7 +256,6 @@ class RegisterController implements ControllerProviderInterface
         $this->repository->store($entry);
         $this->refreshCache();
 
-        // TODO: log the good insertion
         return true;
     }
 
