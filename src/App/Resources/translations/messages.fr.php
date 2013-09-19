@@ -3,6 +3,7 @@
 /**
  * Summary :
  *  -> A list of various messages
+ *  -> Admin
  *  -> Captcha
  *  -> Contact
  *  -> Error
@@ -30,12 +31,14 @@ return [
     'Error'                      => 'Erreur',
     'Error(s)'                   => "Il y a <b>0</b> erreur(s) : à 1.",
     'General'                    => 'Général',
+    'Home'                       => 'Accueil',
     'Last published articles'    => 'Derniers articles publiés',
     'Login'                      => 'Connexion',
     'Logout'                     => 'Déconnexion',
     'No'                         => 'Non',
     'none'                       => 'aucun',
     'Older'                      => 'Plus anciens',
+    'Other'                      => 'Autre',
     'Password'                   => 'Mot de passe',
     'Post'                       => 'Poster',
     'Posted by'                  => 'Posté par',
@@ -55,6 +58,13 @@ return [
     'website'                    => 'site web',
     'Yes'                        => 'Oui',
     'Younger'                    => 'Plus récents',
+
+    // Admin
+    'admin' => [
+        'cacheClear'   => 'Vider le cache',
+        'cacheCleared' => 'Cache vidé.',
+        'home'         => 'Administration',
+    ],
 
     // Captcha
     'captcha' => [

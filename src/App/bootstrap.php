@@ -36,7 +36,8 @@ $app['mongo.connection'] = new \MongoClient(MONGO_SERVER); // default connection
 $app['mongo.database'] = $app['mongo.connection']->selectDB(MONGO_DB);
 
 /* Paths and directories */
-$app['path.web'] = ROOT.'/web';
+$app['path.cache']  = ROOT.'/cache';
+$app['path.web']    = ROOT.'/web';
 $app['dir.captcha'] = 'tmp/captcha';
 
 /* Config. parameters in bulk */
@@ -52,13 +53,13 @@ $app->register(new \Silex\Provider\SessionServiceProvider());
 
 /* http cache */
 $app->register(new \App\HttpCache\ServiceProvider(), [
-    'http_cache.cache_dir' => ROOT.'/cache/http',
+    'http_cache.cache_dir' => $app['path.cache'].'/http',
 ]);
 
 /* twig */
 $app->register(new \Silex\Provider\TwigServiceProvider(), [
     'twig.path' => [APP.'/Resources/views'],
-    'twig.options' => ['cache' => DEBUG ? null : (ROOT.'/cache/twig')],
+    'twig.options' => ['cache' => DEBUG ? null : ($app['path.cache'].'/twig')],
 ]);
 
 /* swiftmailer */

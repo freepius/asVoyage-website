@@ -1,0 +1,38 @@
+{% extends "layout.html.twig" %}
+
+
+{% block main %}
+    <h1 id="page-title">{{ 'admin.home'|trans }}</h1>
+
+    <!-- Blog -->
+    <h2>{{ 'blog.home'|trans }}</h2>
+
+    <ul>
+        <li><a href="/blog/dashboard">{{ 'blog.dashboard'|trans }}</a></li>
+        <li><a href="/blog/create">{{ 'blog.create'|trans }}</a></li>
+    </ul>
+
+    <!-- Media -->
+    <h2>{{ 'media.home'|trans }}</h2>
+
+    <ul>
+        <li><a href="/media">{{ 'Home'|trans }}</a></li>
+        <li><a href="/media/create">{{ 'media.creation'|trans }}</a></li>
+    </ul>
+
+    <!-- Register -->
+    <h2>{{ 'register.home'|trans }}</h2>
+
+    <ul>
+        <li><a href="/register/post">{{ 'register.posting'|trans }}</a></li>
+    </ul>
+
+    <!-- Other -->
+    <h2>{{ 'Other'|trans }}</h2>
+
+    <ul>
+        <li><a href="/admin/cache-clear">{{ 'admin.cacheClear'|trans }}</a></li>
+        <li><a href="/admin/logout">{{ 'Logout'|trans }}</a></li>
+    </ul>
+
+{% endblock %}

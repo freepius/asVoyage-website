@@ -57,25 +57,25 @@ class MediaController implements ControllerProviderInterface
         $this->addHomeRoutes($media);
 
         // Create multiple
-        $media->get('create' , [$this, 'initCreateMultiple']);
-        $media->post('create', [$this, 'postMultiple'])
+        $media->get('/create' , [$this, 'initCreateMultiple']);
+        $media->post('/create', [$this, 'postMultiple'])
             ->value('isCreation', true);
 
         // Upload a single file
-        $media->post('upload', [$this, 'upload'])
+        $media->post('/upload', [$this, 'upload'])
             ->mustBeAjax();
 
         // Delete a single uploaded file
-        $media->get('delete-uploaded/{id}', [$this, 'deleteUploaded'])
+        $media->get('/delete-uploaded/{id}', [$this, 'deleteUploaded'])
             ->mustBeAjax();
 
         // Update multiple
-        $media->post('init-update', [$this, 'initUpdateMultiple']);
-        $media->post('update'     , [$this, 'postMultiple'])
+        $media->post('/init-update', [$this, 'initUpdateMultiple']);
+        $media->post('/update'     , [$this, 'postMultiple'])
             ->value('isCreation', false);
 
         // Delete multiple
-        $media->post('delete', [$this, 'deleteMultiple']);
+        $media->post('/delete', [$this, 'deleteMultiple']);
 
         return $media;
     }

@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use Silex\ControllerProviderInterface,
-    Symfony\Component\HttpFoundation\Request;
+    Symfony\Component\HttpFoundation\Request,
+    Symfony\Component\Filesystem\Filesystem;
 
 
 /**
@@ -20,8 +21,12 @@ use Silex\ControllerProviderInterface,
  *      => diagonal3000Km [our-trips] [cached]
  *      => afrikapie      [our-trips]
  *
- *  -> TECHNICAL ACTIONS :
+ *  -> ADMIN ACTIONS :
  *      => login
+ *      => admin
+ *      => cacheClear
+ *
+ *  -> TECHNICAL ACTIONS :
  *      => switchLocale
  *      => changeCaptcha    [ajax]
  *      => renderRichText   [ajax]
@@ -56,9 +61,12 @@ class BaseController implements ControllerProviderInterface
         $base->get('our-trips/3000-km-diagonal', [$this, 'diagonal3000Km']);
         $base->get('our-trips/afrikapie'       , [$this, 'afrikapie']);
 
-        // Technical routes
-        $base->get('/login', [$this, 'login']);
+        // Admin routes
+        $base->get('/login'            , [$this, 'login']);
+        $base->get('/admin'            , [$this, 'admin']);
+        $base->get('/admin/cache-clear', [$this, 'cacheClear']);
 
+        // Technical routes
         $base->get('/switch-locale/{locale}', [$this, 'switchLocale'])
             ->assert('locale', 'en|fr');
 
@@ -222,7 +230,7 @@ class BaseController implements ControllerProviderInterface
 
 
     /***************************************************************************
-     * TECHNICAL ACTIONS
+     * ADMIN ACTIONS
      **************************************************************************/
 
     public function login(Request $request)
@@ -232,6 +240,36 @@ class BaseController implements ControllerProviderInterface
             'error' => $this->app['security.last_error']($request),
         ]);
     }
+
+    /**
+     * Dashboard for admin actions (for blog, media, register, etc.)
+     */
+    public function admin()
+    {
+        return $this->app->render('base/admin.html.twig');
+    }
+
+    /**
+     * -> Remove and recreate the /cache dir
+     * -> Drop the "http cache" mongo collection
+     */
+    public function cacheClear()
+    {
+        $fs = new Filesystem();
+        $fs->remove($this->app['path.cache']);
+        $fs->mkdir($this->app['path.cache']);
+
+        $this->app['http_cache.mongo.collection']->drop();
+
+        $this->app->addFlash('success', $this->app->trans('admin.cacheCleared'));
+
+        return $this->app->redirect('/admin');
+    }
+
+
+    /***************************************************************************
+     * TECHNICAL ACTIONS
+     **************************************************************************/
 
     public function switchLocale($locale)
     {
