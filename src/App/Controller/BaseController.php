@@ -250,14 +250,21 @@ class BaseController implements ControllerProviderInterface
     }
 
     /**
-     * -> Remove and recreate the /cache dir
+     * -> Empty the cache dir
+     * -> Empty the captcha dir
      * -> Drop the "http cache" mongo collection
      */
     public function cacheClear()
     {
+        $app = $this->app;
+
         $fs = new Filesystem();
-        $fs->remove($this->app['path.cache']);
-        $fs->mkdir($this->app['path.cache']);
+
+        $fs->remove($app['path.cache']);
+        $fs->mkdir ($app['path.cache']);
+
+        $fs->remove($app['path.web'].'/'.$app['dir.captcha']);
+        $fs->mkdir ($app['path.web'].'/'.$app['dir.captcha']);
 
         $this->app['http_cache.mongo.collection']->drop();
 
