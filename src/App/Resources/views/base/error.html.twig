@@ -10,10 +10,9 @@
 
     {% set img = random(5) ~ '.jpg' %}
 
-    {{ linked_img('/images/errors/', img, {
+    {{ linked_img('/images/errors', img, {
         class: 'col-xs-4',
         class_img: 'img-rounded',
-        group: null,
         thumb: true,
     }) }}
 

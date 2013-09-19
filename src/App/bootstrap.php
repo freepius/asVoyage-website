@@ -51,12 +51,9 @@ $app['currentTravel.startingDate'] = '2013-10-02';
 $app->register(new \Silex\Provider\SessionServiceProvider());
 
 /* http cache */
-if (! DEBUG)
-{
-    $app->register(new \App\HttpCache\ServiceProvider(), [
-        'http_cache.cache_dir' => ROOT.'/cache/http',
-    ]);
-}
+$app->register(new \App\HttpCache\ServiceProvider(), [
+    'http_cache.cache_dir' => ROOT.'/cache/http',
+]);
 
 /* twig */
 $app->register(new \Silex\Provider\TwigServiceProvider(), [

@@ -12,11 +12,12 @@ use Silex\ControllerProviderInterface,
  *  -> connect
  *
  *  -> GLOBAL ACTIONS :
- *      => home
- *      => about
+ *      => home                       [cached]
+ *      => about                      [cached]
  *      => contact
- *      => ourTrips
- *      => diagonal3000Km [our-trips]
+ *      => map
+ *      => ourTrips                   [cached]
+ *      => diagonal3000Km [our-trips] [cached]
  *      => afrikapie      [our-trips]
  *
  *  -> TECHNICAL ACTIONS :
@@ -48,6 +49,7 @@ class BaseController implements ControllerProviderInterface
         // Various pages
         $base->get('/about'    , [$this, 'about']);
         $base->match('/contact', [$this, 'contact']);
+        $base->get('/map'      , [$this, 'map']);
 
         // Our trips
         $base->get('our-trips'                 , [$this, 'ourTrips']);
@@ -76,8 +78,17 @@ class BaseController implements ControllerProviderInterface
      * GLOBAL ACTIONS
      **************************************************************************/
 
-    public function home()
+    /**
+     * CACHE: public ; validation
+     */
+    public function home(Request $request)
     {
+        $response = $this->app['http_cache.mongo']->response(
+            'base.home', ['blog', 'media', 'register']
+        );
+        if ($response->isNotModified($request)) { return $response; }
+
+
         // The 6 last blog articles
         $lastArticles = iterator_to_array(
             $this->app['model.repository.blog']->find(6)
@@ -98,7 +109,7 @@ class BaseController implements ControllerProviderInterface
             'favoriteImages' => $lastImages,
             'geoEntries'     => $geoEntries,
             'lastGeoEntry'   => $geoEntries->current(),
-        ]);
+        ], $response);
     }
 
     /**
@@ -123,8 +134,17 @@ class BaseController implements ControllerProviderInterface
             'yearsMarie' => (int) round(($now - 591231900) / 31557600),
         ])
         ->setSharedMaxAge(3600 * 24 * 30);
-        ]);
     }
+
+    /*public function map()
+    {
+        $entries = $this->app['model.repository.register']
+            ->find(0, ['from' => $this->currentTravelStartingDate, 'geo' => true]);
+
+        return $this->app->render('base/map.html.twig', [
+            'entries' => $entries,
+        ]);
+    }*/
 
     public function contact(Request $request)
     {
@@ -154,7 +174,7 @@ class BaseController implements ControllerProviderInterface
 
                 $this->app->addFlash('success', $this->app->trans('contact.sent'));
 
-                return $this->app->redirect('/home');
+                return $this->app->redirect('/contact');
             }
         }
 

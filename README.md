@@ -47,14 +47,17 @@ TODO
 * Revoir le CSS : les marges pour les titres, le centrage dans about, l'affichage sur grand et petit écran, etc.
 * Make RSS or newsletter
 * BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)
-* Follow my pullrequest for Lightbox2.
-* Follow my pullrequest for Leaflet Zoom Control.
 * Make a translation table for tags
 * Blog : macro to include a media in a blog article
 * New hom page
 * BUG on IE 9 : problem to refresh captcha (eg: on contact page)
 * Improve tags size on tags box ?!
 * Media module : add an "info box" on home page
+* ADMIN : make a command to clear cache (twig, http, mongo-http...)
+* Follow my pullrequest for :
+  * Lightbox2
+  * Leaflet Zoom Control
+  * Symfony/HttpKernel
 
 For production
 --------------

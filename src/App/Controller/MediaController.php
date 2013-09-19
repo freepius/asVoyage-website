@@ -12,6 +12,7 @@ use Silex\ControllerProviderInterface,
  * Summary :
  *  -> __construct
  *  -> connect
+ *  -> refreshCache [protected]
  *
  *  -> ONLY FOR CREATION MULTIPLE :
  *      => initCreateMultiple
@@ -77,6 +78,14 @@ class MediaController implements ControllerProviderInterface
         $media->post('delete', [$this, 'deleteMultiple']);
 
         return $media;
+    }
+
+    /**
+     * Refresh caches that depend on register entries.
+     */
+    protected function refreshCache()
+    {
+        $this->app['http_cache.mongo']->drop('media');
     }
 
 
@@ -234,6 +243,7 @@ class MediaController implements ControllerProviderInterface
                 $isCreation ? 'media.created' : 'media.updated',
                 $countPosted, [$countPosted]
             ));
+            $this->refreshCache();
         }
 
         if ($countUnfound > 0)
@@ -272,6 +282,7 @@ class MediaController implements ControllerProviderInterface
             $this->app->addFlash('success', $this->app->transChoice(
                 'media.deleted', $countDeleted, [$countDeleted])
             );
+            $this->refreshCache();
         }
 
         if ($countUnfound > 0)

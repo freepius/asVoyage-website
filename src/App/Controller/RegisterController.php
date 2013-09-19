@@ -15,6 +15,7 @@ use Silex\ControllerProviderInterface,
  *  -> postOneFromSms
  *  -> isMultiSms       [protected]
  *  -> processMultiSms  [protected]
+ *  -> refreshCache     [protected]
  */
 class RegisterController implements ControllerProviderInterface
 {
@@ -132,6 +133,12 @@ class RegisterController implements ControllerProviderInterface
             ));
         }
 
+        // Refresh caches depending on 'register' entries
+        if ($countCreated > 0 || $countUpdated > 0)
+        {
+            $this->refreshCache();
+        }
+
         return (0 === $countInError) ?
 
             $this->app->redirect('/home') :
@@ -247,6 +254,7 @@ class RegisterController implements ControllerProviderInterface
         if (@ $errors['message'])     { $entry['message'] = substr($entry['message'], 500); }
 
         $this->repository->store($entry);
+        $this->refreshCache();
 
         // TODO: log the good insertion
         return true;
@@ -311,5 +319,13 @@ class RegisterController implements ControllerProviderInterface
         $this->app->setSession('register.multiSms', $multiList);
 
         return true;
+    }
+
+    /**
+     * Refresh caches that depend on register entries.
+     */
+    protected function refreshCache()
+    {
+        $this->app['http_cache.mongo']->drop('register');
     }
 }

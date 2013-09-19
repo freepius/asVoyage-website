@@ -105,7 +105,6 @@ Trait TaggedDatedTrait
         ];
     }
 
-    // TODO : cache HTML until one element is updated/created/deleted
     protected function renderTagsFilter()
     {
         return $this->app->renderView('generic/filter-by-tags.html.twig', [
@@ -114,7 +113,6 @@ Trait TaggedDatedTrait
         ]);
     }
 
-    // TODO : cache HTML until one element is updated/created/deleted
     protected function renderDatesFilter()
     {
         return $this->app->renderView('generic/filter-by-dates.html.twig', [
@@ -123,9 +121,20 @@ Trait TaggedDatedTrait
         ]);
     }
 
+    /**
+     * CACHE: public ; validation
+     */
     public function home(Request $request, $page)
     {
         list($viewFilters, $queryFilters) = $this->getFilters($request);
+
+        // Http cache
+        $cacheKey = self::MODULE.'.home.'.serialize($queryFilters).'.'.$page;
+
+        $response = $this->app['http_cache.mongo']->response($cacheKey, [self::MODULE]);
+
+        if ($response->isNotModified($request)) { return $response; }
+
 
         // Total number of elements depending on filters
         $total = $this->repository->count($queryFilters);
@@ -169,6 +178,6 @@ Trait TaggedDatedTrait
             'counterAndNavigation' => $countAndNav,
             'tagsFilter'           => $this->renderTagsFilter(),
             'datesFilter'          => $this->renderDatesFilter(),
-        ]);
+        ], $response);
     }
 }

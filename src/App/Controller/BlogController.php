@@ -14,6 +14,7 @@ use Silex\ControllerProviderInterface,
  *  -> connect
  *  -> retrieveFiltersAndPage [protected]
  *  -> slugToArticle
+ *  -> refreshCache           [protected]
  *
  *  -> GLOBAL ACTIONS :
  *      => dashboard
@@ -194,6 +195,14 @@ class BlogController implements ControllerProviderInterface
         }
     }
 
+    /**
+     * Refresh caches that depend on blog articles/comments.
+     */
+    protected function refreshCache()
+    {
+        $this->app['http_cache.mongo']->drop('blog');
+    }
+
 
     /***************************************************************************
      * GLOBAL ACTIONS
@@ -256,6 +265,7 @@ class BlogController implements ControllerProviderInterface
             if (! $errors)
             {
                 $this->repository->store($article);
+                $this->refreshCache();
 
                 $this->app->addFlash('success', $this->app->trans(
                     'blog.' . ($isCreation ? 'created' : 'updated'),
@@ -280,6 +290,7 @@ class BlogController implements ControllerProviderInterface
         if ($request->isMethod('POST'))
         {
             $this->repository->deleteById($article['_id']);
+            $this->refreshCache();
 
             $this->app->addFlash('success', $this->app->trans(
                 'blog.deleted', [$article['slug']]
@@ -380,6 +391,7 @@ class BlogController implements ControllerProviderInterface
             ));
 
             $this->repository->deleteComment($article['_id'], $idComment);
+            $this->refreshCache();
 
             return true;
         }
@@ -416,6 +428,7 @@ class BlogController implements ControllerProviderInterface
         if (! $errors)
         {
             $this->repository->storeComment($article['_id'], $idComment, $comment);
+            $this->refreshCache();
 
             $this->app->addFlash('success', $this->app->trans(
                 (null === $idComment) ? 'comment.created' : 'comment.updated',
