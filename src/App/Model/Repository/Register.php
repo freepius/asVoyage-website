@@ -2,17 +2,35 @@
 
 namespace App\Model\Repository;
 
+use Symfony\Component\Filesystem\Filesystem,
+    App\Util\StringUtil;
+
 
 /**
  * Summary :
+ *  -> __construct
  *  -> store
  *  -> filter   [protected]
  *  -> find
+ *  -> getGeoJsFile
+ *  -> clearCacheDir
  */
 class Register extends MongoRepository
 {
+    protected $twig;
+    protected $webPath;
+    protected $cacheDir;
+
+    public function __construct(\MongoCollection $collection, $twig, $webPath, $cacheDir)
+    {
+        parent::__construct($collection);
+        $this->twig     = $twig;
+        $this->webPath  = $webPath;
+        $this->cacheDir = $cacheDir;
+    }
+
     /**
-     * Store an entity : if alreay exists, update it ; else, create it.
+     * Store an entity : if already exists, update it ; else, create it.
      * Return :
      *  -> -1 in case of failure
      *  ->  0 in case of creation
@@ -85,5 +103,43 @@ class Register extends MongoRepository
         if ($limit > 0) { $entries->limit($limit); }
 
         return $entries;
+    }
+
+    /**
+     * Select all entries having geo. coords
+     * (eventually between two datetime, $from and $to included).
+     *
+     * Then, generate a *public javascript file* including these entries.
+     * Finally, return its path (relative to web dir).
+     *
+     * If the js file already exists, return directly its path.
+     */
+    public function getGeoJsFile($from = null, $to = null)
+    {
+        $fs = new Filesystem();
+
+        $filepath = sprintf('/%s/from-%s-to-%s.js',
+            $this->cacheDir,
+            StringUtil::slugify($from),
+            StringUtil::slugify($to)
+        );
+
+        if (! $fs->exists($this->webPath.$filepath))
+        {
+            $content = $this->twig->render('register/geo-entries.js.twig', [
+                'entries' => $this->find(0, ['geo' => true, 'from' => $from, 'to' => $to])
+            ]);
+
+            $fs->dumpFile($this->webPath.$filepath, $content);
+        }
+
+        return $filepath;
+    }
+
+    public function clearCacheDir()
+    {
+        $fs = new Filesystem();
+        $fs->remove($this->webPath.'/'.$this->cacheDir);
+        $fs->mkdir ($this->webPath.'/'.$this->cacheDir);
     }
 }

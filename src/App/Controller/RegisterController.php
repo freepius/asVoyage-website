@@ -16,17 +16,17 @@ use Silex\ControllerProviderInterface,
  *  -> isMultiSms       [protected]
  *  -> processMultiSms  [protected]
  *  -> refreshCache     [protected]
+ *  -> getRepository    [protected]
  */
 class RegisterController implements ControllerProviderInterface
 {
-    public function __construct(\App\Application $app, $twilioAccount, $twilioNumber)
+    public function __construct(\App\Application $app)
     {
-        $this->app        = $app;
-        $this->factory    = $app['model.factory.register'];
-        $this->repository = $app['model.repository.register'];
+        $this->app     = $app;
+        $this->factory = $app['model.factory.register'];
 
-        $this->twilioAccount = $twilioAccount;
-        $this->twilioNumber  = $twilioNumber;
+        $this->twilioAccount = $app['register.config']['twilio.account'];
+        $this->twilioNumber  = $app['register.config']['twilio.number'];
     }
 
     public function connect(\Silex\Application $app)
@@ -56,7 +56,7 @@ class RegisterController implements ControllerProviderInterface
         if ($filters)
         {
             $entries = iterator_to_array(
-                $this->repository->find(100, $filters)
+                $this->getRepository()->find(100, $filters)
             );
 
             foreach ($entries as & $e) {
@@ -103,7 +103,7 @@ class RegisterController implements ControllerProviderInterface
             }
             else
             {
-                $res = $this->repository->store($entry);
+                $res = $this->getRepository()->store($entry);
 
                 if     ($res === 0) { $countCreated ++; }
                 elseif ($res === 1) { $countUpdated ++; }
@@ -253,7 +253,7 @@ class RegisterController implements ControllerProviderInterface
         if (@ $errors['meteo'])       { $entry['meteo']       = null; }
         if (@ $errors['message'])     { $entry['message'] = substr($entry['message'], 500); }
 
-        $this->repository->store($entry);
+        $this->getRepository()->store($entry);
         $this->refreshCache();
 
         return true;
@@ -326,5 +326,12 @@ class RegisterController implements ControllerProviderInterface
     protected function refreshCache()
     {
         $this->app['http_cache.mongo']->drop('register');
+
+        $this->getRepository()->clearCacheDir();
+    }
+
+    protected function getRepository()
+    {
+        return $this->app['model.repository.register'];
     }
 }

@@ -10,6 +10,7 @@
  *  -> Filter
  *  -> Languages
  *  -> Literal numbers
+ *  -> Map
  *  -> Months
  *  -> Navigation
  *  -> Placeholder
@@ -130,6 +131,14 @@ return [
         '13' => 'thirteen',
         '14' => 'forteen',
         '15' => 'fifteen',
+    ],
+
+    // Map
+    'map' => [
+        'home' => 'The map',
+
+        'clusterLabel.other' => 'and OTHER_L other points...',
+        'clusterLabel.all'   => 'Click to see the TOTAL_L points of the area.',
     ],
 
     // Months

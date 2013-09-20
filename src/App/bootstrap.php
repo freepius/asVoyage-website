@@ -218,7 +218,10 @@ $app['model.repository.media'] = $app->share(function ($app)
 
 $app['model.repository.register'] = $app->share(function ($app)
 {
-    return new \App\Model\Repository\Register($app['mongo.database']->register);
+    return new \App\Model\Repository\Register(
+        $app['mongo.database']->register, $app['twig'],
+        $app['path.web'], $app['register.config']['cache_dir']
+    );
 });
 
 
@@ -272,13 +275,25 @@ $app['media.config'] =
 
 
 /*************************************************
+ * Configuration for the "travel register"
+ ************************************************/
+
+$app['register.config'] =
+[
+    'twilio.account' => TWILIO_ACCOUNT_SID,
+    'twilio.number'  => TWILIO_NUMBER,
+    'cache_dir'      => 'tmp/register',  // relative to web path
+];
+
+
+/*************************************************
  * Define the routes
  ************************************************/
 
 $app->mount('/'        , new \App\Controller\BaseController($app));
 $app->mount('/blog'    , new \App\Controller\BlogController($app));
 $app->mount('/media'   , new \App\Controller\MediaController($app));
-$app->mount('/register', new \App\Controller\RegisterController($app, TWILIO_ACCOUNT_SID, TWILIO_NUMBER));
+$app->mount('/register', new \App\Controller\RegisterController($app));
 
 
 return $app;

@@ -3,7 +3,7 @@
  #  -> cssBase
  #  -> jsBase
  #  -> cssFull
- #  -> cssFull
+ #  -> jsFull
  #}
 
 
@@ -23,6 +23,7 @@
     {% endif %}
 
     <link rel="stylesheet" href="/css/leaflet/leaflet.awesome-markers.css">
+    <link rel="stylesheet" href="/css/leaflet/leaflet.label.css">
 {% endmacro %}
 
 
@@ -38,6 +39,7 @@
     <script src="//maps.stamen.com/js/tile.stamen.js?v1.2.3"></script>
     <script src="/js/leaflet/leaflet.tile-layer.bing.js"></script>
     <script src="/js/leaflet/leaflet.awesome-markers.min.js"></script>
+    <script src="/js/leaflet/leaflet.label-src.js"></script>
     <script src="/js/app-carto.js"></script>
 {% endmacro %}
 
@@ -60,4 +62,28 @@
     {{ _self.jsBase() }}
     <script src="/js/leaflet/leaflet.markercluster-src.js"></script>
     <script src="/js/leaflet/L.Control.Zoomslider.js"></script>
+
+    <script>
+        function getClusterLabel(markers)
+        {
+            var label = '<p>' + markers[0].getLabel()._content + '</p>' +
+                        '<p>' + markers[1].getLabel()._content + '</p>';
+
+            if (markers.length === 3) {
+                label += '<p>' + markers[2].getLabel()._content + '</p>';
+            }
+
+            if (markers.length > 3) {
+                label += '{{ "map.clusterLabel.other"|trans }}<br>';
+            }
+
+            label += '<small>' +
+                        '<i class="icon-caret-right"></i> '  +
+                        '{{ "map.clusterLabel.all"|trans }}' +
+                     '</small>';
+
+            return label.replace('OTHER_L', markers.length - 2)
+                        .replace('TOTAL_L', markers.length);
+        }
+    </script>
 {% endmacro %}

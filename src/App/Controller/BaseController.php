@@ -144,15 +144,14 @@ class BaseController implements ControllerProviderInterface
         ->setSharedMaxAge(3600 * 24 * 30);
     }
 
-    /*public function map()
+    public function map()
     {
-        $entries = $this->app['model.repository.register']
-            ->find(0, ['from' => $this->currentTravelStartingDate, 'geo' => true]);
+        $registerRepo = $this->app['model.repository.register'];
 
         return $this->app->render('base/map.html.twig', [
-            'entries' => $entries,
+            'register_entries_js' => $registerRepo->getGeoJsFile($this->currentTravelStartingDate),
         ]);
-    }*/
+    }
 
     public function contact(Request $request)
     {
@@ -249,23 +248,24 @@ class BaseController implements ControllerProviderInterface
         return $this->app->render('base/admin.html.twig');
     }
 
-    /**
-     * -> Empty the cache dir
-     * -> Empty the captcha dir
-     * -> Drop the "http cache" mongo collection
-     */
     public function cacheClear()
     {
         $app = $this->app;
 
         $fs = new Filesystem();
 
+        // Empty the cache dir
         $fs->remove($app['path.cache']);
         $fs->mkdir ($app['path.cache']);
 
+        // Empty the public captcha dir
         $fs->remove($app['path.web'].'/'.$app['dir.captcha']);
         $fs->mkdir ($app['path.web'].'/'.$app['dir.captcha']);
 
+        // Empty the public register dir
+        $app['model.repository.register']->clearCacheDir();
+
+        // Drop the "http cache" mongo collection
         $this->app['http_cache.mongo.collection']->drop();
 
         $this->app->addFlash('success', $this->app->trans('admin.cacheCleared'));

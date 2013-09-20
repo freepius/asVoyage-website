@@ -23,7 +23,10 @@ External libraries used
   * [Elastic](http://unwrongest.com/projects/elastic/) : auto grows textareas
   * [ShiftCheckbox](https://github.com/nylen/shiftcheckbox) : handle a "select all" widget + selecting ranges of checkboxes via Shift+Click
 * [Leaflet](http://leafletjs.com/) and plugins :
-  * [awesome-markers plugin](https://github.com/lvoogdt/Leaflet.awesome-markers)
+  * [AwesomeMarkers](https://github.com/lvoogdt/Leaflet.awesome-markers)
+  * [MarkerCluster](https://github.com/Leaflet/Leaflet.markercluster)
+  * [ZoomSlider](https://github.com/kartena/Leaflet.zoomslider)
+  * [Label](https://github.com/Leaflet/Leaflet.label)
 
 Author
 ------
@@ -53,7 +56,6 @@ TODO
 * BUG on IE 9 : problem to refresh captcha (eg: on contact page)
 * Improve tags size on tags box ?!
 * Media module : add an "info box" on home page
-* ADMIN : make a command to clear cache (twig, http, mongo-http...)
 * Follow my pullrequest for :
   * Lightbox2
   * Leaflet Zoom Control
@@ -65,7 +67,6 @@ For production
 * Solve the TODOs
 * Update vendor and libraries
 * Cache (with APC/Memcached ?) :
-  * Blog repository => caching for listTags() and countArticlesByYearMonth()
   * Blog controller => caching the generated HTML from RichText
 * Minified JS and CSS files
 

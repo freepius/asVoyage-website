@@ -1,0 +1,29 @@
+var geoCoords = [
+    {%- for entry in entries -%}
+        [{{ entry.geoCoords }}],
+    {%- endfor -%}
+],
+
+labels = [
+    {% for entry in entries %}
+        {%- set message -%}
+            {{- entry._id | localizeddate('short', 'short') -}}
+
+            {%- if entry.temperature or entry.meteo -%}
+                &nbsp;&nbsp;<i class='icon-caret-right'></i>&nbsp;&nbsp;
+                {{- entry.temperature ? (entry.temperature ~ '°C ') -}}
+                {{- entry.meteo       ? ("<img src='/images/weather/"~entry.meteo~".png'>") | raw -}}
+            {%- endif -%}
+
+            <br>{{- entry.message -}}
+        {%- endset -%}
+
+        "{{ message }}",
+    {% endfor %}
+],
+
+hasMessage = [
+    {%- for entry in entries -%}
+        {{ entry.message ? '1' : '0' }},
+    {%- endfor -%}
+];

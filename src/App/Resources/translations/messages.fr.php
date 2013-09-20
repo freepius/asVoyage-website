@@ -10,6 +10,7 @@
  *  -> Filter
  *  -> Languages
  *  -> Literal numbers
+ *  -> Map
  *  -> Months
  *  -> Navigation
  *  -> Placeholder
@@ -130,6 +131,14 @@ return [
         '13' => 'treize',
         '14' => 'quatorze',
         '15' => 'quinze',
+    ],
+
+    // Map
+    'map' => [
+        'home' => 'La carte',
+
+        'clusterLabel.other' => 'et OTHER_L autres points...',
+        'clusterLabel.all'   => 'Cliquez pour voir les TOTAL_L points de la zone.',
     ],
 
     // Months
