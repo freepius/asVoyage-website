@@ -144,13 +144,22 @@ class BaseController implements ControllerProviderInterface
         ->setSharedMaxAge(3600 * 24 * 30);
     }
 
+    /**
+     * CACHE: public ; validation
+     */
     public function map()
     {
+        $response = $this->app['http_cache.mongo']->response(
+            'base.map', ['register']
+        );
+        if ($response->isNotModified($request)) { return $response; }
+
+
         $registerRepo = $this->app['model.repository.register'];
 
         return $this->app->render('base/map.html.twig', [
             'register_entries_js' => $registerRepo->getGeoJsFile($this->currentTravelStartingDate),
-        ]);
+        ], $response);
     }
 
     public function contact(Request $request)
