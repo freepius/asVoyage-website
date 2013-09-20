@@ -147,7 +147,7 @@ class BaseController implements ControllerProviderInterface
     /**
      * CACHE: public ; validation
      */
-    public function map()
+    public function map(Request $request)
     {
         $response = $this->app['http_cache.mongo']->response(
             'base.map', ['register']
