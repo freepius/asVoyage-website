@@ -23,10 +23,11 @@
 
                 // default options
                 o = {
-                    center  : [0.0, 0.0],
-                    zoom    : 5,
-                    layer   : 'WaterColor',
-                    layers  : []
+                    center : [0.0, 0.0],
+                    zoom   : 5,
+                    layer  : 'WaterColor',
+                    layers : [],
+                    scale  : false
                 };
 
             // Merge default and user options
@@ -39,6 +40,10 @@
             map.attributionControl.setPrefix('');
 
             L.control.layers(this.layers).addTo(map);
+
+            if (o.scale) {
+                L.control.scale({maxWidth: 150}).addTo(map);
+            }
 
             this.maps[id] = map;
 

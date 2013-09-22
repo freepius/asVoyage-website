@@ -23,6 +23,7 @@ return [
     //'by date'                    => '',
     //'by tag'                     => '',
     //'Cancel'                     => '',
+    //'Close'                      => '',
     //'Comments'                   => '',
     //'Contents under CC0 license' => '',
     //'Current trip'               => '',
@@ -30,8 +31,9 @@ return [
     //'Delete filter(s)'           => '',
     //'Edit'                       => '',
     //'Error'                      => '',
-    'Error(s)'                   => "There is/are <b>0</b> error/s : at 1.",
+    'Error(s)'                   => 'There is/are <b>0</b> error/s : at 1.',
     //'General'                    => '',
+    //'Help'                       => '',
     //'Home'                       => '',
     //'Last published articles'    => '',
     //'Login'                      => '',
@@ -135,10 +137,10 @@ return [
 
     // Map
     'map' => [
-        'home' => 'The map',
-
         'clusterLabel.other' => 'and OTHER_L other points...',
         'clusterLabel.all'   => 'Click to see the TOTAL_L points of the area.',
+        'helpTitle'          => 'Understand the map',
+        'home'               => 'The map',
     ],
 
     // Months

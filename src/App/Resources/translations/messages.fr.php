@@ -23,6 +23,7 @@ return [
     'by date'                    => 'par date',
     'by tag'                     => 'par mot-clé',
     'Cancel'                     => 'Annuler',
+    'Close'                      => 'Fermer',
     'Comments'                   => 'Commentaires',
     'Contents under CC0 license' => 'Contenus sous licence CC0',
     'Current trip'               => 'Voyage en cours',
@@ -30,8 +31,9 @@ return [
     'Delete filter(s)'           => 'Supprimer le(s) filtre(s)',
     'Edit'                       => 'Éditer',
     'Error'                      => 'Erreur',
-    'Error(s)'                   => "Il y a <b>0</b> erreur(s) : à 1.",
+    'Error(s)'                   => 'Il y a <b>0</b> erreur(s) : à 1.',
     'General'                    => 'Général',
+    'Help'                       => 'Aide',
     'Home'                       => 'Accueil',
     'Last published articles'    => 'Derniers articles publiés',
     'Login'                      => 'Connexion',
@@ -135,10 +137,10 @@ return [
 
     // Map
     'map' => [
-        'home' => 'La carte',
-
         'clusterLabel.other' => 'et OTHER_L autres points...',
         'clusterLabel.all'   => 'Cliquez pour voir les TOTAL_L points de la zone.',
+        'helpTitle'          => 'Comprendre la carte',
+        'home'               => 'La carte',
     ],
 
     // Months

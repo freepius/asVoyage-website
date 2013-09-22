@@ -8,7 +8,7 @@
 (function () {
     "use strict";
 
-    var map = asCarto.addMap('map', {layer: 'OSM'}),
+    var map = asCarto.addMap('map', {layer: 'OSM', scale: true}),
 
         // Path already traveled of the current trip
         path = L.polyline(geoCoords, {clickable: false, color: 'blue', weight: 8}),

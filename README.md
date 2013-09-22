@@ -26,6 +26,7 @@ External libraries used
   * [AwesomeMarkers](https://github.com/lvoogdt/Leaflet.awesome-markers)
   * [MarkerCluster](https://github.com/Leaflet/Leaflet.markercluster)
   * [ZoomSlider](https://github.com/kartena/Leaflet.zoomslider)
+  * [PanControl](https://github.com/kartena/Leaflet.Pancontrol)
   * [Label](https://github.com/Leaflet/Leaflet.label)
 
 Author
@@ -44,7 +45,6 @@ TODO
 
 * Blog creating/updating page :
   * Add help for RichText
-* Improve the inclusion of JS and CSS files (if not using => do not include)
 * On Blog "reading" page : add box containing related articles/contents
 * Traduction of new base pages (about, our-trips, etc.)
 * Revoir le CSS : les marges pour les titres, le centrage dans about, l'affichage sur grand et petit écran, etc.
@@ -57,8 +57,8 @@ TODO
 * Improve tags size on tags box ?!
 * Media module : add an "info box" on home page
 * Follow my pullrequest for :
-  * Lightbox2
-  * Leaflet Zoom Control
+  * Lightbox2               (I make the local change)
+  * Leaflet Zoom Control    (I make the locale change)
   * Symfony/HttpKernel
 
 For production
@@ -69,6 +69,7 @@ For production
 * Cache (with APC/Memcached ?) :
   * Blog controller => caching the generated HTML from RichText
 * Minified JS and CSS files
+* Improve the inclusion of JS and CSS files (if not using => do not include)
 
 Low priority
 ------------

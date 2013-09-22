@@ -29,7 +29,20 @@
 
 
 {% block main %}
-    <h1 id="page-title">{{ 'map.home'|trans }}</h1>
 
-    <div id="map"></div>
+<header class="clearfix">
+    <h1 id="page-title" class="pull-left">{{ 'map.home'|trans }}</h1>
+
+    <!-- Button for help modal -->
+    <div class="actions-right">
+        <a data-toggle="modal" href="#help-for-map">
+            <i class="icon-info-sign"></i> {{ 'Help'|trans }}
+        </a>
+    </div>
+</header>
+
+{% include "base/map-help.html.twig" only %}
+
+<div id="map"></div>
+
 {% endblock %}

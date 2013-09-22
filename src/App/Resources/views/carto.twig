@@ -50,10 +50,11 @@
     <link rel="stylesheet" href="/css/leaflet/MarkerCluster.css" />
     <link rel="stylesheet" href="/css/leaflet/MarkerCluster.Default.css" />
     <link rel="stylesheet" href="/css/leaflet/L.Control.Zoomslider.css" />
+    <link rel="stylesheet" href="/css/leaflet/L.Control.Pan.css" />
 
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="/css/leaflet/MarkerCluster.Default.ie.css" />
         <link rel="stylesheet" href="/css/leaflet/L.Control.Zoomslider.ie.css" />
+        <link rel="stylesheet" href="/css/leaflet/L.Control.Pan.ie.css" />
     <![endif]-->
 {% endmacro %}
 
@@ -62,6 +63,7 @@
     {{ _self.jsBase() }}
     <script src="/js/leaflet/leaflet.markercluster-src.js"></script>
     <script src="/js/leaflet/L.Control.Zoomslider.js"></script>
+    <script src="/js/leaflet/L.Control.Pan.js"></script>
 
     <script>
         function getClusterLabel(markers)
