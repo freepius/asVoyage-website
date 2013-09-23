@@ -1,4 +1,4 @@
-{% set currentNav = 'our-trips' %}
+{% set currentNav = 'our-travels' %}
 
 {% extends "layout.html.twig" %}
 
@@ -18,7 +18,7 @@
     {{ carto.jsBase() }}
 
     <script>
-        {% include "base/our-trips/afrikapie.carto.js" %}
+        {% include "base/our-travels/afrikapie.carto.js" %}
 
         var alt  = L.multiPolyline([altNamibia_points, altMali_points], {color: 'green', weight: 5}),
             main = L.polyline(main_points, {color: 'brown', weight: 10, opacity: 1.0});
@@ -36,7 +36,7 @@
 
         <!-- Breadcrumb + title -->
         <header>
-            <nav><a href="/our-trips">{{ 'nav.our-trips'|trans }}</a> »</nav>
+            <nav><a href="/our-travels">{{ 'nav.our-travels'|trans }}</a> »</nav>
             <h1 id="page-title">Afrikapié</h1>
         </header>
 

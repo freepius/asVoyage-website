@@ -26,7 +26,7 @@ return [
     'Close'                      => 'Fermer',
     'Comments'                   => 'Commentaires',
     'Contents under CC0 license' => 'Contenus sous licence CC0',
-    'Current trip'               => 'Voyage en cours',
+    'Current travel'             => 'Voyage en cours',
     'Delete'                     => 'Supprimer',
     'Delete filter(s)'           => 'Supprimer le(s) filtre(s)',
     'Edit'                       => 'Éditer',
@@ -173,12 +173,12 @@ return [
 
     // Navigation
     'nav' => [
-        'about'     => 'À propos',
-        'blog'      => 'Blog',
-        'contact'   => 'Contact',
-        'home'      => 'Accueil',
-        'media'     => 'Nos médias',
-        'our-trips' => 'Nos voyages',
+        'about'       => 'À propos',
+        'blog'        => 'Blog',
+        'contact'     => 'Contact',
+        'home'        => 'Accueil',
+        'media'       => 'Nos médias',
+        'our-travels' => 'Nos voyages',
     ],
 
     // Placeholder

@@ -36,12 +36,12 @@
 
         <nav id="nav-main">
             <ul class="nav nav-pills">
-                {{ add_nav('home'     , currentNav) }}
-                {{ add_nav('about'    , currentNav) }}
-                {{ add_nav('contact'  , currentNav) }}
-                {{ add_nav('our-trips', currentNav) }}
-                {{ add_nav('blog'     , currentNav) }}
-                {{ add_nav('media'    , currentNav) }}
+                {{ add_nav('home'       , currentNav) }}
+                {{ add_nav('about'      , currentNav) }}
+                {{ add_nav('contact'    , currentNav) }}
+                {{ add_nav('our-travels', currentNav) }}
+                {{ add_nav('blog'       , currentNav) }}
+                {{ add_nav('media'      , currentNav) }}
             </ul>
         </nav>
     </section>
@@ -50,9 +50,9 @@
         {% block headerNotification %}
 
             <strong>
-                {{ 'Current trip'|trans }}
+                {{ 'Current travel'|trans }}
                 &nbsp;<i class="icon-double-angle-right"></i>&nbsp;
-                <a href="/our-trips/afrikapie" class="special">Afrikapié</a>
+                <a href="/our-travels/afrikapie" class="special">Afrikapié</a>
             </strong>
 
         {% endblock %}

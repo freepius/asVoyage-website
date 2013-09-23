@@ -13,13 +13,13 @@ use Silex\ControllerProviderInterface,
  *  -> connect
  *
  *  -> GLOBAL ACTIONS :
- *      => home                       [cached]
- *      => about                      [cached]
+ *      => home                         [cached]
+ *      => about                        [cached]
  *      => contact
  *      => map
- *      => ourTrips                   [cached]
- *      => diagonal3000Km [our-trips] [cached]
- *      => afrikapie      [our-trips]
+ *      => ourTravels                   [cached]
+ *      => diagonal3000Km [our-travels] [cached]
+ *      => afrikapie      [our-travels]
  *
  *  -> ADMIN ACTIONS :
  *      => login
@@ -56,10 +56,10 @@ class BaseController implements ControllerProviderInterface
         $base->match('/contact', [$this, 'contact']);
         $base->get('/map'      , [$this, 'map']);
 
-        // Our trips
-        $base->get('our-trips'                 , [$this, 'ourTrips']);
-        $base->get('our-trips/3000-km-diagonal', [$this, 'diagonal3000Km']);
-        $base->get('our-trips/afrikapie'       , [$this, 'afrikapie']);
+        // Our travels
+        $base->get('our-travels'                 , [$this, 'ourTravels']);
+        $base->get('our-travels/3000-km-diagonal', [$this, 'diagonal3000Km']);
+        $base->get('our-travels/afrikapie'       , [$this, 'afrikapie']);
 
         // Admin routes
         $base->get('/login'            , [$this, 'login']);
@@ -206,9 +206,9 @@ class BaseController implements ControllerProviderInterface
     /**
      * CACHE: public ; 30 days
      */
-    public function ourTrips()
+    public function ourTravels()
     {
-        return $this->app->render('base/our-trips.html.twig')
+        return $this->app->render('base/our-travels/home.html.twig')
             ->setSharedMaxAge(3600 * 24 * 30);
     }
 
@@ -219,11 +219,11 @@ class BaseController implements ControllerProviderInterface
     {
         $repository = $this->app['model.repository.media'];
 
-        // Retrieve 4 favorite images per trip
+        // Retrieve 4 favorite images per travel
         $downLoireImgs = $repository->randomImagesByTags(['Favori', 'Descente de Loire'], 4);
         $longWalkImgs  = $repository->randomImagesByTags(['Favori', 'Grande marche']    , 4);
 
-        return $this->app->render('base/our-trips/3000-km-diagonal.html.twig',
+        return $this->app->render('base/our-travels/3000-km-diagonal.html.twig',
         [
             'downLoireImgs' => $downLoireImgs,
             'longWalkImgs'  => $longWalkImgs,
@@ -233,7 +233,7 @@ class BaseController implements ControllerProviderInterface
 
     public function afrikapie()
     {
-        return $this->app->render('base/our-trips/afrikapie.html.twig');
+        return $this->app->render('base/our-travels/afrikapie.html.twig');
     }
 
 

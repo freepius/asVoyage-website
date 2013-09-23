@@ -1,4 +1,4 @@
-{% set currentNav = 'our-trips' %}
+{% set currentNav = 'our-travels' %}
 
 {% extends "layout.html.twig" %}
 
@@ -73,7 +73,7 @@
     {{ carto.jsBase() }}
 
     <script>
-        {% include "base/our-trips/3000-km-diagonal.carto.js" %}
+        {% include "base/our-travels/3000-km-diagonal.carto.js" %}
 
         var downLoire = L.polyline(downLoire_points, {color: 'blue'})
                 .bindPopup('Descente de Loire'),
@@ -96,7 +96,7 @@
 
         <!-- Breadcrumb + title -->
         <header>
-            <nav><a href="/our-trips">{{ 'nav.our-trips'|trans }}</a> »</nav>
+            <nav><a href="/our-travels">{{ 'nav.our-travels'|trans }}</a> »</nav>
             <h1 id="page-title">3000 km en diagonale</h1>
         </header>
 
@@ -148,7 +148,7 @@ Cet ouvrage pèse 172 pages, est auto-édité et est publié sous une [licence l
     </article>
 
     <aside class="col-xs-4">
-        {% include "base/our-trips/3000-km-diagonal-book-pub.html.twig" only %}
+        {% include "base/our-travels/3000-km-diagonal-book-pub.html.twig" only %}
 
         <!-- Map -->
         <div id="map" class="box"></div>

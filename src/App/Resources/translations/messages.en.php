@@ -26,7 +26,7 @@ return [
     //'Close'                      => '',
     //'Comments'                   => '',
     //'Contents under CC0 license' => '',
-    //'Current trip'               => '',
+    //'Current travel'             => '',
     //'Delete'                     => '',
     //'Delete filter(s)'           => '',
     //'Edit'                       => '',
@@ -173,12 +173,12 @@ return [
 
     // Navigation
     'nav' => [
-        'about'     => 'About',
-        'blog'      => 'Blog',
-        'contact'   => 'Contact',
-        'home'      => 'Home',
-        'media'     => 'Our medias',
-        'our-trips' => 'Our trips',
+        'about'       => 'About',
+        'blog'        => 'Blog',
+        'contact'     => 'Contact',
+        'home'        => 'Home',
+        'media'       => 'Our medias',
+        'our-travels' => 'Our travels',
     ],
 
     // Placeholder

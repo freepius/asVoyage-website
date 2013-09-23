@@ -1,4 +1,4 @@
-{% set currentNav = 'our-trips' %}
+{% set currentNav = 'our-travels' %}
 
 {% extends "layout.html.twig" %}
 
@@ -9,10 +9,10 @@
     <h1 id="page-title">Nos voyages</h1>
 
     <!-- Afrikapié -->
-    <div id="afrikapie" class="trip">
+    <div id="afrikapie" class="travel">
 
         <h2>
-            <a href="/our-trips/afrikapie">Afrikapié</a>
+            <a href="/our-travels/afrikapie">Afrikapié</a>
         </h2>
 
         <div class="frieze">
@@ -23,7 +23,7 @@
             Notre premier voyage hors des frontières françaises.
             Le continent africain nous accueillera, on l'espère, pour un long long périple.
             Il permettra de nous accomplir comme voyageurs de grands chemins.
-            <nobr><big><a href="/our-trips/afrikapie">» Lire plus</a></big></nobr>
+            <nobr><big><a href="/our-travels/afrikapie">» Lire plus</a></big></nobr>
         <p>
 
         {% set tags = [
@@ -40,10 +40,10 @@
     <!-- =================================================================== -->
 
     <!-- 3000 km in diagonal, in 2011 -->
-    <div id="diagonal-3000-km" class="trip">
+    <div id="diagonal-3000-km" class="travel">
 
         <h2>
-            <a href="/our-trips/3000-km-diagonal">3000 km en diagonale</a>
+            <a href="/our-travels/3000-km-diagonal">3000 km en diagonale</a>
         </h2>
 
         <div class="frieze">
@@ -54,7 +54,7 @@
             Notre premier voyage au long cours.
             À travers la France, nous nous sommes immergés au cœur de multiples territoires.
             Nous y avons assis notre désir de vies de voyage.
-            <nobr><big><a href="/our-trips/3000-km-diagonal">» Lire plus</a></big></nobr>
+            <nobr><big><a href="/our-travels/3000-km-diagonal">» Lire plus</a></big></nobr>
         <p>
 
         {% set tags = [
@@ -69,7 +69,7 @@
 
         <div class="pictures">
             {% for i in 0..2 %}
-                {{ linked_img('/images/our-trips', '3000-km-diagonal-'~i~'.jpg', {
+                {{ linked_img('/images/our-travels', '3000-km-diagonal-'~i~'.jpg', {
                     class: 'col-md-4',
                     group: 'diagonal',
                     thumb: true,
@@ -81,7 +81,7 @@
     <!-- =================================================================== -->
 
     <!-- The Nantes-Brest channel, in 2008 -->
-    <div id="channel-2008" class="trip">
+    <div id="channel-2008" class="travel">
         <h2>Canal de Nantes à Brest</h2>
 
         <div class="frieze">
@@ -96,7 +96,7 @@
 
         <div class="pictures">
             {% for i in 0..2 %}
-                {{ linked_img('/images/our-trips', 'channel-2008-'~i~'.jpg', {
+                {{ linked_img('/images/our-travels', 'channel-2008-'~i~'.jpg', {
                     class: 'col-md-4',
                     group: 'channel',
                     thumb: true,
