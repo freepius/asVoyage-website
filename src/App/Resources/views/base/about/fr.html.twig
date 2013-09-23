@@ -1,9 +1,3 @@
-{% set currentNav = 'about' %}
-
-{% extends "layout.html.twig" %}
-
-{% from "macros.twig" import tags_box, linked_img %}
-
 {% set tagsMathieu = [
     [3, '1987'],
     [4, yearsMathieu ~ ' ans'],
@@ -79,8 +73,6 @@
     [4, 'Vagabonds'],
 ] %}
 
-{% set tagsBothMiddle = (tagsBoth | length) // 2 %}
-
 {% set tagsAnarchosSemitas = [
     [1, 'زهر (zhar)'],
     [2, 'ἀνἀρχός'],
@@ -103,60 +95,9 @@
     [3, 'Tous azimuts'],
 ] | shuffle %}
 
-
-{% block stylesheets %}
-    <style>
-        #main h2 { text-align: center; }
-
-        #both { margin: 5px 0; }
-
-        @media (min-width: 992px)
-        {
-            #both { margin: 5px 90px; }
-        }
-    </style>
-{% endblock %}
-
-
-{% block main %}
-    <article itemscope itemtype="http://schema.org/Article">
-        <h1 itemprop="name" id="page-title">À propos...</h1>
-
-        <div itemprop="articleBody">
-            <h2>Qui sommes-nous ?</h2>
-
-            <div class="row">
-                {{ tags_box(tagsMathieu, {align: 'right', class: 'col-xs-4', special: 'Mathieu'}) }}
-
-                <div class="col-xs-4">
-                    {{ linked_img('/images/ourselves', 'freepius.jpg', {class: 'col-xs-6'}) }}
-                    {{ linked_img('/images/ourselves', 'manalee.jpg',  {class: 'col-xs-6'}) }}
-                </div>
-
-                {{ tags_box(tagsMarie, {align: 'left', class: 'col-xs-4', special: 'Marie'}) }}
-            </div>
-
-            <div class="text-center special">
-                <strong>Mathieu et Marie</strong>
-            </div>
-
-            <div id="both" class="row">
-                {{ tags_box(tagsBoth[0:tagsBothMiddle], {align: 'right', class: 'col-xs-4'}) }}
-
-                {{ linked_img('/images/ourselves', 'together.jpg', {class: 'col-xs-4'}) }}
-
-                {{ tags_box(tagsBoth[tagsBothMiddle:], {align: 'left', class: 'col-xs-4'}) }}
-            </div>
-
-            <h2>anarchos semitas</h2>
-
-            <div class="col-xs-12 text-center">
-                <img src="/images/base/roots.png" class="img-responsive">
-            </div>
-
-            {{ tags_box(tagsAnarchosSemitas, {class: 'text-muted'}) }}
-
-            {%- set text -%}
+{% set pageTitle = 'À propos' %}
+{% set aboutUsTitle = 'Qui sommes-nous ?' %}
+{% set mainText -%}
 *"anarchos semitas"* c'est l'idée que nos pas -- physiquement et philosophiquement -- se laisseront aller aux vagabondages, aux rencontres, à la découverte.
 C'est l'idée, aussi, qu'ils essaieront de ne jamais suivre des routes et des pensées trop facilement tracées.
 Nous avons tous deux, en effet, un profond besoin de construire nos vies, sans préjugé ni but strict,
@@ -168,12 +109,6 @@ Des voyages, petits ou grands (en distance, en durée, en dureté...), nous aime
 qu'ils poussent sur notre ligne de vie comme des herbes folles, qu'ils la ponctuent d'abord, puis s'étendent jusqu'à en devenir son paysage.
 Nous aimerions y être comme des enfants, naïfs et joyeux, et toujours considérer n'être qu'à nos débuts.
 Des vies qui seraient alors *les débuts d'un long voyage*.
-            {%- endset -%}
-            {{ text | richText }}
+{%- endset %}
 
-            <div class="col-xs-12 text-center">
-                <img src="/images/base/fresco.png" class="img-responsive">
-            </div>
-        </div>
-    </article>
-{% endblock %}
+{% extends "base/about/layout.html.twig" %}

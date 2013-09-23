@@ -27,14 +27,14 @@
     </a>
 
     <section id="navigation">
-        {#<nav id="nav-lang">
-            <ul class="inline">
+        <nav id="nav-lang">
+            <ul class="list-inline">
                 {{ add_lang('fr', app.locale) }}
                 {{ add_lang('en', app.locale) }}
             </ul>
-        </nav>#}
+        </nav>
 
-        <nav id="nav-main" style="margin-top: 20px;">
+        <nav id="nav-main">
             <ul class="nav nav-pills">
                 {{ add_nav('home'     , currentNav) }}
                 {{ add_nav('about'    , currentNav) }}

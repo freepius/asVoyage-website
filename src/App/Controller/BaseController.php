@@ -127,7 +127,7 @@ class BaseController implements ControllerProviderInterface
     {
         $now = time();
 
-        return $this->app->render("base/about.{$this->app['locale']}.html.twig",
+        return $this->app->render("base/about/{$this->app['locale']}.html.twig",
         [
             // Years together of Marie and Mathieu
             // ("Now" - "2004/10/15 16:00:00") / (60 * 60 * 24 * 365.25)

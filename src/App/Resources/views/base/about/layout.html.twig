@@ -1,0 +1,69 @@
+{% set currentNav = 'about' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import tags_box, linked_img %}
+
+{% set tagsBothMiddle = (tagsBoth | length) // 2 %}
+
+
+{% block stylesheets %}
+    <style>
+        #main h2 { text-align: center; }
+
+        #both { margin: 5px 0; }
+
+        @media (min-width: 992px)
+        {
+            #both { margin: 5px 90px; }
+        }
+    </style>
+{% endblock %}
+
+
+{% block main %}
+    <article itemscope itemtype="http://schema.org/Article">
+    <h1 itemprop="name" id="page-title">{{ pageTitle }}</h1>
+
+        <div itemprop="articleBody">
+            <h2>{{ aboutUsTitle }}</h2>
+
+            <div class="row">
+                {{ tags_box(tagsMathieu, {align: 'right', class: 'col-xs-4', special: 'Mathieu'}) }}
+
+                <div class="col-xs-4">
+                    {{ linked_img('/images/ourselves', 'freepius.jpg', {class: 'col-xs-6'}) }}
+                    {{ linked_img('/images/ourselves', 'manalee.jpg',  {class: 'col-xs-6'}) }}
+                </div>
+
+                {{ tags_box(tagsMarie, {align: 'left', class: 'col-xs-4', special: 'Marie'}) }}
+            </div>
+
+            <div class="text-center special" style="margin: 7px;">
+                <strong>Mathieu & Marie</strong>
+            </div>
+
+            <div id="both" class="row">
+                {{ tags_box(tagsBoth[0:tagsBothMiddle], {align: 'right', class: 'col-xs-4'}) }}
+
+                {{ linked_img('/images/ourselves', 'together.jpg', {class: 'col-xs-4'}) }}
+
+                {{ tags_box(tagsBoth[tagsBothMiddle:], {align: 'left', class: 'col-xs-4'}) }}
+            </div>
+
+            <h2>anarchos semitas</h2>
+
+            <div class="col-xs-12 text-center">
+                <img src="/images/base/roots.png" class="img-responsive">
+            </div>
+
+            {{ tags_box(tagsAnarchosSemitas, {class: 'text-muted'}) }}
+
+            {{ mainText | richText }}
+
+            <div class="col-xs-12 text-center">
+                <img src="/images/base/fresco.png" class="img-responsive">
+            </div>
+        </div>
+    </article>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% set tagsMathieu = [
+    [3, '1987'],
+    [4, yearsMathieu ~ ' years'],
+    [3, 'Tall man'],
+    [3, 'Geek'],
+    [3, 'Roader'],
+    [1, 'Do it yourselfer'],
+    [2, 'Long coffee'],
+    [3, 'Curious'],
+    [1, 'Gnu.42'],
+    [1, 'Gourmand'],
+    [2, 'Climber'],
+    [1, 'Grumpy'],
+    [1, 'Bigmouth'],
+    [3, 'Ocean'],
+    [1, 'Open'],
+    [2, 'Pragmatic'],
+    [2, 'Rigorous'],
+    [2, 'Sports'],
+    [3, 'Willing'],
+] %}
+
+{% set tagsMarie = [
+    [3, '1988'],
+    [4, yearsMarie ~ ' years'],
+    [3, 'Biodiversity'],
+    [2, 'Blond'],
+    [1, 'Shambolic'],
+    [1, 'Cooking'],
+    [2, 'Robust'],
+    [3, 'Cheese'],
+    [1, 'Climber'],
+    [2, 'Hobbit'],
+    [3, 'Cheerful'],
+    [3, 'Go slowly'],
+    [2, 'Logistician'],
+    [1, 'Ingenuous'],
+    [3, 'Siesta'],
+    [2, 'Natural'],
+    [1, 'Super nice!'],
+    [3, 'Open'],
+] %}
+
+{% set tagsBoth = [
+    [1, 'Campaign'],
+    [1, 'Free hugs'],
+    [1, 'Ligériens'],
+    [1, 'Loire-Atlantique'],
+    [2, 'Lovers'],
+    [2, 'Dreamers'],
+    [3, 'Discovery'],
+    [3, 'French'],
+    [3, 'Joyful'],
+    [3, 'Nature'],
+    [3, 'Travel'],
+    [4, 'Vagabonds'],
+    [4, yearsMMM ~ ' years'],
+    [4, 'Eclectic'],
+    [4, 'Environmentalists'],
+    [1, 'Bretons'],
+    [1, 'Marsh'],
+    [2, 'Bivouac'],
+    [2, 'Contemplative'],
+    [2, 'Observers'],
+    [3, 'Curious'],
+    [3, 'Writing'],
+    [4, 'Long walk'],
+    [3, 'United'],
+    [4, 'Freedom'],
+] %}
+
+{% set tagsAnarchosSemitas = [
+    [1, 'زهر (zhar)'],
+    [2, 'ἀνἀρχός'],
+    [1, 'ἀναρχία'],
+    [1, 'anarchia'],
+    [1, 'Anarchy'],
+    [3, 'Path'],
+    [3, 'Way'],
+    [2, 'Travel'],
+    [4, 'Ambulation'],
+    [1, 'Disorganization'],
+    [4, 'Diversity'],
+    [3, 'Random'],
+    [3, 'Mind'],
+    [4, 'Thinking'],
+    [2, 'Sense'],
+    [1, 'Feeling'],
+    [2, 'Sēmita'],
+    [4, 'Trail'],
+    [3, 'All-out'],
+] | shuffle %}
+
+{% set pageTitle = 'About' %}
+{% set aboutUsTitle = 'About Us' %}
+{% set mainText -%}
+*"anarchos semitas"* it's the idea that our footsteps (physically and  philosophically) will go to discovery, to vagrancy, to encounters.
+It's also the idea that they not follow the too-easily-established roads and thoughts.
+Indeed, we have a profound need to build our lives without bias neither strict goal,
+along ambulatory paths, along *"anarchic paths"*.
+
+## The beginning of a long travel
+
+Throughout our lives, we would like to do a lot of travels, small or large (in distance, duration or hardness).
+We would like to be there as children (naive and cheerful) and always think to be at the beginning.
+Therefore, our lives would be *the beginning of a long travel*.
+{%- endset %}
+
+{% extends "base/about/layout.html.twig" %}
