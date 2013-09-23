@@ -1,0 +1,84 @@
+{% set currentNav = 'our-travels' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import linked_img, tags_box %}
+
+
+{% block main %}
+    <h1 id="page-title">{{ PageTitle }}</h1>
+
+    <!-- Afrikapié -->
+    <div id="afrikapie" class="travel">
+
+        <h2>
+            <a href="/our-travels/afrikapie">Afrikapié</a>
+        </h2>
+
+        <div class="frieze">
+            <div class="inner">{{ afrikapiePeriod }}</div>
+        </div>
+
+        <p>
+            {{ afrikapieText | raw }}
+            <nobr><big><a href="/our-travels/afrikapie">» {{ 'Read more'|trans }}</a></big></nobr>
+        <p>
+
+        {{ tags_box(afrikapieTags, {class: 'text-muted'}) }}
+    </div>
+
+    <!-- =================================================================== -->
+
+    <!-- 3000 km in diagonal, in 2011 -->
+    <div id="diagonal-3000-km" class="travel">
+
+        <h2>
+            <a href="/our-travels/3000-km-diagonal">{{ diagonal3000kmTitle }}</a>
+        </h2>
+
+        <div class="frieze">
+            <div class="inner">{{ diagonal3000kmPeriod }}</div>
+        </div>
+
+        <p>
+            {{ diagonal3000kmText }}
+            <nobr><big><a href="/our-travels/3000-km-diagonal">» {{ 'Read more'|trans }}</a></big></nobr>
+        <p>
+
+        {{ tags_box(diagonal3000kmTags, {class: 'text-muted'}) }}
+
+        <div class="pictures">
+            {% for i in 0..2 %}
+                {{ linked_img('/images/our-travels', '3000-km-diagonal-'~i~'.jpg', {
+                    class: 'col-md-4',
+                    group: 'diagonal',
+                    thumb: true,
+                }) }}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+
+    <!-- The Nantes-Brest channel, in 2008 -->
+    <div id="channel-2008" class="travel">
+        <h2>{{ channel2008Title }}</h2>
+
+        <div class="frieze">
+            <div class="inner">{{ channel2008Period }}</div>
+        </div>
+
+        <p class="main">{{ channel2008Text }}</p>
+
+        <div class="pictures">
+            {% for i in 0..2 %}
+                {{ linked_img('/images/our-travels', 'channel-2008-'~i~'.jpg', {
+                    class: 'col-md-4',
+                    group: 'channel',
+                    thumb: true,
+                }) }}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

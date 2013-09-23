@@ -1,0 +1,56 @@
+{% set PageTitle = 'Nos voyages' %}
+
+
+{# Afrikapié #}
+{% set afrikapiePeriod = '2013 - 2016 : 2 à 3 ans' %}
+
+{% set afrikapieText %}
+    Notre premier voyage hors des frontières françaises.
+    Le continent africain nous accueillera, on l'espère, pour un long long périple.
+    Il permettra de nous accomplir comme voyageurs de grands chemins.
+{% endset %}
+
+{% set afrikapieTags = [
+    [4, 'Afrique'],
+    [2, 'Cultures'],
+    [3, 'Découvertes'],
+    [2, 'Humain'],
+    [4, 'Marche'],
+    [2, 'Nature'],
+] %}
+
+
+{# 3000 km in diagonal #}
+{% set diagonal3000kmTitle = '3000 km en diagonale' %}
+
+{% set diagonal3000kmPeriod = 'Avril - Octobre 2011 : 6 mois' %}
+
+{% set diagonal3000kmText %}
+    Notre premier voyage au long cours.
+    À travers la France, nous nous sommes immergés au cœur de multiples territoires.
+    Nous y avons assis notre désir de vies de voyage.
+{% endset %}
+
+{% set diagonal3000kmTags = [
+    [2, 'Déambulation'],
+    [2, 'France'],
+    [4, 'Kayak'],
+    [3, 'Loire'],
+    [4, 'Marche'],
+    [3, 'Nantes - Nice'],
+] %}
+
+
+{# Nantes - Brest channel, in 2008 #}
+{% set channel2008Title = 'Canal de Nantes à Brest' %}
+
+{% set channel2008Period = 'Juin 2008 : 2 semaines' %}
+
+{% set channel2008Text %}
+    Notre première « aventure » en itinérance, à vélo.
+    Nous étions alors novices en de nombreux domaines : camping, cyclisme, débrouille...
+    Rallier la côte bretonne par nos propres moyens fit s'épanouir nos rêves de voyage et de liberté.
+{% endset %}
+
+
+{% extends "/base/our-travels/home-layout.html.twig" %}

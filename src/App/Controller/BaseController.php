@@ -208,7 +208,7 @@ class BaseController implements ControllerProviderInterface
      */
     public function ourTravels()
     {
-        return $this->app->render('base/our-travels/home.html.twig')
+        return $this->app->render("base/our-travels/home-{$this->app['locale']}.html.twig")
             ->setSharedMaxAge(3600 * 24 * 30);
     }
 
