@@ -31,21 +31,45 @@ Nous y semons, aussi, nos expériences, émotions et souvenirs de voyages.
 * une petite présentation de [nozigues][1] ;
 * un dossier sur notre [voyage de 2011][2], notre premier périple au long-cours :
   3000 km en France, en kayak et à pied, durant 6 mois ;
-* un autre sur notre prochain voyage <small>(départ octobre 2013)</small> :
-{#* un autres sur notre voyage actuel <small>(commencé en octobre 2013)</small> : #}
+* un autre sur notre voyage actuel <small>(commencé en octobre 2013)</small> :
   [**Afrikapié**][3] ;
-* quelques [articles][4], [photos][5] et cartes {#[cartes][6]#}, de-ci de-là ;
+* quelques [articles][4], [photos][5] et [cartes][6], de-ci de-là ;
 * et un [pigeon voyageur][7], pour nous contacter.
 
-Actuellement, nous nous préparons ici :
-{#Actuellement, nous nous trouvons ici :#}
-<a id="current-place" href="#">*{{- lastGeoEntry.geoCoords | default('0, 0') -}}*</a>,
-dans notre belle région natale de l'*estuaire de Loire*.
+Actuellement, nous nous trouvons ici :
+<a id="current-place" href="#">*{{- lastGeoEntry.geoCoords | default('0, 0') -}}*</a>
 
 <big>Bonne balade.</big>
     {%- endset %}
 {% else %}
     {% set text -%}
+# Welcome to all! { #page-title  }
+
+<big>We are <strong class="special">Marie and Mathieu</strong>, two young travellers.</big>
+
+This web space is our small digital garden, almost secret.
+Here, slowly, humbly, we make grow some vagabond ideas: some soft and sweet, others bitter and spicy, and more.
+We also sow our travel experiences, emotions and souvenirs.
+
+<big>Walk there and find:</big>
+
+* a little presentation of [ourselves][1] ;
+* a presention of our [travel in 2011][2], our first long travel :
+  3000 km in France, kayaking and walking, during 6 mouths ;
+* and other about our curent travel <small>(started in October 2013)</small> :
+  [**Afrikapié**][3] ;
+* some [articles][4], [photos][5] and [maps][6], here and there ;
+* and a [pigeon carrier][7] to contact us.
+
+Currently, we are here:
+<a id="current-place" href="#">*{{- lastGeoEntry.geoCoords | default('0, 0') -}}*</a>
+
+<big>Stroll well.</big>
+
+<p class="alert alert-warning">
+    <b>Note:</b> French is our mother tongue.
+    Therefore, the "day-to-day" content of this web space is mostly written in French language.
+</p>
     {%- endset %}
 {% endif %}
 

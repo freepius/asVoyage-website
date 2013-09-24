@@ -46,15 +46,14 @@ TODO
 * Blog creating/updating page :
   * Add help for RichText
 * On Blog "reading" page : add box containing related articles/contents
-* Traduction of new base pages (about, our-trips, etc.)
 * Revoir le CSS : les marges pour les titres, le centrage dans about, l'affichage sur grand et petit écran, etc.
 * Make RSS or newsletter
 * BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)
 * Make a translation table for tags
 * Blog : macro to include a media in a blog article
-* New hom page
 * BUG on IE 9 : problem to refresh captcha (eg: on contact page)
 * Improve tags size on tags box ?!
+* Home page : insert the travel path on mini-map
 * Media module : add an "info box" on home page
 * Follow my pullrequest for :
   * Lightbox2               (I make the local change)
@@ -66,8 +65,8 @@ For production
 
 * Solve the TODOs
 * Update vendor and libraries
-* Cache (with APC/Memcached ?) :
-  * Blog controller => caching the generated HTML from RichText
+* HttpCache:
+  * Blog articles => cache the generated HTML from RichText
 * Minified JS and CSS files
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 
