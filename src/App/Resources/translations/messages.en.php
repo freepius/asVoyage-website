@@ -53,6 +53,8 @@ return [
     //'See more articles'          => '',
     //'See more images'            => '',
     //'Submit'                     => '',
+    //'Tags'                       => '',
+    //'The figures'                => '',
     //'They support us!'           => '',
     //'to'                         => '',
     //'Top'                        => '',

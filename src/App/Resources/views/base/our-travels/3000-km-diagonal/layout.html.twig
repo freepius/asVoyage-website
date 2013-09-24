@@ -1,0 +1,79 @@
+{% set currentNav = 'our-travels' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "macros.twig" import tags_box %}
+
+{% import "carto.twig" as carto %}
+
+
+{% block stylesheets %}
+    {{ carto.cssBase() }}
+
+    <style>
+        #map { height: 300px; }
+
+        .leaflet-label
+        {
+            min-width: 0px;
+            white-space: nowrap;
+        }
+    </style>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ carto.jsBase() }}
+
+    <script>
+        {% include "base/our-travels/3000-km-diagonal/geo-coords.js" %}
+
+        var downLoire = L.polyline(downLoire_points, {color: 'blue'})
+            .bindLabel('Descente de Loire'),
+
+            longWalk = L.polyline(longWalk_points,  {color: 'green'})
+                .bindLabel('Grande marche'),
+
+            group = L.featureGroup([downLoire, longWalk])
+                .setStyle({weight: 10});
+
+        asCarto.addMap('map')
+            .addLayer(group)
+            .fitBounds(group.getBounds(), {reset: true});
+    </script>
+{% endblock %}
+
+
+{% block main %}
+    <article itemscope itemtype="http://schema.org/Article" class="col-xs-8">
+
+        <!-- Breadcrumb + title -->
+        <header>
+            <nav><a href="/our-travels">{{ 'nav.our-travels'|trans }}</a> »</nav>
+            <h1 id="page-title">{{ pageTitle | trans }}</h1>
+        </header>
+
+        <div itemprop="articleBody">
+            {{ text | richText }}
+        </div>
+    </article>
+
+    <aside class="col-xs-4">
+        {% include "base/our-travels/3000-km-diagonal/book-pub.html.twig" only %}
+
+        <!-- Map -->
+        <div id="map" class="box"></div>
+
+        <!-- Tags -->
+        <div class="box">
+            <h1>{{ 'Tags'|trans }}</h1>
+            {{ tags_box(tags) }}
+        </div>
+
+        <!-- The numbers -->
+        <div class="box">
+            <h1>{{ 'The figures'|trans }}</h1>
+            {{ tags_box(theFigures, {shuffle: false, style: 'unstyled'}) }}
+        </div>
+    </aside>
+{% endblock %}

@@ -53,6 +53,8 @@ return [
     'See more articles'          => "Voir plus d'articles",
     'See more images'            => "Voir plus d'images",
     'Submit'                     => 'Envoyer',
+    'Tags'                       => 'Mots-clés',
+    'The figures'                => 'Les chiffres',
     'They support us!'           => 'Ils nous soutiennent !',
     'to'                         => 'à',
     'Top'                        => 'Haut',

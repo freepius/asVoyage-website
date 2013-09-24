@@ -1,0 +1,98 @@
+{% from "media/macros.twig" import media_render %}
+
+{% set pageTitle = '3000 km diagonally' %}
+
+{% set tags = [
+    [4, '2011'],
+    [4, '3000 km'],
+    [4, '6 mouths'],
+    [3, 'Bivouac'],
+    [2, 'Ambulation'],
+    [2, 'Diagonal'],
+    [3, 'Kayak'],
+    [3, 'Loire'],
+    [2, 'Long travel'],
+    [3, 'Walk'],
+    [3, 'Nantes - Nice'],
+    [2, 'Nature'],
+    [2, 'Precarious'],
+    [1, 'Alpilles'],
+    [1, 'Auvergne'],
+    [1, 'Brenne'],
+    [1, 'Camargue'],
+    [1, 'Cévennes'],
+    [1, 'Creuse'],
+    [1, 'Lubéron'],
+    [1, 'Touraine'],
+    [1, 'Verdon'],
+] %}
+
+{% set theFigures = [
+    [4, '168 days'],
+    [4, '1846 km walking'],
+    [4, '857 km kayaking'],
+    [4, '149 bivouacs'],
+    [3, '102 days of good weather'],
+    [3, '19 days of rain'],
+    [3, '6 big thunderstorms'],
+    [3, '19 summits ascended'],
+    [3, '18 beautiful animal encounters'],
+    [3, '11 libraries visited'],
+    [3, '7 frights'],
+    [2, '20 beautiful human encounters'],
+    [2, '14 very hot days'],
+    [2, '3 big disputes'],
+    [2, '6 invasive species'],
+    [2, '13 good bathings'],
+    [2, '523 photos'],
+    [2, '24 restaurants'],
+    [1, '200 km motorized'],
+    [1, '7 continuous days of rain'],
+    [1, '35 days of rest'],
+    [1, '5 big "What\'s the fuck?"'],
+    [1, '2 fireworks'],
+] %}
+
+{% set text -%}
+*"3000 km diagonally"* is our initiatic travel.
+In 2011, from April to October, we passed through some pieces of France, from South-East to North-West and return.
+
+During two months, we followed the longest river of France, from its source to the Atlantic ocean :
+the first 120 km walking through Ardèche's mountains ;
+the other 900 km kayaking up to be in the mud of the Loire's estuary.  
+It was our **"Descente de Loire"**.
+
+<p class="row">
+    {% for img in downLoireImgs %}
+        {{ media_render(img, {class: 'col-xs-3', group: 'downLoire'}) }}
+    {% endfor %}
+
+    <a href="/media/tags-Descente de Loire" class="lead pull-right">» See all photos</a>
+</p>
+
+Two weeks later, we put our muddy shoes and "On the road again"!
+Initially, we wanted to walk on the Way of St. James up to the Cape Finisterre in Spain.
+But our life of vagabonds in nature and the slap induced by encounters have changed our azimuth.
+Finally, we stayed on France's roads and have joined (through various superb territories) Nantes to Nice during 1700 km.  
+This was our **"Grande marche"**.
+
+<p class="row">
+    {% for img in longWalkImgs %}
+        {{ media_render(img, {class: 'col-xs-3', group: 'longWalk'}) }}
+    {% endfor %}
+
+    <a href="/media/tags-Grande marche" class="lead pull-right">» See all photos</a>
+</p>
+
+From this first long travel experience, crude and precarious, simple and surprising, formative and joyful,
+full of thoughts and daydreams, of discoveries and rants, of many observations and analysis,
+we written a book **in french language**.  
+This book (172 pages) is self-published under a [free license][].  
+**Find the paper version (€ 12) and the digital one (€ 2.99) on [atramenta.net][]**.
+
+[free license]: http://http://en.wikipedia.org/wiki/Free_license
+[atramenta.net]: http://www.atramenta.net/books/3000-kilometres-en-diagonale/179
+{%- endset %}
+
+
+{% extends "base/our-travels/3000-km-diagonal/layout.html.twig" %}

@@ -208,7 +208,7 @@ class BaseController implements ControllerProviderInterface
      */
     public function ourTravels()
     {
-        return $this->app->render("base/our-travels/home-{$this->app['locale']}.html.twig")
+        return $this->app->render("base/our-travels/{$this->app['locale']}.html.twig")
             ->setSharedMaxAge(3600 * 24 * 30);
     }
 
@@ -223,7 +223,7 @@ class BaseController implements ControllerProviderInterface
         $downLoireImgs = $repository->randomImagesByTags(['Favori', 'Descente de Loire'], 4);
         $longWalkImgs  = $repository->randomImagesByTags(['Favori', 'Grande marche']    , 4);
 
-        return $this->app->render('base/our-travels/3000-km-diagonal.html.twig',
+        return $this->app->render("base/our-travels/3000-km-diagonal/{$this->app['locale']}.html.twig",
         [
             'downLoireImgs' => $downLoireImgs,
             'longWalkImgs'  => $longWalkImgs,
