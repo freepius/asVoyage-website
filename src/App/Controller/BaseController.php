@@ -67,8 +67,8 @@ class BaseController implements ControllerProviderInterface
         $base->get('/admin/cache-clear', [$this, 'cacheClear']);
 
         // Technical routes
-        $base->get('/switch-locale/{locale}', [$this, 'switchLocale'])
-            ->assert('locale', 'en|fr');
+        $base->get('/home/{_locale}', [$this, 'switchLocale'])
+            ->assert('_locale', 'en|fr');
 
         $base->get('/captcha-change', [$this, 'changeCaptcha'])
             ->mustBeAjax();
@@ -287,11 +287,13 @@ class BaseController implements ControllerProviderInterface
      * TECHNICAL ACTIONS
      **************************************************************************/
 
-    public function switchLocale($locale)
+    public function switchLocale(Request $request, $_locale)
     {
-        $this->app->setSession('locale', $locale);
+        $this->app->setSession('locale', $_locale);
 
-        return $this->app->redirect('/home');
+        $this->app['translator']->setLocale($_locale);
+
+        return $this->home($request);
     }
 
     /**

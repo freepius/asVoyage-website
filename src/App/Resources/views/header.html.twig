@@ -4,7 +4,7 @@
 {% macro add_lang(lang, currentLang) %}
 {% spaceless %}
     <li {{ lang == currentLang ? 'class="active"' }}>
-        <a href="{{ '/switch-locale/' ~ lang }}">
+        <a href="{{ '/home/' ~ lang }}">
             <img src="/images/{{- lang -}}.gif" alt="{{ ('lang.'~lang)|trans }}">
         </a>
     </li>
