@@ -131,7 +131,9 @@ Trait TaggedDatedTrait
         // Http cache
         $cacheKey = self::MODULE.'.home.'.serialize($queryFilters).'.'.$page;
 
-        $response = $this->app['http_cache.mongo']->response($cacheKey, [self::MODULE]);
+        $response = $this->app['http_cache.mongo']->response(
+            $request, $cacheKey, [self::MODULE]
+        );
 
         if ($response->isNotModified($request)) { return $response; }
 

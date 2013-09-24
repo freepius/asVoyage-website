@@ -92,7 +92,7 @@ class BaseController implements ControllerProviderInterface
     public function home(Request $request)
     {
         $response = $this->app['http_cache.mongo']->response(
-            'base.home', ['blog', 'media', 'register']
+            $request, 'base.home', ['blog', 'media', 'register']
         );
         if ($response->isNotModified($request)) { return $response; }
 
@@ -150,7 +150,7 @@ class BaseController implements ControllerProviderInterface
     public function map(Request $request)
     {
         $response = $this->app['http_cache.mongo']->response(
-            'base.map', ['register']
+            $request, 'base.map', ['register']
         );
         if ($response->isNotModified($request)) { return $response; }
 

@@ -3,6 +3,7 @@
 namespace App\HttpCache;
 
 use Symfony\Component\HttpFoundation\Response,
+    Symfony\Component\HttpFoundation\Request,
     App\Model\Repository\MongoRepository;
 
 
@@ -35,8 +36,9 @@ class MongoCache extends MongoRepository
      *          ...
      *      }
      */
-    public function response($key, array $dependencies = [])
+    public function response(Request $request, $key, array $dependencies = [])
     {
+        $key   = $request->getLocale().'.'.$key;
         $query = ['_id' => $key];
 
         // Exists there a valid "MongoDB cache" for this $key ?
