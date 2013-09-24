@@ -233,7 +233,7 @@ class BaseController implements ControllerProviderInterface
 
     public function afrikapie()
     {
-        return $this->app->render('base/our-travels/afrikapie.html.twig');
+        return $this->app->render("base/our-travels/afrikapie/{$this->app['locale']}.html.twig");
     }
 
 
