@@ -57,9 +57,7 @@ class MongoCache extends MongoRepository
             );
         }
 
-        return (new Response())
-            ->setMaxAge(0)
-            ->setSharedMaxAge(0)
+        return (new Response('', 200, ['Cache-Control' => 'no-store, no-cache, must-revalidate']))
             ->setLastModified(new \DateTime(@ $cache['lastModified']));
     }
 
