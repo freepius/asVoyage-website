@@ -46,7 +46,6 @@ TODO
 * Blog creating/updating page :
   * Add help for RichText
 * On Blog "reading" page : add box containing related articles/contents
-* Revoir le CSS : les marges pour les titres, le centrage dans about, l'affichage sur grand et petit écran, etc.
 * Make RSS or newsletter
 * BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)
 * Make a translation table for tags

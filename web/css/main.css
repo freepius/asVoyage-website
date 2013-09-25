@@ -5580,6 +5580,7 @@ article.summary footer {
   border: 2px solid;
 }
 .travel h2 {
+  margin: 7px;
   font-size: 22px;
   text-align: center;
 }
@@ -5747,7 +5748,7 @@ h2 {
  ************************************************/
 #header {
   height: 155px;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
   border-bottom: 5px solid #cf5b37;
 }
 #header #logo {
