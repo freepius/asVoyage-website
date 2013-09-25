@@ -52,6 +52,7 @@ TODO
 * Make a translation table for tags
 * Blog : macro to include a media in a blog article
 * BUG on IE 9 : problem to refresh captcha (eg: on contact page)
+* BIG BUG : HttpCache + switch locale + client-side cache + ... = DOES NOT WORK (well) !
 * Improve tags size on tags box ?!
 * Home page : insert the travel path on mini-map
 * Media module : add an "info box" on home page

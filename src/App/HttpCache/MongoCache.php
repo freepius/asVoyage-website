@@ -58,7 +58,8 @@ class MongoCache extends MongoRepository
         }
 
         return (new Response())
-            ->setPublic()
+            ->setMaxAge(0)
+            ->setSharedMaxAge(0)
             ->setLastModified(new \DateTime(@ $cache['lastModified']));
     }
 
