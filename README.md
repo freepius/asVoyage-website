@@ -66,7 +66,6 @@ For production
 * Update vendor and libraries
 * HttpCache:
   * Blog articles => cache the generated HTML from RichText
-* Minified JS and CSS files
 * Improve the inclusion of JS and CSS files (if not using => do not include)
 
 Low priority

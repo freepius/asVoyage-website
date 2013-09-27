@@ -55,7 +55,7 @@
     /**
      * Add the current place
      */
-    currentPlace = L.marker(register.geoCoords[0])
+    currentPlace = L.marker(register.geoCoords[0], {zIndexOffset: 100})
         .setIcon(currentPlaceIcon)
         .bindLabel(register.labels[0])
         .addTo(map);
@@ -99,7 +99,7 @@
      */
     for (i = 0; i < media.geoCoords.length; i += 1) {
 
-        marker = L.marker(media.geoCoords[i])
+        marker = L.marker(media.geoCoords[i], {riseOnHover: true})
             .setIcon(mediaIcon)
             .addTo(mediaLayer);
 
