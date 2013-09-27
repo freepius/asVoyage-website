@@ -5375,6 +5375,9 @@ article > header time {
 article [itemprop="articleBody"] {
   margin-bottom: 50px;
 }
+article [itemprop="articleBody"] .thumbnail {
+  margin: 0.7em;
+}
 article.summary {
   margin-bottom: 20px;
   padding: 15px;
@@ -5740,7 +5743,8 @@ h6 {
   margin: 0;
 }
 h1,
-h2 {
+h2,
+h3 {
   margin-bottom: 0.5em;
 }
 /*************************************************
