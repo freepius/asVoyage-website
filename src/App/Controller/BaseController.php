@@ -19,7 +19,7 @@ use Silex\ControllerProviderInterface,
  *      => map
  *      => ourTravels                   [cached]
  *      => diagonal3000Km [our-travels] [cached]
- *      => afrikapie      [our-travels]
+ *      => afrikapie      [our-travels] [cached]
  *
  *  -> ADMIN ACTIONS :
  *      => login
@@ -239,9 +239,13 @@ class BaseController implements ControllerProviderInterface
         ->setSharedMaxAge(3600 * 24 * 30);
     }
 
+    /**
+     * CACHE: public ; 30 days
+     */
     public function afrikapie()
     {
-        return $this->app->render("base/our-travels/afrikapie/{$this->app['locale']}.html.twig");
+        return $this->app->render("base/our-travels/afrikapie/{$this->app['locale']}.html.twig")
+            ->setSharedMaxAge(3600 * 24 * 30);
     }
 
 
