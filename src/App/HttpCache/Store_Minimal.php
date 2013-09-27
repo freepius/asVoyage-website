@@ -6,6 +6,12 @@ use Symfony\Component\HttpFoundation\Request,
     Symfony\Component\HttpKernel\HttpCache\Store as BaseStore;
 
 
+/**
+ * With HttpKernel 2.3, it is not possible to extend the BaseStore class
+ * (because of private methods and properties).
+ * With HttpKernel 2.3-dev, yes !
+ * TODO: Follow this.
+ */
 class Store extends BaseStore
 {
     /**

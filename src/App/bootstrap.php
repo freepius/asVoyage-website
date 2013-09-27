@@ -41,7 +41,7 @@ $app['path.web']    = ROOT.'/web';
 $app['dir.captcha'] = 'tmp/captcha';
 
 /* Config. parameters in bulk */
-$app['currentTravel.startingDate'] = '2013-10-02';
+$app['currentTravel.startingDate'] = '2013-09-29';
 
 
 /*************************************************

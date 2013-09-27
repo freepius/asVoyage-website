@@ -37,10 +37,7 @@ class BaseController implements ControllerProviderInterface
     public function __construct(\App\Application $app)
     {
         $this->app = $app;
-
-        // TODO: change this when Afrikapié start
-        $this->currentTravelStartingDate = '2013-09-03';
-        //$this->currentTravelStartingDate = $app['currentTravel.startingDate'];
+        $this->currentTravelStartingDate = $app['currentTravel.startingDate'];
     }
 
     public function connect(\Silex\Application $app)

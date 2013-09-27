@@ -51,13 +51,13 @@ TODO
 * BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)
 * Make a translation table for tags
 * Blog : macro to include a media in a blog article
-* BUG on IE 9 : problem to refresh captcha (eg: on contact page)
-* Improve tags size on tags box ?!
-* Media module : add an "info box" on home page
+* Improve tags size on tags box ?
 * Follow my pullrequest for :
   * Lightbox2               (I make the local change)
   * Leaflet Zoom Control    (I make the local change)
   * Symfony/HttpKernel      (I made the local change)
+* BUG on IE 9 : problem to refresh captcha (eg: on contact page)
+* BUG on IE 8 : very bad displaying of pages (html5 not recognized ?)
 
 For production
 --------------
