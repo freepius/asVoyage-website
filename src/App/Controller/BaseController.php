@@ -107,18 +107,22 @@ class BaseController implements ControllerProviderInterface
         // The 20 last favorite images
         $lastImages = $mediaRepo->find(20, 0, ['tags' => ['Favori'], 'type' => 'image']);
 
+        // Get the last "geo. entry" from "Travel Register" module
+        $lastGeoEntry = $registerRepo->getLastGeoEntry();
+
+        // Get the last "message entry" from "Travel Register"
+        $lastMsgEntry = $registerRepo->getLastMsgEntry();
+
         // Get/generate the javascript file containing the travel register entries
         $geoEntries_js = $registerRepo->getGeoJsFile($this->currentTravelStartingDate);
-
-        // Get the last geo. entry from "Travel Register" module (=== our current place)
-        $lastGeoEntry = $registerRepo->getLastGeoEntry();
 
         return $this->app->render('base/home.html.twig',
         [
             'articles'       => $lastArticles,
             'favoriteImages' => $lastImages,
-            'geoEntries_js'  => $geoEntries_js,
             'lastGeoEntry'   => $lastGeoEntry,
+            'lastMsgEntry'   => $lastMsgEntry,
+            'geoEntries_js'  => $geoEntries_js,
         ], $response);
     }
 

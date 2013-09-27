@@ -1,0 +1,24 @@
+{##
+ # Summary :
+ #  -> register_render
+ #}
+
+
+{##
+ # Render the register entry.
+ #}
+{% macro register_render(e) %}
+{% spaceless %}
+
+    {{- e._id | localizeddate('short', 'short') -}}
+
+    {%- if e.temperature or e.meteo -%}
+        &nbsp;&nbsp;<i class='icon-caret-right'></i>&nbsp;&nbsp;
+        {{- e.temperature ? (e.temperature ~ '°C ') -}}
+        {{- e.meteo       ? ("<img src='/images/weather/"~e.meteo~".png'>") | raw -}}
+    {%- endif -%}
+
+    <br>{{- e.message -}}
+
+{% endspaceless %}
+{% endmacro %}

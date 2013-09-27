@@ -13,6 +13,7 @@ use Symfony\Component\Filesystem\Filesystem,
  *  -> filter   [protected]
  *  -> find
  *  -> getLastGeoEntry
+ *  -> getLastMsgEntry
  *  -> getGeoJsFile
  *  -> clearCacheDir
  */
@@ -57,6 +58,7 @@ class Register extends MongoRepository
      * Return some filters for querying register entries :
      *    -> between two datetime ("from" and "to" included)
      *    -> having geo. coords (if "geo" is true)
+     *    -> having a message (if "msg" is true)
      *
      * Null (or equivalent) filter are ignored.
      *
@@ -65,6 +67,7 @@ class Register extends MongoRepository
      *      from : The old bound date   ; format = Y-m-d (H:i:s)
      *      to   : The young bound date ; format = Y-m-d (H:i:s)
      *      geo  : If true, entry must have geo. coords
+     *      msg  : If true, entry must have a message
      * }
      *
      * @return array
@@ -76,10 +79,12 @@ class Register extends MongoRepository
         $from      = @ $filters['from'];
         $to        = @ $filters['to'];
         $havingGeo = (bool) @ $filters['geo'];
+        $havingMsg = (bool) @ $filters['msg'];
 
         if ($from)      { $query['_id']['$gte'] = $from; }
         if ($to)        { $query['_id']['$lte'] = $to; }
         if ($havingGeo) { $query['geoCoords']['$ne'] = ''; }
+        if ($havingMsg) { $query['message']['$ne'] = ''; }
 
         return $query;
     }
@@ -112,6 +117,16 @@ class Register extends MongoRepository
     public function getLastGeoEntry()
     {
         $entry = $this->find(1, ['geo' => true]);
+        $entry->next();
+        return $entry->current();
+    }
+
+    /**
+     * Return the last entry having a message.
+     */
+    public function getLastMsgEntry()
+    {
+        $entry = $this->find(1, ['msg' => true]);
         $entry->next();
         return $entry->current();
     }

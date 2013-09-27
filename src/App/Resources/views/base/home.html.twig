@@ -6,6 +6,8 @@
 
 {% from "macros.twig" import linked_img %}
 
+{% from "register/macros.twig" import register_render %}
+
 
 {% block stylesheets %}
     {{ carto.cssBase() }}
@@ -36,7 +38,22 @@
 
 {% block main %}
     <aside class="col-xs-4">
-        {% include "base/our-travels/3000-km-diagonal/book-pub.html.twig" only %}
+        <!-- The last travel register entry with message -->
+        <div class="box">
+            <h1 class="special" style="margin-bottom: 1em; font-size: 1em;">
+                {{ 'Last mini-message'|trans }}
+            </h1>
+
+            {{ register_render(lastMsgEntry) }}
+        </div>
+
+        <!-- Mini-map -->
+        <div id="map"></div>
+
+        <!-- Link to the Map page -->
+        <div class="clearfix small special" style="margin-bottom: 1.5em;">
+            <a href="/map" class="pull-right">» {{ 'See the large map'|trans }}</a>
+        </div>
 
         <!-- Carousel of last favorite images -->
         <div class="carousel-inner slide">
@@ -52,13 +69,7 @@
             <a href="/media" class="pull-right">» {{ 'See more images'|trans }}</a>
         </div>
 
-        <!-- Mini-map -->
-        <div id="map"></div>
-
-        <!-- Link to the Map page -->
-        <div class="clearfix small special" style="margin-bottom: 1.5em;">
-            <a href="/map" class="pull-right">» {{ 'See the large map'|trans }}</a>
-        </div>
+        {% include "base/our-travels/3000-km-diagonal/book-pub.html.twig" only %}
     </aside>
 
     <div class="col-xs-8">

@@ -35,6 +35,7 @@ return [
     'General'                    => 'Général',
     'Help'                       => 'Aide',
     'Home'                       => 'Accueil',
+    'Last mini-message'          => 'Dernier mini-message',
     'Last published articles'    => 'Derniers articles publiés',
     'Login'                      => 'Connexion',
     'Logout'                     => 'Déconnexion',

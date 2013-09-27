@@ -35,6 +35,7 @@ return [
     //'General'                    => '',
     //'Help'                       => '',
     //'Home'                       => '',
+    //'Last mini-message'          => '',
     //'Last published articles'    => '',
     //'Login'                      => '',
     //'Logout'                     => '',
