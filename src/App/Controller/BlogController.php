@@ -14,7 +14,8 @@ use Silex\ControllerProviderInterface,
  *  -> connect
  *  -> retrieveFiltersAndPage [protected]
  *  -> slugToArticle
- *  -> refreshCache           [protected]
+ *  -> clearCache             [protected]
+ *  -> getRepository          [protected]
  *
  *  -> GLOBAL ACTIONS :
  *      => dashboard
@@ -196,11 +197,16 @@ class BlogController implements ControllerProviderInterface
     }
 
     /**
-     * Refresh caches that depend on blog articles/comments.
+     * Clear caches that depend on blog articles/comments.
      */
-    protected function refreshCache()
+    protected function clearCache()
     {
         $this->app['http_cache.mongo']->drop('blog');
+    }
+
+    protected function getRepository()
+    {
+        return $this->app['model.repository.blog'];
     }
 
 
@@ -265,7 +271,7 @@ class BlogController implements ControllerProviderInterface
             if (! $errors)
             {
                 $this->repository->store($article);
-                $this->refreshCache();
+                $this->clearCache();
 
                 $this->app->addFlash('success', $this->app->trans(
                     'blog.' . ($isCreation ? 'created' : 'updated'),
@@ -290,7 +296,7 @@ class BlogController implements ControllerProviderInterface
         if ($request->isMethod('POST'))
         {
             $this->repository->deleteById($article['_id']);
-            $this->refreshCache();
+            $this->clearCache();
 
             $this->app->addFlash('success', $this->app->trans(
                 'blog.deleted', [$article['slug']]
@@ -391,7 +397,7 @@ class BlogController implements ControllerProviderInterface
             ));
 
             $this->repository->deleteComment($article['_id'], $idComment);
-            $this->refreshCache();
+            $this->clearCache();
 
             return true;
         }
@@ -428,7 +434,7 @@ class BlogController implements ControllerProviderInterface
         if (! $errors)
         {
             $this->repository->storeComment($article['_id'], $idComment, $comment);
-            $this->refreshCache();
+            $this->clearCache();
 
             $this->app->addFlash('success', $this->app->trans(
                 (null === $idComment) ? 'comment.created' : 'comment.updated',

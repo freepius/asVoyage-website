@@ -24,6 +24,7 @@ External libraries used
   * [ShiftCheckbox](https://github.com/nylen/shiftcheckbox) : handle a "select all" widget + selecting ranges of checkboxes via Shift+Click
 * [Leaflet](http://leafletjs.com/) and plugins :
   * [AwesomeMarkers](https://github.com/lvoogdt/Leaflet.awesome-markers)
+  * [OverlappingMarkerSpiderfier](https://github.com/jawj/OverlappingMarkerSpiderfier-Leaflet)
   * [MarkerCluster](https://github.com/Leaflet/Leaflet.markercluster)
   * [ZoomSlider](https://github.com/kartena/Leaflet.zoomslider)
   * [PanControl](https://github.com/kartena/Leaflet.Pancontrol)
@@ -46,7 +47,7 @@ TODO
 * Blog creating/updating page :
   * Add help for RichText
 * On Blog "reading" page : add box containing related articles/contents
-* Make RSS or newsletter
+* Make RSS
 * BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)
 * Make a translation table for tags
 * Blog : macro to include a media in a blog article
@@ -56,8 +57,8 @@ TODO
 * Media module : add an "info box" on home page
 * Follow my pullrequest for :
   * Lightbox2               (I make the local change)
-  * Leaflet Zoom Control    (I make the locale change)
-  * Symfony/HttpKernel
+  * Leaflet Zoom Control    (I make the local change)
+  * Symfony/HttpKernel      (I made the local change)
 
 For production
 --------------

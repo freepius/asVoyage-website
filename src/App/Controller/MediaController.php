@@ -12,7 +12,8 @@ use Silex\ControllerProviderInterface,
  * Summary :
  *  -> __construct
  *  -> connect
- *  -> refreshCache [protected]
+ *  -> clearCache       [protected]
+ *  -> getRepository    [protected]
  *
  *  -> ONLY FOR CREATION MULTIPLE :
  *      => initCreateMultiple
@@ -43,8 +44,6 @@ class MediaController implements ControllerProviderInterface
 
         $this->app             = $app;
         $this->config          = $app['media.config'];
-        $this->webPath         = $app['path.web'];
-        $this->repository      = $app['model.repository.media'];
         $this->factory         = $app['model.factory.media'];
         $this->factoryUploaded = $app['model.factory.media.uploaded'];
     }
@@ -81,11 +80,18 @@ class MediaController implements ControllerProviderInterface
     }
 
     /**
-     * Refresh caches that depend on register entries.
+     * Clear caches that depend on register entries.
      */
-    protected function refreshCache()
+    protected function clearCache()
     {
         $this->app['http_cache.mongo']->drop('media');
+
+        $this->getRepository()->clearCacheDir();
+    }
+
+    protected function getRepository()
+    {
+        return $this->app['model.repository.media'];
     }
 
 
@@ -95,7 +101,7 @@ class MediaController implements ControllerProviderInterface
 
     public function initCreateMultiple()
     {
-        $this->repository->collectGarbage();
+        $this->getRepository()->collectGarbage();
 
         return $this->app->render('media/post-multiple.html.twig',
             $this->getUploadParams() + ['isCreation' => true]
@@ -124,7 +130,7 @@ class MediaController implements ControllerProviderInterface
         $errors = $this->factoryUploaded->bind($media, $request->files->get('files'));
 
         if (! $errors) {
-            $this->repository->store($media, true);
+            $this->getRepository()->store($media, true);
         }
 
         return $this->app->json(['files' =>
@@ -143,7 +149,7 @@ class MediaController implements ControllerProviderInterface
      */
     public function deleteUploaded($id)
     {
-        if (! $this->repository->deleteById($id, true))
+        if (! $this->getRepository()->deleteById($id, true))
         {
             $this->app->abort(404, "\"$id\" is not a valid uploaded media element.");
         }
@@ -167,7 +173,7 @@ class MediaController implements ControllerProviderInterface
         foreach ($httpData as $id => $value)
         {
             try {
-                $listMedia[] = $this->repository->getById($id);
+                $listMedia[] = $this->getRepository()->getById($id);
             }
             catch (MediaElementNotFound $e)
             {
@@ -207,7 +213,7 @@ class MediaController implements ControllerProviderInterface
         foreach ($httpData as $id => $httpMedia)
         {
             try {
-                $media = $this->repository->getById($id, $isCreation);
+                $media = $this->getRepository()->getById($id, $isCreation);
 
                 $errors = $this->factory->bind($media, $httpMedia);
 
@@ -219,7 +225,7 @@ class MediaController implements ControllerProviderInterface
                 else
                 {
                     $countPosted ++;
-                    $this->repository->store($media);
+                    $this->getRepository()->store($media);
                 }
             }
             catch (MediaElementNotFound $e)
@@ -243,7 +249,7 @@ class MediaController implements ControllerProviderInterface
                 $isCreation ? 'media.created' : 'media.updated',
                 $countPosted, [$countPosted]
             ));
-            $this->refreshCache();
+            $this->clearCache();
         }
 
         if ($countUnfound > 0)
@@ -273,8 +279,8 @@ class MediaController implements ControllerProviderInterface
         // Retrieve all elements to delete
         foreach ($httpData as $id => $value)
         {
-            if ($this->repository->deleteById($id)) { $countDeleted ++; }
-            else                                    { $countUnfound ++; }
+            if ($this->getRepository()->deleteById($id)) { $countDeleted ++; }
+            else                                         { $countUnfound ++; }
         }
 
         if ($countDeleted > 0)
@@ -282,7 +288,7 @@ class MediaController implements ControllerProviderInterface
             $this->app->addFlash('success', $this->app->transChoice(
                 'media.deleted', $countDeleted, [$countDeleted])
             );
-            $this->refreshCache();
+            $this->clearCache();
         }
 
         if ($countUnfound > 0)

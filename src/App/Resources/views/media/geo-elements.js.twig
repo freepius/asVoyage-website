@@ -1,0 +1,29 @@
+{% from "/media/macros.twig" import media_render %}
+
+
+var media =
+{
+    geoCoords: [
+        {%- for e in elements -%}
+            [{{ e.geoCoords }}],
+        {%- endfor -%}
+    ],
+
+    thumb: [
+        {%- for e in elements -%}
+            '<img class="thumb" src="/media/thumb/{{ e.content }}">',
+        {%- endfor -%}
+    ],
+
+    content: [
+        {%- for e in elements -%}
+            '{{ (
+'<div class="text-center">' ~
+    (e.creationDate ? ('<b>' ~ (e.creationDate | localizeddate('short', 'short')) ~ '</b><br>')) ~
+    (media_render(e) | replace('\n', ' ')) ~
+    (e.caption ? ('<br><i>' ~ (e.caption | escape) ~ '</i>')) ~
+'</div>'
+            ) | raw }}',
+        {%- endfor -%}
+    ],
+};

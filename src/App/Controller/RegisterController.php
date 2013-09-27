@@ -15,7 +15,7 @@ use Silex\ControllerProviderInterface,
  *  -> postOneFromSms
  *  -> isMultiSms       [protected]
  *  -> processMultiSms  [protected]
- *  -> refreshCache     [protected]
+ *  -> clearCache       [protected]
  *  -> getRepository    [protected]
  */
 class RegisterController implements ControllerProviderInterface
@@ -133,10 +133,10 @@ class RegisterController implements ControllerProviderInterface
             ));
         }
 
-        // Refresh caches depending on 'register' entries
+        // Clear caches depending on 'register' entries
         if ($countCreated > 0 || $countUpdated > 0)
         {
-            $this->refreshCache();
+            $this->clearCache();
         }
 
         return (0 === $countInError) ?
@@ -254,7 +254,7 @@ class RegisterController implements ControllerProviderInterface
         if (@ $errors['message'])     { $entry['message'] = substr($entry['message'], 500); }
 
         $this->getRepository()->store($entry);
-        $this->refreshCache();
+        $this->clearCache();
 
         return true;
     }
@@ -321,9 +321,9 @@ class RegisterController implements ControllerProviderInterface
     }
 
     /**
-     * Refresh caches that depend on register entries.
+     * Clear caches that depend on register entries.
      */
-    protected function refreshCache()
+    protected function clearCache()
     {
         $this->app['http_cache.mongo']->drop('register');
 

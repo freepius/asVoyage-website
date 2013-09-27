@@ -61,9 +61,9 @@ class Register extends MongoRepository
      *
      * $filters =
      * {
-     *      from :  The old bound date   ; format = Y-m-d (H:i:s)
-     *      to   :  The young bound date ; format = Y-m-d (H:i:s)
-     *      geo  :  If true, entry must have geo. coords
+     *      from : The old bound date   ; format = Y-m-d (H:i:s)
+     *      to   : The young bound date ; format = Y-m-d (H:i:s)
+     *      geo  : If true, entry must have geo. coords
      * }
      *
      * @return array

@@ -109,7 +109,7 @@ Trait TaggedDatedTrait
     {
         return $this->app->renderView('generic/filter-by-tags.html.twig', [
             'module' => self::MODULE,
-            'tags'   => $this->repository->listTags()
+            'tags'   => $this->getRepository()->listTags()
         ]);
     }
 
@@ -117,7 +117,7 @@ Trait TaggedDatedTrait
     {
         return $this->app->renderView('generic/filter-by-dates.html.twig', [
             'module'           => self::MODULE,
-            'countByYearMonth' => $this->repository->countByYearMonth()
+            'countByYearMonth' => $this->getRepository()->countByYearMonth()
         ]);
     }
 
@@ -139,7 +139,7 @@ Trait TaggedDatedTrait
 
 
         // Total number of elements depending on filters
-        $total = $this->repository->count($queryFilters);
+        $total = $this->getRepository()->count($queryFilters);
 
         $totalPages = (int) ceil($total / $this->limitInHome);
 
@@ -149,7 +149,7 @@ Trait TaggedDatedTrait
         $skip = ($page - 1) * $this->limitInHome;
 
         // Retrieve elements depending on filters
-        $elements = iterator_to_array($this->repository->find(
+        $elements = iterator_to_array($this->getRepository()->find(
             $this->limitInHome, $skip, $queryFilters
         ));
 

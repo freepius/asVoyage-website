@@ -150,14 +150,16 @@ class BaseController implements ControllerProviderInterface
     public function map(Request $request)
     {
         $response = $this->app['http_cache.mongo']->response(
-            $request, 'base.map', ['register']
+            $request, 'base.map', ['media', 'register']
         );
         if ($response->isNotModified($request)) { return $response; }
 
 
+        $mediaRepo    = $this->app['model.repository.media'];
         $registerRepo = $this->app['model.repository.register'];
 
         return $this->app->render('base/map.html.twig', [
+            'media_elements_js'   => $mediaRepo->getGeoJsFile($this->currentTravelStartingDate),
             'register_entries_js' => $registerRepo->getGeoJsFile($this->currentTravelStartingDate),
         ], $response);
     }
@@ -273,6 +275,9 @@ class BaseController implements ControllerProviderInterface
 
         // Empty the public register dir
         $app['model.repository.register']->clearCacheDir();
+
+        // Empty the public media dir
+        $app['model.repository.media']->clearCacheDir();
 
         // Drop the "http cache" mongo collection
         $this->app['http_cache.mongo.collection']->drop();

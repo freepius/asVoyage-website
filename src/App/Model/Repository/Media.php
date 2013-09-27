@@ -2,7 +2,9 @@
 
 namespace App\Model\Repository;
 
-use App\Exception\MediaElementNotFound,
+use Symfony\Component\Filesystem\Filesystem,
+    App\Exception\MediaElementNotFound,
+    App\Util\StringUtil,
     App\Util\Group;
 
 
@@ -21,15 +23,21 @@ use App\Exception\MediaElementNotFound,
  *  -> listTags
  *  -> countByYearMonth
  *  -> randomImagesByTags
+ *  -> getGeoJsFile
+ *  -> clearCacheDir
  */
 class Media extends MongoRepository
 {
+    protected $twig;
     protected $webPath;
+    protected $cacheDir;
 
-    public function __construct(\MongoCollection $collection, $webPath)
+    public function __construct(\MongoCollection $collection, $twig, $webPath, $cacheDir)
     {
         parent::__construct($collection);
-        $this->webPath = $webPath;
+        $this->twig     = $twig;
+        $this->webPath  = $webPath;
+        $this->cacheDir = $cacheDir;
     }
 
     /**
@@ -122,6 +130,7 @@ class Media extends MongoRepository
      *    -> not the temporary elements
      *    -> between two creation datetime ("from" and "to", included)
      *    -> having all "tags"
+     *    -> having geo. coords (if "geo" is true)
      *    -> being of a certain "type"
      *
      * Null (or equivalent) filter are ignored.
@@ -131,6 +140,7 @@ class Media extends MongoRepository
      *      from : The old bound date   ; format = Y-m-d (H:i:s)
      *      to   : The young bound date ; format = Y-m-d (H:i:s)
      *      tags : An array of strings
+     *      geo  : If true, entry must have geo. coords
      *      type : A string
      * }
      *
@@ -140,15 +150,17 @@ class Media extends MongoRepository
     {
         $query = ['isTmp' => false];
 
-        $from = @ $filters['from'];
-        $to   = @ $filters['to'];
-        $tags = @ $filters['tags'];
-        $type = @ $filters['type'];
+        $from      = @ $filters['from'];
+        $to        = @ $filters['to'];
+        $tags      = @ $filters['tags'];
+        $havingGeo = (bool) @ $filters['geo'];
+        $type      = @ $filters['type'];
 
-        if ($from) { $query['creationDate']['$gte'] = $from; }
-        if ($to)   { $query['creationDate']['$lte'] = $to; }
-        if ($tags) { $query['tags']['$all'] = $tags; }
-        if ($type) { $query['mainType'] = $type; }
+        if ($from)      { $query['creationDate']['$gte'] = $from; }
+        if ($to)        { $query['creationDate']['$lte'] = $to; }
+        if ($tags)      { $query['tags']['$all'] = $tags; }
+        if ($havingGeo) { $query['geoCoords']['$ne'] = ''; }
+        if ($type)      { $query['mainType'] = $type; }
 
         return $query;
     }
@@ -223,5 +235,46 @@ class Media extends MongoRepository
         shuffle($media);
 
         return array_slice(array_values($media), 0, $limit);
+    }
+
+    /**
+     * Select all **images** having geo. coords
+     * (eventually between two datetime, $from and $to included).
+     *
+     * Then, generate a *public javascript file* including these entries.
+     * Finally, return its path (relative to web dir).
+     *
+     * If the js file already exists, return directly its path.
+     */
+    public function getGeoJsFile($from = null, $to = null)
+    {
+        $fs = new Filesystem();
+
+        $filepath = sprintf('/%s/from-%s-to-%s.js',
+            $this->cacheDir,
+            StringUtil::slugify($from),
+            StringUtil::slugify($to)
+        );
+
+        if (! $fs->exists($this->webPath.$filepath))
+        {
+            $content = $this->twig->render('media/geo-elements.js.twig', [
+                'elements' => $this->find(0, 0, [
+                    'type' => 'image', 'geo' => true,
+                    'from' => $from, 'to' => $to
+                ])
+            ]);
+
+            $fs->dumpFile($this->webPath.$filepath, $content);
+        }
+
+        return $filepath;
+    }
+
+    public function clearCacheDir()
+    {
+        $fs = new Filesystem();
+        $fs->remove($this->webPath.'/'.$this->cacheDir);
+        $fs->mkdir ($this->webPath.'/'.$this->cacheDir);
     }
 }

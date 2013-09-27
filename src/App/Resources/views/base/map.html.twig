@@ -17,6 +17,19 @@
             margin-right: auto;
             border-radius: 10px;
         }
+
+        /* Override a Leaflet CSS property */
+        img.img-responsive { max-width: 100% !important; }
+
+        .media-label {
+            min-width: 0px;
+            white-space: nowrap;
+            z-index: 1000000000 !important;
+        }
+
+        .media-label img {
+            max-width: 400px;
+        }
     </style>
 {% endblock %}
 
@@ -24,6 +37,7 @@
 {% block javascripts %}
     {{ carto.jsFull() }}
     <script src="{{ register_entries_js }}"></script>
+    <script src="{{ media_elements_js }}"></script>
     <script src="/js/app-base-map.js"></script>
 {% endblock %}
 

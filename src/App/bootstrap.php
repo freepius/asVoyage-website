@@ -213,7 +213,10 @@ $app['model.repository.blog'] = $app->share(function ($app)
 
 $app['model.repository.media'] = $app->share(function ($app)
 {
-    return new \App\Model\Repository\Media($app['mongo.database']->media, $app['path.web']);
+    return new \App\Model\Repository\Media(
+        $app['mongo.database']->media, $app['twig'],
+        $app['path.web'], $app['media.config']['cache_dir']
+    );
 });
 
 $app['model.repository.register'] = $app->share(function ($app)
@@ -266,9 +269,10 @@ $app['model.factory.register'] = $app->share(function ($app)
 
 $app['media.config'] =
 [
-    'image.web.size'       => 1200,     // size of small side in px
-    'image.thumb.size'     => 120,      // size of small side in px
-    'maxFileSize'          => 10000000, // 10M
+    'cache_dir'            => 'tmp/media', // relative to web path
+    'image.web.size'       => 1200,        // size of small side in px
+    'image.thumb.size'     => 120,         // size of small side in px
+    'maxFileSize'          => 10000000,    // 10M
     'acceptTypes.mime'     => ['application/ogg', 'audio/ogg', 'image/jpeg', 'image/png'],
     'acceptTypes.jsRegexp' => '/(\.|\/)(oga|ogg|ogx|jpe?g|png)$/i',
 ];
@@ -280,9 +284,9 @@ $app['media.config'] =
 
 $app['register.config'] =
 [
+    'cache_dir'      => 'tmp/register',  // relative to web path
     'twilio.account' => TWILIO_ACCOUNT_SID,
     'twilio.number'  => TWILIO_NUMBER,
-    'cache_dir'      => 'tmp/register',  // relative to web path
 ];
 
 
