@@ -179,6 +179,7 @@ return [
         'blog'        => 'Blog',
         'contact'     => 'Contact',
         'home'        => 'Home',
+        'map'         => 'The map',
         'media'       => 'Our medias',
         'our-travels' => 'Our travels',
     ],
