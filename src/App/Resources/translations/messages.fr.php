@@ -50,6 +50,7 @@ return [
     'Read more'                  => 'Lire plus',
     'Run search'                 => 'Lancer la recherche',
     'Search'                     => 'Chercher',
+    'See the large map'          => 'Voir la carte en grand',
     'See more articles'          => "Voir plus d'articles",
     'See more images'            => "Voir plus d'images",
     'Submit'                     => 'Envoyer',

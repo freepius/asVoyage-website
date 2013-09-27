@@ -97,26 +97,28 @@ class BaseController implements ControllerProviderInterface
         if ($response->isNotModified($request)) { return $response; }
 
 
+        $blogRepo     = $this->app['model.repository.blog'];
+        $mediaRepo    = $this->app['model.repository.media'];
+        $registerRepo = $this->app['model.repository.register'];
+
         // The 6 last blog articles
-        $lastArticles = iterator_to_array(
-            $this->app['model.repository.blog']->find(6)
-        );
+        $lastArticles = iterator_to_array($blogRepo->find(6));
 
         // The 20 last favorite images
-        $lastImages = $this->app['model.repository.media']
-            ->find(20, 0, ['tags' => ['Favori'], 'type' => 'image']);
+        $lastImages = $mediaRepo->find(20, 0, ['tags' => ['Favori'], 'type' => 'image']);
 
-        // The "Travel Register" entries for mini-map
-        $geoEntries = $this->app['model.repository.register']
-            ->find(0, ['from' => $this->currentTravelStartingDate, 'geo' => true]);
-        $geoEntries->next();
+        // Get/generate the javascript file containing the travel register entries
+        $geoEntries_js = $registerRepo->getGeoJsFile($this->currentTravelStartingDate);
+
+        // Get the last geo. entry from "Travel Register" module (=== our current place)
+        $lastGeoEntry = $registerRepo->getLastGeoEntry();
 
         return $this->app->render('base/home.html.twig',
         [
             'articles'       => $lastArticles,
             'favoriteImages' => $lastImages,
-            'geoEntries'     => $geoEntries,
-            'lastGeoEntry'   => $geoEntries->current(),
+            'geoEntries_js'  => $geoEntries_js,
+            'lastGeoEntry'   => $lastGeoEntry,
         ], $response);
     }
 

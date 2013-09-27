@@ -50,6 +50,7 @@ return [
     //'Read more'                  => '',
     //'Run search'                 => '',
     //'Search'                     => '',
+    //'See the large map'          => '',
     //'See more articles'          => '',
     //'See more images'            => '',
     //'Submit'                     => '',

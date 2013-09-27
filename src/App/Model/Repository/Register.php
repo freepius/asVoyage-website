@@ -12,6 +12,7 @@ use Symfony\Component\Filesystem\Filesystem,
  *  -> store
  *  -> filter   [protected]
  *  -> find
+ *  -> getLastGeoEntry
  *  -> getGeoJsFile
  *  -> clearCacheDir
  */
@@ -103,6 +104,16 @@ class Register extends MongoRepository
         if ($limit > 0) { $entries->limit($limit); }
 
         return $entries;
+    }
+
+    /**
+     * Return the last geo-referenced entry.
+     */
+    public function getLastGeoEntry()
+    {
+        $entry = $this->find(1, ['geo' => true]);
+        $entry->next();
+        return $entry->current();
     }
 
     /**

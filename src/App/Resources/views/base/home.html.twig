@@ -26,14 +26,9 @@
 
 {% block javascripts %}
     {{ carto.jsBase() }}
+    <script src="{{ geoEntries_js }}"></script>
     <script>
-        var currentPlace = [{{ lastGeoEntry.geoCoords | default('0, 0') }}],
-            currentPlaceMessage = "{{ lastGeoEntry.message | default }}",
-            geoCoords = [
-                {% for entry in geoEntries %}
-                    [{{ entry.geoCoords }}],
-                {% endfor %}
-            ];
+        var currentPlace = [{{ lastGeoEntry.geoCoords | default('0, 0') }}];
     </script>
     <script src="/js/app-base-home.js"></script>
 {% endblock %}
@@ -59,6 +54,11 @@
 
         <!-- Mini-map -->
         <div id="map"></div>
+
+        <!-- Link to the Map page -->
+        <div class="clearfix small special" style="margin-bottom: 1.5em;">
+            <a href="/map" class="pull-right">» {{ 'See the large map'|trans }}</a>
+        </div>
     </aside>
 
     <div class="col-xs-8">

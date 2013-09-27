@@ -53,7 +53,6 @@ TODO
 * Blog : macro to include a media in a blog article
 * BUG on IE 9 : problem to refresh captcha (eg: on contact page)
 * Improve tags size on tags box ?!
-* Home page : insert the travel path on mini-map
 * Media module : add an "info box" on home page
 * Follow my pullrequest for :
   * Lightbox2               (I make the local change)
