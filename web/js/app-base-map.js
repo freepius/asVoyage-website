@@ -39,6 +39,7 @@
         i,
         currentPlace,
         marker,
+        markers = [],
         popup = new L.Popup({minWidth: 120, maxWidth: 400});
 
     /**
@@ -46,11 +47,13 @@
      * Then, add it to the cluster.
      */
     for (i = 1; i < register.geoCoords.length; i += 1) {
-        L.marker(register.geoCoords[i])
-            .setIcon(register.hasMessage[i] ? envelopeIcon : globeIcon)
-            .bindLabel(register.labels[i])
-            .addTo(cluster);
+        markers.push(
+            L.marker(register.geoCoords[i])
+                .setIcon(register.hasMessage[i] ? envelopeIcon : globeIcon)
+                .bindLabel(register.labels[i])
+        );
     }
+    cluster.addLayers(markers);
 
     /**
      * Add the current place
@@ -85,10 +88,15 @@
     map.on('zoomend', function () {
         if (map.getZoom() < 5) {
             if (map.hasLayer(cluster)) {
+                // removeLayer() will remove marker labels too :-(
                 map.removeLayer(cluster);
             }
         } else {
             if (!map.hasLayer(cluster)) {
+                // For each marker, re-bind label
+                for (i = 1; i < register.geoCoords.length; i += 1) {
+                    markers[i-1].bindLabel(register.labels[i]);
+                }
                 map.addLayer(cluster);
             }
         }
