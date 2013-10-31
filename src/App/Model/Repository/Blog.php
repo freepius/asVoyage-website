@@ -85,7 +85,8 @@ class Blog extends MongoRepository
         return $this->collection->find([], [
             'title', 'slug', 'pubDatetime',
             'isPublished', 'beCommented', 'tags', 'countComments',
-        ]);
+        ])
+        ->sort(['pubDatetime' => -1]); // desc = younger first
     }
 
     /**
