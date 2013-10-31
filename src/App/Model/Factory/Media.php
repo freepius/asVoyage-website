@@ -34,7 +34,7 @@ class Media extends EntityFactory
     protected function getConstraints(array $entity)
     {
         return new Assert\Collection([
-            'caption'      => new Assert\Length(['max' => 100]),
+            'caption'      => new Assert\Length(['max' => 200]),
             'creationDate' => new Assert\DateTime(),
             'geoCoords'    => new Assert\Regex(['pattern' => Geo::LAT_LON_DD_PATTERN]),
             'tags'         => null,
