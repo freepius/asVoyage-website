@@ -251,7 +251,7 @@ class RegisterController implements ControllerProviderInterface
         if (@ $errors['geoCoords'])   { $entry['geoCoords']   = null; }
         if (@ $errors['temperature']) { $entry['temperature'] = null; }
         if (@ $errors['meteo'])       { $entry['meteo']       = null; }
-        if (@ $errors['message'])     { $entry['message'] = substr($entry['message'], 500); }
+        if (@ $errors['message'])     { $entry['message'] = substr($entry['message'], 0, 500); }
 
         $this->getRepository()->store($entry);
         $this->clearCache();
