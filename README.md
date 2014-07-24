@@ -11,8 +11,20 @@ Requirements
 - PHP extension : Fileinfo, GD, Exif
 - [optional] PHPUnit 3.5+ to execute the test suite (phpunit --version)
 
-External libraries used
------------------------
+Used libraries
+--------------
+
+### Server side
+
+* [Silex](http://silex.sensiolabs.org/) : PHP micro-framework based on the Symfony2 Components
+* [Twig](http://twig.sensiolabs.org/) : template engine for PHP
+* [Swiftmailer](http://swiftmailer.org/) : PHP mailer
+* [php-markdown](https://michelf.ca/projects/php-markdown/) : PHP Markdown parser
+* [php-smartypants](https://michelf.ca/projects/php-smartypants/) : PHP implementation of SmartyPants
+
+For more, see *composer.json* file.
+
+### Client side
 
 * [Bootstrap](http://twitter.github.io/bootstrap/) : front-end web framework
 * [Font-Awesome](http://fortawesome.github.io/Font-Awesome/) : iconic font designed for Bootstrap
@@ -41,28 +53,32 @@ License
 *anarchos semitas - voyage* is licensed under the **CC0 1.0 Universal** -- see the `LICENSE` file for details.
 
 
+BUG
+===
+
+* BUG : Media/Blog -> filter on December return empty list
+* BUG on IE 9 : problem to refresh captcha (eg: on contact page)
+* BUG on IE 8 : very bad displaying of pages (html5 not recognized ?)
+
+
 TODO
 ====
 
-* Blog creating/updating page :
-  * Add help for RichText
-* On Blog "reading" page : add box containing related articles/contents
+* Blog :
+  * Creation/Updating -> Add a "help box" for RichText
+  * Reading -> Add a box containing related articles/contents
+  * Write RichText macros to easily include a media
+* Blog/Media : Improve tags size on tags box
 * Make RSS
-* BUG (not critic) : in DEBUG mode => when Logout => error (related to Session and header already sent)
 * Make a translation table for tags
-* Blog : macro to include a media in a blog article
-* Improve tags size on tags box ?
 * Follow my pullrequest for :
   * Lightbox2               (I make the local change)
   * Leaflet Zoom Control    (I make the local change)
-  * Symfony/HttpKernel      (I made the local change)
-* BUG on IE 9 : problem to refresh captcha (eg: on contact page)
-* BUG on IE 8 : very bad displaying of pages (html5 not recognized ?)
+* Add a test suite (unit and functional) !
 
 For production
 --------------
 
-* Solve the TODOs
 * Update vendor and libraries
 * HttpCache:
   * Blog articles => cache the generated HTML from RichText

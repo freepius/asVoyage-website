@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Silex\ControllerProviderInterface,
+use Silex\Api\ControllerProviderInterface,
     Symfony\Component\HttpFoundation\Request,
     App\Exception\BlogArticleNotFound,
     App\Util\StringUtil;

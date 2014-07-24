@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Silex\ControllerProviderInterface,
+use Silex\Api\ControllerProviderInterface,
     Symfony\Component\HttpFoundation\Request,
     Symfony\Component\Validator\Constraints as Assert,
     App\Exception\MediaElementNotFound;

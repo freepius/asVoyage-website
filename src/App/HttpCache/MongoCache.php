@@ -23,9 +23,10 @@ class MongoCache extends MongoRepository
      *  -> OR cached if none exists.
      *
      *  Example of use:
+     *      // $request is the current Http Request
      *      // $cacheEngine is an instance of App\HttpCache\MongoCache
      *
-     *      $response = $cacheEngine->response('my.cache.key', ['dep_1', 'dep_2']);
+     *      $response = $cacheEngine->response($request, 'my.cache.key', ['dep_1', 'dep_2']);
      *
      *      if ($response->isNotModified($request))
      *      {
@@ -57,7 +58,7 @@ class MongoCache extends MongoRepository
             );
         }
 
-        return (new Response('', 200, ['Cache-Control' => 'no-store, no-cache, must-revalidate']))
+        return (new Response('', 200, ['Cache-Control' => 'public, no-cache']))
             ->setLastModified(new \DateTime(@ $cache['lastModified']));
     }
 

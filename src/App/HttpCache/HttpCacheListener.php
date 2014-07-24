@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent,
 
 
 /**
- * If user is not ADMIN => run the http cache !
+ * If user is not ADMIN => run the http cache
  */
 class HttpCacheListener implements EventSubscriberInterface
 {
@@ -24,15 +24,15 @@ class HttpCacheListener implements EventSubscriberInterface
         // If ADMIN => no http cache
         if ($this->app->isGranted('ROLE_ADMIN'))
         {
-            $this->app['http_cache.mongo'] = $this->app->share(function ($app) {
+            $this->app['http_cache.mongo'] = function ($app) {
                 return new MongoNoCache($app['http_cache.mongo.collection']);
-            });
+            };
         }
         else
         {
-            $this->app['http_cache.mongo'] = $this->app->share(function ($app) {
+            $this->app['http_cache.mongo'] = function ($app) {
                 return new MongoCache($app['http_cache.mongo.collection']);
-            });
+            };
 
             $dispatcher = $this->app['dispatcher'];
             $listeners  = $dispatcher->getListeners(KernelEvents::REQUEST);
@@ -54,12 +54,12 @@ class HttpCacheListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             /* Must be registered after :
              *  -> LocaleListener to have access to the correct locale through Request [priority is 16]
              *  -> Firewall to execute correctly the isGranted() function              [priority is 8]
              */
             KernelEvents::REQUEST => ['onKernelRequest', 7],
-        );
+        ];
     }
 }

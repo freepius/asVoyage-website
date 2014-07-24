@@ -6,7 +6,7 @@ define('ROOT', dirname(SRC));
 
 /*
  * Include host-dependent configuration parameters
- * (with servernames, keywords...).
+ * (with servernames, passwords...).
  */
 include APP.'/config.php';
 
@@ -22,11 +22,8 @@ $app['route_class'] = 'App\\Route';
 /* Locale of the application */
 setlocale(LC_ALL, 'fr_FR.UTF-8');
 
-/* Locale of the current request */
-$app['locale'] = $app->share(function ($app)
-{
-    return $app->getSession('locale') ?: 'fr';
-});
+/* Locale of the current request : default = fr */
+$app['locale'] = 'fr';
 
 /* debug */
 $app['debug'] = DEBUG;
@@ -63,10 +60,13 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
 ]);
 
 /* swiftmailer */
-$app->register(new Silex\Provider\SwiftmailerServiceProvider());
+$app->register(new \Silex\Provider\SwiftmailerServiceProvider());
 
 /* validator */
-$app->register(new Silex\Provider\ValidatorServiceProvider());
+$app->register(new \Silex\Provider\ValidatorServiceProvider());
+
+/* locale */
+$app->register(new \App\Locale\ServiceProvider());
 
 /* translator */
 $app->register(new \Silex\Provider\TranslationServiceProvider());
@@ -75,15 +75,16 @@ $app->register(new \Silex\Provider\TranslationServiceProvider());
 $app->register(new \Silex\Provider\SecurityServiceProvider());
 
 /* autolink Twig extension */
-$app->register(new \Nicl\Silex\AutolinkServiceProvider());
+// TODO: adapt autolink to silex 2.0
+//$app->register(new \Nicl\Silex\AutolinkServiceProvider());
 
 /* richText (markdown and typo) */
-$app['richText'] = $app->share(function ($app) {
+$app['richText'] = function ($app) {
     return new \App\Util\RichText($app['locale']);
-});
+};
 
 /* captcha manager */
-$app['captcha.manager'] = $app->share(function ($app) {
+$app['captcha.manager'] = function ($app) {
     return new \App\Util\CaptchaManager(
         $app['session'],
         [
@@ -91,15 +92,16 @@ $app['captcha.manager'] = $app->share(function ($app) {
             'imageFolder' => $app['dir.captcha'],
         ]
     );
-});
+};
 
 /* monolog */
 /*
 $app->register(new \Silex\Provider\MonologServiceProvider(), [
     'monolog.name' => 'asVoyage',
-    'monolog.handler' => $app->share(function ($app) {
-        return new \Monolog\Handler\MongoDBHandler($app['mongo.connection'], $app['mongo.database'], 'log');
-    }),
+    'monolog.logfile' => ROOT.'/development.log',
+    //'monolog.handler' => function ($app) {
+        //return new \Monolog\Handler\MongoDBHandler($app['mongo.connection'], $app['mongo.database'], 'log');
+    //},
 ]);
 */
 
@@ -110,11 +112,11 @@ $app->register(new \Silex\Provider\MonologServiceProvider(), [
 
 $loader->add('Twig', ROOT.'/vendor/twig/extensions/lib');
 
-$app['twig'] = $app->share($app->extend('twig', function($twig, $app)
+$app['twig'] = $app->extend('twig', function($twig, $app)
 {
-    $twig->addExtension(new Twig_Extensions_Extension_Intl());  // for 'localizeddate' filter
+    $twig->addExtension(new \Twig_Extensions_Extension_Intl());  // for 'localizeddate' filter
 
-    $twig->addGlobal('host', $app['request']->getUriForPath('/'));
+    $twig->addGlobal('host', $app['request_stack']->getMasterRequest()->getUriForPath('/'));
 
     $twig->addFilter(new \Twig_SimpleFilter('sum', 'array_sum'));
 
@@ -130,7 +132,7 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app)
     ));
 
     return $twig;
-}));
+});
 
 
 /*************************************************
@@ -183,6 +185,7 @@ $app['security.access_rules'] =
  * Hack: call 'security.firewall' allows to call
  * 'security' and 'twig' services at this point !
  */
+$app->boot();
 $app['security.firewall'];
 
 
@@ -201,66 +204,70 @@ foreach ($locales as $locale) {
     }
 }
 
+// TODO: Bug ! Actually, calling *translator* service sets to null the 'locale' parameter.
+// The Bug is declared on GitHub #982. Follow it !
+$app['locale'] = 'fr';
+
 
 /*************************************************
  * Register repositories
  ************************************************/
 
-$app['model.repository.blog'] = $app->share(function ($app)
+$app['model.repository.blog'] = function ($app)
 {
     return new \App\Model\Repository\Blog($app['mongo.database']->blog);
-});
+};
 
-$app['model.repository.media'] = $app->share(function ($app)
+$app['model.repository.media'] = function ($app)
 {
     return new \App\Model\Repository\Media(
         $app['mongo.database']->media, $app['twig'],
         $app['path.web'], $app['media.config']['cache_dir']
     );
-});
+};
 
-$app['model.repository.register'] = $app->share(function ($app)
+$app['model.repository.register'] = function ($app)
 {
     return new \App\Model\Repository\Register(
         $app['mongo.database']->register, $app['twig'],
         $app['path.web'], $app['register.config']['cache_dir']
     );
-});
+};
 
 
 /*************************************************
  * Register entity factories
  ************************************************/
 
-$app['model.factory.article'] = $app->share(function ($app)
+$app['model.factory.article'] = function ($app)
 {
     return new \App\Model\Factory\Article($app['validator'], $app['model.repository.blog']);
-});
+};
 
-$app['model.factory.comment'] = $app->share(function ($app)
+$app['model.factory.comment'] = function ($app)
 {
     return new \App\Model\Factory\Comment($app['validator'], $app['security'], $app['captcha.manager']);
-});
+};
 
-$app['model.factory.contact'] = $app->share(function ($app)
+$app['model.factory.contact'] = function ($app)
 {
     return new \App\Model\Factory\Contact($app['validator'], $app['captcha.manager']);
-});
+};
 
-$app['model.factory.media'] = $app->share(function ($app)
+$app['model.factory.media'] = function ($app)
 {
     return new \App\Model\Factory\Media($app['validator']);
-});
+};
 
-$app['model.factory.media.uploaded'] = $app->share(function ($app)
+$app['model.factory.media.uploaded'] = function ($app)
 {
     return new \App\Model\Factory\MediaUploaded($app['validator'], $app['path.web'], $app['media.config']);
-});
+};
 
-$app['model.factory.register'] = $app->share(function ($app)
+$app['model.factory.register'] = function ($app)
 {
     return new \App\Model\Factory\Register($app['validator']);
-});
+};
 
 
 /*************************************************

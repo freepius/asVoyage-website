@@ -18,6 +18,11 @@ class Application extends \Silex\Application
 
     // Session shortcuts
 
+    public function hasSession($name)
+    {
+        return $this['session']->has($name);
+    }
+
     public function getSession($name, $default = null)
     {
         return $this['session']->get($name, $default);
