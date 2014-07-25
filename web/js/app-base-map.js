@@ -30,10 +30,10 @@
         oms = new OverlappingMarkerSpiderfier(map),
 
         // Some icons
-        globeIcon        = L.AwesomeMarkers.icon({color: 'orange', icon: 'globe'}),
-        envelopeIcon     = L.AwesomeMarkers.icon({color: 'orange', icon: 'envelope-o'}),
-        currentPlaceIcon = L.AwesomeMarkers.icon({color: 'red',    icon: 'smile-o'}),
-        mediaIcon        = L.AwesomeMarkers.icon({color: 'blue',   icon: 'camera'}),
+        globeIcon        = L.AwesomeMarkers.icon({prefix: 'fa', markerColor: 'orange', icon: 'globe'}),
+        envelopeIcon     = L.AwesomeMarkers.icon({prefix: 'fa', markerColor: 'orange', icon: 'envelope-o'}),
+        currentPlaceIcon = L.AwesomeMarkers.icon({prefix: 'fa', markerColor: 'red',    icon: 'smile-o'}),
+        mediaIcon        = L.AwesomeMarkers.icon({prefix: 'fa', markerColor: 'blue',   icon: 'camera'}),
 
         // Various variables
         i,

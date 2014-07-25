@@ -29,7 +29,7 @@
 
         var marker = L.marker(currentPlace, {
                 clickable: false,
-                icon: L.AwesomeMarkers.icon({color: 'red', icon: 'smile'}),
+                icon: L.AwesomeMarkers.icon({prefix: 'fa', markerColor: 'red', icon: 'smile-o'}),
                 zIndexOffset: 1000
             }).addTo(map);
 
