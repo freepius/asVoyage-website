@@ -26,7 +26,7 @@
         <link href="/vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
     {% else %}
     {# Else => files from CDNs #}
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     {% endif %}
 
     {# Red borders for ADMIN ! #}
@@ -52,7 +52,7 @@
         <a href="/admin/logout" class="label label-danger"
            style="position: absolute; top: 10px;"
         >
-            <i class="icon-off icon-white"></i> {{ 'Logout'|trans }}
+            <i class="fa fa-power-off fa-inverse"></i> {{ 'Logout'|trans }}
         </a>
 
     {% endif %}
@@ -106,7 +106,7 @@
 
     <!-- Link to back up -->
     <a href="#header" id="back2top" style="display: none;">
-        <i class="icon-arrow-up icon-white"></i> {{ 'Top'|trans }}
+        <i class="fa fa-arrow-up fa-inverse"></i> {{ 'Top'|trans }}
     </a>
 
 

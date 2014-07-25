@@ -6520,10 +6520,8 @@ p {
 .lead {
   margin: 0;
 }
-a [class^="icon-"],
-.btn-link [class^="icon-"],
-a [class*=" icon-"],
-.btn-link [class*=" icon-"] {
+a .fa,
+.btn-link .fa {
   text-decoration: none;
 }
 .input-group-btn > .btn-link {

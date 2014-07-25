@@ -31,8 +31,8 @@
 
         // Some icons
         globeIcon        = L.AwesomeMarkers.icon({color: 'orange', icon: 'globe'}),
-        envelopeIcon     = L.AwesomeMarkers.icon({color: 'orange', icon: 'envelope-alt'}),
-        currentPlaceIcon = L.AwesomeMarkers.icon({color: 'red',    icon: 'smile'}),
+        envelopeIcon     = L.AwesomeMarkers.icon({color: 'orange', icon: 'envelope-o'}),
+        currentPlaceIcon = L.AwesomeMarkers.icon({color: 'red',    icon: 'smile-o'}),
         mediaIcon        = L.AwesomeMarkers.icon({color: 'blue',   icon: 'camera'}),
 
         // Various variables
@@ -143,7 +143,7 @@
      */
     L.control.layers(
         null,
-        {"Photos <i class='icon-camera'></i>": mediaLayer},
+        {"Photos <i class='fa fa-camera'></i>": mediaLayer},
         {collapsed: false}
     ).addTo(map);
 

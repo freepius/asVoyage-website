@@ -79,7 +79,7 @@
     <div class="box">
         <!-- Publication datetime -->
         <p>
-            <i class="icon-calendar" title="{{ 'blog.field.pubDatetime'|trans }}"></i>
+            <i class="fa fa-calendar" title="{{ 'blog.field.pubDatetime'|trans }}"></i>
 
             <time itemprop="datePublished" datetime="{{ article.pubDatetime }}">
                 {{ article.pubDatetime | localizeddate('medium', 'short') | capitalize }}
@@ -88,7 +88,7 @@
 
         <!-- Tags -->
         <p>
-            <i class="icon-tags" title="{{ 'blog.field.tags'|trans }}"></i>
+            <i class="fa fa-tags" title="{{ 'blog.field.tags'|trans }}"></i>
 
             {% if article.tags is empty %}
                 {{ 'none'|trans }}
@@ -104,7 +104,7 @@
         {% if article.beCommented or article.countComments > 0 %}
             <!-- Comments : count + link to read + link to create/update -->
             <p>
-                <i class="icon-comments"></i>
+                <i class="fa fa-comments"></i>
                 <a href="#comments">
                     {{ 'comment.count'|trans([article.countComments]) }}
                 </a>
@@ -113,7 +113,7 @@
 
                 {% if article.beCommented or comment.isUpdating %}
                     <small style="margin-left: 15px;">
-                        <i class="icon-arrow-right"></i>
+                        <i class="fa fa-arrow-right"></i>
                         <a href="#comment-post">
                             {{ (comment.isCreation ? 'comment.create' : 'comment.update') | trans }}
                         </a>
@@ -124,18 +124,18 @@
 
         {% if isUnpublished %}
             <!-- Article unpublished -->
-            <p><i class="icon-lock"></i> {{ 'blog.isUnpublished'|trans }}</p>
+            <p><i class="fa fa-lock"></i> {{ 'blog.isUnpublished'|trans }}</p>
         {% endif %}
 
         {% if is_granted('ROLE_ADMIN') %}
             <div class="actions-right">
                 <!-- Update -->
                 <a href="/blog/{{- article.slug -}}/update" title="{{ 'Update'|trans }}">
-                    <i class="icon-pencil"></i></a>
+                    <i class="fa fa-pencil"></i></a>
 
                 <!-- Delete -->
                 <a href="/blog/{{- article.slug -}}/delete" title="{{ 'Delete'|trans }}">
-                    <i class="icon-trash"></i></a>
+                    <i class="fa fa-trash-o"></i></a>
             </div>
         {% endif %}
     </div>

@@ -8,7 +8,7 @@
         style="margin-bottom: 5px;"
     >
         <span class="input-group-addon" title="{{ ('media.' ~ field) | trans }}">
-            <i class="icon-fixed-width icon-{{ icon }}"></i>
+            <i class="fa fa-fw fa-{{ icon }}"></i>
         </span>
 
         <input name="{{ media._id ~ '[' ~ field ~ ']' }}" type="text"
@@ -54,7 +54,7 @@
         <button class="btn btn-danger delete" title="{{ 'Delete'|trans }}"
             data-type="GET" data-url="/media/delete-uploaded/{{ _id }}"
         >
-            <i class="icon-trash icon-white"></i>
+            <i class="fa fa-trash-o fa-inverse"></i>
         </button>
     {% endif %}
 </td>

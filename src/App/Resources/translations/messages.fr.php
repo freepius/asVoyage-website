@@ -77,7 +77,7 @@ return [
     'captcha' => [
         'field' => 'Système anti-spam',
 
-        'help' => '<i class="icon-warning-sign"></i> '.
+        'help' => '<i class="fa fa-exclamation-triangle"></i> '.
             "Veuillez recopier les caractères affichés dans l'image, afin d'empêcher les systèmes automatiques de <i>spammer</i>.",
 
         'help.change' => "Cliquez ici pour changer l'image",

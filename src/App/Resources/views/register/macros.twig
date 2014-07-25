@@ -13,7 +13,7 @@
     {{- e._id | localizeddate('short', 'short') -}}
 
     {%- if e.temperature or e.meteo -%}
-        &nbsp;&nbsp;<i class='icon-caret-right'></i>&nbsp;&nbsp;
+        &nbsp;&nbsp;<i class='fa fa-caret-right'></i>&nbsp;&nbsp;
         {{- e.temperature is not null ? (e.temperature ~ '°C ') -}}
         {{- e.meteo                   ? ("<img src='/images/weather/"~e.meteo~".png'>") | raw -}}
     {%- endif -%}

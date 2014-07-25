@@ -19,7 +19,7 @@ return ['comment' => [
     ],
 
     'help' => [
-        'text' => '<i class="icon-info-sign"></i> '.
+        'text' => '<i class="fa fa-info-circle"></i> '.
             'HTML code is removed and URL are automatically converted.',
     ],
 ]];

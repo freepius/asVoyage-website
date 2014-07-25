@@ -17,7 +17,7 @@
 
         <!-- Create an article -->
         <a href="/blog/create" class="btn btn-success pull-right">
-            <i class="icon-plus-sign icon-white"></i> {{ 'blog.create'|trans }}
+            <i class="fa fa-plus-circle fa-inverse"></i> {{ 'blog.create'|trans }}
         </a>
     </header>
 
@@ -51,15 +51,15 @@
                     <td>
                         <!-- Read -->
                         <a href="/blog/{{- article.slug -}}/read" title="{{ 'Read'|trans }}">
-                            <i class="icon-eye-open"></i></a>
+                            <i class="fa fa-eye"></i></a>
 
                         <!-- Update -->
                         <a href="/blog/{{- article.slug -}}/update" title="{{ 'Update'|trans }}">
-                            <i class="icon-pencil"></i></a>
+                            <i class="fa fa-pencil"></i></a>
 
                         <!-- Delete -->
                         <a href="/blog/{{- article.slug -}}/delete" title="{{ 'Delete'|trans }}">
-                            <i class="icon-trash"></i></a>
+                            <i class="fa fa-trash-o"></i></a>
                     </td>
                 </tr>
             {% endfor %}

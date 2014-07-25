@@ -18,7 +18,7 @@
 {% spaceless %}
     {{ not nobr ? '<br>' }}
     <small class="text-muted indent">
-        <i class="icon-arrow-right"></i>&nbsp;{{- element | raw -}}
+        <i class="fa fa-arrow-right"></i>&nbsp;{{- element | raw -}}
     </small>
 {% endspaceless %}
 {% endmacro %}
@@ -31,12 +31,12 @@
 {% spaceless %}
 
     {% if value %}
-        <i class="icon-ok" title="{{ 'Yes'|trans }}">
-            <span class="hide">{{ 'Yes'|trans }}</span>
+        <i class="fa fa-check" title="{{ 'Yes'|trans }}">
+            <span class="hidden">{{ 'Yes'|trans }}</span>
         </i>
     {% else %}
-        <i class="icon-remove" title="{{ 'No'|trans }}">
-            <span class="hide">{{ 'No'|trans }}</span>
+        <i class="fa fa-times" title="{{ 'No'|trans }}">
+            <span class="hidden">{{ 'No'|trans }}</span>
         </i>
     {% endif %}
 
@@ -57,7 +57,7 @@
     <!-- Cancel button -->
     <form name="cancel" action="{{ action }}" method="get">
         <button type="submit" class="{{ classes }}">
-            <i class="icon-remove icon-white"></i> {{ text }}
+            <i class="fa fa-times fa-inverse"></i> {{ text }}
         </button>
     </form>
 
@@ -76,7 +76,7 @@
 
     <!-- Cancel link -->
     <a href="{{ action }}" class="{{ classes }}">
-        <i class="icon-remove icon-white"></i> {{ text }}
+        <i class="fa fa-times fa-inverse"></i> {{ text }}
     </a>
 
 {% endspaceless %}
