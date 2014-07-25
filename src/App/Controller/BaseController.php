@@ -325,7 +325,7 @@ class BaseController implements ControllerProviderInterface
         );
     }
 
-    public function manageErrors(\Exception $e, $code)
+    public function manageErrors(\Exception $e, Request $request, $code)
     {
         if ($this->app['debug']) { return; }
 
