@@ -1,1 +1,10 @@
 Generate manually the "main.css" file by compiling the "main.less" file.
+
+
+Note for myself
+---------------
+
+Run these two commands :
+
+export PATH=$PATH:/opt/node/bin ; export NODE_PATH=/opt/node:/opt/node/lib/node_modulesexport PATH=$PATH:/opt/node/bin ; export NODE_PATH=/opt/node:/opt/node/lib/node_modules
+lessc src/App/Resources/styles/main.less web/css/main.css

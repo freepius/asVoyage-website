@@ -170,11 +170,11 @@
             {{ (module ~ '.field.' ~ field) | trans }}
         </label>
 
-        <div class="col-md-9 checkbox">
+        <div class="col-md-9 checkbox-inline">
             <input type="checkbox" id="{{ field }}" name="{{ field }}" {{ entity[field] ? 'checked' }}>
 
             {% if o.help %}
-                <span class="help-block" style="margin-top: 0;">
+                <span class="help-inline" style="margin-top: 0;">
                     {{ (module ~ '.help.' ~ field) | trans | raw }}
                 </span>
             {% endif %}
