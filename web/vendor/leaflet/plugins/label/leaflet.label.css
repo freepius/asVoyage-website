@@ -1,6 +1,6 @@
 .leaflet-label {
 	background: rgb(235, 235, 235);
-	background: rgba(235, 235, 235, 0.85);
+	background: rgba(235, 235, 235, 0.81);
 	background-clip: padding-box;
 	border-color: #777;
 	border-color: rgba(0,0,0,0.25);
@@ -17,13 +17,14 @@
 	   -moz-user-select: none;
 	    -ms-user-select: none;
 	        user-select: none;
-/*	white-space: nowrap;*/      /* MODIF freepius44 */
-	z-index: 1000 !important;   /* MODIF freepius44 */
-	min-width: 250px;           /* ADD   freepius44 */
+	pointer-events: none;
+	white-space: nowrap;
+	z-index: 6;
 }
 
 .leaflet-label.leaflet-clickable {
 	cursor: pointer;
+	pointer-events: auto;
 }
 
 .leaflet-label:before,
@@ -41,8 +42,7 @@
 	left: -10px;
 }
 
-.leaflet-label:after,
-.ie_after {
+.leaflet-label:after {
 	border-left: 6px solid black;
 	border-left-color: inherit;
 	right: -10px;

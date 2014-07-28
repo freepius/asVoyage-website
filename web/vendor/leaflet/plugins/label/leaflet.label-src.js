@@ -7,11 +7,11 @@
 	https://github.com/jacobtoye
 */
 (function (window, document, undefined) {
-/*
+var L = window.L;/*
  * Leaflet.label assumes that you have already included the Leaflet library.
  */
 
-L.labelVersion = '0.2.0-dev';
+L.labelVersion = '0.2.2-dev';
 
 L.Label = L.Class.extend({
 
@@ -38,14 +38,20 @@ L.Label = L.Class.extend({
 	onAdd: function (map) {
 		this._map = map;
 
-		this._pane = this._source instanceof L.Marker ? map._panes.markerPane : map._panes.popupPane;
+		this._pane = this.options.pane ? map._panes[this.options.pane] :
+			this._source instanceof L.Marker ? map._panes.markerPane : map._panes.popupPane;
 
 		if (!this._container) {
 			this._initLayout();
 		}
-		this._updateContent();
 
 		this._pane.appendChild(this._container);
+
+		this._initInteraction();
+
+		this._update();
+
+		this.setOpacity(this.options.opacity);
 
 		map
 			.on('moveend', this._onMoveEnd, this)
@@ -57,13 +63,8 @@ L.Label = L.Class.extend({
 
 		if (L.Browser.touch && !this.options.noHide) {
 			L.DomEvent.on(this._container, 'click', this.close, this);
+			map.on('click', this.close, this);
 		}
-
-		this._initInteraction();
-
-		this._update();
-
-		this.setOpacity(this.options.opacity);
 	},
 
 	onRemove: function (map) {
@@ -89,8 +90,12 @@ L.Label = L.Class.extend({
 	},
 
 	setContent: function (content) {
+		// Backup previous content and store new content
+		this._previousContent = this._content;
 		this._content = content;
-		this._update();
+
+		this._updateContent();
+
 		return this;
 	},
 
@@ -100,6 +105,7 @@ L.Label = L.Class.extend({
 		if (map) {
 			if (L.Browser.touch && !this.options.noHide) {
 				L.DomEvent.off(this._container, 'click', this.close);
+				map.off('click', this.close, this);
 			}
 
 			map.removeLayer(this);
@@ -139,10 +145,14 @@ L.Label = L.Class.extend({
 	},
 
 	_updateContent: function () {
-		if (!this._content) { return; }
+		if (!this._content || !this._map || this._prevContent === this._content) {
+			return;
+		}
 
 		if (typeof this._content === 'string') {
 			this._container.innerHTML = this._content;
+
+			this._prevContent = this._content;
 
 			this._labelWidth = this._container.offsetWidth;
 		}
@@ -180,7 +190,7 @@ L.Label = L.Class.extend({
 	},
 
 	_zoomAnimation: function (opt) {
-		var pos = this._map._latLngToNewLayerPoint(this._latlng, opt.zoom, opt.center);
+		var pos = this._map._latLngToNewLayerPoint(this._latlng, opt.zoom, opt.center).round();
 
 		this._setPosition(pos);
 	},
@@ -428,6 +438,16 @@ L.Marker.include({
 		if (this.label) {
 			this.label.setOpacity(this.options.labelHasSemiTransparency ? this.options.opacity : absoluteOpacity);
 		}
+	},
+
+	_originalSetLatLng: L.Marker.prototype.setLatLng,
+
+	setLatLng: function (latlng) {
+		if (this.label && !this._labelNoHide) {
+			this.hideLabel();
+		}
+
+		return this._originalSetLatLng(latlng);
 	}
 });
 

@@ -8,7 +8,10 @@
 (function () {
     "use strict";
 
-    var map = asCarto.addMap('map', {layer: 'OSM', scale: true}),
+    var map = asCarto.addMap('map', {
+            layer: 'OSM',
+            controls: {pan: true, scale: true, zoomslider: true}
+        }),
 
         // Path already traveled
         path = L.polyline(register.geoCoords, {
