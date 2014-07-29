@@ -19,7 +19,7 @@
     ================================================== -->
 
     <link href="/css/main.css" rel="stylesheet">
-    <link href="/css/lightbox.css" rel="stylesheet">
+    <link href="/vendor/lightbox/css/lightbox.css" rel="stylesheet">
 
     {# DEBUG mode => local files #}
     {% if app.debug %}
@@ -121,16 +121,17 @@
     {# DEBUG mode => local files #}
     {% if app.debug %}
         <script src="/vendor/jquery-1.11.1.js"></script>
-        <script src="/js/bootstrap.js"></script>
-        <script src="/js/modernizr.js"></script>
-        <script src="/js/lightbox.js"></script>
-        <script src="/js/utils.js"></script>
-        <script src="/js/app.js"></script>
+        <script src="/vendor/bootstrap.js"></script>
+        <script src="/vendor/lightbox/js/lightbox.js"></script>
     {% else %}
     {# Else => files from CDNs #}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="/js/compressed/main.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="/vendor/lightbox/js/lightbox.min.js"></script>
     {% endif %}
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/app.js"></script>
 
     {% block javascripts %}{% endblock %}
 </body>

@@ -71,18 +71,18 @@ TODO
 * Blog/Media : Improve tags size on tags box
 * Make RSS
 * Make a translation table for tags
-* Follow my pullrequest for :
-  * Lightbox2               (I make the local change)
-  * Leaflet Zoom Control    (I make the local change)
 * Add a test suite (unit and functional) !
+* Main map : multiple tile layers (only one is displayed depending on zoom)
+  http://moonlite.github.io/Leaflet.MultiTileLayer/
+* Main map : possibility to "fullscreen" the map
 
 For production
 --------------
 
-* Update vendor and libraries
 * HttpCache:
   * Blog articles => cache the generated HTML from RichText
 * Improve the inclusion of JS and CSS files (if not using => do not include)
+* Use https certificate for admin pages
 
 Low priority
 ------------

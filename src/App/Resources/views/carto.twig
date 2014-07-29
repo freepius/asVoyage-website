@@ -16,36 +16,8 @@
 
     <link rel="stylesheet" href="/vendor/leaflet/plugins/awesome/leaflet.awesome-markers.css">
     <link rel="stylesheet" href="/vendor/leaflet/plugins/label/leaflet.label.css">
-{% endmacro %}
-
-
-{% macro jsBase() %}
-    {% if app.debug %}
-        <script src="/vendor/leaflet/leaflet-src.js"></script>
-        <script src="/vendor/leaflet/plugins/leaflet.tile-layer.bing.js"></script>
-        <script src="/vendor/leaflet/plugins/awesome/leaflet.awesome-markers.min.js"></script>
-        <script src="/vendor/leaflet/plugins/label/leaflet.label-src.js"></script>
-    {% else %}
-        <script src="//cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-        <script src="/js/compressed/leaflet-base.js"></script>
-    {% endif %}
-
-    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
-    <script src="/js/app-carto.js"></script>
-{% endmacro %}
-
-
-{% macro cssFull() %}
-    {{ _self.cssBase() }}
-
-    {% if app.debug %}
-        <link rel="stylesheet" href="/vendor/leaflet/plugins/markercluster/MarkerCluster.css" />
-        <link rel="stylesheet" href="/vendor/leaflet/plugins/markercluster/MarkerCluster.Default.css" />
-        <link rel="stylesheet" href="/vendor/leaflet/plugins/zoomslider/L.Control.Zoomslider.css" />
-        <link rel="stylesheet" href="/vendor/leaflet/plugins/pancontrol/L.Control.Pan.css" />
-    {% else %}
-        <link rel="stylesheet" href="/css/compressed/leaflet-full.css" />
-    {% endif %}
+    <link rel="stylesheet" href="/vendor/leaflet/plugins/pancontrol/L.Control.Pan.css" />
+    <link rel="stylesheet" href="/vendor/leaflet/plugins/zoomslider/L.Control.Zoomslider.css" />
 
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="/vendor/leaflet/plugins/pancontrol/L.Control.Pan.ie.css" />
@@ -53,18 +25,40 @@
 {% endmacro %}
 
 
+{% macro jsBase() %}
+    {% if app.debug %}
+        <script src="/vendor/leaflet/leaflet-src.js"></script>
+        <script src="/vendor/leaflet/plugins/awesome/leaflet.awesome-markers.js"></script>
+        <script src="/vendor/leaflet/plugins/label/leaflet.label-src.js"></script>
+    {% else %}
+        <script src="//cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+        <script src="/vendor/leaflet/plugins/awesome/leaflet.awesome-markers.min.js"></script>
+        <script src="/vendor/leaflet/plugins/label/leaflet.label.js"></script>
+    {% endif %}
+
+    <script src="/vendor/leaflet/plugins/leaflet.tile-layer.bing.js"></script>
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+
+    <script src="/vendor/leaflet/plugins/pancontrol/L.Control.Pan.js"></script>
+    <script src="/vendor/leaflet/plugins/zoomslider/L.Control.Zoomslider.js"></script>
+
+    <script src="/js/app-carto.js"></script>
+{% endmacro %}
+
+
+{% macro cssFull() %}
+    {{ _self.cssBase() }}
+
+    <link rel="stylesheet" href="/vendor/leaflet/plugins/markercluster/MarkerCluster.css" />
+    <link rel="stylesheet" href="/vendor/leaflet/plugins/markercluster/MarkerCluster.Default.css" />
+{% endmacro %}
+
+
 {% macro jsFull() %}
     {{ _self.jsBase() }}
 
-    {% if app.debug %}
-        <script src="/vendor/leaflet/plugins/oms.min.js"></script>
-        <script src="/vendor/leaflet/plugins/markercluster/leaflet.markercluster-src.js"></script>
-        <script src="/vendor/leaflet/plugins/zoomslider/L.Control.Zoomslider.js"></script>
-        <script src="/vendor/leaflet/plugins/pancontrol/L.Control.Pan.js"></script>
-    {% else %}
-        <script src="/js/compressed/leaflet-full.js"></script>
-    {% endif %}
-
+    <script src="/vendor/leaflet/plugins/oms.min.js"></script>
+    <script src="/vendor/leaflet/plugins/markercluster/leaflet.markercluster-src.js"></script>
     <script>
         function getClusterLabel(markers)
         {
