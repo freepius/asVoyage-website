@@ -1,0 +1,20 @@
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster div {
+	background-color: rgba(0, 0, 255, 0.5);
+	width: 26px;
+	height: 26px;
+	margin-left: 7px;
+	margin-top: 7px;
+
+	text-align: center;
+	border-radius: 15px;
+	color: white;
+	font-size: 12px;
+	font-weight: bold;
+	}
+.marker-cluster span {
+	line-height: 26px;
+	}

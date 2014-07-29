@@ -18,8 +18,9 @@
 	    -ms-user-select: none;
 	        user-select: none;
 	pointer-events: none;
-	white-space: nowrap;
-	z-index: 6;
+/*	white-space: nowrap;*/      /* MODIF freepius44 */
+	z-index: 1000 !important;   /* MODIF freepius44 */
+	min-width: 250px;           /* ADD   freepius44 */
 }
 
 .leaflet-label.leaflet-clickable {

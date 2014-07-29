@@ -22,7 +22,7 @@
 {% macro jsBase() %}
     {% if app.debug %}
         <script src="/vendor/leaflet/leaflet-src.js"></script>
-        <script src="/js/leaflet/leaflet.tile-layer.bing.js"></script>
+        <script src="/vendor/leaflet/plugins/leaflet.tile-layer.bing.js"></script>
         <script src="/vendor/leaflet/plugins/awesome/leaflet.awesome-markers.min.js"></script>
         <script src="/vendor/leaflet/plugins/label/leaflet.label-src.js"></script>
     {% else %}
@@ -39,8 +39,8 @@
     {{ _self.cssBase() }}
 
     {% if app.debug %}
-        <link rel="stylesheet" href="/css/leaflet/MarkerCluster.css" />
-        <link rel="stylesheet" href="/css/leaflet/MarkerCluster.Default.css" />
+        <link rel="stylesheet" href="/vendor/leaflet/plugins/markercluster/MarkerCluster.css" />
+        <link rel="stylesheet" href="/vendor/leaflet/plugins/markercluster/MarkerCluster.Default.css" />
         <link rel="stylesheet" href="/vendor/leaflet/plugins/zoomslider/L.Control.Zoomslider.css" />
         <link rel="stylesheet" href="/vendor/leaflet/plugins/pancontrol/L.Control.Pan.css" />
     {% else %}
@@ -57,8 +57,8 @@
     {{ _self.jsBase() }}
 
     {% if app.debug %}
-        <script src="/js/leaflet/oms.min.js"></script>
-        <script src="/js/leaflet/leaflet.markercluster-src.js"></script>
+        <script src="/vendor/leaflet/plugins/oms.min.js"></script>
+        <script src="/vendor/leaflet/plugins/markercluster/leaflet.markercluster-src.js"></script>
         <script src="/vendor/leaflet/plugins/zoomslider/L.Control.Zoomslider.js"></script>
         <script src="/vendor/leaflet/plugins/pancontrol/L.Control.Pan.js"></script>
     {% else %}
