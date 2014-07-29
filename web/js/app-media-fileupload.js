@@ -1,5 +1,5 @@
 /*jslint nomen: true, regexp: true */
-/*global $, tmpl */
+/*global $, tmpl, console */
 
 (function () {
     "use strict";
@@ -21,15 +21,20 @@
             this._super();
 
             this._on({
-                fileuploadadded     : this._refresh,
-                fileuploaddestroyed : this._refresh,
-                fileuploadfinished  : this._refresh
+                fileuploadadded         : this._refresh,
+                fileuploadfinished      : this._refresh,
+                fileuploaddestroyed     : this._refresh,
+                fileuploaddestroyfailed : this._destroyfailed
             });
         },
 
         // Overloading
         _destroyEventHandlers: function () {
-            this._off(this.element, 'fileuploadadded fileuploaddestroyed fileuploadfinished');
+            this._off(this.element,
+                'fileuploadadded ' +
+                'fileuploadfinished ' +
+                'fileuploaddestroyed ' +
+                'fileuploaddestroyfailed');
             this._super();
         },
 
@@ -55,6 +60,10 @@
             } else {
                 $('#submit-media').hide();
             }
+        },
+
+        _destroyfailed: function () {
+            console.log('Impossible to delete this uploaded media element.');
         }
 
     });

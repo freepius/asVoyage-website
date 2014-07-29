@@ -151,9 +151,9 @@ class MediaController implements ControllerProviderInterface
     {
         if (! $this->getRepository()->deleteById($id, true))
         {
-            $this->app->abort(404, "\"$id\" is not a valid uploaded media element.");
+            $this->app->abort(500, "$id is not a valid uploaded media element.");
         }
-        return '';
+        return true;
     }
 
 

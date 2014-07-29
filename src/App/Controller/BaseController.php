@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Silex\Api\ControllerProviderInterface,
     Symfony\Component\HttpFoundation\Request,
+    Symfony\Component\HttpFoundation\Response,
     Symfony\Component\Filesystem\Filesystem;
 
 
@@ -334,6 +335,12 @@ class BaseController implements ControllerProviderInterface
             new \Symfony\Component\Security\Core\Authentication\Token\AnonymousToken('', '')
         );
 
+        // Case of an ajax request => return a "simple text" response
+        if ($request->isXmlHttpRequest()) {
+            return new Response($e->getMessage(), $code);
+        }
+
+        // Other cases => return a html response
         return $this->app->render('base/error.html.twig',
         [
             'message' => $e->getMessage(),
