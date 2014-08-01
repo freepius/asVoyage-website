@@ -115,10 +115,12 @@ return [
 
     // Filter
     'filter' => [
-        'tags'       => 'Filtré par le mot-clé <b>0</b>|'.
-                        'Filtré par les mots-clés <b>0</b>',
-        'year'       => "Filtré par l'année <b>0</b>",
-        'year-month' => "Filtré par la date <b>1 0</b>",
+        'tags'           => 'Filtré par le mot-clé <b>0</b>|'.
+                            'Filtré par les mots-clés <b>0</b>',
+        'tags.hideSmall' => 'Cacher les petits mots-clés',
+        'tags.showSmall' => 'Afficher tous les mots-clés',
+        'year'           => "Filtré par l'année <b>0</b>",
+        'year-month'     => "Filtré par la date <b>1 0</b>",
     ],
 
     // Languages

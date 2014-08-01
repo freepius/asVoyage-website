@@ -71,7 +71,6 @@ TODO
   * Creation/Updating -> Add a "help box" for RichText
   * Reading -> Add a box containing related articles/contents
   * Write RichText macros to easily include a media
-* Blog/Media : Improve tags size on tags box
 * Make RSS
 * Make a translation table for tags
 * Add a test suite (unit and functional) !

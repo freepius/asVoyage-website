@@ -1,16 +1,39 @@
-{% if tags | length > 0 %}
+{##
+ # WARNING: do not forget to include the js file "web/js/filters/by-tags.js"
+ #}
 
-    <h2>{{ 'by tag'|trans }}</h2>
+{% set countTags         = tags | length %}
+{% set activateSmallTags = countTags > 50 %}
+{% set minRatio          = 0.02 %}
+
+{% if countTags > 0 %}
+    <h2>
+        {{ 'by tag'|trans }}
+
+        {% if activateSmallTags %}
+            <!-- Buttons to hide/show the "small tags" -->
+            <small>
+                <i id="hide-small-tags" style="cursor: pointer;" class="fa fa-minus-square-o"
+                    title="{{ 'filter.tags.hideSmall'|trans }}"></i>
+
+                <i id="show-small-tags" style="cursor: pointer;" class="fa fa-plus-square-o"
+                    title="{{ 'filter.tags.showSmall'|trans }}"></i>
+            </small>
+        {% endif %}
+    </h2>
 
     <!-- Filter by one tag -->
     <ul class="tags-box list-inline text-center">
         {% for tag, weight in tags %}
 
-            {% set size = 90 + weight.1 * weight.1 * 0.05 %}
+            {# Compute the font-size from 90% to 300% #}
+            {% set size = 90 + 210 * weight.1  %}
             {% set size = size | number_format(0) %}
-            {% set size = size > 200 ? 200 : size %}
 
-            <li style="font-size: {{ size }}%;">
+            <li style="font-size: {{ size }}%;"
+                data-placement="left" title="{{ weight.0 }}"
+                {{ activateSmallTags and weight.1 <= minRatio ? 'class="small-tag"' }}
+            >
                 <a href="{{ '/' ~ module ~ '/tag-' ~ tag }}">{{ tag }}</a>
             </li>
 

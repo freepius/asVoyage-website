@@ -11,7 +11,7 @@ class Group
     /**
      * Return an array, "natural sorted" by keys, whose :
      *    Key   = a unique tag
-     *    Value = [0 => occurrences of it ; 1 => its percentage on elements number]
+     *    Value = [0 => its occurrences number ; 1 => its ratio between 0 to 1]
      *
      * Each element of $collection must :
      *  -> be an array or \ArrayAccess
@@ -35,10 +35,10 @@ class Group
             }
         }
 
-        // Compute the percentage of each
+        // Compute the ratio of each
         $result = array_map(function ($nOcc) use ($total)
         {
-            return [$nOcc, (int) round($nOcc / $total * 100)];
+            return [$nOcc, $nOcc / $total];
         },
         $result);
 

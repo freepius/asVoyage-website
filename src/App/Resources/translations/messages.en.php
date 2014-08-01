@@ -115,10 +115,12 @@ return [
 
     // Filter
     'filter' => [
-        'tags'       => 'Filtered by tag <b>0</b>|'.
-                        'Filtered by tags <b>0</b>',
-        'year'       => "Filtered by year <b>0</b>",
-        'year-month' => "Filtered by date <b>1 0</b>",
+        'tags'           => 'Filtered by tag <b>0</b>|'.
+                            'Filtered by tags <b>0</b>',
+        'tags.hideSmall' => 'Hide the small tags',
+        'tags.showSmall' => 'Show all tags',
+        'year'           => "Filtered by year <b>0</b>",
+        'year-month'     => "Filtered by date <b>1 0</b>",
     ],
 
     // Languages
