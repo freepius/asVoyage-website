@@ -28,7 +28,6 @@ For more, see *composer.json* file.
 
 * [Bootstrap](http://twitter.github.io/bootstrap/) : front-end web framework
 * [Font-Awesome](http://fortawesome.github.io/Font-Awesome/) : iconic font designed for Bootstrap
-* [Modernizr](http://modernizr.com/)
 * [jQuery](http://jquery.com/) and plugins :
   * [Lightbox 2](http://lokeshdhakar.com/projects/lightbox2/)
   * [jQuery File Upload](http://blueimp.github.io/jQuery-File-Upload/) : file upload widget
@@ -56,7 +55,8 @@ License
 BUG
 ===
 
-* BUG : Media/Blog -> filter on December return empty list
+* BUG related to Http cache : on production server, switch locale doesn't change the locale (without to do a Ctrl+F5).
+  See the diff in Http cache config for Apache2.
 * BUG on IE 9 : problem to refresh captcha (eg: on contact page)
 * BUG on IE 8 : very bad displaying of pages (html5 not recognized ?)
 
@@ -64,7 +64,10 @@ BUG
 TODO
 ====
 
+* Home page :
+  * Add a block summarizing the news of the last 7 days
 * Blog :
+  * Dashboard -> add the date of the last comment
   * Creation/Updating -> Add a "help box" for RichText
   * Reading -> Add a box containing related articles/contents
   * Write RichText macros to easily include a media
@@ -75,13 +78,16 @@ TODO
 * Main map : multiple tile layers (only one is displayed depending on zoom)
   http://moonlite.github.io/Leaflet.MultiTileLayer/
 * Main map : possibility to "fullscreen" the map
+* Register :
+  * make a real creation/updating page
+  * make a page to overview the last register entries
 
 For production
 --------------
 
 * HttpCache:
   * Blog articles => cache the generated HTML from RichText
-* Improve the inclusion of JS and CSS files (if not using => do not include)
+* Improve the inclusion of JS and CSS files (if not using => do not include) ?
 * Use https certificate for admin pages
 
 Low priority

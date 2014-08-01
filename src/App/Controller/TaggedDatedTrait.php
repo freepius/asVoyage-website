@@ -82,10 +82,24 @@ Trait TaggedDatedTrait
 
         // Transform $year and $month in period (from and to) for the DB query
         if ($year) {
-            $nextDate = ($year + !$month) .'-'. ($month + (bool) $month);
+            switch ($month) {
+                case 0 :
+                    $fromDate = $year.'-01';
+                    $toDate   = ($year + 1).'-01';
+                    break;
 
-            $fromDate = date('Y-m-d H:i:s', strtotime("$year-$month"));
-            $toDate   = date('Y-m-d H:i:s', strtotime($nextDate));
+                case 12 :
+                    $fromDate = $year.'-12';
+                    $toDate   = ($year + 1).'-01';
+                    break;
+
+                default :
+                    $fromDate = $year .'-'. $month;
+                    $toDate   = $year .'-'. ($month + 1);
+            }
+
+            $fromDate = date('Y-m-d H:i:s', strtotime($fromDate));
+            $toDate   = date('Y-m-d H:i:s', strtotime($toDate));
         }
         else { $fromDate = $toDate = null; }
 
