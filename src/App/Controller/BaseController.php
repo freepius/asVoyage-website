@@ -97,7 +97,7 @@ class BaseController implements ControllerProviderInterface
 
         $blogRepo     = $this->app['model.repository.blog'];
         $mediaRepo    = $this->app['model.repository.media'];
-        $registerRepo = $this->app['model.repository.register'];
+        //$registerRepo = $this->app['model.repository.register'];
 
         // The 6 last blog articles
         $lastArticles = iterator_to_array($blogRepo->find(6));
@@ -106,21 +106,21 @@ class BaseController implements ControllerProviderInterface
         $lastImages = $mediaRepo->find(20, 0, ['tags' => ['Favori'], 'type' => 'image']);
 
         // Get the last "geo. entry" from "Travel Register" module
-        $lastGeoEntry = $registerRepo->getLastGeoEntry();
+        //$lastGeoEntry = $registerRepo->getLastGeoEntry();
 
         // Get the last "message entry" from "Travel Register"
-        $lastMsgEntry = $registerRepo->getLastMsgEntry();
+        //$lastMsgEntry = $registerRepo->getLastMsgEntry();
 
         // Get/generate the javascript file containing the travel register entries
-        $geoEntries_js = $registerRepo->getGeoJsFile($this->currentTravelStartingDate);
+        //$geoEntries_js = $registerRepo->getGeoJsFile($this->currentTravelStartingDate);
 
         return $this->app->render('base/home.html.twig',
         [
             'articles'       => $lastArticles,
             'favoriteImages' => $lastImages,
-            'lastGeoEntry'   => $lastGeoEntry,
-            'lastMsgEntry'   => $lastMsgEntry,
-            'geoEntries_js'  => $geoEntries_js,
+            //'lastGeoEntry'   => $lastGeoEntry,
+            //'lastMsgEntry'   => $lastMsgEntry,
+            //'geoEntries_js'  => $geoEntries_js,
         ], $response);
     }
 

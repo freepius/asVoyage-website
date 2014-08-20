@@ -37,6 +37,7 @@ return [
     //'Home'                       => '',
     //'Last mini-message'          => '',
     //'Last published articles'    => '',
+    //'Last travel'                => '',
     //'Login'                      => '',
     //'Logout'                     => '',
     //'No'                         => '',

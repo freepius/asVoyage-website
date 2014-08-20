@@ -80,6 +80,7 @@ TODO
 * Register :
   * make a real creation/updating page
   * make a page to overview the last register entries
+* Redesign the multi-locales system
 
 For production
 --------------

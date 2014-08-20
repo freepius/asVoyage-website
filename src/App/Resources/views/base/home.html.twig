@@ -2,7 +2,7 @@
 
 {% extends "layout.html.twig" %}
 
-{% import "carto.twig" as carto %}
+{#{% import "carto.twig" as carto %}#}
 
 {% from "macros.twig" import linked_img %}
 
@@ -10,7 +10,7 @@
 
 
 {% block stylesheets %}
-    {{ carto.cssBase() }}
+    {#{{ carto.cssBase() }}#}
 
     <style>
         #map { height: 300px; }
@@ -27,17 +27,25 @@
 
 
 {% block javascripts %}
+{#
     {{ carto.jsBase() }}
     <script src="{{ geoEntries_js }}"></script>
     <script>
         var currentPlace = [{{ lastGeoEntry.geoCoords | default('0, 0') }}];
     </script>
     <script src="/js/app-base-home.js"></script>
+#}
+    <script>
+        $(document).ready(function () {
+            $('.carousel-inner').carousel();
+        });
+    </script>
 {% endblock %}
 
 
 {% block main %}
     <aside class="col-xs-4">
+    {#
         <!-- The last travel register entry with message -->
         <div class="box">
             <h1 class="special" style="margin-bottom: 1em; font-size: 1em;">
@@ -54,6 +62,7 @@
         <div class="clearfix small special" style="margin-bottom: 1.5em;">
             <a href="/map" class="pull-right">» {{ 'See the large map'|trans }}</a>
         </div>
+    #}
 
         <!-- Carousel of last favorite images -->
         <div class="carousel-inner slide">

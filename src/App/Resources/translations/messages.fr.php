@@ -37,6 +37,7 @@ return [
     'Home'                       => 'Accueil',
     'Last mini-message'          => 'Dernier mini-message',
     'Last published articles'    => 'Derniers articles publiés',
+    'Last travel'                => 'Dernier voyage',
     'Login'                      => 'Connexion',
     'Logout'                     => 'Déconnexion',
     'No'                         => 'Non',
