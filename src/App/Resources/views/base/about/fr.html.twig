@@ -1,105 +1,127 @@
+{##
+ # Number of each weight : 1 = 6   2 = 5   3 = 7   4 = 1
+ #}
 {% set tagsMathieu = [
-    [3, '1987'],
-    [4, yearsMathieu ~ ' ans'],
-    [3, 'Asperge'],
-    [3, 'Barbu'],
-    [3, 'Baroudeur'],
     [1, 'Bidouilleur'],
-    [2, 'Café allongé'],
-    [3, 'Curieux'],
     [1, 'Gnu.42'],
     [1, 'Gourmand'],
-    [2, 'Grimpeur'],
     [1, 'Grognon'],
     [1, 'Gueulard'],
-    [3, 'Océan'],
     [1, 'Ouvert'],
+    [2, 'Café allongé'],
+    [2, 'Grimpeur'],
     [2, 'Pragmatique'],
     [2, 'Rigueur'],
     [2, 'Sportif'],
+    [3, '1987'],
+    [3, 'Asperge'],
+    [3, 'Barbu'],
+    [3, 'Baroudeur'],
+    [3, 'Curieux'],
+    [3, 'Océan'],
     [3, 'Volontaire'],
+    [4, yearsMathieu ~ ' ans'],
 ] %}
 
+{##
+ # Number of each weight : 1 = 6   2 = 5   3 = 7   4 = 1
+ #
+ # TODO: Add 'Fouineuse'
+ #}
 {% set tagsMarie = [
-    [3, '1988'],
-    [4, yearsMarie ~ ' ans'],
-    [3, 'Biodiversité'],
-    [2, 'Blonde'],
     [1, 'Bordelique'],
     [1, 'Cuisine'],
-    [2, 'Endurante'],
-    [3, 'Fromage'],
     [1, 'Grimpeuse'],
+    [1, 'Intendante'],
+    [1, 'Naïve'],
+    [1, 'Super sympa !'],
+    [2, 'Blonde'],
+    [2, 'Endurante'],
     [2, 'Hobbit'],
+    [2, 'Logisticienne'],
+    [2, 'Simple'],
+    [3, '1988'],
+    [3, 'Biodiversité'],
+    [3, 'Fromage'],
     [3, 'Joyeuse'],
     [3, 'Lenteur'],
-    [2, 'Logisticienne'],
-    [1, 'Naïve'],
-    [3, 'Siestes'],
-    [2, 'Simple'],
-    [1, 'Super sympa !'],
     [3, 'Ouverte'],
+    [3, 'Siestes'],
+    [4, yearsMarie ~ ' ans'],
 ] %}
 
+{##
+ # Number of each weight :
+ #  -> Part 1 : 1 = 4   2 = 4   3 = 4   4 = 3
+ #  -> Part 2 : 1 = 4   2 = 4   3 = 4   4 = 3
+ #
+ # TODO: Add 'Récup'
+ #}
 {% set tagsBoth = [
     [1, 'Câlins'],
     [1, 'Campagne'],
     [1, 'Gueulards'],
     [1, 'Ligériens'],
-    [1, 'Loire-Atlantique'],
     [2, 'Amoureux'],
-    [2, 'Décroissants'],
+    [2, 'Joyeux'],
+    [2, 'Montagne'],
     [2, 'Rêveurs'],
+    [3, 'Culture libre'],
     [3, 'Découverte'],
-    [3, 'Joyeux'],
     [3, 'Nature'],
     [3, 'Voyage'],
     [4, yearsMMM ~ ' ans'],
     [4, 'Éclectiques'],
-    [4, 'Écolos'],
     [4, 'Long cours'],
+
     [1, 'Bretons'],
     [1, 'Clampins'],
-    [1, 'Croissants'],
+    [1, 'Loire-Atlantique'],
     [1, 'Marais'],
     [2, 'Bivouac'],
     [2, 'Contemplatifs'],
+    [2, 'Curieux'],
     [2, 'Observateurs'],
-    [3, 'Curieux'],
     [3, 'Écriture'],
     [3, 'Marche'],
+    [3, 'Sobriété heureuse'],
     [3, 'Unis'],
+    [4, 'Écolos'],
     [4, 'Liberté'],
     [4, 'Vagabonds'],
 ] %}
 
+{##
+ # Number of each weight : 1 = 6   2 = 5   3 = 5   4 = 4
+ #}
 {% set tagsAnarchosSemitas = [
     [1, 'زهر (zhar)'],
-    [2, 'ἀνἀρχός'],
     [1, 'ἀναρχία'],
     [1, 'anarchia'],
     [1, 'Anarchie'],
+    [1, 'Désorganisation'],
+    [1, 'Sensation'],
+    [2, 'ἀνἀρχός'],
+    [2, 'Cheminement'],
+    [2, 'Choix'],
+    [2, 'Sēmita'],
+    [2, 'Sens'],
     [3, 'Anarchique'],
     [3, 'Chemin'],
-    [2, 'Cheminement'],
-    [4, 'Démambulation'],
-    [1, 'Désorganisation'],
-    [4, 'Diversité'],
     [3, 'Hasard'],
     [3, 'Idée'],
-    [4, 'Pensée'],
-    [2, 'Sens'],
-    [1, 'Sensation'],
-    [2, 'Sēmita'],
-    [4, 'Sentier'],
     [3, 'Tous azimuts'],
+    [4, 'Déambulation'],
+    [4, 'Diversité'],
+    [4, 'Pensée'],
+    [4, 'Sentier'],
 ] | shuffle %}
 
 {% set pageTitle = 'À propos' %}
 {% set aboutUsTitle = 'Qui sommes-nous ?' %}
 {% set mainText -%}
-*"anarchos semitas"* c'est l'idée que nos pas -- physiquement et philosophiquement -- se laisseront aller aux vagabondages, aux rencontres, à la découverte.
-C'est l'idée, aussi, qu'ils essaieront de ne jamais suivre des routes et des pensées trop facilement tracées.
+*"anarchos semitas"* c'est l'idée que, physiquement et philosophiquement, nous nous laissons aller aux vagabondages, aux rencontres, à la découverte.
+C'est l'idée, aussi, que nous ne suivons pas des routes et des pensées trop facilement tracées.
 Nous avons tous deux, en effet, un profond besoin de construire nos vies, sans préjugé ni but strict,
 le long de chemins de déambulation, de *"chemins anarchiques"*.
 
