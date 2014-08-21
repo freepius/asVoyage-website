@@ -6,6 +6,8 @@
 
 {% set tagsBothMiddle = (tagsBoth | length) // 2 %}
 
+{% set i = random(2) %} {# What set of images? #}
+
 
 {% block stylesheets %}
     <style>
@@ -34,8 +36,8 @@
                 {{ tags_box(tagsMathieu, {align: 'right', class: 'col-xs-4', special: 'Mathieu'}) }}
 
                 <div class="col-xs-4">
-                    {{ linked_img('/images/ourselves', 'freepius.jpg', {class: 'col-xs-6'}) }}
-                    {{ linked_img('/images/ourselves', 'manalee.jpg',  {class: 'col-xs-6'}) }}
+                    {{ linked_img('/images/ourselves', 'freepius-'~i~'.jpg', {class: 'col-xs-6'}) }}
+                    {{ linked_img('/images/ourselves', 'manalee-'~i~'.jpg',  {class: 'col-xs-6'}) }}
                 </div>
 
                 {{ tags_box(tagsMarie, {align: 'left', class: 'col-xs-4', special: 'Marie'}) }}
@@ -48,7 +50,7 @@
             <div id="both" class="row">
                 {{ tags_box(tagsBoth[0:tagsBothMiddle], {align: 'right', class: 'col-xs-4'}) }}
 
-                {{ linked_img('/images/ourselves', 'together.jpg', {class: 'col-xs-4'}) }}
+                {{ linked_img('/images/ourselves', 'together-'~i~'.jpg', {class: 'col-xs-4'}) }}
 
                 {{ tags_box(tagsBoth[tagsBothMiddle:], {align: 'left', class: 'col-xs-4'}) }}
             </div>
