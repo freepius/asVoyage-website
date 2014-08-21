@@ -55,6 +55,16 @@
     </div>
 </header>
 
+<p class="alert alert-warning">
+    {% if app.locale == 'fr' %}
+        Cette carte correspond au tracé, au jour le jour, de notre dernier voyage : <a href="/our-travels/afrikapie">Afrikapié</a>.<br>
+        Celui-ci est désormais terminé <small>(depuis la fin juin 2014)</small>. La carte sera donc bientôt mise à jour.
+    {% else %}
+        This map represents the path, day after day, of our last travel : <a href="/our-travels/afrikapie">Afrikapié</a>.<br>
+        This travel is now completed <small>(since the end of June 2014)</small>. So, the map will be update soon.
+    {% endif %}
+</p>
+
 {% include "base/map-help.html.twig" only %}
 
 <div id="map"></div>
