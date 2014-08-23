@@ -55,9 +55,10 @@ class BaseController implements ControllerProviderInterface
         $base->get('/map'      , [$this, 'map']);
 
         // Our travels
-        $base->get('our-travels'                 , [$this, 'ourTravels']);
-        $base->get('our-travels/3000-km-diagonal', [$this, 'diagonal3000Km']);
-        $base->get('our-travels/afrikapie'       , [$this, 'afrikapie']);
+        $base->get('our-travels'                   , [$this, 'ourTravels']);
+        $base->get('our-travels/3000-km-diagonal'  , [$this, 'diagonal3000Km']);
+        $base->get('our-travels/afrikapie'         , [$this, 'afrikapie']);
+        $base->get('our-travels/afrikapie/original', [$this, 'afrikapieOriginal']);
 
         // Admin routes
         $base->get('/login'            , [$this, 'login']);
@@ -242,7 +243,29 @@ class BaseController implements ControllerProviderInterface
      */
     public function afrikapie()
     {
-        return $this->app->render("base/our-travels/afrikapie/{$this->app['locale']}.html.twig")
+        $repository = $this->app['model.repository.media'];
+
+        // Retrieve 4 favorite images per country
+        $images = [
+            'morocco'    => $repository->randomImagesByTags(['Afrikapié', 'Favori', 'Maroc']     , 4),
+            'mauritania' => $repository->randomImagesByTags(['Afrikapié', 'Favori', 'Mauritanie'], 4),
+            'senegal'    => $repository->randomImagesByTags(['Afrikapié', 'Favori', 'Sénégal']   , 4),
+            'mali'       => $repository->randomImagesByTags(['Afrikapié', 'Favori', 'Mali']      , 4),
+        ];
+
+        return $this->app->render("base/our-travels/afrikapie/{$this->app['locale']}.html.twig",
+        [
+            'images' => $images,
+        ])
+        ->setSharedMaxAge(3600 * 24 * 30);
+    }
+
+    /**
+     * CACHE: public ; 30 days
+     */
+    public function afrikapieOriginal()
+    {
+        return $this->app->render("base/our-travels/afrikapie/original/{$this->app['locale']}.html.twig")
             ->setSharedMaxAge(3600 * 24 * 30);
     }
 

@@ -1,0 +1,47 @@
+{% set currentNav = 'our-travels' %}
+
+{% extends "layout.html.twig" %}
+
+{% import "carto.twig" as carto %}
+
+
+{% block stylesheets %}
+    {{ carto.cssBase() }}
+
+    <style>
+        #map { height: 500px; }
+    </style>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ carto.jsBase() }}
+
+    <script>
+        {% include "base/our-travels/afrikapie/original/geo-coords.js" %}
+
+        var alt  = L.multiPolyline([altNamibia_points, altMali_points], {color: 'green', weight: 5}),
+            main = L.polyline(main_points, {color: 'brown', weight: 10, opacity: 1.0});
+
+        asCarto.addMap('map')
+            .addLayer(main)
+            .addLayer(alt)
+            .fitBounds(main, {reset: true});
+    </script>
+{% endblock %}
+
+
+{% block main %}
+    <article itemscope itemtype="http://schema.org/Article">
+
+        <!-- Breadcrumb + title -->
+        <header>
+            <nav><a href="/our-travels">{{ 'nav.our-travels'|trans }}</a> »</nav>
+            <h1 id="page-title">Afrikapié</h1>
+        </header>
+
+        <p class="alert alert-warning">{{ note }}</p>
+
+        <div itemprop="articleBody">{{ text | richText }}</div>
+    </article>
+{% endblock %}

@@ -1,61 +1,223 @@
-{% set note %}
-    Cette page <small>(écrite à l'été 2013)</small> décrit le <strong>projet Afrikapié</strong>,
-    ses raisons, ses objectifs, son tracé initial...
-    Au moment où vous lisez ces lignes, nous l'avons terminé, plus tôt que prévu <small>(fin juin 2014)</small>.
-    Nous avons parcouru, durant <strong>8 mois et 4000 km à pied</strong>, le Maroc, la Mauritanie, le Sénégal et le Mali.
-    <br>
-    Pour vous faire une idée de ce que nous avons vécu, allez donc voir :
-    les <a href="/blog/tag-Afrikapié">articles</a>,
-    les <a href="/media/tag-Afrikapié">images</a> et
-    la <a href="/map">carte</a>.
-{% endset %}
+{% from "media/macros.twig" import media_render %}
 
+{##
+ # Number of each weight : 1 = 10   2 = 8   3 = 8   4 = 4
+ #}
+{% set tags = [
+    [4, '2013 - 2014'],
+    [4, '9 mois'],
+    [4, '4000 km'],
+    [4, 'Afrique'],
+    [3, 'Bivouac'],
+    [3, 'Culture'],
+    [3, 'Famille'],
+    [3, 'Mali'],
+    [3, 'Marche'],
+    [3, 'Maroc'],
+    [3, 'Mauritanie'],
+    [3, 'Sénégal'],
+    [2, 'Brousse'],
+    [2, 'Désert'],
+    [2, 'Hospitalité'],
+    [2, 'Humanité'],
+    [2, 'Language'],
+    [2, 'Montagne'],
+    [2, 'Nature'],
+    [2, 'Océan Atlantique'],
+    [1, 'Capitales'],
+    [1, 'Chaleur'],
+    [1, 'Contemplation'],
+    [1, 'Découverte'],
+    [1, 'Grandeur'],
+    [1, 'Immersion'],
+    [1, 'Rencontre'],
+    [1, 'Simplicité'],
+    [1, 'Solitude'],
+    [1, 'Village'],
+] %}
+
+{##
+ # Number of each weight : 1 = 10   2 = 16   3 = 16   4 = 10
+ #}
+{% set theFigures = [
+    [4, '272 jours'],
+    [4, '251 aller / 21 retour'],
+    [4, '3842 km à pied'],
+    [4, '2226 km motorisés'],
+    [4, '4400 km retour'],
+    [4, '4 pays'],
+    [4, '110 bivouacs'],
+    [4, '71 nuits accueillies'],
+    [4, '40 accueillants'],
+    [4, '4 longs accueils'],
+    [3, '41 nuits en hôtels et auberges'],
+    [3, '16 nuits chez l\'habitant'],
+    [3, '15 nuits en location'],
+    [3, '1 petit studio'],
+    [3, '805 photos'],
+    [3, '999 belles rencontres !'],
+    [3, '2 babas marocains'],
+    [3, '1 famille mauritanienne'],
+    [3, '1 belle amitié sénégalaise'],
+    [3, '1 école-amie malienne'],
+    [3, '3 grosses touristas'],
+    [3, '6 paires de tongs'],
+    [3, '4 gros orages'],
+    [3, '4 tempêtes de sable'],
+    [3, '14 jours de pluie'],
+    [3, '19 livres lus'],
+    [2, '500 km dans un wagon à minerai'],
+    [2, '2 km sur une cariole avec cheval'],
+    [2, '106 jours consécutifs sans pluie'],
+    [2, '7 jours de brouillard de sable'],
+    [2, '1 jour de neige'],
+    [2, '10 kilos perdus chacun'],
+    [2, '8676 € au total'],
+    [2, '1642 € d\'alimentation'],
+    [2, '2 dromadaires'],
+    [2, '2 antilopes'],
+    [2, '2 coiffeurs'],
+    [2, '2 barbiers'],
+    [2, '1 hippopotame'],
+    [2, '1 énorme scorpion noir !'],
+    [2, '1 piqûre d\'un petit scorpion jaune'],
+    [2, '1 rappel antirabique'],
+    [1, '11 baignades'],
+    [1, '4 raffistolages de chemise'],
+    [1, '1 paire de sandales'],
+    [1, '1 lentille de contact perdue dans le sable'],
+    [1, '2 messes dominicales'],
+    [1, '3903 € au voyage aller'],
+    [1, 'dont 445 € de transport'],
+    [1, '1293 € au voyage retour'],
+    [1, 'dont 700 € de transport'],
+    [1, 'Trop de mangues ingurgitées'],
+] %}
 
 {% set text -%}
-*"Afrikapié"* c'est notre nouveau projet de voyage au long cours ; le second.
 
-Partant du Nord-Est marocain, nous voulons traverser l'Afrique, du Nord au Sud, puis d'Ouest en Est, pour rejoindre l'île rouge : Madagascar <small>[\[voir carte\]](#map)</small>.
-Ce projet est ambitieux. Il nous fera vagabonder sur terre, à pied, durant 2 à 3 années.
-D'avance, nos mollets se crispent et nos peaux blanches rougissent.
+**Afrikapié**, c'est notre premier voyage hors des frontières françaises.
+L'Afrique nous a accueillis pour un long et fort périple, nous permettant de nous accomplir comme voyageurs de grands chemins.
 
-Il peut paraître un peu fou, aussi. Car d'ici, de nos contrées occidentales prospères, l'Afrique -- ce grand continent aux 1100 millions d'habitants et aux 54 pays -- semble accablé de mille maux terrifiants.
+D’octobre 2013 à juillet 2014, nous l'avons parcourue **à pied** pendant **huit mois** et **4000 km**,
+traversant quatre pays de cet immense continent : **Maroc**, **Mauritanie**, **Sénégal** et **Mali**.
 
-Certes, l'Afrique a une géopolitique hypercomplexe, une pauvreté encore endémique et est criblée d'épidémies et de conflits en tous genres.
-Elle panse, toujours, les plaies de son histoire contemporaine tragique.
+Initialement, ce voyage devait durer une à deux années et nous mener jusqu'à Madagascar.
+Mais, au fil des kilomètres parcourus, de la famille qui manque, de la fatigue physique,
+des projets en perspective, des souvenirs et des idées débordant déjà de nos têtes...
+nous avons décidé de nous arrêter d'abord au Bénin (notre objectif intermédiaire), puis finalement à Bamako.
 
-Mais, c'est aussi un continent en hypercroissance, qui se démocratise à grands pas et qui devient une puissance qui compte.
-C'est, encore, un territoire à l'extrême diversité : de paysages, de climats, de peuples, de cultures, de langues, d'histoires...
+Relisez la [description du projet initial](/our-travels/afrikapie/original),
+ainsi que les [quoi et pourquoi](/blog/afrikapie-change/read) de cet arrêt prématuré.
 
-Voilà pourquoi l'Afrique.  
-Parce que nous l'avons rêvée cent et cent fois.  
-Parce que sa diversité et ses espérances gonflent les nôtres.
+<hr>
 
-Et voici sa carte, en tête de zèbre orientée plein sud.  
-En marron, notre trajet principal ; en vert, nos alternatives.  
-Nous projetons de traverser les pays suivants : Maroc, Mauritanie, Sénégal, Guinée, Côte d'Ivoire, Ghana, Togo, Bénin, Nigeria, Cameroun, Gabon, Congo-Brazzaville, Congo-Kinshasa, Angola, Zambie, Zimbabwe, Mozambique et Madagascar.
+Notre voyage commence à Nador, dans la région du Rif, au Nord-Est du Maroc.
+Nous restons trois mois dans ce beau et long pays, y marchand près de 1600 km.
 
-<div class="thumbnail container" style="width: 70%; margin-bottom: 20px;">
-    <div id="map"></div>
-</div>
+Le premier mois est un test sérieux.
+Il nous mène de Nador à Rabat (400 km).
+Là, nous marchons sur de petites routes, apprenons quelques mots de *tarifit* (dialecte berbère du Rif) et de *darija* (arabe marocain),
+prenons notre rythme de marche (25 km par jour, en moyenne) et supportons quelques grosses chaleurs.
 
-Notre objectif premier est d'atteindre le Bénin en un an, en longeant la côté Atlantique.  
-Le reste suivra...
+Quittant Rabat le 1<sup>er</sup> novembre, nous nous dirigeons Sud-Sud-Est vers les montagnes du Haut-Atlas (de Demnate à Ouarzazate),
+puis Ouest-Sud-Ouest vers celles de l’Anti-Atlas (de Ouarzazate à Tiznit).
+Durant un mois et près de 600 km, nous crapahutons au cœur de ces deux superbes massifs, aux sommets parfois enneigés,
+et passons de nombreuses nuits à 0°C, en d'inoubliables bivouacs.
 
-Pour aller au plus près des populations, au cœur des environnements, prendre le temps de la découverte et de l'apprentissage, nous voyagerons à pied.
-La marche, comme mode de déplacement majeur, fera de ce voyage un défi à la fois sportif, humain et écologique.
+Notre fin d’année 2013 se déroule en longeant l’Océan Atlantique, de Tiznit à Tan-Tan (250 km environ, plein Sud).
+Nous terminons notre traversée marocaine par une très jolie note : durant six jours, nous foulons les 50 km de la « Plage Blanche »,
+entre un océan agité et quelques hautes dunes de sable fin.
 
-Aimant les voyages libérés de buts stricts et cloisonnés, nous laisserons la déambulation -- physique et mentale -- guider nos pas et tracer son trait sur notre carte.
-Il se peut, pourtant, qu'elle se laisse influencer par quelques uns de nos thèmes de prédilections :
+<p class="row">
+    {% for img in images.morocco %}
+        {{ media_render(img, {class: 'col-xs-3', group: 'morocco'}) }}
+    {% endfor %}
 
-* l'eau : réservoirs et cours d'eau, biodiversité, gestion, pollution... ;
-* les espaces naturels et protégés ;
-* le quotidien des hommes et des femmes : nécessités élémentaires, cultures, religions, place de la femme... ;
-* l'aménagement des territoires ;
-* le développement durable : agriculture bio, commerce équitable, énergies renouvelables...
+    <a href="/media?tags=Afrikapié, Maroc" class="lead pull-right">» Voir toutes les photos du Maroc</a>
+</p>
 
-Sur le présent site web, nous rendrons régulièrement compte de nos avancées, expériences, observations, analyses, rencontres, etc.
-Nous y écrirons des articles et y déposerons photos, vidéos et sons, pour tenter de vous immerger dans notre aventure.
+Le 2 janvier 2014, à Guergarat, la frontière Maroc-Mauritanie est franchie, sans le moindre petit souci.
+Nous restons deux mois en Mauritanie, dans ce pays à part (à la fois grandiose, fascinant, triste et frustrant),
+grande étendue de poésie et de désert, coincée entre deux blocs civilisationnels (le Maghreb et l'Afrique noire).
+
+Fin janvier, après trois semaines passées à Nouadhibou (capitale économique du pays) dans une belle famille maure (celle de Mamine et Aziza Évin),
+nous empruntons, de nuit, le plus long train du monde, les culs posés sur la tôle poussiéreuse d'un wagon à minerais,
+direction Choum, à 500 km de là.
+
+Entre Choum et Chinguetti (200 km environ), en passant pas Atar (capitale de la région de l’Adrar),
+nous marchons quasiment seuls, dans des paysages désertiques et pierreux, époustouflants.
+
+Entre Chinguetti et Akjoujt, nous louons les services d’un chamelier (Mohamed) et de ses deux chouettes dromadaires (Raïdeu et Raïcheu),
+pour parcourir 250 km de désert (Vallée Blanche, passe de Tifoujar, bord de l’erg Amatlich).
+Ces 12 jours de quasi-solitude resteront comme l'une des grosses expériences de nos jeunes vies de voyageurs.
+
+De Nouakchott (capitale administrative) à la frontière sénégalaise (250 km), nous marchons sur une petite route, sableuse et défoncée,
+quoique très empruntée par camions et camionnettes (axe principal Maroc-Sénégal).
+
+<p class="row">
+    {% for img in images.mauritania %}
+        {{ media_render(img, {class: 'col-xs-3', group: 'mauritania'}) }}
+    {% endfor %}
+
+    <a href="/media?tags=Afrikapié, Mauritanie" class="lead pull-right">» Voir toutes les photos de Mauritanie</a>
+</p>
+
+Notre arrivée au Sénégal marque l'entrée en Afrique noire.
+Dès le premier jour, nous rencontrons une population sympathique, ouverte et courtoise.
+De Saint-Louis à Dakar (200 km), nous longeons (encore) l'Océan Atlantique, sur une longue plage de sable blanc,
+au cœur de l'écosystème des Niayes et d'une apaisante solitude.
+
+Après deux semaines à vivre dans la grouillante et immense Dakar, nous nous engageons plein Est pour une traversée du Sénégal
+d'un mois et 550 km, en passant par Nioro-du-Rip, Koungheul et Tambacounda, direction Kidira à la frontière malienne.
+
+Nous traversons, d'abord, un bout des terres du peuple sérère et de leur passionnante culture,
+puis furtivement le calme delta du Siné-Saloum, pour enfin parcourir une brousse sèche, parfois brûlée,
+le long de la "route nationale 1" très passante, dans un paysage plat, triste et monotone.
+C'est la saison chaude. Le travail manque, les gens sont maussades.
+L'harmattan nous souffle à la gueule en de longues bourrasques de poussière, brûlantes et étouffantes.
+Éprouvante marche.
+
+<p class="row">
+    {% for img in images.senegal %}
+        {{ media_render(img, {class: 'col-xs-3', group: 'senegal'}) }}
+    {% endfor %}
+
+    <a href="/media?tags=Afrikapié, Sénégal" class="lead pull-right">» Voir toutes les photos du Sénégal</a>
+</p>
+
+Après deux mois et demi, nous quittons le Sénégal.
+Le Mali se découvre alors à nous : franchement accueillant, bourré de richesses naturelles, mais relativement pauvre.
+Les hommes, fiers de leur terre, semblent n'aspirer qu'à construire le pays et partagent un repas, une soirée ou une discussion avec curiosité.
+Les rencontres sont touchantes, avec les enfants surtout (baignades, chansons, danses).
+
+La saison des pluies approche et nous marchons sous les orages et les tempêtes de sable, sur des chemins de terre ocre,
+souvent à l'ombre de forêts verdoyantes saheliennes.
+Chaque jour, nous nous gavons de mangues juteuses et des vues sur le fleuve Sénégal ou les falaises aux couleurs de feu.
+
+
+Passant par Kayes, les chutes du Félou, celles de Gouina, l'énorme barrage de Manantali puis la pieuse ville de Kita,
+nous rejoignons Bamako -- capitale du pays -- en un mois et 600 km.
+
+<p class="row">
+    {% for img in images.mali %}
+        {{ media_render(img, {class: 'col-xs-3', group: 'mali'}) }}
+    {% endfor %}
+
+    <a href="/media?tags=Afrikapié, Mali" class="lead pull-right">» Voir toutes les photos du Mali</a>
+</p>
+
+La marche s'arrête ici, mais le voyage, lui, continue encore un peu.
+Deux écolos amoureux de lenteur, ça vient à pied et ça repart en transports en commun...
+
+
+Cette première Afrique nous a fait vivre des moments, des rencontres, des paysages... devinez... inoubliables !
+
+Début 2015, **retrouvez notre long périple dans deux ouvrages** :
+un **récit de voyage** (beaucoup de texte, quelques cartes et images) et
+un **beau livre** (cartes, images, textes courts et anecdotes).
+
 {%- endset %}
 
 
-{% extends "/base/our-travels/afrikapie/layout.html.twig" %}
+{% extends "base/our-travels/afrikapie/layout.html.twig" %}

@@ -2,37 +2,21 @@
 
 {% extends "layout.html.twig" %}
 
+{% from "macros.twig" import tags_box %}
+
 {% import "carto.twig" as carto %}
 
 
 {% block stylesheets %}
-    {{ carto.cssBase() }}
-
-    <style>
-        #map { height: 500px; }
-    </style>
 {% endblock %}
 
 
 {% block javascripts %}
-    {{ carto.jsBase() }}
-
-    <script>
-        {% include "base/our-travels/afrikapie/geo-coords.js" %}
-
-        var alt  = L.multiPolyline([altNamibia_points, altMali_points], {color: 'green', weight: 5}),
-            main = L.polyline(main_points, {color: 'brown', weight: 10, opacity: 1.0});
-
-        asCarto.addMap('map')
-            .addLayer(main)
-            .addLayer(alt)
-            .fitBounds(main, {reset: true});
-    </script>
 {% endblock %}
 
 
 {% block main %}
-    <article itemscope itemtype="http://schema.org/Article">
+    <article itemscope itemtype="http://schema.org/Article" class="col-xs-8">
 
         <!-- Breadcrumb + title -->
         <header>
@@ -40,8 +24,22 @@
             <h1 id="page-title">Afrikapié</h1>
         </header>
 
-        <p class="alert alert-warning">{{ note }}</p>
-
-        <div itemprop="articleBody">{{ text | richText }}</div>
+        <div itemprop="articleBody">
+            {{ text | richText }}
+        </div>
     </article>
+
+    <aside class="col-xs-4">
+        <!-- Tags -->
+        <div class="box">
+            <h1>{{ 'Tags'|trans }}</h1>
+            {{ tags_box(tags) }}
+        </div>
+
+        <!-- The figures -->
+        <div class="box">
+            <h1>{{ 'The figures'|trans }}</h1>
+            {{ tags_box(theFigures, {shuffle: false, style: 'unstyled'}) }}
+        </div>
+    </aside>
 {% endblock %}
