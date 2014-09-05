@@ -82,7 +82,6 @@ TODO
   * make a real creation/updating page
   * make a page to overview the last register entries
 * Redesign the multi-locales system
-* shuffle is now include in Twig-extension
 
 For production
 --------------

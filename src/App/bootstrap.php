@@ -114,17 +114,15 @@ $loader->add('Twig', ROOT.'/vendor/twig/extensions/lib');
 
 $app['twig'] = $app->extend('twig', function($twig, $app)
 {
-    $twig->addExtension(new \Twig_Extensions_Extension_Intl());  // for 'localizeddate' filter
+    // for 'shuffle' filter
+    $twig->addExtension(new \Twig_Extensions_Extension_Array());
+
+    // for 'localizeddate' filter
+    $twig->addExtension(new \Twig_Extensions_Extension_Intl());
 
     $twig->addGlobal('host', $app['request_stack']->getMasterRequest()->getUriForPath('/'));
 
     $twig->addFilter(new \Twig_SimpleFilter('sum', 'array_sum'));
-
-    $twig->addFilter(new \Twig_SimpleFilter('shuffle', function ($array)
-    {
-        shuffle($array);
-        return $array;
-    }));
 
     $twig->addFilter(new \Twig_SimpleFilter('richText',
         [$app['richText'], 'transform'],
