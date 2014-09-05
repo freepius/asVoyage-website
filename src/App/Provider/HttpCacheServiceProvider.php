@@ -4,6 +4,7 @@ namespace App\Provider;
 
 use App\Provider\HttpCache\HttpCacheListener,
     App\Provider\HttpCache\MongoNoCache,
+    App\Provider\HttpCache\Store,
     Pimple\Container,
     Pimple\ServiceProviderInterface,
     Silex\Provider\HttpCache\HttpCache;

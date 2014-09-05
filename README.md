@@ -82,6 +82,7 @@ TODO
   * make a real creation/updating page
   * make a page to overview the last register entries
 * Redesign the multi-locales system
+* Add a simple management of assets
 
 For production
 --------------
