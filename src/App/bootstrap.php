@@ -8,7 +8,7 @@ define('ROOT', dirname(SRC));
  * Include host-dependent configuration parameters
  * (with servernames, passwords...).
  */
-include APP.'/config.php';
+require_once APP.'/load-config.php';
 
 $loader = require ROOT.'/vendor/autoload.php';
 
