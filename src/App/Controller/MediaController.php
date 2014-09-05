@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use Silex\Api\ControllerProviderInterface,
+use App\Exception\MediaElementNotFound,
+    Silex\Api\ControllerProviderInterface,
     Symfony\Component\HttpFoundation\Request,
-    Symfony\Component\Validator\Constraints as Assert,
-    App\Exception\MediaElementNotFound;
+    Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -50,33 +50,33 @@ class MediaController implements ControllerProviderInterface
 
     public function connect(\Silex\Application $app)
     {
-        $media = $app['controllers_factory'];
+        $ctrl = $app['controllers_factory'];
 
         // Home page
-        $this->addHomeRoutes($media);
+        $this->addHomeRoutes($ctrl);
 
         // Create multiple
-        $media->get('/create' , [$this, 'initCreateMultiple']);
-        $media->post('/create', [$this, 'postMultiple'])
+        $ctrl->get('/create' , [$this, 'initCreateMultiple']);
+        $ctrl->post('/create', [$this, 'postMultiple'])
             ->value('isCreation', true);
 
         // Upload a single file
-        $media->post('/upload', [$this, 'upload'])
+        $ctrl->post('/upload', [$this, 'upload'])
             ->mustBeAjax();
 
         // Delete a single uploaded file
-        $media->get('/delete-uploaded/{id}', [$this, 'deleteUploaded'])
+        $ctrl->get('/delete-uploaded/{id}', [$this, 'deleteUploaded'])
             ->mustBeAjax();
 
         // Update multiple
-        $media->post('/init-update', [$this, 'initUpdateMultiple']);
-        $media->post('/update'     , [$this, 'postMultiple'])
+        $ctrl->post('/init-update', [$this, 'initUpdateMultiple']);
+        $ctrl->post('/update'     , [$this, 'postMultiple'])
             ->value('isCreation', false);
 
         // Delete multiple
-        $media->post('/delete', [$this, 'deleteMultiple']);
+        $ctrl->post('/delete', [$this, 'deleteMultiple']);
 
-        return $media;
+        return $ctrl;
     }
 
     /**

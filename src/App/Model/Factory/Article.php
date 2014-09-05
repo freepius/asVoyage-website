@@ -2,11 +2,11 @@
 
 namespace App\Model\Factory;
 
-use Symfony\Component\Validator\Constraints as Assert,
-    Symfony\Component\Validator\ValidatorInterface,
-    App\Model\Repository\MongoRepository,
+use App\Model\Repository\MongoRepository,
+    App\Util\StringUtil,
     App\Validator\Constraints\Unused,
-    App\Util\StringUtil;
+    Symfony\Component\Validator\Constraints as Assert,
+    Symfony\Component\Validator\ValidatorInterface;
 
 
 class Article extends EntityFactory

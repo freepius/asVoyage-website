@@ -31,16 +31,26 @@ class RegisterController implements ControllerProviderInterface
 
     public function connect(\Silex\Application $app)
     {
-        $register = $app['controllers_factory'];
+        $ctrl = $app['controllers_factory'];
+
+        // List all entries
+        $ctrl->get('/list', [$this, 'listAll']);
 
         // Post multiple entries in the travel register
-        $register->get('/post' , [$this, 'initPost']);
-        $register->post('/post', [$this, 'post']);
+        $ctrl->get('/post' , [$this, 'initPost']);
+        $ctrl->post('/post', [$this, 'post']);
 
         // Post one entry from SMS (currently throught Twilio services : http://twilio.com)
-        $register->post('/public-post-one', [$this, 'postOneFromSms']);
+        $ctrl->post('/public-post-one', [$this, 'postOneFromSms']);
 
-        return $register;
+        return $ctrl;
+    }
+
+    public function listAll()
+    {
+        return $this->app->render('register/list.html.twig', [
+            'entries' => $this->getRepository()->find()
+        ]);
     }
 
     public function initPost(Request $request)

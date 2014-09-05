@@ -1,0 +1,25 @@
+{% set currentNav = 'register' %}
+
+{% extends "layout.html.twig" %}
+
+{% from "register/macros.twig" import register_render %}
+
+
+{% block main %}
+
+    <header>
+        <!-- Breadcrumb + title -->
+        <nav>{{ 'register.home'|trans }} »</nav>
+
+        <h1 id="page-title">
+            {{ 'register.listing'|trans }}
+        </h1>
+    </header>
+
+    <ul>
+        {% for entry in entries %}
+            <li class="alert alert-success">{{ register_render(entry) }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

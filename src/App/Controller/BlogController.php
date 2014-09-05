@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use Silex\Api\ControllerProviderInterface,
-    Symfony\Component\HttpFoundation\Request,
-    App\Exception\BlogArticleNotFound,
-    App\Util\StringUtil;
+use App\Exception\BlogArticleNotFound,
+    App\Util\StringUtil,
+    Silex\Api\ControllerProviderInterface,
+    Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -52,43 +52,43 @@ class BlogController implements ControllerProviderInterface
 
     public function connect(\Silex\Application $app)
     {
-        $blog = $app['controllers_factory'];
+        $ctrl = $app['controllers_factory'];
 
         $slugToArticle = [$this, 'slugToArticle'];
 
         // Home page
-        $this->addHomeRoutes($blog);
+        $this->addHomeRoutes($ctrl);
 
         // Admin dashboard
-        $blog->get('/dashboard', [$this, 'dashboard']);
+        $ctrl->get('/dashboard', [$this, 'dashboard']);
 
         // CRUD for article :
-        $blog->match('/create', [$this, 'post']);
+        $ctrl->match('/create', [$this, 'post']);
 
-        $blog->get('/{article}/read', [$this, 'read'])
+        $ctrl->get('/{article}/read', [$this, 'read'])
             ->convert('article', $slugToArticle);
 
-        $blog->match('/{article}/update', [$this, 'post'])
+        $ctrl->match('/{article}/update', [$this, 'post'])
             ->convert('article', $slugToArticle);
 
-        $blog->match('/{article}/delete', [$this, 'delete'])
+        $ctrl->match('/{article}/delete', [$this, 'delete'])
             ->convert('article', $slugToArticle);
 
         // CRUD for comment :
 
         // ...on the article reading page
-        $blog->match('/{article}/read/{idComment}', [$this, 'read'])
+        $ctrl->match('/{article}/read/{idComment}', [$this, 'read'])
             ->convert('article', $slugToArticle)
             ->value('idComment', null)
             ->assert('idComment', '\d+');
 
         // ...on a specific admin page
-        $blog->match('/{article}/comments/{idComment}', [$this, 'crudComment'])
+        $ctrl->match('/{article}/comments/{idComment}', [$this, 'crudComment'])
             ->convert('article', $slugToArticle)
             ->value('idComment', null)
             ->assert('idComment', '\d+');
 
-        return $blog;
+        return $ctrl;
     }
 
     /**

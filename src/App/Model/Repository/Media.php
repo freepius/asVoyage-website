@@ -2,10 +2,10 @@
 
 namespace App\Model\Repository;
 
-use Symfony\Component\Filesystem\Filesystem,
-    App\Exception\MediaElementNotFound,
+use App\Exception\MediaElementNotFound,
+    App\Util\Group,
     App\Util\StringUtil,
-    App\Util\Group;
+    Symfony\Component\Filesystem\Filesystem;
 
 
 /**

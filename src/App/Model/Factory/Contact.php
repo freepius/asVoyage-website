@@ -2,10 +2,10 @@
 
 namespace App\Model\Factory;
 
-use Symfony\Component\Validator\Constraints as Assert,
-    Symfony\Component\Validator\ValidatorInterface,
-    App\Util\CaptchaManager,
-    App\Util\StringUtil;
+use App\Util\CaptchaManager,
+    App\Util\StringUtil,
+    Symfony\Component\Validator\Constraints as Assert,
+    Symfony\Component\Validator\ValidatorInterface;
 
 
 class Contact extends EntityFactory

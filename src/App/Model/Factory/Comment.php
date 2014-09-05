@@ -2,11 +2,11 @@
 
 namespace App\Model\Factory;
 
-use Symfony\Component\Validator\Constraints as Assert,
-    Symfony\Component\Validator\ValidatorInterface,
+use App\Util\CaptchaManager,
+    App\Util\StringUtil,
     Symfony\Component\Security\Core\SecurityContextInterface,
-    App\Util\CaptchaManager,
-    App\Util\StringUtil;
+    Symfony\Component\Validator\Constraints as Assert,
+    Symfony\Component\Validator\ValidatorInterface;
 
 
 class Comment extends EntityFactory

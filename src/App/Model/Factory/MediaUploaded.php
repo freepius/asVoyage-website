@@ -2,11 +2,11 @@
 
 namespace App\Model\Factory;
 
-use Symfony\Component\Validator\Constraints as Assert,
-    Symfony\Component\Validator\ValidatorInterface,
-    Symfony\Component\HttpFoundation\File\File,
+use App\Util\Geo,
     Gregwar\Image\Image,
-    App\Util\Geo;
+    Symfony\Component\HttpFoundation\File\File,
+    Symfony\Component\Validator\Constraints as Assert,
+    Symfony\Component\Validator\ValidatorInterface;
 
 
 class MediaUploaded extends EntityFactory

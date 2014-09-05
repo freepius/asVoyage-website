@@ -43,41 +43,41 @@ class BaseController implements ControllerProviderInterface
 
     public function connect(\Silex\Application $app)
     {
-        $base = $app['controllers_factory'];
+        $ctrl = $app['controllers_factory'];
 
         // Home
-        $base->get('/',     [$this, 'home']);
-        $base->get('/home', [$this, 'home']);
+        $ctrl->get('/',     [$this, 'home']);
+        $ctrl->get('/home', [$this, 'home']);
 
         // Various pages
-        $base->get('/about'    , [$this, 'about']);
-        $base->match('/contact', [$this, 'contact']);
-        $base->get('/map'      , [$this, 'map']);
+        $ctrl->get('/about'    , [$this, 'about']);
+        $ctrl->match('/contact', [$this, 'contact']);
+        $ctrl->get('/map'      , [$this, 'map']);
 
         // Our travels
-        $base->get('our-travels'                   , [$this, 'ourTravels']);
-        $base->get('our-travels/3000-km-diagonal'  , [$this, 'diagonal3000Km']);
-        $base->get('our-travels/afrikapie'         , [$this, 'afrikapie']);
-        $base->get('our-travels/afrikapie/original', [$this, 'afrikapieOriginal']);
+        $ctrl->get('our-travels'                   , [$this, 'ourTravels']);
+        $ctrl->get('our-travels/3000-km-diagonal'  , [$this, 'diagonal3000Km']);
+        $ctrl->get('our-travels/afrikapie'         , [$this, 'afrikapie']);
+        $ctrl->get('our-travels/afrikapie/original', [$this, 'afrikapieOriginal']);
 
         // Admin routes
-        $base->get('/login'            , [$this, 'login']);
-        $base->get('/admin'            , [$this, 'admin']);
-        $base->get('/admin/cache-clear', [$this, 'cacheClear']);
+        $ctrl->get('/login'            , [$this, 'login']);
+        $ctrl->get('/admin'            , [$this, 'admin']);
+        $ctrl->get('/admin/cache-clear', [$this, 'cacheClear']);
 
         // Technical routes
-        $base->get('/switch-locale/{locale}', [$this, 'switchLocale'])
+        $ctrl->get('/switch-locale/{locale}', [$this, 'switchLocale'])
             ->assert('locale', 'en|fr');
 
-        $base->get('/captcha-change', [$this, 'changeCaptcha'])
+        $ctrl->get('/captcha-change', [$this, 'changeCaptcha'])
             ->mustBeAjax();
 
-        $base->post('/render-richtext', [$this, 'renderRichText'])
+        $ctrl->post('/render-richtext', [$this, 'renderRichText'])
             ->mustBeAjax();
 
         $app->error([$this, 'manageErrors']);
 
-        return $base;
+        return $ctrl;
     }
 
 

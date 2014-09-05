@@ -2,8 +2,8 @@
 
 namespace App\Model\Repository;
 
-use Symfony\Component\Filesystem\Filesystem,
-    App\Util\StringUtil;
+use App\Util\StringUtil,
+    Symfony\Component\Filesystem\Filesystem;
 
 
 /**

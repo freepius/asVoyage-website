@@ -2,8 +2,8 @@
 
 namespace App\Model\Factory;
 
-use Symfony\Component\Validator\Constraints as Assert,
-    App\Util\Geo;
+use App\Util\Geo,
+    Symfony\Component\Validator\Constraints as Assert;
 
 
 class Register extends EntityFactory

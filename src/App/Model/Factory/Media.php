@@ -2,10 +2,9 @@
 
 namespace App\Model\Factory;
 
-use Symfony\Component\Validator\Constraints as Assert,
-    Symfony\Component\Validator\ValidatorInterface,
+use App\Util\Geo,
     App\Util\StringUtil,
-    App\Util\Geo;
+    Symfony\Component\Validator\Constraints as Assert;
 
 
 class Media extends EntityFactory

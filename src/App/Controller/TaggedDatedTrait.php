@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Request,
+use App\Util\StringUtil,
     Silex\ControllerCollection,
-    App\Util\StringUtil;
+    Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -17,33 +17,33 @@ use Symfony\Component\HttpFoundation\Request,
  */
 Trait TaggedDatedTrait
 {
-    protected function addHomeRoutes(ControllerCollection $factory)
+    protected function addHomeRoutes(ControllerCollection $ctrl)
     {
         // Home : a list of elements
-        $factory->get('/', [$this, 'home'])
+        $ctrl->get('/', [$this, 'home'])
             ->value('page', 1);
 
-        $factory->get('/{page}', [$this, 'home'])
+        $ctrl->get('/{page}', [$this, 'home'])
             ->assert('page', '\d+');
 
         // ...filtered by one tag
-        $factory->get('/tag-{tags}/{page}', [$this, 'home'])
+        $ctrl->get('/tag-{tags}/{page}', [$this, 'home'])
             ->value('page', 1)
             ->assert('page', '\d+');
 
         // ...filtered by multiple tags
-        $factory->get('/tags-{tags}/{page}', [$this, 'home'])
+        $ctrl->get('/tags-{tags}/{page}', [$this, 'home'])
             ->value('page', 1)
             ->assert('page', '\d+');
 
         // ...filtered by year
-        $factory->get('/year-{year}/{page}', [$this, 'home'])
+        $ctrl->get('/year-{year}/{page}', [$this, 'home'])
             ->value('page', 1)
             ->assert('page', '\d+')
             ->assert('year', '\d{4}');
 
         // ...filtered by year and month
-        $factory->get('/year-{year}/month-{month}/{page}', [$this, 'home'])
+        $ctrl->get('/year-{year}/month-{month}/{page}', [$this, 'home'])
             ->value('page', 1)
             ->assert('page' , '\d+')
             ->assert('year' , '\d{4}')

@@ -3,6 +3,14 @@
 namespace App\Model\Repository;
 
 
+/**
+ * Summary :
+ *  -> __construct
+ *  -> getCollection
+ *  -> init             [abstract, protected]
+ *  -> deleteById
+ *  -> store
+ */
 abstract class MongoRepository
 {
     protected $collection;
