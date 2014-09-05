@@ -29,7 +29,7 @@ $app['locale'] = 'fr';
 $app['debug'] = DEBUG;
 
 /* MongoDB config */
-$app['mongo.connection'] = new \MongoClient(MONGO_SERVER); // default connection
+$app['mongo.connection'] = new \MongoClient(MONGO_SERVER);
 $app['mongo.database'] = $app['mongo.connection']->selectDB(MONGO_DB);
 
 /* Paths and directories */
@@ -49,7 +49,7 @@ $app['currentTravel.startingDate'] = '2013-09-29';
 $app->register(new \Silex\Provider\SessionServiceProvider());
 
 /* http cache */
-$app->register(new \App\HttpCache\ServiceProvider(), [
+$app->register(new \App\Provider\HttpCacheServiceProvider(), [
     'http_cache.cache_dir' => $app['path.cache'].'/http',
 ]);
 
@@ -66,7 +66,7 @@ $app->register(new \Silex\Provider\SwiftmailerServiceProvider());
 $app->register(new \Silex\Provider\ValidatorServiceProvider());
 
 /* locale */
-$app->register(new \App\Locale\ServiceProvider());
+$app->register(new \App\Provider\LocaleServiceProvider());
 
 /* translator */
 $app->register(new \Silex\Provider\TranslationServiceProvider());

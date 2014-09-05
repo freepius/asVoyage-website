@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Locale;
+namespace App\Provider\Locale;
 
 use App\Application,
+    Symfony\Component\EventDispatcher\EventSubscriberInterface,
     Symfony\Component\HttpKernel\Event\GetResponseEvent,
-    Symfony\Component\HttpKernel\KernelEvents,
-    Symfony\Component\EventDispatcher\EventSubscriberInterface;
+    Symfony\Component\HttpKernel\KernelEvents;
 
 
 /**

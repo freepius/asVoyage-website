@@ -1,8 +1,10 @@
 <?php
 
-namespace App\HttpCache;
+namespace App\Provider;
 
-use Pimple\Container,
+use App\Provider\HttpCache\HttpCacheListener,
+    App\Provider\HttpCache\MongoNoCache,
+    Pimple\Container,
     Pimple\ServiceProviderInterface,
     Silex\Provider\HttpCache\HttpCache;
 
@@ -10,9 +12,9 @@ use Pimple\Container,
 /**
  * Active http cache mechanisms when :
  *  -> debug is off
- *  -> user is not admin
+ *  -> user is not admin (through HttpCacheListener)
  */
-class ServiceProvider implements ServiceProviderInterface
+class HttpCacheServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $app)
     {

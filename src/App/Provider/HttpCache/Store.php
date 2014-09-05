@@ -1,6 +1,6 @@
 <?php
 
-namespace App\HttpCache;
+namespace App\Provider\HttpCache;
 
 use Symfony\Component\HttpFoundation\Request,
     Symfony\Component\HttpKernel\HttpCache\Store as BaseStore;

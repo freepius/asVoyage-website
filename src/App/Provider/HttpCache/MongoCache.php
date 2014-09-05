@@ -1,10 +1,10 @@
 <?php
 
-namespace App\HttpCache;
+namespace App\Provider\HttpCache;
 
-use Symfony\Component\HttpFoundation\Response,
+use App\Model\Repository\MongoRepository,
     Symfony\Component\HttpFoundation\Request,
-    App\Model\Repository\MongoRepository;
+    Symfony\Component\HttpFoundation\Response;
 
 
 class MongoCache extends MongoRepository

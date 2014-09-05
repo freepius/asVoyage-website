@@ -1,10 +1,11 @@
 <?php
 
-namespace App\HttpCache;
+namespace App\Provider\HttpCache;
 
-use Symfony\Component\HttpKernel\Event\GetResponseEvent,
-    Symfony\Component\HttpKernel\KernelEvents,
-    Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use App\Application,
+    Symfony\Component\EventDispatcher\EventSubscriberInterface,
+    Symfony\Component\HttpKernel\Event\GetResponseEvent,
+    Symfony\Component\HttpKernel\KernelEvents;
 
 
 /**
@@ -14,7 +15,7 @@ class HttpCacheListener implements EventSubscriberInterface
 {
     protected $app;
 
-    public function __construct(\App\Application $app)
+    public function __construct(Application $app)
     {
         $this->app = $app;
     }

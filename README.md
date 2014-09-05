@@ -59,6 +59,7 @@ BUG
   See the diff in Http cache config for Apache2.
 * BUG on IE 9 : problem to refresh captcha (eg: on contact page)
 * BUG on IE 8 : very bad displaying of pages (html5 not recognized ?)
+* displaying BUG : in Afrikapié and "3000 km" pages, the text "Voir toutes les photos" is too much on the right side
 
 
 TODO
@@ -81,6 +82,7 @@ TODO
   * make a real creation/updating page
   * make a page to overview the last register entries
 * Redesign the multi-locales system
+* shuffle is now include in Twig-extension
 
 For production
 --------------

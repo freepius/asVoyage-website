@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Locale;
+namespace App\Provider;
 
-use Pimple\Container,
+use App\Provider\Locale\LocaleListener,
+    Pimple\Container,
     Pimple\ServiceProviderInterface,
     Silex\Api\EventListenerProviderInterface,
     Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 
-class ServiceProvider implements ServiceProviderInterface, EventListenerProviderInterface
+class LocaleServiceProvider implements ServiceProviderInterface, EventListenerProviderInterface
 {
     public function register(Container $app)
     {

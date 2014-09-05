@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Symfony\Component\HttpFoundation\Request,
-    Symfony\Component\HttpKernel\Exception\HttpException,
-    Silex\Route as BaseRoute;
+use Silex\Route as BaseRoute,
+    Symfony\Component\HttpFoundation\Request,
+    Symfony\Component\HttpKernel\Exception\HttpException;
 
 
 class Route extends BaseRoute

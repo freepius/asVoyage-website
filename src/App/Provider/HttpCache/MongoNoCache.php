@@ -1,9 +1,9 @@
 <?php
 
-namespace App\HttpCache;
+namespace App\Provider\HttpCache;
 
-use Symfony\Component\HttpFoundation\Response,
-    Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request,
+    Symfony\Component\HttpFoundation\Response;
 
 
 class MongoNoCache extends MongoCache

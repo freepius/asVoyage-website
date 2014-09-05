@@ -7,8 +7,6 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * Constraint for the Unused validator
- *
- * @Annotation
  */
 class Unused extends Constraint
 {
