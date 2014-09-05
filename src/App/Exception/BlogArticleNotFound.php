@@ -3,6 +3,6 @@
 namespace App\Exception;
 
 
-class BlogArticleNotFound extends \Exception
+class BlogArticleNotFound extends EntityNotFound
 {
 }

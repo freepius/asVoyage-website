@@ -3,6 +3,6 @@
 namespace App\Exception;
 
 
-class MediaElementNotFound extends \Exception
+class MediaElementNotFound extends EntityNotFound
 {
 }

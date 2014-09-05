@@ -2,12 +2,16 @@
 
 namespace App\Model\Repository;
 
+use App\Exception\EntityNotFound;
+
 
 /**
  * Summary :
  *  -> __construct
  *  -> getCollection
- *  -> init             [abstract, protected]
+ *  -> init                     [protected]
+ *  -> throwNotFoundException   [protected]
+ *  -> getById
  *  -> deleteById
  *  -> store
  */
@@ -34,6 +38,31 @@ abstract class MongoRepository
      *  -> etc.
      */
     protected function init() { }
+
+    /**
+     * Throw an exception of type 'Not found'.
+     */
+    protected function throwNotFoundException($message)
+    {
+        throw new EntityNotFound($message);
+    }
+
+    /**
+     * Retrieve an entity from its id.
+     * Throw an exception if no match.
+     */
+    public function getById($id)
+    {
+        $id = new \MongoId($id);
+
+        $entity = $this->collection->findOne(['_id' => $id]);
+
+        if (! is_array($entity)) {
+            throwNotFoundException("id = $id");
+        }
+
+        return $entity;
+    }
 
     /**
      * Delete an entity from its id.
