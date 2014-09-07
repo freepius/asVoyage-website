@@ -80,7 +80,7 @@ class MediaController implements ControllerProviderInterface
     }
 
     /**
-     * Clear caches that depend on register entries.
+     * Clear caches that depend on media elements.
      */
     protected function clearCache()
     {
