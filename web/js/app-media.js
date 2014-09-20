@@ -179,7 +179,7 @@
 
                 $('.thumbnail')
                     .popover('destroy')
-                    .tooltip('destroy') // TODO: Imperative to destroy 'tooltip' ! Bug ?
+                    .tooltip('destroy')  // NOTE: mandatory to destroy 'tooltip' ! Apparently, it isn't a bug.
                     .tooltip({
                         html      : true,
                         container : 'body',
@@ -207,7 +207,7 @@
                     });
             });
 
-            // Handle the full view (no tooltip or popover)
+            // Handle the full view (no tooltip nor popover)
             $('#view-full').click(function () {
                 $('#media')
                     .removeClass('view-medium view-short')

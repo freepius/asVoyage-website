@@ -81,6 +81,8 @@ TODO
 * Register :
   * make a real creation/updating page
   * make a page to overview the last register entries
+* Media :
+  * Date filter : add a link to filter the elements without date
 * Redesign the multi-locales system
 * Add a simple management of assets
 * Switch locale : prefer labels to flag pictures (eg: 'FR', 'EN'...)

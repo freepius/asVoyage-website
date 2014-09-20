@@ -4,13 +4,13 @@ define('APP' , __DIR__);
 define('SRC' , dirname(APP));
 define('ROOT', dirname(SRC));
 
+$loader = require ROOT.'/vendor/autoload.php';
+
 /*
  * Include host-dependent configuration parameters
  * (with servernames, passwords...).
  */
 require_once APP.'/load-config.php';
-
-$loader = require ROOT.'/vendor/autoload.php';
 
 /* Enable _method request parameter support */
 \Symfony\Component\HttpFoundation\Request::enableHttpMethodParameterOverride();
@@ -109,8 +109,6 @@ $app->register(new \Silex\Provider\MonologServiceProvider(), [
 /*************************************************
  * Twig extensions, global variables, filters and functions.
  ************************************************/
-
-$loader->add('Twig', ROOT.'/vendor/twig/extensions/lib');
 
 $app['twig'] = $app->extend('twig', function($twig, $app)
 {
