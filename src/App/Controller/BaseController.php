@@ -30,7 +30,7 @@ use Silex\Api\ControllerProviderInterface,
  *  -> TECHNICAL ACTIONS :
  *      => switchLocale
  *      => changeCaptcha    [ajax]
- *      => renderRichText   [ajax]
+ *      => renderRichtext   [ajax]
  *      => manageErrors
  */
 class BaseController implements ControllerProviderInterface
@@ -72,7 +72,7 @@ class BaseController implements ControllerProviderInterface
         $ctrl->get('/captcha-change', [$this, 'changeCaptcha'])
             ->mustBeAjax();
 
-        $ctrl->post('/render-richtext', [$this, 'renderRichText'])
+        $ctrl->post('/render-richtext', [$this, 'renderRichtext'])
             ->mustBeAjax();
 
         $app->error([$this, 'manageErrors']);
@@ -342,9 +342,9 @@ class BaseController implements ControllerProviderInterface
         return $captchaManager->getFilename();
     }
 
-    public function renderRichText(Request $request)
+    public function renderRichtext(Request $request)
     {
-        return $this->app['richText']->transform(
+        return $this->app['richtext']->transform(
             $request->request->get('text')
         );
     }

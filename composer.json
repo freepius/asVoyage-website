@@ -5,7 +5,7 @@
     "license": "CC0",
     "authors": [
         {
-            "name" : "Mathieu <freepius44> Poisbeau",
+            "name" : "Mathieu <freepius> Poisbeau",
             "email": "freepius44@gmail.com"
         }
     ],
@@ -22,10 +22,9 @@
         "symfony/finder": "*",
         "swiftmailer/swiftmailer": "5.*",
         "monolog/monolog": "*",
-        "michelf/php-markdown": "*",
-        "michelf/php-smartypants": "*",
         "gregwar/captcha": "*",
-        "gregwar/image": "*"
+        "gregwar/image": "*",
+        "freepius/php-richtext": "*"
     },
     "autoload": {
         "psr-0": { "App": "src/" }

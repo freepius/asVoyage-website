@@ -74,14 +74,12 @@ $app->register(new \Silex\Provider\TranslationServiceProvider());
 /* security */
 $app->register(new \Silex\Provider\SecurityServiceProvider());
 
+/* freepius/php-richtext extension */
+$app->register(new \Freepius\Pimple\Provider\RichtextProvider());
+
 /* autolink Twig extension */
 // TODO: adapt autolink to silex 2.0
 //$app->register(new \Nicl\Silex\AutolinkServiceProvider());
-
-/* richText (markdown and typo) */
-$app['richText'] = function ($app) {
-    return new \App\Util\RichText($app['locale']);
-};
 
 /* captcha manager */
 $app['captcha.manager'] = function ($app) {
@@ -121,11 +119,6 @@ $app['twig'] = $app->extend('twig', function($twig, $app)
     $twig->addGlobal('host', $app['request_stack']->getMasterRequest()->getUriForPath('/'));
 
     $twig->addFilter(new \Twig_SimpleFilter('sum', 'array_sum'));
-
-    $twig->addFilter(new \Twig_SimpleFilter('richText',
-        [$app['richText'], 'transform'],
-        ['is_safe' => ['all']]
-    ));
 
     return $twig;
 });

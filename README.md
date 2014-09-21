@@ -86,6 +86,7 @@ TODO
 * Redesign the multi-locales system
 * Add a simple management of assets
 * Switch locale : prefer labels to flag pictures (eg: 'FR', 'EN'...)
+* Captcha : add the html atrribute *autocomplete="off"*
 
 For production
 --------------
@@ -99,7 +100,6 @@ Low priority
 ------------
 
 * Use DataTable jquery plugin to Blog dashboard ?
-* Transform App\Util\RichText to Silex provider ?
 * Locale depending on :
   * user preferences (the 'Accept-Languages' HTTP header)
   * geo-localization
