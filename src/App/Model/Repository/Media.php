@@ -2,11 +2,11 @@
 
 namespace App\Model\Repository;
 
-use App\Exception\MediaElementNotFound,
-    Freepius\Util\Group,
-    Freepius\Util\StringUtil,
-    Symfony\Component\Filesystem\Filesystem;
-
+use App\Exception\MediaElementNotFound;
+use Freepius\Model\MongoRepository;
+use Freepius\Util\Group;
+use Freepius\Util\StringUtil;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Summary :

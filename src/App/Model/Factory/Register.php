@@ -2,9 +2,9 @@
 
 namespace App\Model\Factory;
 
-use Freepius\Util\Geo,
-    Symfony\Component\Validator\Constraints as Assert;
-
+use Freepius\Model\EntityFactory;
+use Freepius\Util\Geo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Register extends EntityFactory
 {

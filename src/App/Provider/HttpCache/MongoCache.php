@@ -2,10 +2,9 @@
 
 namespace App\Provider\HttpCache;
 
-use App\Model\Repository\MongoRepository,
-    Symfony\Component\HttpFoundation\Request,
-    Symfony\Component\HttpFoundation\Response;
-
+use Freepius\Model\MongoRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class MongoCache extends MongoRepository
 {

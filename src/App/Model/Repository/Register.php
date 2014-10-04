@@ -2,9 +2,9 @@
 
 namespace App\Model\Repository;
 
-use Freepius\Util\StringUtil,
-    Symfony\Component\Filesystem\Filesystem;
-
+use Freepius\Model\MongoRepository;
+use Freepius\Util\StringUtil;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Summary :

@@ -2,12 +2,12 @@
 
 namespace App\Model\Factory;
 
-use Freepius\Util\Geo,
-    Gregwar\Image\Image,
-    Symfony\Component\HttpFoundation\File\File,
-    Symfony\Component\Validator\Constraints as Assert,
-    Symfony\Component\Validator\ValidatorInterface;
-
+use Freepius\Model\EntityFactory;
+use Freepius\Util\Geo;
+use Gregwar\Image\Image;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ValidatorInterface;
 
 class MediaUploaded extends EntityFactory
 {

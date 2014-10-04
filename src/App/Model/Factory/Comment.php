@@ -2,12 +2,12 @@
 
 namespace App\Model\Factory;
 
-use Freepius\Util\CaptchaManager,
-    Freepius\Util\StringUtil,
-    Symfony\Component\Security\Core\SecurityContextInterface,
-    Symfony\Component\Validator\Constraints as Assert,
-    Symfony\Component\Validator\ValidatorInterface;
-
+use Freepius\Model\EntityFactory;
+use Freepius\Util\CaptchaManager;
+use Freepius\Util\StringUtil;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ValidatorInterface;
 
 class Comment extends EntityFactory
 {

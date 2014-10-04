@@ -69,17 +69,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius44/php-toolbox.git",
-                "reference": "8f7ca85b130970333149b777d3390be46b0c9be8"
+                "reference": "9fb8a13fd3cd2ef397ae7e46cf27d96b8d84f32a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius44/php-toolbox/zipball/8f7ca85b130970333149b777d3390be46b0c9be8",
-                "reference": "8f7ca85b130970333149b777d3390be46b0c9be8",
+                "url": "https://api.github.com/repos/freepius44/php-toolbox/zipball/9fb8a13fd3cd2ef397ae7e46cf27d96b8d84f32a",
+                "reference": "9fb8a13fd3cd2ef397ae7e46cf27d96b8d84f32a",
                 "shasum": ""
             },
             "require": {
                 "gregwar/captcha": "*",
                 "silex/silex": "*",
+                "symfony/validator": "*",
                 "twig/twig": "*"
             },
             "require-dev": {
@@ -103,7 +104,7 @@
             ],
             "description": "Various tools for my PHP projects",
             "homepage": "https://github.com/freepius44/php-toolbox",
-            "time": "2014-10-04 13:16:48"
+            "time": "2014-10-04 15:07:53"
         },
         {
             "name": "gregwar/cache",

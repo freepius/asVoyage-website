@@ -2,12 +2,12 @@
 
 namespace App\Model\Factory;
 
-use App\Model\Repository\MongoRepository,
-    Freepius\Util\StringUtil,
-    App\Validator\Constraints\Unused,
-    Symfony\Component\Validator\Constraints as Assert,
-    Symfony\Component\Validator\ValidatorInterface;
-
+use Freepius\Model\EntityFactory;
+use Freepius\Model\MongoRepository;
+use Freepius\Util\StringUtil;
+use App\Validator\Constraints\Unused;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ValidatorInterface;
 
 class Article extends EntityFactory
 {

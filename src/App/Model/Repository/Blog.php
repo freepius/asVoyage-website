@@ -2,9 +2,9 @@
 
 namespace App\Model\Repository;
 
-use App\Exception\BlogArticleNotFound,
-    Freepius\Util\Group;
-
+use App\Exception\BlogArticleNotFound;
+use Freepius\Model\MongoRepository;
+use Freepius\Util\Group;
 
 /**
  * Summary :

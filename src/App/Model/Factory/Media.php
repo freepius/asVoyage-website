@@ -2,10 +2,10 @@
 
 namespace App\Model\Factory;
 
-use Freepius\Util\Geo,
-    Freepius\Util\StringUtil,
-    Symfony\Component\Validator\Constraints as Assert;
-
+use Freepius\Model\EntityFactory;
+use Freepius\Util\Geo;
+use Freepius\Util\StringUtil;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Media extends EntityFactory
 {
