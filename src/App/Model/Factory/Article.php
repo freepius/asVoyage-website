@@ -3,7 +3,7 @@
 namespace App\Model\Factory;
 
 use App\Model\Repository\MongoRepository,
-    App\Util\StringUtil,
+    Freepius\Util\StringUtil,
     App\Validator\Constraints\Unused,
     Symfony\Component\Validator\Constraints as Assert,
     Symfony\Component\Validator\ValidatorInterface;

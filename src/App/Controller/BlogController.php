@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Exception\BlogArticleNotFound,
-    App\Util\StringUtil,
+    Freepius\Util\StringUtil,
     Silex\Api\ControllerProviderInterface,
     Symfony\Component\HttpFoundation\Request;
 

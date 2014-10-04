@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Util\StringUtil,
+use Freepius\Util\StringUtil,
     Silex\ControllerCollection,
     Symfony\Component\HttpFoundation\Request;
 

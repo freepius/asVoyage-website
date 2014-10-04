@@ -2,7 +2,7 @@
 
 namespace App\Model\Repository;
 
-use App\Util\StringUtil,
+use Freepius\Util\StringUtil,
     Symfony\Component\Filesystem\Filesystem;
 
 

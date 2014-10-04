@@ -3,8 +3,8 @@
 namespace App\Model\Repository;
 
 use App\Exception\MediaElementNotFound,
-    App\Util\Group,
-    App\Util\StringUtil,
+    Freepius\Util\Group,
+    Freepius\Util\StringUtil,
     Symfony\Component\Filesystem\Filesystem;
 
 
@@ -199,7 +199,7 @@ class Media extends MongoRepository
     }
 
     /**
-     * @see \App\Util\Group::byTags
+     * @see \Freepius\Util\Group::byTags
      */
     public function listTags()
     {
@@ -209,7 +209,7 @@ class Media extends MongoRepository
     }
 
     /**
-     * @see \App\Util\Group::byYearMonth
+     * @see \Freepius\Util\Group::byYearMonth
      */
     public function countByYearMonth()
     {

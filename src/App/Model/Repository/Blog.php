@@ -3,7 +3,7 @@
 namespace App\Model\Repository;
 
 use App\Exception\BlogArticleNotFound,
-    App\Util\Group;
+    Freepius\Util\Group;
 
 
 /**
@@ -143,7 +143,7 @@ class Blog extends MongoRepository
     }
 
     /**
-     * @see \App\Util\Group::byTags
+     * @see \Freepius\Util\Group::byTags
      */
     public function listTags()
     {
@@ -153,7 +153,7 @@ class Blog extends MongoRepository
     }
 
     /**
-     * @see \App\Util\Group::byYearMonth
+     * @see \Freepius\Util\Group::byYearMonth
      */
     public function countByYearMonth()
     {

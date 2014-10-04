@@ -22,9 +22,9 @@
         "symfony/finder": "*",
         "swiftmailer/swiftmailer": "5.*",
         "monolog/monolog": "*",
-        "gregwar/captcha": "*",
         "gregwar/image": "*",
-        "freepius/php-richtext": "*"
+        "freepius/php-richtext": "*",
+        "freepius/php-toolbox": "*"
     },
     "autoload": {
         "psr-0": { "App": "src/" }

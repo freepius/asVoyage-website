@@ -2,7 +2,7 @@
 
 namespace App\Model\Factory;
 
-use App\Util\Geo,
+use Freepius\Util\Geo,
     Symfony\Component\Validator\Constraints as Assert;
 
 

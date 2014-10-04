@@ -83,7 +83,7 @@ $app->register(new \Freepius\Pimple\Provider\RichtextProvider());
 
 /* captcha manager */
 $app['captcha.manager'] = function ($app) {
-    return new \App\Util\CaptchaManager(
+    return new \Freepius\Util\CaptchaManager(
         $app['session'],
         [
             'webPath'     => $app['path.web'],

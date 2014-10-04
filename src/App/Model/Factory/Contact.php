@@ -2,8 +2,8 @@
 
 namespace App\Model\Factory;
 
-use App\Util\CaptchaManager,
-    App\Util\StringUtil,
+use Freepius\Util\CaptchaManager,
+    Freepius\Util\StringUtil,
     Symfony\Component\Validator\Constraints as Assert,
     Symfony\Component\Validator\ValidatorInterface;
 
