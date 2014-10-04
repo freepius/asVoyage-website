@@ -69,18 +69,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius44/php-toolbox.git",
-                "reference": "9fb8a13fd3cd2ef397ae7e46cf27d96b8d84f32a"
+                "reference": "3b9647303e35a8fa03f3119bb1e7f57795714b31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius44/php-toolbox/zipball/9fb8a13fd3cd2ef397ae7e46cf27d96b8d84f32a",
-                "reference": "9fb8a13fd3cd2ef397ae7e46cf27d96b8d84f32a",
+                "url": "https://api.github.com/repos/freepius44/php-toolbox/zipball/3b9647303e35a8fa03f3119bb1e7f57795714b31",
+                "reference": "3b9647303e35a8fa03f3119bb1e7f57795714b31",
                 "shasum": ""
             },
             "require": {
                 "gregwar/captcha": "*",
                 "silex/silex": "*",
                 "symfony/validator": "*",
+                "twbs/bootstrap": "3.2.0",
                 "twig/twig": "*"
             },
             "require-dev": {
@@ -104,7 +105,7 @@
             ],
             "description": "Various tools for my PHP projects",
             "homepage": "https://github.com/freepius44/php-toolbox",
-            "time": "2014-10-04 15:07:53"
+            "time": "2014-10-04 16:39:42"
         },
         {
             "name": "gregwar/cache",
@@ -359,12 +360,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1e47b2788a01097b4a61bc18a2bd4120ec9623f7"
+                "reference": "940cbe15abe36924e5693abb585215bb322686a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1e47b2788a01097b4a61bc18a2bd4120ec9623f7",
-                "reference": "1e47b2788a01097b4a61bc18a2bd4120ec9623f7",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/940cbe15abe36924e5693abb585215bb322686a7",
+                "reference": "940cbe15abe36924e5693abb585215bb322686a7",
                 "shasum": ""
             },
             "require": {
@@ -423,7 +424,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-10-04 11:53:35"
+            "time": "2014-10-04 15:43:06"
         },
         {
             "name": "pimple/pimple",
@@ -1376,6 +1377,57 @@
             "description": "Symfony Validator Component",
             "homepage": "http://symfony.com",
             "time": "2014-10-04 07:54:45"
+        },
+        {
+            "name": "twbs/bootstrap",
+            "version": "v3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "c068162161154a4b85110ea1e7dd3d7897ce2b72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/c068162161154a4b85110ea1e7dd3d7897ce2b72",
+                "reference": "c068162161154a4b85110ea1e7dd3d7897ce2b72",
+                "shasum": ""
+            },
+            "replace": {
+                "twitter/bootstrap": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                },
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "http://getbootstrap.com",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "less",
+                "mobile-first",
+                "responsive",
+                "web"
+            ],
+            "time": "2014-06-26 16:36:48"
         },
         {
             "name": "twig/extensions",
