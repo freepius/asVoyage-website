@@ -77,6 +77,9 @@ $app->register(new \Silex\Provider\SecurityServiceProvider());
 /* freepius/php-richtext extension */
 $app->register(new \Freepius\Pimple\Provider\RichtextProvider());
 
+/* freepius/php-toolbox extension */
+$app->register(new \Freepius\Silex\Provider\ToolboxProvider());
+
 /* autolink Twig extension */
 // TODO: adapt autolink to silex 2.0
 //$app->register(new \Nicl\Silex\AutolinkServiceProvider());

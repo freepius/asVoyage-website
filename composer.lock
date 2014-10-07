@@ -69,12 +69,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius44/php-toolbox.git",
-                "reference": "3b9647303e35a8fa03f3119bb1e7f57795714b31"
+                "reference": "20bb4a2f0fbad42d7c348a8362c46f310b654043"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius44/php-toolbox/zipball/3b9647303e35a8fa03f3119bb1e7f57795714b31",
-                "reference": "3b9647303e35a8fa03f3119bb1e7f57795714b31",
+                "url": "https://api.github.com/repos/freepius44/php-toolbox/zipball/20bb4a2f0fbad42d7c348a8362c46f310b654043",
+                "reference": "20bb4a2f0fbad42d7c348a8362c46f310b654043",
                 "shasum": ""
             },
             "require": {
@@ -105,7 +105,7 @@
             ],
             "description": "Various tools for my PHP projects",
             "homepage": "https://github.com/freepius44/php-toolbox",
-            "time": "2014-10-04 16:39:42"
+            "time": "2014-10-07 09:05:09"
         },
         {
             "name": "gregwar/cache",
@@ -609,12 +609,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "74d3dd246fa8abcdee7bd97d1e238bc5991a2446"
+                "reference": "613354e08fbddce0943646932b007be9873c658f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/74d3dd246fa8abcdee7bd97d1e238bc5991a2446",
-                "reference": "74d3dd246fa8abcdee7bd97d1e238bc5991a2446",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/613354e08fbddce0943646932b007be9873c658f",
+                "reference": "613354e08fbddce0943646932b007be9873c658f",
                 "shasum": ""
             },
             "require": {
@@ -653,7 +653,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-10-04 05:53:52"
+            "time": "2014-10-05 19:53:07"
         },
         {
             "name": "symfony/config",
@@ -1241,12 +1241,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/TwigBridge.git",
-                "reference": "f4cc452b919cf1243b50f1aa5902c52832573900"
+                "reference": "2d2aadcbab1d09ea82ebd2c38ecfd2aed834cdd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/TwigBridge/zipball/f4cc452b919cf1243b50f1aa5902c52832573900",
-                "reference": "f4cc452b919cf1243b50f1aa5902c52832573900",
+                "url": "https://api.github.com/repos/symfony/TwigBridge/zipball/2d2aadcbab1d09ea82ebd2c38ecfd2aed834cdd1",
+                "reference": "2d2aadcbab1d09ea82ebd2c38ecfd2aed834cdd1",
                 "shasum": ""
             },
             "require": {
@@ -1306,7 +1306,7 @@
             ],
             "description": "Symfony Twig Bridge",
             "homepage": "http://symfony.com",
-            "time": "2014-10-03 12:13:48"
+            "time": "2014-10-06 11:17:54"
         },
         {
             "name": "symfony/validator",
