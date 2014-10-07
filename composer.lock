@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d564a809cdf5e5004de714ece4ac8c1a",
+    "hash": "7cd75a71a10151c869ecc740d9d3dd11",
     "packages": [
         {
             "name": "freepius/php-richtext",
@@ -106,6 +106,53 @@
             "description": "Various tools for my PHP projects",
             "homepage": "https://github.com/freepius44/php-toolbox",
             "time": "2014-10-07 09:05:09"
+        },
+        {
+            "name": "freepius/silex-autolink",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/freepius44/Silex-Autolink.git",
+                "reference": "3bdcd51e7e4fff28c44c6ce52b22484108554aa1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/freepius44/Silex-Autolink/zipball/3bdcd51e7e4fff28c44c6ce52b22484108554aa1",
+                "reference": "3bdcd51e7e4fff28c44c6ce52b22484108554aa1",
+                "shasum": ""
+            },
+            "require": {
+                "silex/silex": "2.0.*@dev",
+                "twig/twig": ">=1.8,<2.0-dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Nicl": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Long",
+                    "email": "nicolaslong@gmail.com"
+                },
+                {
+                    "name": "Mathieu Poisbeau",
+                    "email": "freepius44@gmail.com"
+                }
+            ],
+            "description": "Simple Twig extension for Silex to add autolink filter",
+            "homepage": "http://github.com/nicl/silex-autolink",
+            "time": "2014-10-07 11:13:02"
         },
         {
             "name": "gregwar/cache",

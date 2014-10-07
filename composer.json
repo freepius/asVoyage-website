@@ -23,6 +23,7 @@
         "swiftmailer/swiftmailer": "5.*",
         "monolog/monolog": "*",
         "gregwar/image": "*",
+        "freepius/silex-autolink": "*",
         "freepius/php-richtext": "*",
         "freepius/php-toolbox": "*"
     },

@@ -81,8 +81,8 @@ $app->register(new \Freepius\Pimple\Provider\RichtextProvider());
 $app->register(new \Freepius\Silex\Provider\ToolboxProvider());
 
 /* autolink Twig extension */
-// TODO: adapt autolink to silex 2.0
-//$app->register(new \Nicl\Silex\AutolinkServiceProvider());
+/* TODO: Keep watch the Silex-Autolink from Nicl */
+$app->register(new \Nicl\Silex\AutolinkServiceProvider());
 
 /* captcha manager */
 $app['captcha.manager'] = function ($app) {
