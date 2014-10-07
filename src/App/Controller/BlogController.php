@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
-use App\Exception\BlogArticleNotFound,
-    Freepius\Util\StringUtil,
-    Silex\Api\ControllerProviderInterface,
-    Symfony\Component\HttpFoundation\Request;
-
+use App\Exception\BlogArticleNotFound;
+use Freepius\Util\StringUtil;
+use Silex\Api\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Summary :
@@ -32,7 +31,7 @@ use App\Exception\BlogArticleNotFound,
  */
 class BlogController implements ControllerProviderInterface
 {
-    use TaggedDatedTrait;
+    use \Freepius\Controller\TaggedDatedTrait;
 
     const MODULE = 'blog';
 
@@ -40,7 +39,7 @@ class BlogController implements ControllerProviderInterface
     protected $limitInHome;
 
 
-    public function __construct(\App\Application $app)
+    public function __construct(\Freepius\Application $app)
     {
         $this->limitInHome = $app['debug'] ? 2 : 10;
 

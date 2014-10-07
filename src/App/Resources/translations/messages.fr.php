@@ -4,84 +4,26 @@
  * Summary :
  *  -> A list of various messages
  *  -> Admin
- *  -> Captcha
  *  -> Contact
  *  -> Error
- *  -> Filter
- *  -> Languages
- *  -> Literal numbers
  *  -> Map
- *  -> Months
  *  -> Navigation
- *  -> Placeholder
  */
 
 return [
-    'Actions'                    => 'Actions',
-    'at'                         => 'à',
-    'Bad credentials'            => 'Mot de passe erroné',
-    'by date'                    => 'par date',
-    'by tag'                     => 'par mot-clé',
-    'Cancel'                     => 'Annuler',
-    'Close'                      => 'Fermer',
-    'Comments'                   => 'Commentaires',
-    'Contents under CC0 license' => 'Contenus sous licence CC0',
-    'Current travel'             => 'Voyage en cours',
-    'Delete'                     => 'Supprimer',
-    'Delete filter(s)'           => 'Supprimer le(s) filtre(s)',
-    'Edit'                       => 'Éditer',
-    'Error'                      => 'Erreur',
-    'Error(s)'                   => 'Il y a <b>0</b> erreur(s) : à 1.',
-    'General'                    => 'Général',
-    'Help'                       => 'Aide',
-    'Home'                       => 'Accueil',
-    'Last mini-message'          => 'Dernier mini-message',
-    'Last published articles'    => 'Derniers articles publiés',
-    'Last travel'                => 'Dernier voyage',
-    'Login'                      => 'Connexion',
-    'Logout'                     => 'Déconnexion',
-    'No'                         => 'Non',
-    'none'                       => 'aucun',
-    'Older'                      => 'Plus anciens',
-    'Other'                      => 'Autre',
-    'Password'                   => 'Mot de passe',
-    'Post'                       => 'Poster',
-    'Posted by'                  => 'Posté par',
-    'Preview'                    => 'Prévisualiser',
-    'Read'                       => 'Lire',
-    'Read more'                  => 'Lire plus',
-    'Run search'                 => 'Lancer la recherche',
-    'Search'                     => 'Chercher',
-    'See the large map'          => 'Voir la carte en grand',
-    'See more articles'          => "Voir plus d'articles",
-    'See more images'            => "Voir plus d'images",
-    'Submit'                     => 'Envoyer',
-    'Tags'                       => 'Mots-clés',
-    'The figures'                => 'Les chiffres',
-    'They support us!'           => 'Ils nous soutiennent !',
-    'to'                         => 'à',
-    'Top'                        => 'Haut',
-    'Update'                     => 'Mettre à jour',
-    'Visit RayonRando.com'       => 'Visitez RayonRando.com',
-    'website'                    => 'site web',
-    'Yes'                        => 'Oui',
-    'Younger'                    => 'Plus récents',
+    'Current travel'          => 'Voyage en cours',
+    'Last mini-message'       => 'Dernier mini-message',
+    'Last published articles' => 'Derniers articles publiés',
+    'Last travel'             => 'Dernier voyage',
+    'See the large map'       => 'Voir la carte en grand',
+    'See more articles'       => "Voir plus d'articles",
+    'See more images'         => "Voir plus d'images",
+    'The figures'             => 'Les chiffres',
+    'They support us!'        => 'Ils nous soutiennent !',
+    'Visit RayonRando.com'    => 'Visitez RayonRando.com',
 
     // Admin
     'admin' => [
-        'cacheClear'   => 'Vider le cache',
-        'cacheCleared' => 'Cache vidé.',
-        'home'         => 'Administration',
-    ],
-
-    // Captcha
-    'captcha' => [
-        'field' => 'Système anti-spam',
-
-        'help' => '<i class="fa fa-exclamation-triangle"></i> '.
-            "Veuillez recopier les caractères affichés dans l'image, afin d'empêcher les systèmes automatiques de <i>spammer</i>.",
-
-        'help.change' => "Cliquez ici pour changer l'image",
     ],
 
     // Contact
@@ -100,46 +42,6 @@ return [
 
     // Error
     'error' => [
-        'go2home'   => 'Peut-être devriez-vous <a href="/home">retourner à l\'accueil</a> ?!',
-        'contactUs' => 'Ou <a href="/contact">contactez-nous</a> si le problème vous paraît louche...',
-
-        'title' => [
-            '404'   => 'Hu hu 404 ! Vous êtes perdus !',
-            'other' => 'Hu hu ! Erreur fatale !',
-        ],
-
-        'message' => [
-            '404'   => "La page que vous cherchez n'existe pas (ou plus).",
-            'other' => "Quelque chose a mal tourné. C'est terrible !",
-        ],
-    ],
-
-    // Filter
-    'filter' => [
-        'tags'           => 'Filtré par le mot-clé <b>0</b>|'.
-                            'Filtré par les mots-clés <b>0</b>',
-        'tags.hideSmall' => 'Cacher les petits mots-clés',
-        'tags.showSmall' => 'Afficher tous les mots-clés',
-        'year'           => "Filtré par l'année <b>0</b>",
-        'year-month'     => "Filtré par la date <b>1 0</b>",
-    ],
-
-    // Languages
-    'lang' => [
-        'fr' => 'Français',
-        'en' => 'Anglais',
-    ],
-
-    // Literal numbers
-    'literal' => [
-        '8'  => 'huit',
-        '9'  => 'neuf',
-        '10' => 'dix',
-        '11' => 'onze',
-        '12' => 'douze',
-        '13' => 'treize',
-        '14' => 'quatorze',
-        '15' => 'quinze',
     ],
 
     // Map
@@ -150,34 +52,6 @@ return [
         'home'               => 'La carte',
     ],
 
-    // Months
-    'month' => [
-        '1'  => 'Janvier',
-        '2'  => 'Février',
-        '3'  => 'Mars',
-        '4'  => 'Avril',
-        '5'  => 'Mai',
-        '6'  => 'Juin',
-        '7'  => 'Juillet',
-        '8'  => 'Août',
-        '9'  => 'Septembre',
-        '10' => 'Octobre',
-        '11' => 'Novembre',
-        '12' => 'Décembre',
-    ],
-    'January'   => 'Janvier',
-    'February'  => 'Février',
-    'March'     => 'Mars',
-    'April'     => 'Avril',
-    'May'       => 'Mai',
-    'June'      => 'Juin',
-    'July'      => 'Juillet',
-    'August'    => 'Août',
-    'September' => 'Septembre',
-    'October'   => 'Octobre',
-    'November'  => 'Novembre',
-    'December'  => 'Décembre',
-
     // Navigation
     'nav' => [
         'about'       => 'À propos',
@@ -187,10 +61,5 @@ return [
         'map'         => 'La carte',
         'media'       => 'Nos médias',
         'our-travels' => 'Nos voyages',
-    ],
-
-    // Placeholder
-    'placeholder' => [
-        'tags' => 'Mots-clés séparés par une virgule',
     ],
 ];

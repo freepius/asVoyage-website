@@ -5,7 +5,7 @@ namespace App\Model\Factory;
 use Freepius\Model\EntityFactory;
 use Freepius\Model\MongoRepository;
 use Freepius\Util\StringUtil;
-use App\Validator\Constraints\Unused;
+use Freepius\Validator\Constraints\Unused;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ValidatorInterface;
 

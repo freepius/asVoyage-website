@@ -15,9 +15,9 @@ require_once APP.'/load-config.php';
 /* Enable _method request parameter support */
 \Symfony\Component\HttpFoundation\Request::enableHttpMethodParameterOverride();
 
-$app = new \App\Application();
+$app = new \Freepius\Application();
 
-$app['route_class'] = 'App\\Route';
+$app['route_class'] = '\\Freepius\\Route';
 
 /* Locale of the application */
 setlocale(LC_ALL, 'fr_FR.UTF-8');
@@ -78,7 +78,7 @@ $app->register(new \Silex\Provider\SecurityServiceProvider());
 $app->register(new \Freepius\Pimple\Provider\RichtextProvider());
 
 /* freepius/php-toolbox extension */
-$app->register(new \Freepius\Silex\Provider\ToolboxProvider());
+$app->register(new \Freepius\Provider\ToolboxProvider());
 
 /* autolink Twig extension */
 /* TODO: Keep watch the Silex-Autolink from Nicl */

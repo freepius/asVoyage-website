@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use Silex\Api\ControllerProviderInterface,
-    Symfony\Component\HttpFoundation\Request;
-
+use Silex\Api\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Summary :
@@ -20,7 +19,7 @@ use Silex\Api\ControllerProviderInterface,
  */
 class RegisterController implements ControllerProviderInterface
 {
-    public function __construct(\App\Application $app)
+    public function __construct(\Freepius\Application $app)
     {
         $this->app     = $app;
         $this->factory = $app['model.factory.register'];

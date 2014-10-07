@@ -2,7 +2,7 @@
 
 namespace App\Provider\HttpCache;
 
-use App\Application,
+use Freepius\Application,
     Symfony\Component\EventDispatcher\EventSubscriberInterface,
     Symfony\Component\HttpKernel\Event\GetResponseEvent,
     Symfony\Component\HttpKernel\KernelEvents;

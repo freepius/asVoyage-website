@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
-use Silex\Api\ControllerProviderInterface,
-    Symfony\Component\HttpFoundation\Request,
-    Symfony\Component\HttpFoundation\Response,
-    Symfony\Component\Filesystem\Filesystem;
-
+use Silex\Api\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Summary :
@@ -23,19 +22,19 @@ use Silex\Api\ControllerProviderInterface,
  *      => afrikapie      [our-travels] [cached]
  *
  *  -> ADMIN ACTIONS :
- *      => login
  *      => admin
  *      => cacheClear
  *
  *  -> TECHNICAL ACTIONS :
  *      => switchLocale
  *      => changeCaptcha    [ajax]
- *      => renderRichtext   [ajax]
  *      => manageErrors
  */
 class BaseController implements ControllerProviderInterface
 {
-    public function __construct(\App\Application $app)
+    use \Freepius\Controller\BaseTrait;
+
+    public function __construct(\Freepius\Application $app)
     {
         $this->app = $app;
         $this->currentTravelStartingDate = $app['currentTravel.startingDate'];
@@ -61,7 +60,6 @@ class BaseController implements ControllerProviderInterface
         $ctrl->get('our-travels/afrikapie/original', [$this, 'afrikapieOriginal']);
 
         // Admin routes
-        $ctrl->get('/login'            , [$this, 'login']);
         $ctrl->get('/admin'            , [$this, 'admin']);
         $ctrl->get('/admin/cache-clear', [$this, 'cacheClear']);
 
@@ -70,9 +68,6 @@ class BaseController implements ControllerProviderInterface
             ->assert('locale', 'en|fr');
 
         $ctrl->get('/captcha-change', [$this, 'changeCaptcha'])
-            ->mustBeAjax();
-
-        $ctrl->post('/render-richtext', [$this, 'renderRichtext'])
             ->mustBeAjax();
 
         $app->error([$this, 'manageErrors']);
@@ -274,14 +269,6 @@ class BaseController implements ControllerProviderInterface
      * ADMIN ACTIONS
      **************************************************************************/
 
-    public function login(Request $request)
-    {
-        return $this->app->render('base/login.html.twig',
-        [
-            'error' => $this->app['security.last_error']($request),
-        ]);
-    }
-
     /**
      * Dashboard for admin actions (for blog, media, register, etc.)
      */
@@ -340,13 +327,6 @@ class BaseController implements ControllerProviderInterface
         $captchaManager->revoke();
 
         return $captchaManager->getFilename();
-    }
-
-    public function renderRichtext(Request $request)
-    {
-        return $this->app['richtext']->transform(
-            $request->request->get('text')
-        );
     }
 
     public function manageErrors(\Exception $e, Request $request, $code)

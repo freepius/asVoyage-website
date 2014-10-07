@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
-use App\Exception\MediaElementNotFound,
-    Silex\Api\ControllerProviderInterface,
-    Symfony\Component\HttpFoundation\Request,
-    Symfony\Component\Validator\Constraints as Assert;
-
+use App\Exception\MediaElementNotFound;
+use Silex\Api\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Summary :
@@ -30,7 +29,7 @@ use App\Exception\MediaElementNotFound,
  */
 class MediaController implements ControllerProviderInterface
 {
-    use TaggedDatedTrait;
+    use \Freepius\Controller\TaggedDatedTrait;
 
     const MODULE = 'media';
 
@@ -38,7 +37,7 @@ class MediaController implements ControllerProviderInterface
     protected $limitInHome;
 
 
-    public function __construct(\App\Application $app)
+    public function __construct(\Freepius\Application $app)
     {
         $this->limitInHome = $app['debug'] ? 10 : 100;
 
