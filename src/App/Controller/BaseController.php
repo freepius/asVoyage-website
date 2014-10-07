@@ -72,6 +72,9 @@ class BaseController implements ControllerProviderInterface
 
         $app->error([$this, 'manageErrors']);
 
+        // Add the trait routes
+        $this->addRoutes($ctrl);
+
         return $ctrl;
     }
 
