@@ -49,7 +49,7 @@ $app['currentTravel.startingDate'] = '2013-09-29';
 $app->register(new \Silex\Provider\SessionServiceProvider());
 
 /* http cache */
-$app->register(new \App\Provider\HttpCacheServiceProvider(), [
+$app->register(new \Freepius\Provider\HttpCacheServiceProvider(), [
     'http_cache.cache_dir' => $app['path.cache'].'/http',
 ]);
 
