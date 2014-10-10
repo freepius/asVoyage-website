@@ -3,11 +3,12 @@
 
 {% macro add_lang(lang, currentLang) %}
 {% spaceless %}
-    <li {{ lang == currentLang ? 'class="active"' }}>
-        <a href="{{ '/switch-locale/' ~ lang }}">
-            <img src="/images/{{- lang -}}.gif" alt="{{ ('lang.'~lang)|trans }}">
-        </a>
-    </li>
+    <a {{ lang == currentLang ? 'class="active"' }}
+        href="{{ '/switch-locale/' ~ lang }}"
+        title="{{ ('lang.'~lang) | trans }}" data-placement="right"
+    >
+        {{ lang }}
+    </a>
 {% endspaceless %}
 {% endmacro %}
 
@@ -28,10 +29,9 @@
 
     <section id="navigation">
         <nav id="nav-lang">
-            <ul class="list-inline">
-                {{ add_lang('fr', app.locale) }}
-                {{ add_lang('en', app.locale) }}
-            </ul>
+            lang. :
+            {{ add_lang('fr', app.locale) }}
+            {{ add_lang('en', app.locale) }}
         </nav>
 
         <nav id="nav-main">

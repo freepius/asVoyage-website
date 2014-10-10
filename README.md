@@ -85,8 +85,6 @@ TODO
   * Date filter : add a link to filter the elements without date
 * Redesign the multi-locales system
 * Add a simple management of assets
-* Switch locale : prefer labels to flag pictures (eg: 'FR', 'EN'...)
-* Captcha : add the html atrribute *autocomplete="off"*
 
 For production
 --------------

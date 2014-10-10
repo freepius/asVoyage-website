@@ -6184,18 +6184,17 @@ a#back2top:hover {
 }
 #navigation {
   float: right;
-  margin-top: 20px;
+  margin-top: 15px;
 }
-#nav-lang > ul {
-  margin: 0;
+#nav-lang {
+  margin-bottom: 10px;
 }
-#nav-lang > ul > li {
-  line-height: 0;
-  margin: 0 3px;
-  padding: 3px 0 0;
+#nav-lang a {
+  color: #777777;
+  text-decoration: none;
 }
-#nav-lang > ul > li.active {
-  border-top: 3px solid #cf5b37;
+#nav-lang a.active {
+  border-bottom: 2px solid #777777;
 }
 #nav-main {
   float: left;
@@ -6583,8 +6582,8 @@ h3 {
 #header .notification {
   clear: right;
   float: right;
-  margin-top: 20px;
-  margin-right: 20px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 /*************************************************
  * Footer
