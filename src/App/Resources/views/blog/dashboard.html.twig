@@ -5,6 +5,51 @@
 {% from "macros.twig" import bool2icon %}
 
 
+{% block stylesheets %}
+
+    <style>
+        #dashboard { font-size: 0.8em; }
+    </style>
+
+    {# DEBUG mode => local files #}
+    {% if app.debug %}
+        <link href="/vendor/datatable/jquery.dataTables.min.css" rel="stylesheet">
+    {% else %}
+    {# Else => files from CDNs #}
+        <link href="//cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    {% endif %}
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    {# DEBUG mode => local files #}
+    {% if app.debug %}
+        <script src="/vendor/datatable/jquery.dataTables.min.js"></script>
+    {% else %}
+    {# Else => files from CDNs #}
+        <script src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+    {% endif %}
+
+    <script>
+        $(document).ready(function() {
+            $('#dashboard').DataTable({
+                "columnDefs": [{
+                    "targets": 8, "searchable": false, "orderable": false
+                }],
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/a5734b29083/i18n/
+                           {{- app.locale == 'fr' ? 'French' : 'English' -}}
+                           .json"
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
+
+
 {% block main %}
 
     <header class="clearfix">
@@ -22,7 +67,7 @@
     </header>
 
     <!-- List of all blog articles -->
-    <table class="table">
+    <table id="dashboard" class="display compact" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>{{ 'blog.field.title'|trans }}</th>
@@ -42,7 +87,7 @@
                 <tr>
                     <td>{{ article.title }}</td>
                     <td>{{ article.slug }}</td>
-                    <td>{{ article.pubDatetime | localizeddate('short', 'short') }}</td>
+                    <td>{{ article.pubDatetime }}</td>
                     <td>{{ bool2icon(article.isPublished) }}</td>
                     <td>{{ bool2icon(article.beCommented) }}</td>
                     <td>{{ article.countComments }}</td>
@@ -50,7 +95,7 @@
                         {% if  (article.comments is not empty)
                            and (article.comments.0 is not null)
                         %}
-                            {{ article.comments.0.datetime | localizeddate('short', 'short')  }}
+                            {{ article.comments.0.datetime }}
                         {% endif %}
                     </td>
                     <td>{{ article.tags|join(', ') }}</td>

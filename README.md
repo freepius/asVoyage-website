@@ -96,7 +96,6 @@ For production
 Low priority
 ------------
 
-* Use DataTable jquery plugin to Blog dashboard ?
 * Locale depending on :
   * user preferences (the 'Accept-Languages' HTTP header)
   * geo-localization
