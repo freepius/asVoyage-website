@@ -31,6 +31,7 @@
                 <th>{{ 'blog.field.isPublished'|trans }}</th>
                 <th>{{ 'blog.field.beCommented'|trans }}</th>
                 <th>{{ 'blog.field.countComments'|trans }}</th>
+                <th>{{ 'blog.field.dateLastComment'|trans }}</th>
                 <th>{{ 'blog.field.tags'|trans }}</th>
                 <th>{{ 'Actions'|trans }}</th>
             </tr>
@@ -45,6 +46,13 @@
                     <td>{{ bool2icon(article.isPublished) }}</td>
                     <td>{{ bool2icon(article.beCommented) }}</td>
                     <td>{{ article.countComments }}</td>
+                    <td>
+                        {% if  (article.comments is not empty)
+                           and (article.comments.0 is not null)
+                        %}
+                            {{ article.comments.0.datetime | localizeddate('short', 'short')  }}
+                        {% endif %}
+                    </td>
                     <td>{{ article.tags|join(', ') }}</td>
 
                     <!-- Actions on article -->

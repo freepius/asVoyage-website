@@ -18,15 +18,16 @@ return ['blog' => [
     'updating'          => "Updating of an article",
 
     'field' => [
-        'beCommented'   => 'Accept comments ?',
-        'countComments' => 'Comments number',
-        'isPublished'   => 'Is published ?',
-        'pubDatetime'   => 'Publication date',
-        'slug'          => 'Slug',
-        'summary'       => 'Summary',
-        'tags'          => 'Tags',
-        'text'          => 'Text',
-        'title'         => 'Title',
+        'beCommented'     => 'Accept comments ?',
+        'countComments'   => 'Comments number',
+        'dateLastComment' => 'Last comment date',
+        'isPublished'     => 'Is published ?',
+        'pubDatetime'     => 'Publication date',
+        'slug'            => 'Slug',
+        'summary'         => 'Summary',
+        'tags'            => 'Tags',
+        'text'            => 'Text',
+        'title'           => 'Title',
     ],
 
     'help' => [

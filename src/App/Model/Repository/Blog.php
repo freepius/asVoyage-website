@@ -82,9 +82,16 @@ class Blog extends MongoRepository
      */
     public function listAll()
     {
-        return $this->collection->find([], [
-            'title', 'slug', 'pubDatetime',
-            'isPublished', 'beCommented', 'tags', 'countComments',
+        return $this->collection->find([],
+        [
+            'title'         => 1,
+            'slug'          => 1,
+            'pubDatetime'   => 1,
+            'isPublished'   => 1,
+            'beCommented'   => 1,
+            'tags'          => 1,
+            'countComments' => 1,
+            'comments'      => ['$slice' => -1],  // last comment ; TODO: one day, have a 'dateLastComment' field?
         ])
         ->sort(['pubDatetime' => -1]); // desc = younger first
     }

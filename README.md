@@ -68,7 +68,6 @@ TODO
 * Home page :
   * Add a block summarizing the news of the last 7 days
 * Blog :
-  * Dashboard -> add the date of the last comment
   * Creation/Updating -> Add a "help box" for RichText
   * Reading -> Add a box containing related articles/contents
   * Write RichText macros to easily include a media
