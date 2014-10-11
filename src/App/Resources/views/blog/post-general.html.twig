@@ -8,9 +8,11 @@
 {% block stylesheets %}
 
     <style>
-        #summary { height: 100px; }
-        #text    { height: 200px; }
-        #summary, #text, .preview { max-height: 600px; }
+        #summary-input { height: 100px; }
+
+        #text-input { height: 200px; }
+
+        #summary-input, #text-input, .preview { max-height: 600px; }
     </style>
 
 {% endblock %}
@@ -18,6 +20,7 @@
 
 {% block javascripts %}
 
+    <script src="/vendor/screenfull.min.js"></script>
     <script src="/vendor/jquery.elastic.source.js"></script>
     <script src="/js/app-blog-post.js"></script>
 

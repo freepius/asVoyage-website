@@ -3,7 +3,7 @@
  */
 
 /*jslint regexp: true */
-/*global document, $ */
+/*global document, $, screenfull */
 
 (function () {
     "use strict";
@@ -34,13 +34,27 @@
     }
 
     function previewMarkdown(field) {
-        var idField   = '#' + field,
-            idPreview = '#' + field + '-preview',
-            idLink    = '#' + field + '-preview-link';
+        var idWidget           = '#' + field,
+            idInput            = '#' + field + '-input',
+            idPreview          = '#' + field + '-preview',
+            idRequestPreview   = '#' + field + '-request-preview',
+            idToggleFullscreen = '#' + field + '-toggle-fullscreen';
 
-        $(idLink).click(function () {
+        $(idToggleFullscreen).click(function (e) {
+            e.preventDefault();
+
+            if (screenfull.enabled) {
+                screenfull.toggle($(idWidget)[0]);
+            }
+        });
+
+        $(document).on(screenfull.raw.fullscreenchange, function () {
+            $(idToggleFullscreen).toggleClass('fa-expand fa-compress');
+        });
+
+        $(idRequestPreview).click(function () {
             var preview = $(idPreview),
-                text = $.trim($(idField).val());
+                text = $.trim($(idInput).val());
 
             if (preview.hasClass('active') || text === '') {
                 return false;
@@ -57,7 +71,7 @@
                 url     : '/render-richtext',
                 data    : { text: text },
                 success : function (data) {
-                    $(preview).html(data);
+                    preview.html(data);
                 }
             });
         });
@@ -65,7 +79,7 @@
 
     $(document).ready(function () {
 
-        $('#text, #summary').elastic();
+        $('#text-input, #summary-input').elastic();
 
         previewMarkdown('text');
         previewMarkdown('summary');
