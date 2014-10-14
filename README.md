@@ -84,6 +84,8 @@ TODO
   * Date filter : add a link to filter the elements without date
 * Redesign the multi-locales system
 * Add a simple management of assets
+* Improve the README.md (dependencies & co)
+* Switch locale: no tooltip on links
 
 For production
 --------------

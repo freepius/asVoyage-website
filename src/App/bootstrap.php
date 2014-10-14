@@ -212,9 +212,20 @@ $app['model.repository.blog'] = function ($app)
 
 $app['model.repository.media'] = function ($app)
 {
+    $defaultFilters = [];
+
+    // Consider the media elements having "private tags" only for ADMIN
+    if ($app['media.config']['tags.private'] && false === $app->isGranted('ROLE_ADMIN'))
+    {
+        $defaultFilters['excludedTags'] = $app['media.config']['tags.private'];
+    }
+
     return new \App\Model\Repository\Media(
-        $app['mongo.database']->media, $app['twig'],
-        $app['path.web'], $app['media.config']['cache_dir']
+        $app['mongo.database']->media,
+        $app['twig'],
+        $app['path.web'],
+        $app['media.config']['cache_dir'],
+        $defaultFilters
     );
 };
 
@@ -274,6 +285,7 @@ $app['media.config'] =
     'maxFileSize'          => 10000000,    // 10M
     'acceptTypes.mime'     => ['application/ogg', 'audio/ogg', 'image/jpeg', 'image/png'],
     'acceptTypes.jsRegexp' => '/(\.|\/)(oga|ogg|ogx|jpe?g|png)$/i',
+    'tags.private'         => ['_Technical'],
 ];
 
 

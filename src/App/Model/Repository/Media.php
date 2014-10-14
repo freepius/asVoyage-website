@@ -31,13 +31,20 @@ class Media extends MongoRepository
     protected $twig;
     protected $webPath;
     protected $cacheDir;
+    protected $defaultFilters;
 
-    public function __construct(\MongoCollection $collection, $twig, $webPath, $cacheDir)
-    {
+    public function __construct(
+        \MongoCollection $collection,
+        $twig,
+        $webPath,
+        $cacheDir,
+        array $defaultFilters = []
+    ) {
         parent::__construct($collection);
-        $this->twig     = $twig;
-        $this->webPath  = $webPath;
-        $this->cacheDir = $cacheDir;
+        $this->twig           = $twig;
+        $this->webPath        = $webPath;
+        $this->cacheDir       = $cacheDir;
+        $this->defaultFilters = $defaultFilters;
     }
 
     /**
@@ -127,9 +134,11 @@ class Media extends MongoRepository
 
     /**
      * Return some filters for querying media elements :
+     *    -> starting from the default filters
      *    -> not the temporary elements
      *    -> between two creation datetime ("from" and "to", included)
      *    -> having all "tags"
+     *    -> having no tag from "excludedTags"
      *    -> having geo. coords (if "geo" is true)
      *    -> being of a certain "type"
      *
@@ -137,11 +146,12 @@ class Media extends MongoRepository
      *
      * $filters =
      * {
-     *      from : The old bound date   ; format = Y-m-d (H:i:s)
-     *      to   : The young bound date ; format = Y-m-d (H:i:s)
-     *      tags : An array of strings
-     *      geo  : If true, entry must have geo. coords
-     *      type : A string
+     *      from         : The old bound date   ; format = Y-m-d (H:i:s)
+     *      to           : The young bound date ; format = Y-m-d (H:i:s)
+     *      tags         : An array of strings
+     *      excludedTags : An array of strings
+     *      geo          : If true, entry must have geo. coords
+     *      type         : A string
      * }
      *
      * @return array
@@ -150,17 +160,21 @@ class Media extends MongoRepository
     {
         $query = ['isTmp' => false];
 
-        $from      = @ $filters['from'];
-        $to        = @ $filters['to'];
-        $tags      = @ $filters['tags'];
-        $havingGeo = (bool) @ $filters['geo'];
-        $type      = @ $filters['type'];
+        $filters += $this->defaultFilters;
 
-        if ($from)      { $query['creationDate']['$gte'] = $from; }
-        if ($to)        { $query['creationDate']['$lte'] = $to; }
-        if ($tags)      { $query['tags']['$all'] = $tags; }
-        if ($havingGeo) { $query['geoCoords']['$ne'] = ''; }
-        if ($type)      { $query['mainType'] = $type; }
+        $from         = @ $filters['from'];
+        $to           = @ $filters['to'];
+        $tags         = @ $filters['tags'];
+        $excludedTags = @ $filters['excludedTags'];
+        $havingGeo    = (bool) @ $filters['geo'];
+        $type         = @ $filters['type'];
+
+        if ($from)         { $query['creationDate']['$gte'] = $from; }
+        if ($to)           { $query['creationDate']['$lte'] = $to; }
+        if ($tags)         { $query['tags']['$all'] = $tags; }
+        if ($excludedTags) { $query['tags']['$nin'] = $excludedTags; }
+        if ($havingGeo)    { $query['geoCoords']['$ne'] = ''; }
+        if ($type)         { $query['mainType'] = $type; }
 
         return $query;
     }
@@ -204,7 +218,7 @@ class Media extends MongoRepository
     public function listTags()
     {
         return Group::byTags(
-            $this->collection->find(['isTmp' => false], ['tags' => 1])
+            $this->collection->find($this->filter(), ['tags' => 1])
         );
     }
 
@@ -214,7 +228,7 @@ class Media extends MongoRepository
     public function countByYearMonth()
     {
         return Group::byYearMonth(
-            $this->collection->find(['isTmp' => false], ['creationDate' => 1]),
+            $this->collection->find($this->filter(), ['creationDate' => 1]),
             'creationDate'
         );
     }

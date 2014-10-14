@@ -47,6 +47,8 @@ class Blog extends MongoRepository
      *      tags :  An array of strings
      * }
      *
+     * TODO: replace the $isAdmin parameter by a "default filters" mechanism (same as Media repository)
+     *
      * @return array
      */
     protected function filter($isAdmin = false, array $filters = [])
