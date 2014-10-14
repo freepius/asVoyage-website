@@ -35,9 +35,12 @@
     <script>
         $(document).ready(function() {
             $('#dashboard').DataTable({
+                "order": [],
+
                 "columnDefs": [{
                     "targets": 8, "searchable": false, "orderable": false
                 }],
+
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/a5734b29083/i18n/
                            {{- app.locale == 'fr' ? 'French' : 'English' -}}
