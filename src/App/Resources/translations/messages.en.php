@@ -14,7 +14,6 @@ return [
     //'Current travel'             => '',
     //'Last mini-message'          => '',
     //'Last published articles'    => '',
-    //'Last travel'                => '',
     //'See the large map'          => '',
     //'See more articles'          => '',
     //'See more images'            => '',

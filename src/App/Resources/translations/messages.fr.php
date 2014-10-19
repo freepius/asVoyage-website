@@ -14,7 +14,6 @@ return [
     'Current travel'          => 'Voyage en cours',
     'Last mini-message'       => 'Dernier mini-message',
     'Last published articles' => 'Derniers articles publiés',
-    'Last travel'             => 'Dernier voyage',
     'See the large map'       => 'Voir la carte en grand',
     'See more articles'       => "Voir plus d'articles",
     'See more images'         => "Voir plus d'images",

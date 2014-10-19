@@ -1,61 +1,43 @@
 {% from _self import add_lang, add_nav %}
 
 
-{% macro add_lang(lang, currentLang) %}
+{% macro add_lang(lang, current) %}
 {% spaceless %}
-    <a {{ lang == currentLang ? 'class="active"' }}
-        href="{{ '/switch-locale/' ~ lang }}"
-        title="{{ ('lang.'~lang) | trans }}" data-placement="right"
-    >
-        {{ lang }}
+    <a href="{{ '/switch-locale/' ~ lang }}" {{ lang == current ? 'class="active"' }}>
+        {{- lang -}}
     </a>
 {% endspaceless %}
 {% endmacro %}
 
 
-{% macro add_nav(nav, currentNav) %}
+{% macro add_nav(nav, current) %}
 {% spaceless %}
-    <li {{ nav == currentNav ? 'class="active"' }}>
-        <a href="{{ '/' ~ nav }}">{{ ('nav.'~nav)|trans }}</a>
+    <li>
+        <a href="{{ '/' ~ nav }}" {{ nav == current ? 'class="active"' }}>
+            {{- ('nav.'~nav)|trans -}}
+        </a>
     </li>
 {% endspaceless %}
 {% endmacro %}
 
-
-<header id="header">
-    <a href="/home" class="hidden-xs hidden-sm">
-        <img id="logo" src="/images/logo.png" alt="Logo of anarchos semitas">
+<header>
+    <a href="/home" id="logo">
+        <img src="/images/logo.png" alt="Logo anarchos semitas">
     </a>
 
-    <section id="navigation">
-        <nav id="nav-lang">
-            lang. :
-            {{ add_lang('fr', app.locale) }}
-            {{ add_lang('en', app.locale) }}
-        </nav>
+    <nav id="nav-lang">
+        lang. :
+        {{ add_lang('fr', app.locale) }}
+        {{ add_lang('en', app.locale) }}
+    </nav>
 
-        <nav id="nav-main">
-            <ul class="nav nav-pills">
-                {{ add_nav('home'       , currentNav) }}
-                {{ add_nav('about'      , currentNav) }}
-                {{ add_nav('blog'       , currentNav) }}
-                {{ add_nav('map'        , currentNav) }}
-                {{ add_nav('media'      , currentNav) }}
-                {{ add_nav('our-travels', currentNav) }}
-                {{ add_nav('contact'    , currentNav) }}
-            </ul>
-        </nav>
-    </section>
-
-    <div class="notification">
-        {% block headerNotification %}
-
-            <strong>
-                {{ 'Last travel'|trans }}
-                &nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;
-                <a href="/our-travels/afrikapie" class="special">Afrikapié</a>
-            </strong>
-
-        {% endblock %}
-    </div>
+    <nav id="nav-main" role="navigation">
+        <ul>
+            {% for i in
+               ['home', 'about', 'blog', 'map', 'media', 'our-travels', 'contact']
+            %}
+                {{ add_nav(i, currentNav) }}
+            {% endfor %}
+        </ul>
+    </nav>
 </header>

@@ -1,0 +1,49 @@
+body > header
+{
+    height: 155px;
+    margin-bottom: 30px;
+    border-bottom: 5px solid @secondary-color;
+}
+
+#logo {
+    .hidden-sm;
+    .hidden-xs;
+}
+
+#nav-lang
+{
+    a {
+        color: @gray-light;
+        text-decoration: none;
+        &.active { border-bottom: 2px solid @gray-light; }
+    }
+}
+
+#nav-main
+{
+    > ul { .list-inline; }
+
+    a {
+        color: @gray;
+        font-size: 1.2em;
+        &.active { font-weight: bold; }
+    }
+}
+
+/* Positioning */
+
+#logo {
+    float: left;
+}
+
+#nav-lang {
+    position: relative;
+    text-align: right;
+    top: 40px;
+}
+
+#nav-main {
+    position: relative;
+    text-align: right;
+    top: 80px;
+}

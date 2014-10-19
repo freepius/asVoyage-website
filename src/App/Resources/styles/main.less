@@ -3,12 +3,12 @@
 
 @import '@{bootstrap}/bootstrap.less';
 @import 'variables.less';
-@import 'navigation.less';
+@import 'header.less';
 
 // Particular styles
 @import 'article.less';
-@import 'carto.less';
 @import 'comment.less';
+@import 'carto.less';
 @import 'media.less';
 @import 'our-travels.less';
 
@@ -105,28 +105,6 @@ a, .btn-link
 h1, h2, h3, h4, h5, h6 { margin: 0; }
 
 h1, h2, h3 { margin-bottom: 0.5em; }
-
-
-/*************************************************
- * Header
- ************************************************/
-
-#header
-{
-    height: 155px;
-    margin-bottom: 30px;
-    border-bottom: 5px solid @secondary-color;
-
-    #logo { float: left; }
-
-    .notification
-    {
-        clear: right;
-        float: right;
-        margin-top: 10px;
-        margin-right: 10px;
-    }
-}
 
 
 /*************************************************
@@ -238,4 +216,25 @@ h2#home-last-published-articles
     color: @gray-light;
     border-bottom: 1px solid @gray-light;
     font-size: 1em;
+}
+
+a#back2top
+{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 2000;
+
+    padding: 15px;
+    background-color: @tertiary-color;
+    border-top: 4px solid @primary-color;
+    border-left: 4px solid @primary-color;
+    border-radius: 10px 0 0;
+
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    opacity: 0.8;
+
+    &:hover { opacity: 1; }
 }
