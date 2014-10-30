@@ -1,0 +1,51 @@
+article
+{
+    [itemprop="articleBody"]
+    {
+        margin-bottom: 50px;
+        .thumbnail { margin: 0.7em; }
+    }
+}
+
+article.summary
+{
+    margin-bottom: 30px;
+
+    > * { .clearfix(); }
+
+    > header
+    {
+        > h1 { float: left; }
+
+        > time {
+            float: right;
+            font-weight: bold;
+            text-align: right;
+            > * { display: block; }
+            > .date { color: @text-light; }
+            > .time { color: @text-lighter; font-size: 0.8em; }
+        }
+    }
+
+    > section[property="articleBody"]
+    {
+        margin: 10px 0;
+    }
+
+    > footer
+    {
+        border-top: 1px solid @gray;
+        border-bottom: 2px solid @gray;
+        padding: 5px 0;
+
+        > * { margin: 0 5px; }
+
+        .actions { float: left; }
+
+        [property="keywords"] { float: left; }
+
+        .about-comments { float: right; }
+
+        [property="url"] { float: right; }
+    }
+}

@@ -6164,30 +6164,10 @@ button.close {
     display: none !important;
   }
 }
-a#back2top {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  z-index: 2000;
-  padding: 15px;
-  background-color: #625d50;
-  border-top: 4px solid #3b372e;
-  border-left: 4px solid #3b372e;
-  border-radius: 10px 0 0;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  opacity: 0.8;
-}
-a#back2top:hover {
-  opacity: 1;
-}
-#navigation {
-  float: right;
-  margin-top: 15px;
-}
-#nav-lang {
-  margin-bottom: 10px;
+body > header {
+  height: 155px;
+  margin-bottom: 30px;
+  border-bottom: 5px solid #cf5b37;
 }
 #nav-lang a {
   color: #777777;
@@ -6196,74 +6176,102 @@ a#back2top:hover {
 #nav-lang a.active {
   border-bottom: 2px solid #777777;
 }
-#nav-main {
+#nav-main > ul {
+  padding-left: 0;
+  list-style: none;
+  margin-left: -5px;
+}
+#nav-main > ul > li {
+  display: inline-block;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+#nav-main a {
+  color: #555555;
+  font-size: 1.2em;
+}
+#nav-main a.active {
+  font-weight: bold;
+}
+/* Positioning */
+#logo {
   float: left;
 }
-#nav-main > ul {
-  padding: 10px;
-  border-radius: 10px;
-  background: 0 0 repeat url('/images/brown-texture.png') #3b372e;
-  font-weight: bold;
+#nav-lang {
+  position: relative;
+  text-align: right;
+  top: 40px;
 }
-#nav-main > ul > li > a {
-  padding: 0 10px;
-  line-height: 40px;
-  color: white;
+#nav-main {
+  position: relative;
+  text-align: right;
+  top: 80px;
 }
-#nav-main > ul > li > a:hover {
-  color: #3b372e;
-}
-#nav-main > ul > li.active > a,
-#nav-main > ul > li > a:hover {
-  background-color: #cf5b37;
-}
-article > header time {
-  font-weight: bold;
-  color: #777777;
-}
-article [itemprop="articleBody"] {
+#blog article [itemprop="articleBody"] {
   margin-bottom: 50px;
 }
-article [itemprop="articleBody"] .thumbnail {
+#blog article [itemprop="articleBody"] .thumbnail {
   margin: 0.7em;
 }
-article.summary {
-  margin-bottom: 20px;
-  padding: 15px;
+#blog article.summary {
+  margin-bottom: 30px;
 }
-article.summary:before,
-article.summary:after {
+#blog article.summary > *:before,
+#blog article.summary > *:after {
   content: " ";
   display: table;
 }
-article.summary:after {
+#blog article.summary > *:after {
   clear: both;
 }
-article.summary:before,
-article.summary:after {
+#blog article.summary > *:before,
+#blog article.summary > *:after {
   content: " ";
   display: table;
 }
-article.summary:after {
+#blog article.summary > *:after {
   clear: both;
 }
-article.summary [itemprop="articleBody"] {
-  margin: 0;
-  padding: 15px 0;
+#blog article.summary > header > h1 {
+  float: left;
 }
-article.summary footer {
-  padding: 10px 0;
-  border-top: 1px solid gray;
-  border-bottom: 2px solid #333333;
+#blog article.summary > header > time {
+  float: right;
+  font-weight: bold;
+  text-align: right;
 }
-.leaflet-container form.leaflet-control-layers-list {
-  margin: 0;
+#blog article.summary > header > time > * {
+  display: block;
 }
-.leaflet-container form.leaflet-control-layers-list input {
-  margin: 0;
+#blog article.summary > header > time > .date {
+  color: #4d4d4d;
 }
-.leaflet-container form.leaflet-control-layers-list label {
-  line-height: 16px;
+#blog article.summary > header > time > .time {
+  color: #666666;
+  font-size: 0.8em;
+}
+#blog article.summary > section[property="articleBody"] {
+  margin: 10px 0;
+}
+#blog article.summary > footer {
+  border-top: 1px solid #555555;
+  border-bottom: 2px solid #555555;
+  padding: 5px 0;
+}
+#blog article.summary > footer > * {
+  margin: 0 5px;
+}
+#blog article.summary > footer .actions {
+  float: left;
+}
+#blog article.summary > footer [property="keywords"] {
+  float: left;
+}
+#blog article.summary > footer .about-comments {
+  float: right;
+}
+#blog article.summary > footer [property="url"] {
+  float: right;
 }
 .comment {
   margin-bottom: 15px;
@@ -6296,6 +6304,15 @@ article.summary footer {
   float: left;
   margin: 0 15px;
   padding: 0 15px;
+}
+.leaflet-container form.leaflet-control-layers-list {
+  margin: 0;
+}
+.leaflet-container form.leaflet-control-layers-list input {
+  margin: 0;
+}
+.leaflet-container form.leaflet-control-layers-list label {
+  line-height: 16px;
 }
 /*************************************************
  * Media home page
@@ -6569,23 +6586,6 @@ h3 {
   margin-bottom: 0.5em;
 }
 /*************************************************
- * Header
- ************************************************/
-#header {
-  height: 155px;
-  margin-bottom: 30px;
-  border-bottom: 5px solid #cf5b37;
-}
-#header #logo {
-  float: left;
-}
-#header .notification {
-  clear: right;
-  float: right;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-/*************************************************
  * Footer
  ************************************************/
 #footer {
@@ -6728,4 +6728,22 @@ h2#home-last-published-articles {
   color: #777777;
   border-bottom: 1px solid #777777;
   font-size: 1em;
+}
+a#back2top {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 2000;
+  padding: 15px;
+  background-color: #625d50;
+  border-top: 4px solid #3b372e;
+  border-left: 4px solid #3b372e;
+  border-radius: 10px 0 0;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  opacity: 0.8;
+}
+a#back2top:hover {
+  opacity: 1;
 }

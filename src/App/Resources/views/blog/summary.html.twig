@@ -1,57 +1,23 @@
-<article itemscope itemtype="http://schema.org/BlogPosting" class="summary">
+<article class="summary" vocab="http://schema.org/" typeof="BlogPosting">
 
-    <header class="clearfix">
-        <h1 itemprop="name" class="pull-left">{{ title }}</h1>
+    <header>
+        <h1>{{ title }}</h1>
 
-        <time itemprop="datePublished" datetime="{{ pubDatetime }}" class="pull-right text-right">
-            {{ pubDatetime | localizeddate('medium', 'none') }}
-            <br>
-            {{ pubDatetime | localizeddate('none', 'short') }}
+        <time datetime="{{ pubDatetime }}" pubdate>
+            <span class="date">{{ pubDatetime | localizeddate('medium', 'none')  }}</span>
+            <span class="time">{{ pubDatetime | localizeddate('none'  , 'short') }}</span>
         </time>
     </header>
 
 
-    <div class="clearfix" itemprop="articleBody">
+    <section property="articleBody">
         {{ (summary|trim ? summary : text) | richtext }}
-
-        <big class="pull-right">
-            <a itemprop="url" href="/blog/{{- slug -}}/read">» {{ 'Read more'|trans }}</a>
-        </big>
-    </div>
+    </section>
 
 
-    <footer class="row">
-        <!-- Tags -->
-        <div class="col-xs-8">
-            <i class="fa fa-tags" title="{{ 'blog.field.tags'|trans }}"></i>
-
-            {% if tags is empty %}
-                {{ 'none'|trans }}
-            {% else %}
-                <span itemprop="keywords">
-                    {% for tag in tags %}
-                        <span class="label label-default">{{ tag }}</span>
-                    {% endfor %}
-                </span>
-            {% endif %}
-        </div>
-
-        {% if beCommented or countComments > 0 %}
-            <!-- Comments -->
-            <div class="pull-right" style="margin-left: 15px;">
-                <meta itemprop="interactionCount" content="UserComments:{{- countComments -}}">
-
-                <a itemprop="discussionUrl" href="/blog/{{- slug -}}/read#comments"
-                    title="{{ 'comment.count'|trans([countComments]) }}"
-                >
-                    <i class="fa fa-comments"></i> {{ countComments }}
-                </a>
-            </div>
-        {% endif %}
-
+    <footer>
         {% if is_granted('ROLE_ADMIN') %}
-            <!-- Actions on article -->
-            <div class="pull-right" style="margin-right: 15px;">
+            <div class="actions">
                 <!-- Update -->
                 <a href="/blog/{{- slug -}}/update" title="{{ 'Update'|trans }}">
                     <i class="fa fa-pencil"></i></a>
@@ -61,6 +27,32 @@
                     <i class="fa fa-trash-o"></i></a>
             </div>
         {% endif %}
+
+        {% if tags is not empty %}
+            <div property="keywords">
+                <i class="fa fa-tags" title="{{ 'Tags'|trans }}"></i>
+
+                {% for tag in tags %}
+                    {{- tag ~ (not loop.last ? ', ') -}}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if beCommented or countComments > 0 %}
+            <div class="about-comments">
+                <meta property="commentCount" content="{{ countComments }}">
+
+                <a property="discussionUrl" href="/blog/{{- slug -}}/read#comments"
+                    title="{{ 'comment.count'|trans([countComments]) }}"
+                >
+                    <i class="fa fa-comments"></i> {{ countComments }}
+                </a>
+            </div>
+        {% endif %}
+
+        <a href="/blog/{{- slug -}}/read" property="url">
+            » {{ 'Read more'|trans }}
+        </a>
     </footer>
 
 </article>

@@ -27,7 +27,7 @@
 
 {% else %}
 
-    <div class="col-xs-8">
+    <div id="blog" class="col-xs-8">
         {% for article in elements %}
             {% include 'blog/summary.html.twig' with article only %}
         {% endfor %}
