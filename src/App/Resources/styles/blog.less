@@ -49,3 +49,19 @@ article.summary
         [property="url"] { float: right; }
     }
 }
+
+ul.mini-list
+{
+    .list-unstyled;
+
+    > li
+    {
+        > * { margin-right: 5px; }
+
+        > time, > .about-comments
+        {
+            color: @text-light;
+            font-size: 0.8em;
+        }
+    }
+}

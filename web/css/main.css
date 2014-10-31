@@ -6273,6 +6273,18 @@ body > header {
 #blog article.summary > footer [property="url"] {
   float: right;
 }
+#blog ul.mini-list {
+  padding-left: 0;
+  list-style: none;
+}
+#blog ul.mini-list > li > * {
+  margin-right: 5px;
+}
+#blog ul.mini-list > li > time,
+#blog ul.mini-list > li > .about-comments {
+  color: #4d4d4d;
+  font-size: 0.8em;
+}
 .comment {
   margin-bottom: 15px;
 }

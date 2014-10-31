@@ -1,23 +1,22 @@
 {% if articles|length > 0 %}
-<ul>
+{# TODO: add RDFa schema.org #}
+<ul class="mini-list">
     {% for article in articles %}
         <li>
-            {# Date : day + month #}
-            <b>
+            <time>
                 {{ article.pubDatetime | date('d') }}
-                {{ article.pubDatetime | date('F') | trans | lower }} :
-            </b>
+                {{ article.pubDatetime | date('F') | trans | lower }}
+            </time>
 
-            {# Title + link to read article #}
             <a href="/blog/{{- article.slug -}}/read">{{ article.title }}</a>
 
             {# Count of comments + link to read them #}
             {% if article.countComments > 0 %}
                 <a href="/blog/{{- article.slug -}}/read#comments"
-                    title="{{ 'comment.count' | trans([article.countComments]) }}"
-                    class="indent small"
+                   title="{{ 'comment.count' | trans([article.countComments]) }}"
+                   class="about-comments"
                 >
-                    <i class="fa fa-comments"></i> {{ article.countComments }}
+                    <i class="fa fa-comments-o"></i> {{ article.countComments }}
                 </a>
             {% endif %}
         </li>
