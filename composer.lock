@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7cd75a71a10151c869ecc740d9d3dd11",
+    "hash": "750eea292329e92203666addb05870a2",
     "packages": [
         {
             "name": "freepius/php-richtext",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/freepius44/php-richtext.git",
-                "reference": "7a0659989514f11ab76d21909af9e198e05b9d5b"
+                "url": "https://github.com/freepius/php-richtext.git",
+                "reference": "0cf9e2b1617652c640b91b0efcf4a66c9ac120a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius44/php-richtext/zipball/7a0659989514f11ab76d21909af9e198e05b9d5b",
-                "reference": "7a0659989514f11ab76d21909af9e198e05b9d5b",
+                "url": "https://api.github.com/repos/freepius/php-richtext/zipball/0cf9e2b1617652c640b91b0efcf4a66c9ac120a0",
+                "reference": "0cf9e2b1617652c640b91b0efcf4a66c9ac120a0",
                 "shasum": ""
             },
             "require": {
@@ -50,31 +50,31 @@
             "authors": [
                 {
                     "name": "Mathieu Poisbeau",
-                    "email": "freepius44@gmail.com"
+                    "email": "freepius@anarchos-semitas.net"
                 }
             ],
             "description": "A simple wrapper (and more) allowing to use Markdown(Extra) and SmartyPants(Typographer)",
-            "homepage": "http://github.com/freepius44/php-richtext",
+            "homepage": "http://github.com/freepius/php-richtext",
             "keywords": [
                 "markdown",
                 "pimple",
                 "silex",
                 "twig"
             ],
-            "time": "2014-10-04 08:40:04"
+            "time": "2014-11-09 17:43:40"
         },
         {
             "name": "freepius/php-toolbox",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/freepius44/php-toolbox.git",
-                "reference": "246fdadee2b1b0ac9f5a48f1aedae9693cc68cc1"
+                "url": "https://github.com/freepius/php-toolbox.git",
+                "reference": "6e01c6669d2d995b98e03ea722501023fbad6828"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius44/php-toolbox/zipball/246fdadee2b1b0ac9f5a48f1aedae9693cc68cc1",
-                "reference": "246fdadee2b1b0ac9f5a48f1aedae9693cc68cc1",
+                "url": "https://api.github.com/repos/freepius/php-toolbox/zipball/6e01c6669d2d995b98e03ea722501023fbad6828",
+                "reference": "6e01c6669d2d995b98e03ea722501023fbad6828",
                 "shasum": ""
             },
             "require": {
@@ -100,25 +100,25 @@
             "authors": [
                 {
                     "name": "Mathieu Poisbeau",
-                    "email": "freepius44@gmail.com"
+                    "email": "freepius@anarchos-semitas.net"
                 }
             ],
             "description": "Various tools for my PHP projects",
-            "homepage": "https://github.com/freepius44/php-toolbox",
-            "time": "2014-11-08 16:12:26"
+            "homepage": "https://github.com/freepius/php-toolbox",
+            "time": "2014-11-09 17:42:08"
         },
         {
             "name": "freepius/silex-autolink",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/freepius44/Silex-Autolink.git",
-                "reference": "3bdcd51e7e4fff28c44c6ce52b22484108554aa1"
+                "url": "https://github.com/freepius/Silex-Autolink.git",
+                "reference": "3c0aa02f76acf2ab1033ef4140bd1c5a2f5cc5ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius44/Silex-Autolink/zipball/3bdcd51e7e4fff28c44c6ce52b22484108554aa1",
-                "reference": "3bdcd51e7e4fff28c44c6ce52b22484108554aa1",
+                "url": "https://api.github.com/repos/freepius/Silex-Autolink/zipball/3c0aa02f76acf2ab1033ef4140bd1c5a2f5cc5ee",
+                "reference": "3c0aa02f76acf2ab1033ef4140bd1c5a2f5cc5ee",
                 "shasum": ""
             },
             "require": {
@@ -147,12 +147,12 @@
                 },
                 {
                     "name": "Mathieu Poisbeau",
-                    "email": "freepius44@gmail.com"
+                    "email": "freepius@anarchos-semitas.net"
                 }
             ],
             "description": "Simple Twig extension for Silex to add autolink filter",
             "homepage": "http://github.com/nicl/silex-autolink",
-            "time": "2014-10-07 11:13:02"
+            "time": "2014-11-09 11:07:25"
         },
         {
             "name": "gregwar/cache",
@@ -373,6 +373,7 @@
                     "Michelf": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -397,10 +398,6 @@
                 "typographer",
                 "typography"
             ],
-            "support": {
-                "source": "https://github.com/michelf/php-smartypants/tree/lib",
-                "issues": "https://github.com/michelf/php-smartypants/issues"
-            },
             "time": "2013-08-02 10:48:47"
         },
         {
@@ -480,13 +477,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Pimple.git",
-                "reference": "8156c13d978b98d6b1e6395b9c9f0adc8814c20a"
+                "url": "https://github.com/silexphp/Pimple.git",
+                "reference": "08502c02fc490678847f733e0a0b784628033b3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Pimple/zipball/8156c13d978b98d6b1e6395b9c9f0adc8814c20a",
-                "reference": "8156c13d978b98d6b1e6395b9c9f0adc8814c20a",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/08502c02fc490678847f733e0a0b784628033b3a",
+                "reference": "08502c02fc490678847f733e0a0b784628033b3a",
                 "shasum": ""
             },
             "require": {
@@ -519,7 +516,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2014-08-29 17:31:46"
+            "time": "2014-11-09 08:04:37"
         },
         {
             "name": "psr/log",
@@ -758,12 +755,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Debug.git",
-                "reference": "8a1bb02de047b62c7824b158969a21883a3336b8"
+                "reference": "2ce999992e04dd90e34270013b2692136187457e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Debug/zipball/8a1bb02de047b62c7824b158969a21883a3336b8",
-                "reference": "8a1bb02de047b62c7824b158969a21883a3336b8",
+                "url": "https://api.github.com/repos/symfony/Debug/zipball/2ce999992e04dd90e34270013b2692136187457e",
+                "reference": "2ce999992e04dd90e34270013b2692136187457e",
                 "shasum": ""
             },
             "require": {
@@ -805,7 +802,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "http://symfony.com",
-            "time": "2014-11-04 14:29:39"
+            "time": "2014-11-06 20:49:33"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1090,12 +1087,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Routing.git",
-                "reference": "d50d2b02bc5d23dad174543e9ec06422816bc347"
+                "reference": "f3f5f31d5e227c51eed7ba8b1ed809a97ebaa341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Routing/zipball/d50d2b02bc5d23dad174543e9ec06422816bc347",
-                "reference": "d50d2b02bc5d23dad174543e9ec06422816bc347",
+                "url": "https://api.github.com/repos/symfony/Routing/zipball/f3f5f31d5e227c51eed7ba8b1ed809a97ebaa341",
+                "reference": "f3f5f31d5e227c51eed7ba8b1ed809a97ebaa341",
                 "shasum": ""
             },
             "require": {
@@ -1148,7 +1145,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2014-11-03 14:26:52"
+            "time": "2014-11-03 20:24:10"
         },
         {
             "name": "symfony/security",
