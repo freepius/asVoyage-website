@@ -57,8 +57,8 @@ return [
         'blog'        => 'Blog',
         'contact'     => 'Contact',
         'home'        => 'Accueil',
-        'map'         => 'La carte',
-        'media'       => 'Nos médias',
-        'our-travels' => 'Nos voyages',
+        'map'         => 'Carte',
+        'media'       => 'Photos',
+        'our-travels' => 'Voyages',
     ],
 ];
