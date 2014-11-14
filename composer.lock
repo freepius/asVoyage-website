@@ -69,19 +69,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius/php-toolbox.git",
-                "reference": "6e01c6669d2d995b98e03ea722501023fbad6828"
+                "reference": "c2e6d04187c4a51a51561954a0028b765c0dc1bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius/php-toolbox/zipball/6e01c6669d2d995b98e03ea722501023fbad6828",
-                "reference": "6e01c6669d2d995b98e03ea722501023fbad6828",
+                "url": "https://api.github.com/repos/freepius/php-toolbox/zipball/c2e6d04187c4a51a51561954a0028b765c0dc1bf",
+                "reference": "c2e6d04187c4a51a51561954a0028b765c0dc1bf",
                 "shasum": ""
             },
             "require": {
                 "gregwar/captcha": "*",
                 "silex/silex": "*",
                 "symfony/validator": "*",
-                "twbs/bootstrap": "3.3.0",
+                "twbs/bootstrap": "3.3.1",
                 "twig/twig": "*"
             },
             "require-dev": {
@@ -105,7 +105,7 @@
             ],
             "description": "Various tools for my PHP projects",
             "homepage": "https://github.com/freepius/php-toolbox",
-            "time": "2014-11-09 17:42:08"
+            "time": "2014-11-14 11:03:47"
         },
         {
             "name": "freepius/silex-autolink",
@@ -1427,16 +1427,16 @@
         },
         {
             "name": "twbs/bootstrap",
-            "version": "v3.3.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "16dbdbd7a2c6cfa3be4e5dcc52249e577c02c84a"
+                "reference": "9a7e365c2c4360335d25246dac11afb1f577210a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/16dbdbd7a2c6cfa3be4e5dcc52249e577c02c84a",
-                "reference": "16dbdbd7a2c6cfa3be4e5dcc52249e577c02c84a",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/9a7e365c2c4360335d25246dac11afb1f577210a",
+                "reference": "9a7e365c2c4360335d25246dac11afb1f577210a",
                 "shasum": ""
             },
             "replace": {
@@ -1474,7 +1474,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2014-10-29 18:56:48"
+            "time": "2014-11-12 17:03:16"
         },
         {
             "name": "twig/extensions",
