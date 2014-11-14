@@ -1,18 +1,3 @@
-@vendor    : '../../../../vendor';
-@bootstrap : '@{vendor}/twbs//bootstrap/less';
-
-@import '@{bootstrap}/bootstrap.less';
-@import 'variables.less';
-@import 'header.less';
-
-// Particular styles
-#blog { @import 'blog.less'; }
-@import 'comment.less';
-@import 'carto.less';
-@import 'media.less';
-@import 'our-travels.less';
-
-
 /*************************************************
  * Special / Highlighting
  ************************************************/
@@ -112,7 +97,7 @@ h1, h2, h3 { margin-bottom: 0.5em; }
  ************************************************/
 
 #footer {
-    .clearfix();
+    &:extend(.clearfix all);
     margin: 4em 0 2em;
     padding: 3em 1.5em;
     background-color: @gray-lighter;
@@ -124,16 +109,11 @@ h1, h2, h3 { margin-bottom: 0.5em; }
  * Main section
  ************************************************/
 
-#main
+.main-section
 {
-    .clearfix();
-
-    aside > .box {
-        background-color: @gray-lighter;
-        border-radius: @border-radius-base;
-
-        p { text-align: left; }
-    };
+    > header {
+        &:extend(.clearfix all);
+    }
 }
 
 
@@ -179,12 +159,13 @@ div.preview // textarea style
     background-color: white;
 }
 
-.actions-right
+.actions
 {
-    .clearfix();
+    &:extend(.clearfix all);
+
     float: right;
 
-    // Vertical divider (styles related to .btn class)
+    // Vertical divider (styled related to .btn class)
     > hr {
         height: @line-height-computed;
         margin: @padding-base-vertical 15px;
