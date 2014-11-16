@@ -76,6 +76,7 @@ $app->register(new \Silex\Provider\SecurityServiceProvider());
 
 /* freepius/php-richtext extension */
 $app->register(new \Freepius\Pimple\Provider\RichtextProvider());
+$app['richtext.config'] += ['remove.script.tags' => false];
 
 /* freepius/php-toolbox extension */
 $app->register(new \Freepius\Provider\ToolboxProvider());
