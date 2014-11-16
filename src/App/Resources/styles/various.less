@@ -40,6 +40,21 @@ p { text-align: justify; }
 
 
 /*************************************************
+ * For php-toolbox's generic templates
+ ************************************************/
+
+.counter-and-navigation:extend(.clearfix all)
+{
+    > .counter:extend(.lead, .text-muted, .text-right) {}
+
+    > nav:extend(.lead) {
+        > a:first-child:extend(.pull-left)  {}
+        > a:last-child :extend(.pull-right) {}
+    }
+}
+
+
+/*************************************************
  * Overloading of Bootstrap styles
  ************************************************/
 
@@ -113,6 +128,11 @@ h1, h2, h3 { margin-bottom: 0.5em; }
 {
     > header {
         &:extend(.clearfix all);
+
+        > h1 {
+            color: @secondary-color;
+            font-family: 'GorriSansRegular';
+        }
     }
 }
 
@@ -159,7 +179,7 @@ div.preview // textarea style
     background-color: white;
 }
 
-.actions
+div.actions
 {
     &:extend(.clearfix all);
 
