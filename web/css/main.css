@@ -3855,6 +3855,8 @@ button.close {
 .counter-and-navigation:after,
 #footer:before,
 #footer:after,
+.main-section:before,
+.main-section:after,
 .main-section > header:before,
 .main-section > header:after,
 div.actions:before,
@@ -3874,6 +3876,7 @@ div.actions:after {
 .modal-footer:after,
 .counter-and-navigation:after,
 #footer:after,
+.main-section:after,
 .main-section > header:after,
 div.actions:after {
   clear: both;
