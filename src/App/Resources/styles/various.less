@@ -128,6 +128,13 @@ h1, h2, h3 { margin-bottom: 0.5em; }
 {
     &:extend(.clearfix all);
 
+    aside > .box {
+        background-color: @gray-lighter;
+        border-radius: @border-radius-base;
+
+        p { text-align: left; }
+    };
+
     > header {
         &:extend(.clearfix all);
 
