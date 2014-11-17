@@ -12,9 +12,8 @@
     font-family: 'GorriSansRegular';
 }
 
-.box
+.box:extend(.clearfix all)
 {
-    .clearfix();
     margin-bottom: 20px;
     padding: 15px;
 }
@@ -43,13 +42,20 @@ p { text-align: justify; }
  * For php-toolbox's generic templates
  ************************************************/
 
-.counter-and-navigation:extend(.clearfix all)
+.counter-and-navigation:extend(.box, .clearfix all)
 {
-    > .counter:extend(.lead, .text-muted, .text-right) {}
+    background-color: @gray-lighter;
+    border-radius: @border-radius-base;
 
-    > nav:extend(.lead) {
-        > a:first-child:extend(.pull-left)  {}
-        > a:last-child :extend(.pull-right) {}
+    > h1 { float: left; }
+
+    > .counter:extend(.lead, .text-muted) { float: right; }
+
+    > nav:extend(.lead)
+    {
+        clear: both;
+        > .older   { float: left; }
+        > .younger { float: right; }
     }
 }
 
@@ -111,8 +117,8 @@ h1, h2, h3 { margin-bottom: 0.5em; }
  * Footer
  ************************************************/
 
-#footer {
-    &:extend(.clearfix all);
+#footer:extend(.clearfix all)
+{
     margin: 4em 0 2em;
     padding: 3em 1.5em;
     background-color: @gray-lighter;
@@ -124,10 +130,8 @@ h1, h2, h3 { margin-bottom: 0.5em; }
  * Main section
  ************************************************/
 
-.main-section
+.main-section:extend(.clearfix all)
 {
-    &:extend(.clearfix all);
-
     aside > .box {
         background-color: @gray-lighter;
         border-radius: @border-radius-base;
@@ -135,13 +139,9 @@ h1, h2, h3 { margin-bottom: 0.5em; }
         p { text-align: left; }
     };
 
-    > header {
-        &:extend(.clearfix all);
-
-        > h1 {
-            color: @secondary-color;
-            font-family: 'GorriSansRegular';
-        }
+    > header:extend(.clearfix all)
+    {
+        > h1:extend(#page-title) {}
     }
 }
 
@@ -188,10 +188,8 @@ div.preview // textarea style
     background-color: white;
 }
 
-div.actions
+div.actions:extend(.clearfix all)
 {
-    &:extend(.clearfix all);
-
     float: right;
 
     // Vertical divider (styled related to .btn class)
@@ -222,7 +220,7 @@ div.actions
 
 h2#home-last-published-articles
 {
-    margin: 10px;
+    margin: 15px 0;
     color: @gray-light;
     border-bottom: 1px solid @gray-light;
     font-size: 1em;
