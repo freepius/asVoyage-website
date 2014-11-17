@@ -1,4 +1,4 @@
-{%- set currentNav = currentNav|default -%}
+{%- set currentNav = currentNav | default('main') -%}
 
 
 <!DOCTYPE html>
@@ -39,7 +39,8 @@
     {# If authenticated, allow to logout #}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <a href="/admin/logout" class="logout">
-            <i class="fa fa-power-off"></i> {{ 'Logout'|trans }}
+            <i class="fa fa-power-off"></i>
+            <span>{{ 'Logout'|trans }}</span>
         </a>
     {% endif %}
 
@@ -80,7 +81,7 @@
 
     <!-- Main content
     ================================================== -->
-    <section id="main" class="main-section">
+    <section id="{{ currentNav }}" class="main-section">
         {% block main %}{% endblock %}
     </section>
 
@@ -91,7 +92,7 @@
 
 
     <!-- Link to back up -->
-    <a href="#main" id="back2top" style="display: none;">
+    <a href="#logo" id="back2top" style="display: none;">
         <i class="fa fa-arrow-up fa-inverse"></i> {{ 'Top'|trans }}
     </a>
 

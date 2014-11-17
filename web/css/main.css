@@ -4436,24 +4436,38 @@ body > header {
     margin-left: 1.25%;
   }
 }
-.logout {
-  -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  transform: rotate(90deg);
-  -webkit-transform-origin: 10px 10px;
-  -moz-transform-origin: 10px 10px;
-  -ms-transform-origin: 10px 10px;
-  transform-origin: 10px 10px;
-  position: fixed;
-  top: 15px;
-  left: 15px;
+#contact > header > img {
+  float: left;
+  margin-right: 10px;
+}
+body > a.logout {
   font-size: 1.2em;
+}
+@media (min-width: 992px) {
+  body > a.logout {
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    -webkit-transform-origin: 10px 10px;
+    -moz-transform-origin: 10px 10px;
+    -ms-transform-origin: 10px 10px;
+    transform-origin: 10px 10px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+  }
+}
+@media (max-width: 991px) {
+  body > a.logout {
+    position: absolute;
+  }
 }
 /*************************************************
  * Special / Highlighting
  ************************************************/
 #page-title,
+.main-section > h1,
 .main-section > header > h1 {
   color: #cf5b37;
   font-family: 'GorriSansRegular';
@@ -4575,6 +4589,9 @@ h3 {
 }
 .main-section aside > .box p {
   text-align: left;
+}
+.main-section > header {
+  margin-bottom: 20px;
 }
 /*************************************************
  * Tags

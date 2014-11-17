@@ -8,14 +8,12 @@
 
 
 {% block main %}
-    <h1 id="page-title">{{ 'contact.title'|trans }}</h1>
+    <header>
+        <h1>{{ 'contact.title'|trans }}</h1>
 
-    {{ list_errors(errors, 'contact') }}
+        <img src="/images/base/pigeon-carrier.png">
 
-    <div class="row" style="margin-bottom: 20px;">
-        <img src="/images/base/pigeon-carrier.png" class="col-xs-2 img-rounded">
-
-        <p class="col-xs-8">
+        <p>
             {% if app.locale == 'fr' %}
                 Le formulaire ci-dessous vous permet de nous faire parvenir un pigeon voyageur.
                 <br>
@@ -36,7 +34,9 @@
                 #}
             {% endif %}
         </p>
-    </div>
+    </header>
+
+    {{ list_errors(errors, 'contact') }}
 
     <form action="/contact" method="post" class="form-horizontal">
         {{ render_fields(contact, errors, 'contact', {required: true},

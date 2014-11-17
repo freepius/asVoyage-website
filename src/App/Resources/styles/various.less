@@ -1,11 +1,28 @@
-.logout
+#contact
 {
-    .rotate(90deg);
-    .transform-origin(10px 10px);
-    position: fixed;
-    top: 15px;
-    left: 15px;
+    > header > img {
+        float: left;
+        margin-right: 10px;
+    }
+}
+
+body > a.logout
+{
     font-size: 1.2em;
+
+    @media (min-width: @screen-md-min)
+    {
+        .rotate(90deg);
+        .transform-origin(10px 10px);
+        position: fixed;
+        top: 10px;
+        left: 10px;
+    }
+
+    @media (max-width: @screen-sm-max)
+    {
+        position: absolute;
+    }
 }
 
 
@@ -150,8 +167,11 @@ h1, h2, h3 { margin-bottom: 0.5em; }
         p { text-align: left; }
     };
 
+    > h1:extend(#page-title) {}
+
     > header:extend(.clearfix all)
     {
+        margin-bottom: 20px;
         > h1:extend(#page-title) {}
     }
 }
