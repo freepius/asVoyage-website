@@ -8,21 +8,17 @@
     "use strict";
 
     /**
-     * Enable the possibility to change the captcha of current user.
+     * Change the captcha of current user.
      */
-    $.enableChangeCaptcha = function () {
-        $('#captcha-change').click(function () {
+    $.changeCaptcha = function () {
+        var $img = $('#captcha-img');
 
-            var $img = $('#captcha-img');
+        $img.attr('src', '/images/loading.gif');
 
-            $img.attr('src', '/images/loading.gif');
-
-            $.ajax({
-                method  : 'GET',
-                url     : '/captcha-change',
-                success : function (data) { $img.attr('src', data); }
-            });
-
+        $.ajax({
+            method  : 'GET',
+            url     : '/captcha-change',
+            success : function (data) { $img.attr('src', data); }
         });
     };
 
