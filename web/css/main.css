@@ -4436,6 +4436,20 @@ body > header {
     margin-left: 1.25%;
   }
 }
+.logout {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  -webkit-transform-origin: 10px 10px;
+  -moz-transform-origin: 10px 10px;
+  -ms-transform-origin: 10px 10px;
+  transform-origin: 10px 10px;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 1.2em;
+}
 /*************************************************
  * Special / Highlighting
  ************************************************/
