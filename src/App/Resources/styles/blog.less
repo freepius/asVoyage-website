@@ -1,17 +1,9 @@
-article
+#blog article
 {
-    [itemprop="articleBody"]
+    > header, > footer, > section
     {
-        margin-bottom: 50px;
-        .thumbnail { margin: 0.7em; }
+        &:extend(.clearfix all);
     }
-}
-
-article.summary
-{
-    margin-bottom: 30px;
-
-    > * { .clearfix(); }
 
     > header
     {
@@ -27,30 +19,31 @@ article.summary
         }
     }
 
-    > section[property="articleBody"]
-    {
-        margin: 10px 0;
-    }
-
     > footer
     {
-        border-top: 1px solid @gray;
         border-bottom: 2px solid @gray;
-        padding: 5px 0;
+        margin-bottom: 30px;
+        padding-bottom: 5px;
 
         > * { margin: 0 5px; }
 
-        .actions { float: left; }
+        .actions, .unpublished, [property="keywords"]
+        { float: left; }
 
-        [property="keywords"] { float: left; }
-
-        .about-comments { float: right; }
-
-        [property="url"] { float: right; }
+        [property="discussionUrl"], [property="url"], [href="#post-comment"]
+        { float: right; }
     }
+
+    > section[property="articleBody"]
+    {
+        margin: 10px 0;
+        .thumbnail { margin: 0.7em; }
+    }
+
+    > section#comments { margin-top: 40px; }
 }
 
-ul.mini-list:extend(.list-unstyled)
+#blog ul.mini-list:extend(.list-unstyled)
 {
     > li
     {

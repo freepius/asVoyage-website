@@ -3851,6 +3851,12 @@ button.close {
 .nav:after,
 .modal-footer:before,
 .modal-footer:after,
+#blog article > header:before,
+#blog article > header:after,
+#blog article > footer:before,
+#blog article > footer:after,
+#blog article > section:before,
+#blog article > section:after,
 .comment:before,
 .comment:after,
 .travel .pictures:before,
@@ -3882,6 +3888,9 @@ div.actions:after,
 .btn-group-vertical > .btn-group:after,
 .nav:after,
 .modal-footer:after,
+#blog article > header:after,
+#blog article > footer:after,
+#blog article > section:after,
 .comment:after,
 .travel .pictures:after,
 .box:after,
@@ -4180,71 +4189,50 @@ body > header {
   text-align: right;
   top: 80px;
 }
-#blog article [itemprop="articleBody"] {
-  margin-bottom: 50px;
-}
-#blog article [itemprop="articleBody"] .thumbnail {
-  margin: 0.7em;
-}
-#blog article.summary {
-  margin-bottom: 30px;
-}
-#blog article.summary > *:before,
-#blog article.summary > *:after {
-  content: " ";
-  display: table;
-}
-#blog article.summary > *:after {
-  clear: both;
-}
-#blog article.summary > *:before,
-#blog article.summary > *:after {
-  content: " ";
-  display: table;
-}
-#blog article.summary > *:after {
-  clear: both;
-}
-#blog article.summary > header > h1 {
+#blog article > header > h1 {
   float: left;
 }
-#blog article.summary > header > time {
+#blog article > header > time {
   float: right;
   font-weight: bold;
   text-align: right;
 }
-#blog article.summary > header > time > * {
+#blog article > header > time > * {
   display: block;
 }
-#blog article.summary > header > time > .date {
+#blog article > header > time > .date {
   color: #4d4d4d;
 }
-#blog article.summary > header > time > .time {
+#blog article > header > time > .time {
   color: #666666;
   font-size: 0.8em;
 }
-#blog article.summary > section[property="articleBody"] {
-  margin: 10px 0;
-}
-#blog article.summary > footer {
-  border-top: 1px solid #555555;
+#blog article > footer {
   border-bottom: 2px solid #555555;
-  padding: 5px 0;
+  margin-bottom: 30px;
+  padding-bottom: 5px;
 }
-#blog article.summary > footer > * {
+#blog article > footer > * {
   margin: 0 5px;
 }
-#blog article.summary > footer .actions {
+#blog article > footer .actions,
+#blog article > footer .unpublished,
+#blog article > footer [property="keywords"] {
   float: left;
 }
-#blog article.summary > footer [property="keywords"] {
-  float: left;
-}
-#blog article.summary > footer .about-comments {
+#blog article > footer [property="discussionUrl"],
+#blog article > footer [property="url"],
+#blog article > footer [href="#post-comment"] {
   float: right;
 }
-#blog article.summary > footer [property="url"] {
-  float: right;
+#blog article > section[property="articleBody"] {
+  margin: 10px 0;
+}
+#blog article > section[property="articleBody"] .thumbnail {
+  margin: 0.7em;
+}
+#blog article > section#comments {
+  margin-top: 40px;
 }
 #blog ul.mini-list > li > * {
   margin-right: 5px;

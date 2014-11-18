@@ -1,9 +1,5 @@
 {% set currentNav = 'blog' %}
 
-{% set now = date() | date('Y-m-d H:i:s') %}
-
-{% set isUnpublished = (article.isPublished == false) or (article.pubDatetime > now) %}
-
 {% extends "layout.html.twig" %}
 
 
@@ -15,130 +11,21 @@
 
 
 {% block main %}
+<article vocab="http://schema.org/" typeof="BlogPosting" class="main-section">
 
-<article itemscope itemtype="http://schema.org/BlogPosting" class="col-xs-8">
+    {% include 'blog/header.html.twig' with article only %}
 
-    <header>
-        <!-- Breadcrumb -->
-        <nav itemprop="breadcrumb">
-            {# Link to Blog home page #}
-            {% set url = '/blog' %}
-            <a href="{{ url }}">{{ 'blog.home'|trans }}</a> »
+    {% include 'blog/footer.html.twig' with (article | merge({comment: comment})) only %}
 
-            {# Link to Blog dashboard if unpublished #}
-            {% if isUnpublished %}
-                <a href="/blog/dashboard">{{ 'blog.dashboard'|trans }}</a> »
-            {% else %}
-
-                {# Eventual link to filtered Blog home page #}
-                {% if hasTagsFilter %}
-                    {% set url = '/blog/' ~ (countTags == 1 ? 'tag-' : 'tags-') ~ tags %}
-
-                    <a href="{{ url }}">
-                        {{ 'filter.tags' | transchoice(countTags, [tags]) | raw }}</a> »
-
-                {% elseif hasYearFilter %}
-                    {% set url = '/blog/year-' ~ year %}
-
-                    <a href="{{ url }}">
-                        {{ 'filter.year' | trans([year]) | raw }}</a> »
-
-                {% elseif hasMonthFilter %}
-                    {% set url = '/blog/year-' ~ year ~ '/month-' ~ month %}
-
-                    <a href="{{ url }}">
-                        {{ 'filter.year-month' | trans([year, ('month.'~month)|trans]) | raw }}</a> »
-                {% endif %}
-
-                {# Eventual link to Blog home page by page number #}
-                {% if hasPage %}
-                    <a href="{{ url ~'/'~ page }}">{{ 'blog.page-number' | trans([page]) }}</a> »
-                {% endif %}
-
-            {% endif %}
-        </nav>
-
-        <!-- Title -->
-        <h1 itemprop="name" id="page-title">{{ article.title }}</h1>
-    </header>
-
-    <div itemprop="articleBody" class="clearfix">
+    <section property="articleBody">
         {{ article.text | richtext }}
-    </div>
+    </section>
 
-    <div id="comments" itemprop="comment">
+    <section id="comments" property="comment">
         {% include 'comment/list.html.twig'
             with {url_prefix: '/blog/'~article.slug~'/read'}
         %}
-    </div>
+    </section>
 
 </article>
-
-
-<aside class="col-xs-4">
-    <div class="box">
-        <!-- Publication datetime -->
-        <p>
-            <i class="fa fa-calendar" title="{{ 'blog.field.pubDatetime'|trans }}"></i>
-
-            <time itemprop="datePublished" datetime="{{ article.pubDatetime }}">
-                {{ article.pubDatetime | localizeddate('medium', 'short') | capitalize }}
-            </time>
-        </p>
-
-        <!-- Tags -->
-        <p>
-            <i class="fa fa-tags" title="{{ 'blog.field.tags'|trans }}"></i>
-
-            {% if article.tags is empty %}
-                {{ 'none'|trans }}
-            {% else %}
-                <span itemprop="keywords">
-                    {% for tag in article.tags %}
-                        <span class="label label-default">{{ tag }}</span>
-                    {% endfor %}
-                </span>
-            {% endif %}
-        </p>
-
-        {% if article.beCommented or article.countComments > 0 %}
-            <!-- Comments : count + link to read + link to create/update -->
-            <p>
-                <i class="fa fa-comments"></i>
-                <a href="#comments">
-                    {{ 'comment.count'|trans([article.countComments]) }}
-                </a>
-
-                <br>
-
-                {% if article.beCommented or comment.isUpdating %}
-                    <small style="margin-left: 15px;">
-                        <i class="fa fa-arrow-right"></i>
-                        <a href="#comment-post">
-                            {{ (comment.isCreation ? 'comment.create' : 'comment.update') | trans }}
-                        </a>
-                    </small>
-                {% endif %}
-            </p>
-        {% endif %}
-
-        {% if isUnpublished %}
-            <!-- Article unpublished -->
-            <p><i class="fa fa-lock"></i> {{ 'blog.isUnpublished'|trans }}</p>
-        {% endif %}
-
-        {% if is_granted('ROLE_ADMIN') %}
-            <div class="actions">
-                <!-- Update -->
-                <a href="/blog/{{- article.slug -}}/update" title="{{ 'Update'|trans }}">
-                    <i class="fa fa-pencil"></i></a>
-
-                <!-- Delete -->
-                <a href="/blog/{{- article.slug -}}/delete" title="{{ 'Delete'|trans }}">
-                    <i class="fa fa-trash-o"></i></a>
-            </div>
-        {% endif %}
-    </div>
-</aside>
-
 {% endblock %}

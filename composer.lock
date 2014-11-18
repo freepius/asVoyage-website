@@ -69,12 +69,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius/php-toolbox.git",
-                "reference": "8eadbae0059e5c11a90a40b72ffcf22d2013a244"
+                "reference": "4a8a4c9d3038d63e3e8f8b4bc5567ddec51d2b17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius/php-toolbox/zipball/8eadbae0059e5c11a90a40b72ffcf22d2013a244",
-                "reference": "8eadbae0059e5c11a90a40b72ffcf22d2013a244",
+                "url": "https://api.github.com/repos/freepius/php-toolbox/zipball/4a8a4c9d3038d63e3e8f8b4bc5567ddec51d2b17",
+                "reference": "4a8a4c9d3038d63e3e8f8b4bc5567ddec51d2b17",
                 "shasum": ""
             },
             "require": {
@@ -105,7 +105,7 @@
             ],
             "description": "Various tools for my PHP projects",
             "homepage": "https://github.com/freepius/php-toolbox",
-            "time": "2014-11-17 21:42:41"
+            "time": "2014-11-18 22:09:43"
         },
         {
             "name": "freepius/silex-autolink",

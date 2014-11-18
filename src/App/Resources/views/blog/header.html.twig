@@ -1,0 +1,8 @@
+<header>
+    <h1>{{ title }}</h1>
+
+    <time datetime="{{ pubDatetime }}" pubdate>
+        <span class="date">{{ pubDatetime | localizeddate('medium', 'none')  }}</span>
+        <span class="time">{{ pubDatetime | localizeddate('none'  , 'short') }}</span>
+    </time>
+</header>

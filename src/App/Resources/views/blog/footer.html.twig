@@ -1,0 +1,75 @@
+{% set url = "/blog/"~slug %}
+
+{% set now = date() | date('Y-m-d H:i:s') %}
+
+{# TODO: one day, "isUnpublished" will be a method of article object/Pimple? #}
+{% set isUnpublished = isPublished == false or pubDatetime > now %}
+
+{% set isSummary = comment is not defined %}
+
+<footer>
+    {##
+     # "Is unpublished" icon
+     #}
+    {% if isUnpublished %}
+        <div class="unpublished">
+            <i class="fa fa-lock" title="{{ 'blog.isUnpublished'|trans }}"></i>
+        </div>
+    {% endif %}
+
+    {##
+     # Admin actions
+     #}
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="actions">
+            <a href="{{ url }}/update" title="{{ 'Update'|trans }}">
+                <i class="fa fa-pencil"></i></a>
+
+            <a href="{{ url }}/delete" title="{{ 'Delete'|trans }}">
+                <i class="fa fa-trash-o"></i></a>
+        </div>
+    {% endif %}
+
+    {##
+     # List of tags
+     #}
+    {% if tags is not empty %}
+        <div property="keywords">
+            <i class="fa fa-tags" title="{{ 'Tags'|trans }}"></i>
+
+            {% for tag in tags %}
+                {{- tag ~ (not loop.last ? ', ') -}}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {##
+     # Url and number of comments
+     #}
+    {% if beCommented or countComments > 0 %}
+        <a property="discussionUrl"
+           href="{{ isSummary ? (url~"/read") }}#comments"
+           title="{{ 'comment.count'|trans([countComments]) }}"
+        >
+            <i class="fa fa-comments"></i>
+            <span property="commentCount">{{ countComments }}</span>
+        </a>
+    {% endif %}
+
+    {##
+     # Link to the full article
+     #}
+    {% if isSummary %}
+        <a property="url" href="{{ url }}/read">
+            » {{ 'Read more'|trans }}
+        </a>
+
+    {##
+     # Link to add/update a comment
+     #}
+    {% elseif beCommented or comment.isUpdating %}
+        <a href="#post-comment">
+            {{ (comment.isCreation ? 'comment.create' : 'comment.update') | trans }}
+        </a>
+    {% endif %}
+</footer>

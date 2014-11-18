@@ -1,58 +1,11 @@
-<article class="summary" vocab="http://schema.org/" typeof="BlogPosting">
+<article vocab="http://schema.org/" typeof="BlogPosting">
 
-    <header>
-        <h1>{{ title }}</h1>
-
-        <time datetime="{{ pubDatetime }}" pubdate>
-            <span class="date">{{ pubDatetime | localizeddate('medium', 'none')  }}</span>
-            <span class="time">{{ pubDatetime | localizeddate('none'  , 'short') }}</span>
-        </time>
-    </header>
-
+    {% include 'blog/header.html.twig' %}
 
     <section property="articleBody">
         {{ (summary|trim ? summary : text) | richtext }}
     </section>
 
-
-    <footer>
-        {% if is_granted('ROLE_ADMIN') %}
-            <div class="actions">
-                <!-- Update -->
-                <a href="/blog/{{- slug -}}/update" title="{{ 'Update'|trans }}">
-                    <i class="fa fa-pencil"></i></a>
-
-                <!-- Delete -->
-                <a href="/blog/{{- slug -}}/delete" title="{{ 'Delete'|trans }}">
-                    <i class="fa fa-trash-o"></i></a>
-            </div>
-        {% endif %}
-
-        {% if tags is not empty %}
-            <div property="keywords">
-                <i class="fa fa-tags" title="{{ 'Tags'|trans }}"></i>
-
-                {% for tag in tags %}
-                    {{- tag ~ (not loop.last ? ', ') -}}
-                {% endfor %}
-            </div>
-        {% endif %}
-
-        {% if beCommented or countComments > 0 %}
-            <div class="about-comments">
-                <meta property="commentCount" content="{{ countComments }}">
-
-                <a property="discussionUrl" href="/blog/{{- slug -}}/read#comments"
-                    title="{{ 'comment.count'|trans([countComments]) }}"
-                >
-                    <i class="fa fa-comments"></i> {{ countComments }}
-                </a>
-            </div>
-        {% endif %}
-
-        <a href="/blog/{{- slug -}}/read" property="url">
-            » {{ 'Read more'|trans }}
-        </a>
-    </footer>
+    {% include 'blog/footer.html.twig' %}
 
 </article>
