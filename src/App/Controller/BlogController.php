@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
  * Summary :
  *  -> __construct
  *  -> connect
- *  -> retrieveFiltersAndPage [protected]
  *  -> slugToArticle
  *  -> clearCache             [protected]
  *  -> getRepository          [protected]
@@ -91,94 +90,6 @@ class BlogController implements ControllerProviderInterface
     }
 
     /**
-     * If HTTP_REFERER is Blog home page :
-     *  -> determine the filters and/or the page number by reverse-engineering on HTTP_REFERER
-     *  -> store them in session
-     *
-     * If HTTP_REFERER is the reading page of a Blog article :
-     *  -> try to retrieve the filters and/or the page number from session
-     *
-     * Url of Blog home page is one of the following ({page} is optional) :
-     *  -> blog/{page}
-     *  -> blog/tag-{tag}/{page}
-     *  -> blog/tags-{tags}/{page}
-     *  -> blog/year-{year}/{page}
-     *  -> blog/year-{year}/mont-{month}/{page}
-     */
-    protected function retrieveFiltersAndPage(Request $request)
-    {
-        $referer = $request->headers->get('referer');
-
-        strtok($referer, '/'); // skip the protocol (eg: http://)
-        strtok('/');           // skip the host     (eg: anarchos-semitas.net/)
-
-        $url = strtok('');
-
-        // Do we come from the reading page of a Blog article ?
-        if (preg_match('{^blog/.*/read}', $url))
-        {
-            return $this->app->getSession('blog.filters_and_page',
-            [
-                'hasTagsFilter'  => false,
-                'hasYearFilter'  => false,
-                'hasMonthFilter' => false,
-                'hasPage'        => false,
-            ]);
-        }
-
-        $year = $month = $page = null;
-        $tags = [];
-
-        // Do we come from Blog home page ?
-        if ('blog' === strtok($url, '/'))
-        {
-            $params = strtok('');
-            $filter = strtok($params, '-');
-
-            if ('tag' === $filter || 'tags' === $filter)
-            {
-                $tags = StringUtil::normalizeTags(urldecode(strtok('/')));
-                $page = strtok('');
-            }
-            elseif ('year' === $filter)
-            {
-                $year = strtok('/');
-
-                if ('month' === $page = strtok('-'))
-                {
-                    $month = strtok('/');
-                    $page  = strtok('');
-                }
-            }
-            else { $page = $params; }
-
-            // Despite appearances, we don't come from Blog home page !
-            if (! (null  === $year  || is_numeric($year))  ||
-                ! (null  === $month || is_numeric($month)) ||
-                ! (false === $page  || is_numeric($page)))
-            {
-                $year = $month = $page = null;
-                $tags = [];
-            }
-        }
-
-        $this->app->setSession('blog.filters_and_page', $result =
-        [
-            'hasTagsFilter'  => (bool) $tags,
-            'hasYearFilter'  => $year && !$month,
-            'hasMonthFilter' => (bool) $month,
-            'hasPage'        => is_numeric((string) $page),
-            'countTags'      => count($tags),
-            'tags'           => implode(',', $tags),
-            'year'           => $year,
-            'month'          => $month,
-            'page'           => (string) $page,
-        ]);
-
-        return $result;
-    }
-
-    /**
      * From its slug ($article param.), retrieve an article as array.
      * If $article doesn't match any article, abort with 404 error code.
      */
@@ -240,7 +151,7 @@ class BlogController implements ControllerProviderInterface
         }
 
         return $this->app->render('blog/read.html.twig',
-            $this->retrieveFiltersAndPage($request) + $opComment + ['article' => $article]
+            $opComment + ['article' => $article]
         );
     }
 
