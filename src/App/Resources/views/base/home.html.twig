@@ -43,8 +43,8 @@
 {% endblock %}
 
 
-{% block main %}
-    <aside class="col-xs-4">
+{% block main_inner %}
+    <aside class="col-md-4">
     {#
         <!-- The last travel register entry with message -->
         <div class="box">
@@ -81,7 +81,7 @@
         {% include "base/our-travels/3000-km-diagonal/book-pub.html.twig" only %}
     </aside>
 
-    <div class="col-xs-8">
+    <div class="col-md-8">
         <div class="box">
             {% include "base/home-welcome-text.html.twig" %}
         </div>
