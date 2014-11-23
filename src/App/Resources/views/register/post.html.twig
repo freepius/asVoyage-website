@@ -7,17 +7,10 @@
 {% from "form.twig" import submit %}
 
 
-{% block main %}
+{% block main_inner %}
 
-    <header class="clearfix">
-        <!-- Breadcrumb + title -->
-        <div class="pull-left">
-            <nav>{{ 'register.home'|trans }} »</nav>
-
-            <h1 id="page-title">
-                {{ 'register.posting'|trans }}
-            </h1>
-        </div>
+    <header>
+        <h1>{{ 'register.posting'|trans }}</h1>
 
         <div class="actions">
             <!-- Cancel posting -->
@@ -31,7 +24,7 @@
     </div>
 
     <form action="/register/post" method="POST" class="form-horizontal">
-        <div class="form-group col-xs-12">
+        <div class="form-group">
             <textarea id="entries" name="entries" rows="8" class="form-control"
                 placeholder="{{ 'register.placeholder.posting'|trans }}" required
             >

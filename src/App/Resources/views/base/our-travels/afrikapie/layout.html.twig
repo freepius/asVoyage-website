@@ -4,42 +4,28 @@
 
 {% from "macros.twig" import tags_box %}
 
-{% import "carto.twig" as carto %}
-
-
-{% block stylesheets %}
-{% endblock %}
-
-
-{% block javascripts %}
-{% endblock %}
-
-
 {% block main %}
-    <article itemscope itemtype="http://schema.org/Article" class="col-xs-8">
+<article vocab="http://schema.org/" typeof="Article">
 
-        <!-- Breadcrumb + title -->
-        <header>
-            <nav><a href="/our-travels">{{ 'nav.our-travels'|trans }}</a> »</nav>
-            <h1 id="page-title">Afrikapié</h1>
-        </header>
+    <header>
+        <h1>Afrikapié</h1>
+    </header>
 
-        <div itemprop="articleBody">
-            {{ text | richtext }}
-        </div>
-    </article>
+    <section property="articleBody" class="col-md-8">
+        {{ text | richtext }}
+    </section>
 
-    <aside class="col-xs-4">
-        <!-- Tags -->
+    <aside class="col-md-4">
         <div class="box">
             <h1>{{ 'Tags'|trans }}</h1>
             {{ tags_box(tags) }}
         </div>
 
-        <!-- The figures -->
         <div class="box">
             <h1>{{ 'The figures'|trans }}</h1>
             {{ tags_box(theFigures, {shuffle: false, style: 'unstyled'}) }}
         </div>
     </aside>
+
+</article>
 {% endblock %}

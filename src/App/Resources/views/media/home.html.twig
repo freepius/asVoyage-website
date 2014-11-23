@@ -22,9 +22,9 @@
 {% endblock %}
 
 
-{% block main %}
+{% block main_inner %}
 
-<header class="clearfix">
+<header>
     {{ titleAndFilters | raw }}
 
     <div class="actions">
@@ -73,13 +73,13 @@
 
 {% else %}
 
-    <form id="media" method="POST" class="col-xs-8 view-short">
+    <form id="media" method="POST" class="col-md-8 view-short">
         {% for media in elements %}
             {% include 'media/read.html.twig' with media only %}
         {% endfor %}
     </form>
 
-    <aside class="col-xs-4">
+    <aside class="col-md-4">
         {{ counterAndNavigation | raw }}
 
         <nav class="box">

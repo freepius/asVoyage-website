@@ -2,21 +2,22 @@
 
 {% from "macros.twig" import indent, linked_img %}
 
-
-{% block main %}
-    <h1 id="page-title">
-        {{ ('error.title.' ~ (code == 404 ? '404' : 'other')) | trans }}
-    </h1>
+{% block main_inner %}
+    <header>
+        <h1>
+            {{ ('error.title.' ~ (code == 404 ? '404' : 'other')) | trans }}
+        </h1>
+    </header>
 
     {% set img = random(5) ~ '.jpg' %}
 
     {{ linked_img('/images/errors', img, {
-        class: 'col-xs-4',
+        class: 'col-sm-4 hidden-xs',
         class_img: 'img-rounded',
         thumb: true,
     }) }}
 
-    <p class="col-xs-7 lead">
+    <p class="col-sm-7 lead">
         {{ ('error.message.' ~ (code == 404 ? '404' : 'other')) | trans }}
 
         {{ message ? indent(message) }}
@@ -29,5 +30,4 @@
 
         <small>{{ 'error.contactUs' | trans | raw }}</small>
     </p>
-
 {% endblock %}

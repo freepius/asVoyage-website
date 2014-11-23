@@ -1,14 +1,7 @@
-#blog article
+article:extend(.main-section all)
 {
-    > header, > footer, > section
-    {
-        &:extend(.clearfix all);
-    }
-
     > header
     {
-        > h1 { float: left; }
-
         > time {
             float: right;
             font-weight: bold;
@@ -22,7 +15,6 @@
     > footer
     {
         border-bottom: 2px solid @gray;
-        margin-bottom: 30px;
         padding-bottom: 5px;
 
         > * { margin: 0 5px; }
@@ -36,7 +28,6 @@
 
     > section[property="articleBody"]
     {
-        margin: 10px 0;
         .thumbnail { margin: 0.7em; }
     }
 

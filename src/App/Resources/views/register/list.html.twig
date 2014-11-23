@@ -5,15 +5,10 @@
 {% from "register/macros.twig" import register_render %}
 
 
-{% block main %}
+{% block main_inner %}
 
     <header>
-        <!-- Breadcrumb + title -->
-        <nav>{{ 'register.home'|trans }} »</nav>
-
-        <h1 id="page-title">
-            {{ 'register.listing'|trans }}
-        </h1>
+        <h1>{{ 'register.listing'|trans }}</h1>
     </header>
 
     <ul>

@@ -8,66 +8,51 @@
 
 {% set i = random(2) %} {# What set of images? #}
 
-
-{% block stylesheets %}
-    <style>
-        #page-title { text-align: center; }
-
-        #main h2 { text-align: center; }
-
-        #both { margin: 5px 0; }
-
-        @media (min-width: 992px)
-        {
-            #both { margin: 5px 90px; }
-        }
-    </style>
-{% endblock %}
-
-
 {% block main %}
-    <article itemscope itemtype="http://schema.org/Article">
-    <h1 itemprop="name" id="page-title">{{ pageTitle }}</h1>
+<article vocab="http://schema.org/" typeof="Article">
 
-        <div itemprop="articleBody">
-            <h2>{{ aboutUsTitle }}</h2>
+    <header>
+        <h1>{{ pageTitle }}</h1>
+    </header>
 
-            <div class="row">
-                {{ tags_box(tagsMathieu, {align: 'right', class: 'col-xs-4', special: 'Mathieu'}) }}
+    <section property="articleBody">
+        <h2>{{ aboutUsTitle }}</h2>
 
-                <div class="col-xs-4">
-                    {{ linked_img('/images/ourselves', 'freepius-'~i~'.jpg', {class: 'col-xs-6'}) }}
-                    {{ linked_img('/images/ourselves', 'manalee-'~i~'.jpg',  {class: 'col-xs-6'}) }}
-                </div>
+        <div class="row">
+            {{ tags_box(tagsMathieu, {class: 'col-md-4 first', special: 'Mathieu'}) }}
 
-                {{ tags_box(tagsMarie, {align: 'left', class: 'col-xs-4', special: 'Marie'}) }}
+            <div class="col-md-4">
+                {{ linked_img('/images/ourselves', 'freepius-'~i~'.jpg', {class: 'col-xs-6'}) }}
+                {{ linked_img('/images/ourselves', 'manalee-'~i~'.jpg',  {class: 'col-xs-6'}) }}
             </div>
 
-            <div class="text-center special" style="margin: 7px;">
-                <strong>Mathieu & Marie</strong>
-            </div>
-
-            <div id="both" class="row">
-                {{ tags_box(tagsBoth[0:tagsBothMiddle], {align: 'right', class: 'col-xs-4'}) }}
-
-                {{ linked_img('/images/ourselves', 'together-'~i~'.jpg', {class: 'col-xs-4'}) }}
-
-                {{ tags_box(tagsBoth[tagsBothMiddle:], {align: 'left', class: 'col-xs-4'}) }}
-            </div>
-
-            <h2>anarchos semitas</h2>
-
-            <div class="col-xs-12 text-center">
-                <img src="/images/base/roots.png" class="img-responsive">
-            </div>
-
-            {{ tags_box(tagsAnarchosSemitas, {class: 'text-muted'}) }}
-
-            {{ mainText | richtext }}
-
-            <div class="col-xs-12 text-center">
-                <img src="/images/base/fresco.png" class="img-responsive">
-            </div>
+            {{ tags_box(tagsMarie, {class: 'col-md-4 second', special: 'Marie'}) }}
         </div>
-    </article>
+
+        <div class="our-names">Mathieu & Marie</div>
+
+        <div class="row mathieu-and-marie">
+            {{ tags_box(tagsBoth[0:tagsBothMiddle], {class: 'col-md-4 first'}) }}
+
+            {{ linked_img('/images/ourselves', 'together-'~i~'.jpg', {class: 'col-md-4'}) }}
+
+            {{ tags_box(tagsBoth[tagsBothMiddle:], {class: 'col-md-4 second'}) }}
+        </div>
+
+        <h2>anarchos semitas</h2>
+
+        <div class="text-center">
+            <img src="/images/base/roots.png" class="img-responsive">
+        </div>
+
+        {{ tags_box(tagsAnarchosSemitas, {class: 'text-muted'}) }}
+
+        {{ mainText | richtext }}
+
+        <div class="text-center">
+            <img src="/images/base/fresco.png" class="img-responsive">
+        </div>
+    </section>
+
+</article>
 {% endblock %}

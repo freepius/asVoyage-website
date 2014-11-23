@@ -45,35 +45,31 @@
 
 
 {% block main %}
-    <article itemscope itemtype="http://schema.org/Article" class="col-xs-8">
+<article vocab="http://schema.org/" typeof="Article">
 
-        <!-- Breadcrumb + title -->
-        <header>
-            <nav><a href="/our-travels">{{ 'nav.our-travels'|trans }}</a> »</nav>
-            <h1 id="page-title">{{ pageTitle | trans }}</h1>
-        </header>
+    <header>
+        <h1>{{ pageTitle | trans }}</h1>
+    </header>
 
-        <div itemprop="articleBody">
-            {{ text | richtext }}
-        </div>
-    </article>
+    <section property="articleBody" class="col-md-8">
+        {{ text | richtext }}
+    </section>
 
-    <aside class="col-xs-4">
+    <aside class="col-md-4">
         {% include "base/our-travels/3000-km-diagonal/book-pub.html.twig" only %}
 
-        <!-- Map -->
         <div id="map" class="box"></div>
 
-        <!-- Tags -->
         <div class="box">
             <h1>{{ 'Tags'|trans }}</h1>
             {{ tags_box(tags) }}
         </div>
 
-        <!-- The figures -->
         <div class="box">
             <h1>{{ 'The figures'|trans }}</h1>
             {{ tags_box(theFigures, {shuffle: false, style: 'unstyled'}) }}
         </div>
     </aside>
+
+</article>
 {% endblock %}

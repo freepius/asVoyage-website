@@ -32,16 +32,15 @@
 
 
 {% block main %}
-    <article itemscope itemtype="http://schema.org/Article">
+<article vocab="http://schema.org/" typeof="Article">
 
-        <!-- Breadcrumb + title -->
-        <header>
-            <nav><a href="/our-travels">{{ 'nav.our-travels'|trans }}</a> »</nav>
-            <h1 id="page-title">Afrikapié</h1>
-        </header>
+    <header>
+        <h1>Afrikapié</h1>
+    </header>
 
-        <p class="alert alert-warning">{{ note }}</p>
+    <p class="alert alert-warning">{{ note }}</p>
 
-        <div itemprop="articleBody">{{ text | richtext }}</div>
-    </article>
+    <section property="articleBody">{{ text | richtext }}</section>
+
+</article>
 {% endblock %}

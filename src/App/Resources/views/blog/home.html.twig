@@ -9,15 +9,17 @@
 
 
 {% block main %}
+<section vocab="http://schema.org/" typeof="Blog" class="main-section">
 
-<header class="clearfix">
+<header>
     {{ titleAndFilters | raw }}
 
     {% if is_granted('ROLE_ADMIN') %}
-        <!-- Go to dashboard -->
-        <a href="/blog/dashboard" class="btn btn-default pull-right">
-            <i class="fa fa-list-alt"></i> {{ 'blog.dashboard'|trans }}
-        </a>
+        <div class="actions">
+            <a href="/blog/dashboard" class="btn btn-default">
+                <i class="fa fa-list-alt"></i> {{ 'blog.dashboard'|trans }}
+            </a>
+        </div>
     {% endif %}
 </header>
 
@@ -27,13 +29,13 @@
 
 {% else %}
 
-    <div id="blog" class="col-xs-8">
+    <div class="col-md-8">
         {% for article in elements %}
             {% include 'blog/summary.html.twig' with article only %}
         {% endfor %}
     </div>
 
-    <aside class="col-xs-4">
+    <aside class="col-md-4">
         {{ counterAndNavigation | raw }}
 
         <nav class="box">
@@ -47,4 +49,5 @@
 
 {% endif %}
 
+</section>
 {% endblock %}

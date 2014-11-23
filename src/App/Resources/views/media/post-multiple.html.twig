@@ -39,17 +39,12 @@
 {% endblock %}
 
 
-{% block main %}
+{% block main_inner %}
 
-    <header class="clearfix">
-        <!-- Breadcrumb + title -->
-        <div class="pull-left">
-            <nav><a href="/media">{{ 'media.home'|trans }}</a> »</nav>
-
-            <h1 id="page-title">
-                {{ (isCreation ? 'media.creation' : 'media.updating') | trans }}
-            </h1>
-        </div>
+    <header>
+        <h1>
+            {{ (isCreation ? 'media.creation' : 'media.updating') | trans }}
+        </h1>
 
         <div class="actions">
             <!-- Cancel creation / updating -->
@@ -61,7 +56,7 @@
     {{ isCreation ? '<form id="fileupload" method="POST" enctype="multipart/form-data">' }}
     <div class="fileupload-buttonbar row form-inline">
 
-        <div class="col-xs-7">
+        <div class="col-md-7">
             <!-- Presentation and helps -->
             <div class="box">
                 {% include 'media/post-help.html.twig' %}
@@ -81,7 +76,7 @@
             {% endif %}
         </div>
 
-        <aside class="col-xs-5">
+        <aside class="col-md-5">
             <!-- Actions on elements -->
             <div class="box">
                 <h2>{{ 'Actions'|trans }}</h2>

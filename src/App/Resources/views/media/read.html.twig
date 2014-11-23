@@ -6,15 +6,15 @@
 {% set hostMedia = host ~ '/media/' %}
 
 
-<div class="thumbnail col-xs-6"
-    itemscope itemtype="http://schema.org/
+<div class="thumbnail col-sm-6"
+    vocab"http://schema.org/" typeof="
     {{- mainType in ['audio', 'image', 'video'] ? (mainType | title) : 'Media' -}}
 Object">
 
-    <meta itemprop="contentURL" content="{{ hostMedia ~ content }}">
+    <meta property="contentURL" content="{{ hostMedia ~ content }}">
 
     {% if mainType == 'image' %}
-        <meta itemprop="thumbnailURL" content="{{ hostMedia }}thumb/{{ content }}">
+        <meta property="thumbnailURL" content="{{ hostMedia }}thumb/{{ content }}">
     {% endif %}
 
     <div class="content">

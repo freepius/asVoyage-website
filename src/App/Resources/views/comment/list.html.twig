@@ -3,10 +3,10 @@
 {% from 'form.twig' import render_fields, submit %}
 
 
-<meta itemprop="interactionCount" content="UserComments:{{- article.countComments -}}">
+<meta property="interactionCount" content="UserComments:{{- article.countComments -}}">
 
 {% if article.countComments > 0 %}
-    <!-- Comments -->
+
     <h2>{{ 'Comments'|trans }}</h2>
 
     {% for id, comment in article.comments if comment is not null %}

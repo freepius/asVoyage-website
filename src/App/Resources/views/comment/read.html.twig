@@ -1,7 +1,7 @@
-<div id="comment-{{ id }}" class="comment" itemscope itemtype="http://schema.org/Comment">
+<div id="comment-{{ id }}" class="comment" vocab="http://schema.org/" typeof="Comment">
 
     <header>
-        <time itemprop="datePublished" datetime="{{ comment.datetime }}" class="clearfix">
+        <time property="datePublished" datetime="{{ comment.datetime }}" class="clearfix">
             <strong>{{ comment.datetime | localizeddate('medium', 'none') }} </strong><br>
             <em>    {{ comment.datetime | localizeddate('none'  , 'short') }}</em>
         </time>
@@ -28,12 +28,12 @@
     </header>
 
 
-    <blockquote itemprop="text">
+    <blockquote property="text">
 
         <small>
             <span style="margin-right: 3px;">#{{ id }}</span>
             {{ 'Posted by'|trans }}
-            <b itemprop="author">{{ comment.name }}</b>
+            <b property="author">{{ comment.name }}</b>
         </small>
 
         {{ comment.text | nl2br | autolink }}

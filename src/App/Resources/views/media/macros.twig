@@ -59,17 +59,17 @@
 
     {% set sep = sep | default('<br>') %}
 
-    <b itemprop="name">{{ e.originalName }}</b>
+    <b property="name">{{ e.originalName }}</b>
     <br>
-    {{ e.mainType }}/<span itemprop="encodingFormat">{{ e.subType }}</span>
+    {{ e.mainType }}/<span property="encodingFormat">{{ e.subType }}</span>
     {{ sep | raw }}
-    <span itemprop="contentSize">{{ format_file_size(e.size) }}</span>
+    <span property="contentSize">{{ format_file_size(e.size) }}</span>
 
     {% if e.mainType == 'image' %}
         {{ sep | raw }}
-        <span itemprop="width">{{ e.width }}</span>
+        <span property="width">{{ e.width }}</span>
         {{- 'x' -}}
-        <span itemprop="height">{{ e.height }}</span>
+        <span property="height">{{ e.height }}</span>
     {% endif %}
 
 {% endmacro %}
@@ -83,7 +83,7 @@
     {% if caption %}
         <p class="caption">
             <i class="fa fa-leaf" title="{{ 'media.caption'|trans }}"></i>
-            <em itemprop="description">{{ caption | raw }}</em>
+            <em property="description">{{ caption | raw }}</em>
         </p>
     {% endif %}
 
@@ -100,7 +100,7 @@
 
     {% if e.creationDate %}
         <i class="fa fa-calendar" title="{{ 'media.creationDate'|trans }}"></i>
-        <time itemprop="dateCreated" datetime="{{ e.creationDate }}">
+        <time property="dateCreated" datetime="{{ e.creationDate }}">
             {{ e.creationDate | localizeddate('medium', 'none') }}
             {{ 'at'|trans }}
             {{ e.creationDate | localizeddate('none', 'short') }}
@@ -110,13 +110,13 @@
 
     {% if e.geoCoords %}
         <i class="fa fa-globe" title="{{ 'media.geoCoords'|trans }}"></i>
-        <span itemprop="contentLocation">{{ e.geoCoords }}</span>
+        <span property="contentLocation">{{ e.geoCoords }}</span>
         <br>
     {% endif %}
 
     {% if e.tags %}
         <i class="fa fa-tags" title="{{ 'media.tags'|trans }}"></i>
-        <small itemprop="keywords">
+        <small property="keywords">
             {% for tag in e.tags %}
                 <span class="label label-default">{{ tag }}</span>
             {% endfor %}

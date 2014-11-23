@@ -31,7 +31,7 @@
 
     {% block stylesheets %}{% endblock %}
 </head>
-<body class="container" itemscope itemtype="http://schema.org/
+<body class="container" vocab="http://schema.org/" typeof="
     {{- currentNav == 'about'   ? 'AboutPage'   :
        (currentNav == 'contact' ? 'ContactPage' : 'WebPage') -}}">
 
@@ -81,9 +81,11 @@
 
     <!-- Main content
     ================================================== -->
-    <section id="{{ currentNav }}" class="main-section">
-        {% block main %}{% endblock %}
-    </section>
+    {% block main %}
+        <section class="main-section">
+            {% block main_inner %}{% endblock %}
+        </section>
+    {% endblock %}
 
 
     <!-- Footer

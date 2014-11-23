@@ -6,59 +6,61 @@
 
 {% from 'form.twig' import list_errors, render_fields, submit %}
 
+{% block main_inner %}
 
-{% block main %}
-    <header>
-        <h1>{{ 'contact.title'|trans }}</h1>
+<header>
+    <h1>{{ 'contact.title'|trans }}</h1>
+</header>
 
-        <img src="/images/base/pigeon-carrier.png">
+<section property="articleBody">
+    <img src="/images/base/pigeon-carrier.png">
 
-        <p>
-            {% if app.locale == 'fr' %}
-                Le formulaire ci-dessous vous permet de nous faire parvenir un pigeon voyageur.
-                <br>
-                Toutefois, si vous désirez nous écrire un message plus complexe, avec des pièces jointes, de la couleur, des images...
-                veuillez directement nous envoyer un email à l'adresse <b>contact&#160;(à-rot-base)&#160;anarchos-semitas.net</b> .
-                {#
-                <br>
-                Dans les deux cas, il est fort probable que nous ne répondons <em>pas avant une semaine à un mois</em>. N'en soyez pas offensés...
-                #}
-            {% else %}
-                The form below allows you to send us a pigeon carrier.
-                <br>
-                However, if you want to write us a more complex message, with attachments, colors, pictures...
-                please directly send us an email at <b>contact&#160;(a-rot-base)&#160;anarchos-semitas.net</b> .
-                {#
-                <br>
-                In both cases, it is quite likely that <em>we don't respond before a week to a month</em>. Don't be offended...
-                #}
-            {% endif %}
-        </p>
-    </header>
+    <p>
+        {% if app.locale == 'fr' %}
+            Le formulaire ci-dessous vous permet de nous faire parvenir un pigeon voyageur.
+            <br>
+            Toutefois, si vous désirez nous écrire un message plus complexe, avec des pièces jointes, de la couleur, des images...
+            veuillez directement nous envoyer un email à l'adresse <b>contact&#160;(à-rot-base)&#160;anarchos-semitas.net</b> .
+            {#
+            <br>
+            Dans les deux cas, il est fort probable que nous ne répondons <em>pas avant une semaine à un mois</em>. N'en soyez pas offensés...
+            #}
+        {% else %}
+            The form below allows you to send us a pigeon carrier.
+            <br>
+            However, if you want to write us a more complex message, with attachments, colors, pictures...
+            please directly send us an email at <b>contact&#160;(a-rot-base)&#160;anarchos-semitas.net</b> .
+            {#
+            <br>
+            In both cases, it is quite likely that <em>we don't respond before a week to a month</em>. Don't be offended...
+            #}
+        {% endif %}
+    </p>
+</section>
 
-    {{ list_errors(errors, 'contact') }}
+{{ list_errors(errors, 'contact') }}
 
-    <form action="/contact" method="post" class="form-horizontal">
-        {{ render_fields(contact, errors, 'contact', {required: true},
-            [
-                {name: 'name'},
-                {name: 'email'},
-                {
-                    name: 'subject',
-                    size: 8
-                },
-                {
-                    type: 'textarea',
-                    name: 'message',
-                },
-                {type: 'captcha'}
-            ]
-        ) }}
+<form action="/contact" method="post" class="form-horizontal">
+    {{ render_fields(contact, errors, 'contact', {required: true},
+        [
+            {name: 'name'},
+            {name: 'email'},
+            {
+                name: 'subject',
+                size: 8
+            },
+            {
+                type: 'textarea',
+                name: 'message',
+            },
+            {type: 'captcha'}
+        ]
+    ) }}
 
-        <div class="col-md-offset-3">
-            {{ submit() }}
-            {{ cancel_link('/home') }}
-        </div>
-    </form>
+    <div class="col-md-offset-3">
+        {{ submit() }}
+        {{ cancel_link('/home') }}
+    </div>
+</form>
 
 {% endblock %}

@@ -1,0 +1,42 @@
+body[typeof="AboutPage"]
+{
+    > article
+    {
+        h1 { float: none; }
+
+        h1, h2 { text-align: center; }
+
+        .our-names:extend(.emphasis-1)
+        {
+            font-weight: bold;
+            margin: 7px;
+            text-align: center;
+        }
+
+        .tags-box { font-size: 0.8em; }
+
+        // Small screens
+        @media (max-width: @screen-sm-max)
+        {
+            .first, .second { text-align: center; }
+            .mathieu-and-marie { margin: 5px 0px; }
+        }
+
+        // Big screens
+        @media (min-width: @screen-md-min)
+        {
+            .first { text-align: right; }
+            .second { text-align: left; }
+            .mathieu-and-marie { margin: 5px 80px; }
+        }
+    }
+}
+
+body[typeof="ContactPage"]
+{
+    [property="articleBody"] > img
+    {
+        float: left;
+        margin-right: 10px;
+    }
+}
