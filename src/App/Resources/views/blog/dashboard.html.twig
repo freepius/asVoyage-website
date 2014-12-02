@@ -53,73 +53,69 @@
 {% endblock %}
 
 
-{% block main %}
+{% block main_inner %}
 
-    <header class="clearfix">
-        <!-- Breadcrumb + title -->
-        <div class="pull-left">
-            <nav><a href="/blog">{{ 'blog.home'|trans }}</a> »</nav>
+<header>
+    <h1>{{ 'blog.dashboard'|trans }}</h1>
 
-            <h1 id="page-title">{{ 'blog.dashboard'|trans }}</h1>
-        </div>
-
-        <!-- Create an article -->
-        <a href="/blog/create" class="btn btn-success pull-right">
+    <div class="actions">
+        <a href="/blog/create" class="btn btn-success">
             <i class="fa fa-plus-circle fa-inverse"></i> {{ 'blog.create'|trans }}
         </a>
-    </header>
+    </div>
+</header>
 
-    <!-- List of all blog articles -->
-    <table id="dashboard" class="display compact" cellspacing="0" width="100%">
-        <thead>
+<!-- List of all blog articles -->
+<table id="dashboard" class="display compact" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{{ 'blog.field.title'|trans }}</th>
+            <th>{{ 'blog.field.slug'|trans }}</th>
+            <th>{{ 'blog.field.pubDatetime'|trans }}</th>
+            <th>{{ 'blog.field.isPublished'|trans }}</th>
+            <th>{{ 'blog.field.beCommented'|trans }}</th>
+            <th>{{ 'blog.field.countComments'|trans }}</th>
+            <th>{{ 'blog.field.dateLastComment'|trans }}</th>
+            <th>{{ 'blog.field.tags'|trans }}</th>
+            <th>{{ 'Actions'|trans }}</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for article in articles %}
             <tr>
-                <th>{{ 'blog.field.title'|trans }}</th>
-                <th>{{ 'blog.field.slug'|trans }}</th>
-                <th>{{ 'blog.field.pubDatetime'|trans }}</th>
-                <th>{{ 'blog.field.isPublished'|trans }}</th>
-                <th>{{ 'blog.field.beCommented'|trans }}</th>
-                <th>{{ 'blog.field.countComments'|trans }}</th>
-                <th>{{ 'blog.field.dateLastComment'|trans }}</th>
-                <th>{{ 'blog.field.tags'|trans }}</th>
-                <th>{{ 'Actions'|trans }}</th>
+                <td>{{ article.title }}</td>
+                <td>{{ article.slug }}</td>
+                <td>{{ article.pubDatetime }}</td>
+                <td>{{ bool2icon(article.isPublished) }}</td>
+                <td>{{ bool2icon(article.beCommented) }}</td>
+                <td>{{ article.countComments }}</td>
+                <td>
+                    {% if  (article.comments is not empty)
+                       and (article.comments.0 is not null)
+                    %}
+                        {{ article.comments.0.datetime }}
+                    {% endif %}
+                </td>
+                <td>{{ article.tags|join(', ') }}</td>
+
+                <!-- Actions on article -->
+                <td>
+                    <!-- Read -->
+                    <a href="/blog/{{- article.slug -}}/read" title="{{ 'Read'|trans }}">
+                        <i class="fa fa-eye"></i></a>
+
+                    <!-- Update -->
+                    <a href="/blog/{{- article.slug -}}/update" title="{{ 'Update'|trans }}">
+                        <i class="fa fa-pencil"></i></a>
+
+                    <!-- Delete -->
+                    <a href="/blog/{{- article.slug -}}/delete" title="{{ 'Delete'|trans }}">
+                        <i class="fa fa-trash-o"></i></a>
+                </td>
             </tr>
-        </thead>
-
-        <tbody>
-            {% for article in articles %}
-                <tr>
-                    <td>{{ article.title }}</td>
-                    <td>{{ article.slug }}</td>
-                    <td>{{ article.pubDatetime }}</td>
-                    <td>{{ bool2icon(article.isPublished) }}</td>
-                    <td>{{ bool2icon(article.beCommented) }}</td>
-                    <td>{{ article.countComments }}</td>
-                    <td>
-                        {% if  (article.comments is not empty)
-                           and (article.comments.0 is not null)
-                        %}
-                            {{ article.comments.0.datetime }}
-                        {% endif %}
-                    </td>
-                    <td>{{ article.tags|join(', ') }}</td>
-
-                    <!-- Actions on article -->
-                    <td>
-                        <!-- Read -->
-                        <a href="/blog/{{- article.slug -}}/read" title="{{ 'Read'|trans }}">
-                            <i class="fa fa-eye"></i></a>
-
-                        <!-- Update -->
-                        <a href="/blog/{{- article.slug -}}/update" title="{{ 'Update'|trans }}">
-                            <i class="fa fa-pencil"></i></a>
-
-                        <!-- Delete -->
-                        <a href="/blog/{{- article.slug -}}/delete" title="{{ 'Delete'|trans }}">
-                            <i class="fa fa-trash-o"></i></a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}

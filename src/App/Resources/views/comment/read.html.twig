@@ -1,20 +1,19 @@
-<div id="comment-{{ id }}" class="comment" vocab="http://schema.org/" typeof="Comment">
+<div id="comment-{{ id }}" vocab="http://schema.org/" typeof="Comment">
 
     <header>
-        <time property="datePublished" datetime="{{ comment.datetime }}" class="clearfix">
+        <time property="datePublished" datetime="{{ comment.datetime }}">
             <strong>{{ comment.datetime | localizeddate('medium', 'none') }} </strong><br>
             <em>    {{ comment.datetime | localizeddate('none'  , 'short') }}</em>
         </time>
 
-        {# Actions on comment #}
         {% if is_granted('ROLE_ADMIN') %}
         <div class="actions">
 
-            <!-- Update -->
+            <!-- Update the comment -->
             <a href="{{ url_comment }}#post-comment" title="{{ 'Update'|trans }}">
                 <i class="fa fa-pencil"></i></a>
 
-            <!-- Delete -->
+            <!-- Delete the comment -->
             <form action="{{ url_comment }}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
 
@@ -27,17 +26,14 @@
         {% endif %}
     </header>
 
-
     <blockquote property="text">
-
         <small>
-            <span style="margin-right: 3px;">#{{ id }}</span>
+            #{{ id }}&nbsp;
             {{ 'Posted by'|trans }}
             <b property="author">{{ comment.name }}</b>
         </small>
 
         {{ comment.text | nl2br | autolink }}
-
     </blockquote>
 
 </div>

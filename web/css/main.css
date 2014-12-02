@@ -3861,8 +3861,8 @@ button.close {
 .main-section:after,
 div.actions:before,
 div.actions:after,
-.comment:before,
-.comment:after,
+[typeof="Comment"] > header > time:before,
+[typeof="Comment"] > header > time:after,
 .travel .pictures:before,
 .travel .pictures:after,
 .counter-and-navigation:before,
@@ -3887,7 +3887,7 @@ article:after {
 #footer:after,
 .main-section:after,
 div.actions:after,
-.comment:after,
+[typeof="Comment"] > header > time:after,
 .travel .pictures:after,
 .counter-and-navigation:after,
 article:after {
@@ -4549,21 +4549,22 @@ article > section#comments {
   color: #4d4d4d;
   font-size: 0.8em;
 }
-.comment {
-  margin-bottom: 15px;
+[typeof="Comment"] {
+  margin-bottom: 10px;
 }
-.comment > header {
+[typeof="Comment"] > * {
   float: left;
+}
+[typeof="Comment"] > header {
+  padding-right: 10px;
   text-align: right;
 }
-.comment > header time {
+[typeof="Comment"] > header > time {
   font-weight: bold;
 }
-.comment [itemprop="text"] {
+[typeof="Comment"] > [property="text"] {
+  padding-left: 10px;
   width: 70%;
-  float: left;
-  margin: 0 15px;
-  padding: 0 15px;
 }
 .leaflet-container form.leaflet-control-layers-list {
   margin: 0;

@@ -1,19 +1,20 @@
-.comment:extend(.clearfix all)
+[typeof="Comment"]
 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
-    > header {
-        float: left;
+    > * { float: left; }
+
+    > header
+    {
+        padding-right: 10px;
         text-align: right;
 
-        time { font-weight: bold; }
+        > time:extend(.clearfix all) { font-weight: bold; }
     }
 
-    [itemprop="text"]
+    > [property="text"]
     {
+        padding-left: 10px;
         width: 70%;
-        float: left;
-        margin: 0 15px;
-        padding: 0 15px;
     }
 }

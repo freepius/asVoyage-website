@@ -7,51 +7,43 @@
 {% from "macros.twig" import cancel %}
 
 
-{% block main %}
+{% block main_inner %}
 
-    <header class="clearfix">
-        <!-- Breadcrumb + title -->
-        <div class="pull-left">
-            <nav>
-                <a href="/blog">{{ 'blog.home'|trans }}</a> »
-                <a href="/blog/dashboard">{{ 'blog.dashboard'|trans }}</a> »
-            </nav>
+<header>
+    <h1>
+        {{ (isCreation ? 'blog.creation' : 'blog.updating') | trans }}
+    </h1>
 
-            <h1 id="page-title">
-                {{ (isCreation ? 'blog.creation' : 'blog.updating') | trans }}
-            </h1>
-        </div>
+    <div class="actions">
+        <!-- Cancel creation / updating -->
+        {{ cancel('/blog/dashboard') }}
 
-        <div class="actions">
-            <!-- Cancel creation / updating -->
-            {{ cancel('/blog/dashboard') }}
-
-            {% if not isCreation %}
-                <!-- Go to the article reading page -->
-                <a href="/blog/{{- originalSlug -}}/read" class="btn btn-default">
-                    <i class="fa fa-eye"></i>
-                    {{ 'Read'|trans }}
-                </a>
-            {% endif %}
-        </div>
-    </header>
+        {% if not isCreation %}
+            <!-- Go to the article reading page -->
+            <a href="/blog/{{- originalSlug -}}/read" class="btn btn-default">
+                <i class="fa fa-eye"></i>
+                {{ 'Read'|trans }}
+            </a>
+        {% endif %}
+    </div>
+</header>
 
 
-    {% if not isCreation %}
-        <!-- Various actions for the article editing -->
-        <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-            <li {{ tab == 'general' ? 'class="active"' }}>
-                <a href="/blog/{{ originalSlug }}/update">{{ 'General'|trans }}</a>
-            </li>
+{% if not isCreation %}
+    <!-- Various actions for the article editing -->
+    <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+        <li {{ tab == 'general' ? 'class="active"' }}>
+            <a href="/blog/{{ originalSlug }}/update">{{ 'General'|trans }}</a>
+        </li>
 
-            <li {{ tab == 'comments' ? 'class="active"' }}>
-                <a href="/blog/{{ originalSlug }}/comments">
-                    {{ 'Comments'|trans }} ({{ article.countComments }})
-                </a>
-            </li>
-        </ul>
-    {% endif %}
+        <li {{ tab == 'comments' ? 'class="active"' }}>
+            <a href="/blog/{{ originalSlug }}/comments">
+                {{ 'Comments'|trans }} ({{ article.countComments }})
+            </a>
+        </li>
+    </ul>
+{% endif %}
 
-    {% block post %}{% endblock %}
+{% block post %}{% endblock %}
 
 {% endblock %}
