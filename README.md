@@ -55,6 +55,7 @@ License
 BUG
 ===
 
+* BUG: In blog dashboard, bad "Last comment" data (when the last data of a post is deleted)
 * BUG related to Http cache : on production server, switch locale doesn't change the locale (without to do a Ctrl+F5).
   See the diff in Http cache config for Apache2.
 * BUG on IE 9 : problem to refresh captcha (eg: on contact page)

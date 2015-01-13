@@ -7,6 +7,46 @@
     "hash": "750eea292329e92203666addb05870a2",
     "packages": [
         {
+            "name": "freepius/php-model",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/freepius/php-model.git",
+                "reference": "7ba815d30989bad06566002a4b1cbaee00ae7c7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/freepius/php-model/zipball/7ba815d30989bad06566002a4b1cbaee00ae7c7b",
+                "reference": "7ba815d30989bad06566002a4b1cbaee00ae7c7b",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/validator": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Freepius\\Model\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "CC0"
+            ],
+            "authors": [
+                {
+                    "name": "Mathieu Poisbeau",
+                    "email": "freepius@anarchos-semitas.net"
+                }
+            ],
+            "description": "Some simple tools for the model layer of PHP projects",
+            "homepage": "https://github.com/freepius/php-model",
+            "time": "2015-01-13 14:52:51"
+        },
+        {
             "name": "freepius/php-richtext",
             "version": "dev-master",
             "source": {
@@ -69,15 +109,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius/php-toolbox.git",
-                "reference": "4a8a4c9d3038d63e3e8f8b4bc5567ddec51d2b17"
+                "reference": "5fd8c2f74d12404aaab4f5bd078b90b00903105a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius/php-toolbox/zipball/4a8a4c9d3038d63e3e8f8b4bc5567ddec51d2b17",
-                "reference": "4a8a4c9d3038d63e3e8f8b4bc5567ddec51d2b17",
+                "url": "https://api.github.com/repos/freepius/php-toolbox/zipball/5fd8c2f74d12404aaab4f5bd078b90b00903105a",
+                "reference": "5fd8c2f74d12404aaab4f5bd078b90b00903105a",
                 "shasum": ""
             },
             "require": {
+                "freepius/php-model": "*",
                 "gregwar/captcha": "*",
                 "silex/silex": "*",
                 "symfony/validator": "*",
@@ -105,7 +146,7 @@
             ],
             "description": "Various tools for my PHP projects",
             "homepage": "https://github.com/freepius/php-toolbox",
-            "time": "2014-11-18 22:09:43"
+            "time": "2015-01-13 15:22:11"
         },
         {
             "name": "freepius/silex-autolink",
@@ -1591,6 +1632,7 @@
     "minimum-stability": "dev",
     "stability-flags": [],
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
 }
