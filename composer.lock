@@ -109,19 +109,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius/php-toolbox.git",
-                "reference": "5fd8c2f74d12404aaab4f5bd078b90b00903105a"
+                "reference": "61906574e6eb33b92a2294206ead3348b23d9147"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius/php-toolbox/zipball/5fd8c2f74d12404aaab4f5bd078b90b00903105a",
-                "reference": "5fd8c2f74d12404aaab4f5bd078b90b00903105a",
+                "url": "https://api.github.com/repos/freepius/php-toolbox/zipball/61906574e6eb33b92a2294206ead3348b23d9147",
+                "reference": "61906574e6eb33b92a2294206ead3348b23d9147",
                 "shasum": ""
             },
             "require": {
                 "freepius/php-model": "*",
+                "freepius/silex-extended": "*",
                 "gregwar/captcha": "*",
                 "silex/silex": "*",
-                "symfony/validator": "*",
                 "twbs/bootstrap": "3.3.1",
                 "twig/twig": "*"
             },
@@ -146,7 +146,7 @@
             ],
             "description": "Various tools for my PHP projects",
             "homepage": "https://github.com/freepius/php-toolbox",
-            "time": "2015-01-13 15:22:11"
+            "time": "2015-01-16 18:23:52"
         },
         {
             "name": "freepius/silex-autolink",
@@ -194,6 +194,46 @@
             "description": "Simple Twig extension for Silex to add autolink filter",
             "homepage": "http://github.com/nicl/silex-autolink",
             "time": "2014-11-09 11:07:25"
+        },
+        {
+            "name": "freepius/silex-extended",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/freepius/silex-extended.git",
+                "reference": "ed1784c143c334364b64dbedd9a530d89dfb1548"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/freepius/silex-extended/zipball/ed1784c143c334364b64dbedd9a530d89dfb1548",
+                "reference": "ed1784c143c334364b64dbedd9a530d89dfb1548",
+                "shasum": ""
+            },
+            "require": {
+                "silex/silex": "dev-master"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Freepius\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "CC0"
+            ],
+            "authors": [
+                {
+                    "name": "Mathieu Poisbeau",
+                    "email": "freepius@anarchos-semitas.net"
+                }
+            ],
+            "description": "Various personal additions to Silex micro-framework",
+            "homepage": "https://github.com/freepius/silex-extended",
+            "time": "2015-01-16 18:12:55"
         },
         {
             "name": "gregwar/cache",

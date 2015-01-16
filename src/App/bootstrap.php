@@ -17,8 +17,6 @@ require_once APP.'/load-config.php';
 
 $app = new \Freepius\Application();
 
-$app['route_class'] = '\\Freepius\\Route';
-
 /* Locale of the application */
 setlocale(LC_ALL, 'fr_FR.UTF-8');
 
