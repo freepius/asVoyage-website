@@ -13,10 +13,10 @@
 
     {# DEBUG mode => local files #}
     {% if app.debug %}
-        <link href="/vendor/datatable/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="/vendor/datatable/jquery.dataTables.css" rel="stylesheet">
     {% else %}
     {# Else => files from CDNs #}
-        <link href="//cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
     {% endif %}
 
 {% endblock %}
@@ -26,10 +26,10 @@
 
     {# DEBUG mode => local files #}
     {% if app.debug %}
-        <script src="/vendor/datatable/jquery.dataTables.min.js"></script>
+        <script src="/vendor/datatable/jquery.dataTables.js"></script>
     {% else %}
     {# Else => files from CDNs #}
-        <script src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+        <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
     {% endif %}
 
     <script>
@@ -42,7 +42,7 @@
                 }],
 
                 "language": {
-                    "url": "https://cdn.datatables.net/plug-ins/a5734b29083/i18n/
+                    "url": "https://cdn.datatables.net/plug-ins/3cfcc339e89/i18n/
                            {{- app.locale == 'fr' ? 'French' : 'English' -}}
                            .json"
                 }
