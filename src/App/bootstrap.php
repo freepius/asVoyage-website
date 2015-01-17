@@ -294,9 +294,10 @@ $app['media.config'] =
 
 $app['register.config'] =
 [
-    'cache_dir'      => 'tmp/register',  // relative to web path
-    'twilio.account' => TWILIO_ACCOUNT_SID,
-    'twilio.number'  => TWILIO_NUMBER,
+    'cache_dir'         => 'tmp/register',  // relative to web path
+    'bing_maps_api_key' => BING_MAPS_API_KEY,
+    'twilio.account'    => TWILIO_ACCOUNT_SID,
+    'twilio.number'     => TWILIO_NUMBER,
 ];
 
 

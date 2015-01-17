@@ -15,7 +15,7 @@
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, CC-BY-SA'
             }),
             WaterColor: new L.StamenTileLayer('watercolor'),
-            BingAerial: new L.BingLayer('Aj6KakrmmAztTyUmXMu7wJnHplOuIYmGbXdd5brEpsAFk3nZL57oPmFgV47nMNHp')
+            BingAerial: new L.BingLayer(window.bingMapsAPIKey)
         },
 
         addMap: function (id, options) {

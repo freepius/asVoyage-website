@@ -26,6 +26,10 @@
 
 
 {% macro jsBase() %}
+    <script>
+        window.bingMapsAPIKey = "{{- app['register.config']['bing_maps_api_key'] -}}";
+    </script>
+
     {% if app.debug %}
         <script src="/vendor/leaflet/leaflet-src.js"></script>
         <script src="/vendor/leaflet/plugins/awesome/leaflet.awesome-markers.js"></script>
