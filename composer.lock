@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius/php-model.git",
-                "reference": "7ba815d30989bad06566002a4b1cbaee00ae7c7b"
+                "reference": "18c60ea862509dfabd8002e6aaa28f85e990b331"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius/php-model/zipball/7ba815d30989bad06566002a4b1cbaee00ae7c7b",
-                "reference": "7ba815d30989bad06566002a4b1cbaee00ae7c7b",
+                "url": "https://api.github.com/repos/freepius/php-model/zipball/18c60ea862509dfabd8002e6aaa28f85e990b331",
+                "reference": "18c60ea862509dfabd8002e6aaa28f85e990b331",
                 "shasum": ""
             },
             "require": {
@@ -44,7 +44,7 @@
             ],
             "description": "Some simple tools for the model layer of PHP projects",
             "homepage": "https://github.com/freepius/php-model",
-            "time": "2015-01-13 14:52:51"
+            "time": "2015-01-19 19:03:57"
         },
         {
             "name": "freepius/php-richtext",
