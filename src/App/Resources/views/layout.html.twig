@@ -22,24 +22,12 @@
     ================================================== -->
 
     <link href="/css/main.css" rel="stylesheet">
-    <link href="/vendor/lightbox/css/lightbox.css" rel="stylesheet">
 
-    {# DEBUG mode => local files #}
-    {% if app.debug %}
-        <link href="/vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
-    {% else %}
-    {# Else => files from CDNs #}
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    {% endif %}
+    {{ css('font-awesome', 'lightbox') }}
 
     {% block stylesheets %}{% endblock %}
 
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    {{ js('old-browsers.cdn') }}
 </head>
 <body class="container" vocab="http://schema.org/" typeof="
     {{- currentNav == 'about'   ? 'AboutPage'   :
@@ -112,17 +100,7 @@
     <!-- Javascripts
     ================================================== -->
 
-    {# DEBUG mode => local files #}
-    {% if app.debug %}
-        <script src="/vendor/jquery-1.11.2.js"></script>
-        <script src="/vendor/bootstrap-3.3.1.js"></script>
-        <script src="/vendor/lightbox/js/lightbox.js"></script>
-    {% else %}
-    {# Else => files from CDNs #}
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-        <script src="/vendor/lightbox/js/lightbox.min.js"></script>
-    {% endif %}
+    {{ js('jquery', 'bootstrap', 'lightbox') }}
 
     <script src="/js/utils.js"></script>
     <script src="/js/app.js"></script>

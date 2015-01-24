@@ -1,11 +1,11 @@
 {
     "name": "freepius/asVoyage",
-    "description": "freepius44 website for voyages",
+    "description": "freepius website for voyages",
     "homepage": "http://anarchos-semitas.net",
     "license": "CC0",
     "authors": [
         {
-            "name" : "Mathieu <freepius> Poisbeau",
+            "name" : "Mathieu Poisbeau",
             "email": "freepius@anarchos-semitas.net"
         }
     ],
@@ -24,6 +24,7 @@
         "monolog/monolog": "*",
         "gregwar/image": "*",
         "freepius/silex-autolink": "*",
+        "freepius/php-asset": "*",
         "freepius/php-richtext": "*",
         "freepius/php-toolbox": "*"
     },

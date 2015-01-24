@@ -6,45 +6,29 @@
 
 
 {% block stylesheets %}
-
     <style>
         #dashboard { font-size: 0.8em; }
     </style>
 
-    {# DEBUG mode => local files #}
-    {% if app.debug %}
-        <link href="/vendor/datatable/jquery.dataTables.css" rel="stylesheet">
-    {% else %}
-    {# Else => files from CDNs #}
-        <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
-    {% endif %}
-
+    {{ css('jquery.dataTables') }}
 {% endblock %}
 
 
 {% block javascripts %}
 
-    {# DEBUG mode => local files #}
-    {% if app.debug %}
-        <script src="/vendor/datatable/jquery.dataTables.js"></script>
-    {% else %}
-    {# Else => files from CDNs #}
-        <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
-    {% endif %}
+    {{ js('jquery.dataTables') }}
 
     <script>
         $(document).ready(function() {
             $('#dashboard').DataTable({
-                "order": [],
+                order: [],
 
-                "columnDefs": [{
-                    "targets": 8, "searchable": false, "orderable": false
+                columnDefs: [{
+                    targets: 8, searchable: false, orderable: false
                 }],
 
-                "language": {
-                    "url": "https://cdn.datatables.net/plug-ins/3cfcc339e89/i18n/
-                           {{- app.locale == 'fr' ? 'French' : 'English' -}}
-                           .json"
+                language: {
+                    url: "{{ asset('jquery.dataTables.'~app.locale~'.json') }}"
                 }
             });
         });

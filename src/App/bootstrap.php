@@ -72,12 +72,21 @@ $app->register(new \Silex\Provider\TranslationServiceProvider());
 /* security */
 $app->register(new \Silex\Provider\SecurityServiceProvider());
 
-/* freepius/php-richtext extension */
+/* freepius/php-richtext */
 $app->register(new \Freepius\Pimple\Provider\RichtextProvider());
 $app['richtext.config'] += ['remove.script.tags' => false];
 
-/* freepius/php-toolbox extension */
+/* freepius/php-toolbox */
 $app->register(new \Freepius\Provider\ToolboxProvider());
+
+/* freepius/silex-asset */
+$app->register(new \Freepius\Asset\ServiceProvider(), [
+    'asset.cdn.use'     => ! $app['debug'],
+    'asset.config'      => [
+        'base.url' => BASE_URL_FOR_ASSET,
+        'leaflet.markercluster.css' => '<link href="/css/MarkerCluster.Default.css" rel="stylesheet">',
+    ],
+]);
 
 /* autolink Twig extension */
 /* TODO: Keep watch the Silex-Autolink from Nicl */

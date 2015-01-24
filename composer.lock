@@ -4,8 +4,50 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "750eea292329e92203666addb05870a2",
+    "hash": "7160988f004b91a4508546d72852e5ab",
     "packages": [
+        {
+            "name": "freepius/php-asset",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/freepius/php-asset.git",
+                "reference": "96bef18627b55cd6131dd4d1ddcfdd58181e1e06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/freepius/php-asset/zipball/96bef18627b55cd6131dd4d1ddcfdd58181e1e06",
+                "reference": "96bef18627b55cd6131dd4d1ddcfdd58181e1e06",
+                "shasum": ""
+            },
+            "require": {
+                "pimple/pimple": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "silex/silex": "*",
+                "twig/twig": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Freepius\\Asset\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "CC0"
+            ],
+            "authors": [
+                {
+                    "name": "Mathieu Poisbeau",
+                    "email": "freepius@anarchos-semitas.net"
+                }
+            ],
+            "description": "Various tools to manage Web assets",
+            "homepage": "https://github.com/freepius/php-asset",
+            "time": "2015-01-24 20:46:10"
+        },
         {
             "name": "freepius/php-model",
             "version": "dev-master",
