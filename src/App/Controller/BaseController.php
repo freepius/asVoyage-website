@@ -34,7 +34,7 @@ class BaseController implements ControllerProviderInterface
 {
     use \Freepius\Controller\BaseTrait;
 
-    public function __construct(\Freepius\Application $app)
+    public function __construct(\Freepius\Silex\Application $app)
     {
         $this->app = $app;
         $this->currentTravelStartingDate = $app['currentTravel.startingDate'];

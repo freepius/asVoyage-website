@@ -2,7 +2,7 @@
 
 namespace App\Provider\Locale;
 
-use Freepius\Application,
+use Freepius\Silex\Application,
     Symfony\Component\EventDispatcher\EventSubscriberInterface,
     Symfony\Component\HttpKernel\Event\GetResponseEvent,
     Symfony\Component\HttpKernel\KernelEvents;

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7160988f004b91a4508546d72852e5ab",
+    "hash": "73614ab7e3b9770384cb0f8ed7731181",
     "packages": [
         {
             "name": "freepius/php-asset",
@@ -90,16 +90,16 @@
         },
         {
             "name": "freepius/php-richtext",
-            "version": "dev-master",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius/php-richtext.git",
-                "reference": "0cf9e2b1617652c640b91b0efcf4a66c9ac120a0"
+                "reference": "6d2fce8a67c823bf0591079130a6dc54259034c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius/php-richtext/zipball/0cf9e2b1617652c640b91b0efcf4a66c9ac120a0",
-                "reference": "0cf9e2b1617652c640b91b0efcf4a66c9ac120a0",
+                "url": "https://api.github.com/repos/freepius/php-richtext/zipball/6d2fce8a67c823bf0591079130a6dc54259034c1",
+                "reference": "6d2fce8a67c823bf0591079130a6dc54259034c1",
                 "shasum": ""
             },
             "require": {
@@ -109,10 +109,12 @@
             "require-dev": {
                 "phpunit/phpunit": "~4.0",
                 "pimple/pimple": "~3.0",
-                "twig/twig": ">=1.8.0,<2.0-dev"
+                "twig/twig": "~1.8"
             },
             "suggest": {
-                "silex/silex": "2.0.*@dev"
+                "pimple/pimple": "~3.0",
+                "silex/silex": "2.0.*@dev",
+                "twig/twig": "~1.8"
             },
             "type": "library",
             "extra": {
@@ -121,8 +123,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Freepius": "src/"
+                "psr-4": {
+                    "Freepius\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -143,7 +145,7 @@
                 "silex",
                 "twig"
             ],
-            "time": "2014-11-09 17:43:40"
+            "time": "2015-02-01 13:21:22"
         },
         {
             "name": "freepius/php-toolbox",
@@ -151,12 +153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius/php-toolbox.git",
-                "reference": "61906574e6eb33b92a2294206ead3348b23d9147"
+                "reference": "5844a65c5dc56a32cff09022afece68b35584363"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius/php-toolbox/zipball/61906574e6eb33b92a2294206ead3348b23d9147",
-                "reference": "61906574e6eb33b92a2294206ead3348b23d9147",
+                "url": "https://api.github.com/repos/freepius/php-toolbox/zipball/5844a65c5dc56a32cff09022afece68b35584363",
+                "reference": "5844a65c5dc56a32cff09022afece68b35584363",
                 "shasum": ""
             },
             "require": {
@@ -164,7 +166,7 @@
                 "freepius/silex-extended": "*",
                 "gregwar/captcha": "*",
                 "silex/silex": "*",
-                "twbs/bootstrap": "3.3.1",
+                "twbs/bootstrap": "3.3.2",
                 "twig/twig": "*"
             },
             "require-dev": {
@@ -188,7 +190,7 @@
             ],
             "description": "Various tools for my PHP projects",
             "homepage": "https://github.com/freepius/php-toolbox",
-            "time": "2015-01-16 18:23:52"
+            "time": "2015-02-01 13:44:46"
         },
         {
             "name": "freepius/silex-autolink",
@@ -243,16 +245,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius/silex-extended.git",
-                "reference": "ed1784c143c334364b64dbedd9a530d89dfb1548"
+                "reference": "fd9c62bf01bbf2138233665535aee31bba1e54f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius/silex-extended/zipball/ed1784c143c334364b64dbedd9a530d89dfb1548",
-                "reference": "ed1784c143c334364b64dbedd9a530d89dfb1548",
+                "url": "https://api.github.com/repos/freepius/silex-extended/zipball/fd9c62bf01bbf2138233665535aee31bba1e54f0",
+                "reference": "fd9c62bf01bbf2138233665535aee31bba1e54f0",
                 "shasum": ""
             },
             "require": {
-                "silex/silex": "dev-master"
+                "silex/silex": "2.0.*@dev"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0"
@@ -260,7 +262,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Freepius\\": "src/"
+                    "Freepius\\Silex\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -275,7 +277,7 @@
             ],
             "description": "Various personal additions to Silex micro-framework",
             "homepage": "https://github.com/freepius/silex-extended",
-            "time": "2015-01-16 18:12:55"
+            "time": "2015-02-01 13:41:13"
         },
         {
             "name": "gregwar/cache",
@@ -1550,16 +1552,16 @@
         },
         {
             "name": "twbs/bootstrap",
-            "version": "v3.3.1",
+            "version": "v3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "9a7e365c2c4360335d25246dac11afb1f577210a"
+                "reference": "bcf7dd38b5ab180256e2e4fb5da0369551b3f082"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/9a7e365c2c4360335d25246dac11afb1f577210a",
-                "reference": "9a7e365c2c4360335d25246dac11afb1f577210a",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/bcf7dd38b5ab180256e2e4fb5da0369551b3f082",
+                "reference": "bcf7dd38b5ab180256e2e4fb5da0369551b3f082",
                 "shasum": ""
             },
             "replace": {
@@ -1597,7 +1599,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2014-11-12 17:03:16"
+            "time": "2015-01-19 17:03:09"
         },
         {
             "name": "twig/extensions",

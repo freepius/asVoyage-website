@@ -38,7 +38,7 @@ class BlogController implements ControllerProviderInterface
     protected $limitInHome;
 
 
-    public function __construct(\Freepius\Application $app)
+    public function __construct(\Freepius\Silex\Application $app)
     {
         $this->limitInHome = $app['debug'] ? 2 : 10;
 

@@ -15,7 +15,7 @@ require_once APP.'/load-config.php';
 /* Enable _method request parameter support */
 \Symfony\Component\HttpFoundation\Request::enableHttpMethodParameterOverride();
 
-$app = new \Freepius\Application();
+$app = new \Freepius\Silex\Application();
 
 /* Locale of the application */
 setlocale(LC_ALL, 'fr_FR.UTF-8');
@@ -79,7 +79,7 @@ $app['richtext.config'] += ['remove.script.tags' => false];
 /* freepius/php-toolbox */
 $app->register(new \Freepius\Provider\ToolboxProvider());
 
-/* freepius/silex-asset */
+/* freepius/php-asset */
 $app->register(new \Freepius\Asset\ServiceProvider(), [
     'asset.cdn.use'     => ! $app['debug'],
     'asset.config'      => [

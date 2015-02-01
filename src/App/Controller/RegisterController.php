@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class RegisterController implements ControllerProviderInterface
 {
-    public function __construct(\Freepius\Application $app)
+    public function __construct(\Freepius\Silex\Application $app)
     {
         $this->app     = $app;
         $this->factory = $app['model.factory.register'];
