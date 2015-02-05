@@ -93,7 +93,7 @@ class Blog extends MongoRepository
             'beCommented'   => 1,
             'tags'          => 1,
             'countComments' => 1,
-            'comments'      => ['$slice' => -1],  // last comment ; TODO: one day, have a 'dateLastComment' field?
+            'comments'      => ['$slice' => -1],  // last comment
         ])
         ->sort(['pubDatetime' => -1]); // desc = younger first
     }
@@ -195,18 +195,24 @@ class Blog extends MongoRepository
     }
 
     /**
-     * Delete a comment in an article (ie: replace its content by null).
+     * Delete a comment in an article.
      * Return true if the operation succeed ; false, else.
      */
     public function deleteComment(\MongoId $idArticle, $idComment)
     {
-        // Change comments[$idComment] by null
+        // Firstly, change comments[$idComment] by null
         $result = $this->collection->update(
             ['_id' => $idArticle],
             [
                 '$unset' => ["comments.$idComment" => 1],
                 '$inc'   => ['countComments' => -1],
             ]
+        );
+
+        // Secondly, remove the null values in comments[]
+        $this->collection->update(
+            ['_id' => $idArticle],
+            ['$pull' => ['comments' => null]]
         );
 
         return $result['err'] === null;

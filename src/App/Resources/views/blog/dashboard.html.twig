@@ -74,13 +74,7 @@
                 <td>{{ bool2icon(article.isPublished) }}</td>
                 <td>{{ bool2icon(article.beCommented) }}</td>
                 <td>{{ article.countComments }}</td>
-                <td>
-                    {% if  (article.comments is not empty)
-                       and (article.comments.0 is not null)
-                    %}
-                        {{ article.comments.0.datetime }}
-                    {% endif %}
-                </td>
+                <td>{{ article.comments.0.datetime | default }}</td>
                 <td>{{ article.tags|join(', ') }}</td>
 
                 <!-- Actions on article -->
