@@ -83,16 +83,13 @@ TODO
 * Media :
   * Date filter : add a link to filter the elements without date
 * Redesign the multi-locales system
-* Add a simple management of assets
 * Improve the README.md (dependencies & co)
-* Switch locale: no tooltip on links
 
 For production
 --------------
 
 * HttpCache:
   * Blog articles => cache the generated HTML from RichText
-* Improve the inclusion of JS and CSS files (if not using => do not include) ?
 * Use https certificate for admin pages
 
 Low priority

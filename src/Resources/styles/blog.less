@@ -1,5 +1,14 @@
 article:extend(.main-section all)
 {
+    &.summary {
+        margin-bottom: 10px;
+
+        > header,
+        > section[property="articleBody"] {
+            margin-bottom: 0;
+        }
+    }
+
     > header
     {
         > time {
