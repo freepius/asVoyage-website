@@ -25,7 +25,7 @@
         "gregwar/image": "*",
         "freepius/silex-autolink": "*",
         "freepius/php-asset": "*",
-        "freepius/php-richtext": "1.0",
+        "freepius/php-richtext": "~1.0",
         "freepius/php-toolbox": "*"
     },
     "autoload": {

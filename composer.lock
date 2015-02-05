@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "73614ab7e3b9770384cb0f8ed7731181",
+    "hash": "493d35ad1700560984bf673bfa55b24b",
     "packages": [
         {
             "name": "freepius/php-asset",
@@ -12,26 +12,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius/php-asset.git",
-                "reference": "96bef18627b55cd6131dd4d1ddcfdd58181e1e06"
+                "reference": "cba9139199b968867d01b28a3ca2fbf314f69099"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius/php-asset/zipball/96bef18627b55cd6131dd4d1ddcfdd58181e1e06",
-                "reference": "96bef18627b55cd6131dd4d1ddcfdd58181e1e06",
+                "url": "https://api.github.com/repos/freepius/php-asset/zipball/cba9139199b968867d01b28a3ca2fbf314f69099",
+                "reference": "cba9139199b968867d01b28a3ca2fbf314f69099",
                 "shasum": ""
             },
             "require": {
-                "pimple/pimple": "*"
+                "pimple/pimple": "~3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0",
-                "silex/silex": "*",
-                "twig/twig": "*"
+                "silex/silex": "2.0.*@dev",
+                "twig/twig": "~1.8"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Freepius\\Asset\\": "src/"
+                    "Freepius\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -46,7 +46,7 @@
             ],
             "description": "Various tools to manage Web assets",
             "homepage": "https://github.com/freepius/php-asset",
-            "time": "2015-01-24 20:46:10"
+            "time": "2015-02-05 14:49:02"
         },
         {
             "name": "freepius/php-model",
@@ -90,16 +90,16 @@
         },
         {
             "name": "freepius/php-richtext",
-            "version": "v1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/freepius/php-richtext.git",
-                "reference": "6d2fce8a67c823bf0591079130a6dc54259034c1"
+                "reference": "cb778beb1b54eafc1570f50983ea5e4abda8465c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freepius/php-richtext/zipball/6d2fce8a67c823bf0591079130a6dc54259034c1",
-                "reference": "6d2fce8a67c823bf0591079130a6dc54259034c1",
+                "url": "https://api.github.com/repos/freepius/php-richtext/zipball/cb778beb1b54eafc1570f50983ea5e4abda8465c",
+                "reference": "cb778beb1b54eafc1570f50983ea5e4abda8465c",
                 "shasum": ""
             },
             "require": {
@@ -145,7 +145,7 @@
                 "silex",
                 "twig"
             ],
-            "time": "2015-02-01 13:21:22"
+            "time": "2015-02-05 10:06:24"
         },
         {
             "name": "freepius/php-toolbox",

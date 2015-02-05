@@ -73,14 +73,14 @@ $app->register(new \Silex\Provider\TranslationServiceProvider());
 $app->register(new \Silex\Provider\SecurityServiceProvider());
 
 /* freepius/php-richtext */
-$app->register(new \Freepius\Pimple\Provider\RichtextProvider());
+$app->register(new \Freepius\Pimple\Provider\RichtextServiceProvider());
 $app['richtext.config'] += ['remove.script.tags' => false];
 
 /* freepius/php-toolbox */
 $app->register(new \Freepius\Provider\ToolboxProvider());
 
 /* freepius/php-asset */
-$app->register(new \Freepius\Asset\ServiceProvider(), [
+$app->register(new \Freepius\Pimple\Provider\AssetServiceProvider(), [
     'asset.cdn.use'     => ! $app['debug'],
     'asset.config'      => [
         'base.url' => BASE_URL_FOR_ASSET,
