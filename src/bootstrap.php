@@ -1,8 +1,7 @@
 <?php
 
 define('APP' , __DIR__);
-define('SRC' , dirname(APP));
-define('ROOT', dirname(SRC));
+define('ROOT', dirname(APP));
 
 $loader = require ROOT.'/vendor/autoload.php';
 
