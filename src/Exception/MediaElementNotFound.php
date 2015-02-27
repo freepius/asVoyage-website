@@ -2,7 +2,7 @@
 
 namespace App\Exception;
 
-use Freepius\Exception\EntityNotFound;
+use Freepius\Model\Exception\EntityNotFound;
 
 class MediaElementNotFound extends EntityNotFound
 {
