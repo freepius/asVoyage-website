@@ -64,6 +64,9 @@
         </div>
     #}
 
+        {% include "base/our-travels/afrikapie/book-pub.html.twig" only %}
+        {% include "base/our-travels/3000-km-diagonal/book-pub.html.twig" only %}
+
         <!-- Carousel of last favorite images -->
         <div class="carousel-inner slide">
             {% for img in favoriteImages %}
@@ -77,8 +80,6 @@
         <div class="clearfix small special" style="margin-bottom: 1.5em;">
             <a href="/media" class="pull-right">» {{ 'See more images'|trans }}</a>
         </div>
-
-        {% include "base/our-travels/3000-km-diagonal/book-pub.html.twig" only %}
     </aside>
 
     <div class="col-md-8">
